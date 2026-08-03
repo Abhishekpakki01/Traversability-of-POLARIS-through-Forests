@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>semantic_mapping</name>
+  <version>0.0.1</version>
+  <description>3D Semantic Voxel Mapping Package using OHM Engine</description>
+  <maintainer email="abhishek@todo.todo">abhishek</maintainer>
+  <license>MIT</license>
+
+  <!-- Build Tool Dependencies -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+
+  <!-- Build & Runtime Dependencies -->
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>tf2_msgs</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <!-- CRITICAL: Must be ament_cmake to build C++ binaries and Python scripts together -->
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
