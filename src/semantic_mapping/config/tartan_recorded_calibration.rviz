@@ -1,65 +1,114 @@
 Panels:
-- Class: rviz_common/Displays
-  Help Height: 70
-  Name: Displays
-  Property Tree Widget:
-    Expanded: null
+  - Class: rviz_common/Displays
+    Help Height: 70
+    Name: Displays
+    Property Tree Widget:
+      Expanded: ~
+      Splitter Ratio: 0.5
+    Tree Height: 98
+  - Class: rviz_common/Views
+    Expanded:
+      - /Current View1
+    Name: Views
     Splitter Ratio: 0.5
-  Tree Height: 124
-- Class: rviz_common/Views
-  Expanded:
-  - /Current View1
-  Name: Views
-  Splitter Ratio: 0.5
 Visualization Manager:
-  Class: ''
+  Class: ""
   Displays:
-  - Class: rviz_default_plugins/Marker
-    Name: Occupied OHM geometry
-    Enabled: true
-    Topic:
-      Value: /semantic_voxel_map_cpp
-      Reliability Policy: Reliable
-      Depth: 10
-  - Class: rviz_default_plugins/Pose
-    Name: Vehicle pose
-    Enabled: true
-    Topic:
-      Value: /vehicle_pose
-    Shape: Arrow
-    Color: 255; 25; 0
-    Alpha: 1
-    Shaft Length: 2
-    Shaft Radius: 0.1
-    Head Length: 0.5
-    Head Radius: 0.25
-  - Class: rviz_default_plugins/Image
-    Name: Original camera
-    Enabled: true
-    Topic:
-      Value: /multisense/left/image_rect_color
-      Reliability Policy: Best Effort
-      Depth: 1
-  - Class: rviz_default_plugins/Image
-    Name: Recorded-TF projection (intrinsics provisional)
-    Enabled: true
-    Topic:
-      Value: /camera_lidar_projection/projection_image
-      Reliability Policy: Best Effort
-      Depth: 1
-  - Class: rviz_default_plugins/PointCloud2
-    Name: Optional semantic voxels
-    Enabled: false
-    Topic:
-      Value: /semantic_voxel_map
-      Reliability Policy: Reliable
-      Durability Policy: Transient Local
-      Depth: 1
-    Style: Boxes
-    Size (m): 0.35
-    Position Transformer: XYZ
-    Color Transformer: RGB8
-    Decay Time: 0
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: Occupied OHM geometry
+      Namespaces:
+        ohm_voxels: true
+      Topic:
+        Depth: 10
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /semantic_voxel_map_cpp
+      Value: true
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.10000000149011612
+      Class: rviz_default_plugins/Pose
+      Color: 255; 25; 0
+      Enabled: true
+      Head Length: 0.5
+      Head Radius: 0.25
+      Name: Vehicle pose
+      Shaft Length: 2
+      Shaft Radius: 0.10000000149011612
+      Shape: Arrow
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /vehicle_pose
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Original camera
+      Normalize Range: true
+      Topic:
+        Depth: 1
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+        Value: /multisense/left/image_rect_color
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Recorded-TF projection (intrinsics provisional)
+      Normalize Range: true
+      Topic:
+        Depth: 1
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+        Value: /camera_lidar_projection/projection_image
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: RGB8
+      Decay Time: 0
+      Enabled: false
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: Optional semantic voxels
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.3499999940395355
+      Style: Boxes
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /semantic_voxel_map
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -67,10 +116,10 @@ Visualization Manager:
     Frame Rate: 20
   Name: root
   Tools:
-  - Class: rviz_default_plugins/Interact
-    Hide Inactive Objects: true
-  - Class: rviz_default_plugins/MoveCamera
-  - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/Interact
+      Hide Inactive Objects: true
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
   Transformation:
     Current:
       Class: rviz_default_plugins/TF
@@ -93,26 +142,24 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5600000023841858
+      Pitch: 0.4497964084148407
       Target Frame: vehicle
       Value: Orbit (rviz_default_plugins)
-      Yaw: 0.699999988079071
-    Saved: null
+      Yaw: 2.2068138122558594
+    Saved: ~
 Window Geometry:
-  Camera reference:
-    collapsed: false
   Displays:
     collapsed: false
-  Height: 987
+  Height: 985
   Hide Left Dock: false
   Hide Right Dock: false
-  Predicted terrain classes:
+  Original camera:
     collapsed: false
-  Projection alignment reference:
+  QMainWindow State: 000000ff00000000fd00000001000000000000019b00000383fc0200000007fb0000002000430061006d0065007200610020007200650066006500720065006e00630065010000003b0000008c0000000000000000fb000000320050007200650064006900630074006500640020007400650072007200610069006e00200063006c0061007300730065007301000000cd0000008d0000000000000000fb0000003c00500072006f006a0065006300740069006f006e00200061006c00690067006e006d0065006e00740020007200650066006500720065006e0063006501000001600000008c0000000000000000fb000000100044006900730070006c006100790073010000003b000000e3000000c700fffffffb0000000a005600690065007700730100000124000000b7000000a000fffffffb0000001e004f0072006900670069006e0061006c002000630061006d00650072006101000001e1000000ec0000002800fffffffb0000005e005200650063006f0072006400650064002d00540046002000700072006f006a0065006300740069006f006e002000280069006e007400720069006e0073006900630073002000700072006f0076006900730069006f006e0061006c002901000002d3000000eb0000002800ffffff000005ce0000038300000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Recorded-TF projection (intrinsics provisional):
     collapsed: false
-  QMainWindow State: 000000ff00000000fd00000001000000000000019b00000385fc0200000005fb0000002000430061006d0065007200610020007200650066006500720065006e00630065010000003b0000008c0000002800fffffffb000000320050007200650064006900630074006500640020007400650072007200610069006e00200063006c0061007300730065007301000000cd0000008d0000002800fffffffb0000003c00500072006f006a0065006300740069006f006e00200061006c00690067006e006d0065006e00740020007200650066006500720065006e0063006501000001600000008c0000002800fffffffb000000100044006900730070006c00610079007301000001f2000000fd000000c700fffffffb0000000a0056006900650077007301000002f5000000cb000000a000ffffff000005d30000038500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
-  Width: 1908
-  X: 0
-  Y: 0
+  Width: 1903
+  X: -32
+  Y: -32
