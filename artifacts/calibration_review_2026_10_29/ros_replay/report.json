@@ -1,0 +1,31 @@
+{
+  "bag": "/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2",
+  "rate": 0.5,
+  "received": {
+    "status": 164,
+    "camera": 161,
+    "camera_info": 153,
+    "pose": 108,
+    "projection": 91
+  },
+  "projection_status": {
+    "images": 114,
+    "lidar_scans": 209,
+    "calibrated_images": 113,
+    "paired": 92,
+    "projected": 91,
+    "dropped": 1,
+    "last_status": "Projection published",
+    "visible_points": 10542,
+    "image_stamp_ns": 1698955334516840000,
+    "lidar_stamp_ns": 1698955334554888000,
+    "image_minus_lidar_ms": -38.048,
+    "pending": 0
+  },
+  "camera_overlay_stamps_match": true,
+  "physical_lidar_calibration_validated": false,
+  "pose_span_seconds": 31.561856,
+  "endpoint_displacement_m": 80.75375475116734,
+  "saved_image_stamp_ns": 1698955334516840000,
+  "passed": true
+}

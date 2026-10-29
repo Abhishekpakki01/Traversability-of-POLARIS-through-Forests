@@ -18,12 +18,13 @@ GOOSE project. I have not trained a new segmentation model.
 
 ## What is still unfinished
 
-The camera–LiDAR calibration on TartanDrive needs checking. The original
-recording contains a mounting transform that differs from the publisher values
-currently used by the adapter. The projection and resulting voxel labels are
-therefore not yet verified for this recording.
+A separate calibration check now uses the mounting transforms from the original
+TartanDrive recording. It also avoids adding a rectification rotation from a
+later example. The old version is kept for comparison. The camera matrix has
+been cross-checked against the recorded stereo output, but physical alignment
+and the resulting voxel labels still need validation.
 
-There are also dropped frames and limited semantic coverage. In the saved
+There are also dropped frames and limited semantic coverage. In an earlier
 Tartan run, 569 of 24,888 occupied voxels received a confirmed class. Most voxels
 remain gray because their class is unknown. Water/trunk recognition, height
 above local ground, slope, clearance and navigation still need work.
@@ -39,6 +40,8 @@ separate, at `~/Traversability-of-POLARIS-through-Forests`; changes in one folde
 do not automatically change the other.
 
 The full terminal commands are in:
+
+- [New recorded-transform calibration check](src/semantic_mapping/docs/TARTAN_CALIBRATION_CHECK.md)
 
 - [RELLIS run guide](src/semantic_mapping/docs/RUN_IT_YOURSELF.md)
 - [TartanDrive run guide](src/semantic_mapping/docs/SECOND_TERRAIN_TARTAN.md)

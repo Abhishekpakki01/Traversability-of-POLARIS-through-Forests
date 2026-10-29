@@ -41,6 +41,7 @@ install(PROGRAMS
   scripts/camera_lidar_projection_node.py
   scripts/camera_semantic_voxel_node.py
   scripts/tartan_camera_adapter.py
+  scripts/tartan_recorded_camera_adapter.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -59,6 +60,7 @@ if(BUILD_TESTING)
   ament_add_pytest_test(camera_projection test/test_camera_projection.py TIMEOUT 30)
   ament_add_pytest_test(semantic_fusion test/test_semantic_fusion.py TIMEOUT 30)
   ament_add_pytest_test(tartan_camera test/test_tartan_camera.py TIMEOUT 30)
+  ament_add_pytest_test(recorded_calibration test/test_recorded_calibration.py TIMEOUT 30)
 endif()
 
 ament_package()

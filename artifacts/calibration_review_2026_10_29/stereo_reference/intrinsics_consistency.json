@@ -1,0 +1,54 @@
+{
+  "same_exposure_stamp_ns": 1698955259317091000,
+  "test": "Project original stereo cloud colors into its matching recorded image. Checks source pipeline consistency, not physical LiDAR calibration.",
+  "results": [
+    {
+      "model": "rectified_P",
+      "cloud_channel_order": "rgb",
+      "points": 149901,
+      "median_mean_absolute_color_error_0_255": 5.333333333333333,
+      "mean_absolute_color_error_0_255": 7.548161786779274,
+      "fraction_error_under_3": 0.30349363913516253
+    },
+    {
+      "model": "rectified_P",
+      "cloud_channel_order": "bgr_packed",
+      "points": 149901,
+      "median_mean_absolute_color_error_0_255": 8.333333333333334,
+      "mean_absolute_color_error_0_255": 9.951650311427764,
+      "fraction_error_under_3": 0.08110019279391065
+    },
+    {
+      "model": "raw_K",
+      "cloud_channel_order": "rgb",
+      "points": 149901,
+      "median_mean_absolute_color_error_0_255": 19.0,
+      "mean_absolute_color_error_0_255": 25.96688481064169,
+      "fraction_error_under_3": 0.06550323213320791
+    },
+    {
+      "model": "raw_K",
+      "cloud_channel_order": "bgr_packed",
+      "points": 149901,
+      "median_mean_absolute_color_error_0_255": 19.666666666666668,
+      "mean_absolute_color_error_0_255": 26.68989088353869,
+      "fraction_error_under_3": 0.019512878499809875
+    },
+    {
+      "model": "P_with_later_R",
+      "cloud_channel_order": "rgb",
+      "points": 149901,
+      "median_mean_absolute_color_error_0_255": 13.666666666666666,
+      "mean_absolute_color_error_0_255": 18.619379901846333,
+      "fraction_error_under_3": 0.10857165729381392
+    },
+    {
+      "model": "P_with_later_R",
+      "cloud_channel_order": "bgr_packed",
+      "points": 149901,
+      "median_mean_absolute_color_error_0_255": 14.333333333333334,
+      "mean_absolute_color_error_0_255": 19.746981896940866,
+      "fraction_error_under_3": 0.02802516327442779
+    }
+  ]
+}

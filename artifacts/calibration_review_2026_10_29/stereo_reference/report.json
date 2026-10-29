@@ -1,0 +1,97 @@
+{
+  "network_bytes": 7874401,
+  "messages": [
+    {
+      "topic": "/multisense/right/image_rect",
+      "frame": "multisense/left_camera_optical_frame",
+      "stamp_ns": 1698955259117271000,
+      "width": 1024,
+      "height": 544,
+      "data_bytes": 557056,
+      "encoding": "mono8",
+      "step": 1024
+    },
+    {
+      "topic": "/multisense/left/image_rect_color",
+      "frame": "multisense/left_camera_optical_frame",
+      "stamp_ns": 1698955259117271000,
+      "width": 1024,
+      "height": 544,
+      "data_bytes": 1671168,
+      "encoding": "bgr8",
+      "step": 3072
+    },
+    {
+      "topic": "/velodyne_1/velodyne_points",
+      "frame": "velodyne_1",
+      "stamp_ns": 1698955259207218000,
+      "width": 34590,
+      "height": 1,
+      "data_bytes": 760980,
+      "fields": [
+        {
+          "name": "x",
+          "offset": 0,
+          "datatype": 7
+        },
+        {
+          "name": "y",
+          "offset": 4,
+          "datatype": 7
+        },
+        {
+          "name": "z",
+          "offset": 8,
+          "datatype": 7
+        },
+        {
+          "name": "intensity",
+          "offset": 12,
+          "datatype": 7
+        },
+        {
+          "name": "ring",
+          "offset": 16,
+          "datatype": 4
+        },
+        {
+          "name": "time",
+          "offset": 18,
+          "datatype": 7
+        }
+      ],
+      "point_step": 22
+    },
+    {
+      "topic": "/deep_cloud",
+      "frame": "multisense",
+      "stamp_ns": 1698955259317091000,
+      "width": 149901,
+      "height": 1,
+      "data_bytes": 2398416,
+      "fields": [
+        {
+          "name": "x",
+          "offset": 0,
+          "datatype": 7
+        },
+        {
+          "name": "y",
+          "offset": 4,
+          "datatype": 7
+        },
+        {
+          "name": "z",
+          "offset": 8,
+          "datatype": 7
+        },
+        {
+          "name": "rgb",
+          "offset": 12,
+          "datatype": 6
+        }
+      ],
+      "point_step": 16
+    }
+  ]
+}

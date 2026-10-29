@@ -1,0 +1,11 @@
+{
+  "backed_up_package_files_verified": 49,
+  "existing_package_files_changed": [
+    "CMakeLists.txt"
+  ],
+  "CMake_change": "Two lines install the separate adapter and register its tests",
+  "original_working_workspace_source_hashes_match": true,
+  "validated_bash_blocks": 21,
+  "old_launch_adapter_and_calibration_unchanged": true,
+  "physical_calibration_accuracy_measured": false
+}

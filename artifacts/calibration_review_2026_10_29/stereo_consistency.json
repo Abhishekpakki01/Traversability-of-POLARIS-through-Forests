@@ -1,0 +1,25 @@
+{
+  "image_and_stereo_cloud_stamp_ns": 1698955259317091000,
+  "physical_lidar_calibration_validated": false,
+  "description": "Recorded stereo colors versus matching camera pixels; candidate-model comparison, not ground-truth reprojection error.",
+  "results": [
+    {
+      "model": "rectified_P",
+      "points": 149901,
+      "median_color_error_0_255": 5.333333333333333,
+      "mean_color_error_0_255": 7.548161786779274
+    },
+    {
+      "model": "raw_K",
+      "points": 149901,
+      "median_color_error_0_255": 19.0,
+      "mean_color_error_0_255": 25.96688481064169
+    },
+    {
+      "model": "P_with_later_R",
+      "points": 149901,
+      "median_color_error_0_255": 13.666666666666666,
+      "mean_color_error_0_255": 18.619379901846333
+    }
+  ]
+}

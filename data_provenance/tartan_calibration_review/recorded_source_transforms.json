@@ -1,0 +1,176 @@
+{
+  "source_recording": "https://airlab-cloud.andrew.cmu.edu:8080/swift/v1/AUTH_ac8533a83cff4d48bc8c608ad222d330/tartandrive2/bags/2023-11-02-16-00-43_down_meadows/down_meadows_0.bag",
+  "network_bytes": 2289758,
+  "recorded_transforms": [
+    {
+      "connection_id": 3,
+      "caller": "/multisense_multisense_head",
+      "parent": "multisense/head",
+      "child": "multisense",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quaternion": [
+        0.9999993658637698,
+        0.0007963264582434141,
+        0.0007963264582434141,
+        -6.341362302272584e-07
+      ]
+    },
+    {
+      "connection_id": 3,
+      "caller": "/multisense_multisense_head",
+      "parent": "multisense/head",
+      "child": "multisense",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quaternion": [
+        0.9999993658637698,
+        0.0007963264582434141,
+        0.0007963264582434141,
+        -6.341362302272584e-07
+      ]
+    },
+    {
+      "connection_id": 3,
+      "caller": "/multisense_multisense_head",
+      "parent": "multisense/head",
+      "child": "multisense",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quaternion": [
+        0.9999993658637698,
+        0.0007963264582434141,
+        0.0007963264582434141,
+        -6.341362302272584e-07
+      ]
+    },
+    {
+      "connection_id": 10,
+      "caller": "/multisense_to_base",
+      "parent": "vehicle",
+      "child": "multisense/head",
+      "translation": [
+        0.0,
+        0.0,
+        -0.1274
+      ],
+      "quaternion": [
+        0.0005446647235482245,
+        0.10893203693359271,
+        -0.0049702245428434365,
+        0.9940366248473097
+      ]
+    },
+    {
+      "connection_id": 10,
+      "caller": "/multisense_to_base",
+      "parent": "vehicle",
+      "child": "multisense/head",
+      "translation": [
+        0.0,
+        0.0,
+        -0.1274
+      ],
+      "quaternion": [
+        0.0005446647235482245,
+        0.10893203693359271,
+        -0.0049702245428434365,
+        0.9940366248473097
+      ]
+    },
+    {
+      "connection_id": 11,
+      "caller": "/sensor_init_to_sensor_init_rot",
+      "parent": "sensor_init",
+      "child": "sensor_init_rot",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quaternion": [
+        0.9999999999991198,
+        0.0,
+        0.0,
+        1.3267948966775328e-06
+      ]
+    },
+    {
+      "connection_id": 11,
+      "caller": "/sensor_init_to_sensor_init_rot",
+      "parent": "sensor_init",
+      "child": "sensor_init_rot",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quaternion": [
+        0.9999999999991198,
+        0.0,
+        0.0,
+        1.3267948966775328e-06
+      ]
+    },
+    {
+      "connection_id": 28,
+      "caller": "/play_1706118490602255889",
+      "parent": "vehicle",
+      "child": "velodyne_1",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quaternion": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "connection_id": 28,
+      "caller": "/play_1706118490602255889",
+      "parent": "vehicle",
+      "child": "velodyne_1",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quaternion": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "connection_id": 28,
+      "caller": "/play_1706118490602255889",
+      "parent": "vehicle",
+      "child": "velodyne_1",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quaternion": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ]
+}

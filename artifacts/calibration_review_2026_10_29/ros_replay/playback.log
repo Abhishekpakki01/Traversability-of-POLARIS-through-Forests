@@ -1,0 +1,13 @@
+stdin is not a terminal device. Keyboard handling disabled.[INFO] [1793301989.578300247] [rosbag2_storage]: Opened database '/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2/down_meadows_moving_ros2.db3' for READ_ONLY.
+[INFO] [1793301989.578658970] [rosbag2_player]: Set rate to 0.5
+[INFO] [1793301989.581611117] [rosbag2_player]: Overriding QoS profile for topic /tf_static
+[INFO] [1793301989.620672614] [rosbag2_player]: Overriding QoS profile for topic /velodyne_1/velodyne_points
+[INFO] [1793301989.866067910] [rosbag2_player]: Sleep 2000000000 ns
+[INFO] [1793301991.867693907] [rosbag2_storage]: Opened database '/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2/down_meadows_moving_ros2.db3' for READ_ONLY.
+[WARN] [1793302021.261587239] [rosbag2_player]: Message queue starved. Messages will be delayed. Consider increasing the --read-ahead-queue-size option.
+[WARN] [1793302032.283266255] [rosbag2_player]: Message queue starved. Messages will be delayed. Consider increasing the --read-ahead-queue-size option.
+[WARN] [1793302035.956757519] [rosbag2_player]: Message queue starved. Messages will be delayed. Consider increasing the --read-ahead-queue-size option.
+[WARN] [1793302036.964434157] [rosbag2_player]: Message queue starved. Messages will be delayed. Consider increasing the --read-ahead-queue-size option.
+[WARN] [1793302038.884945746] [rosbag2_player]: Message queue starved. Messages will be delayed. Consider increasing the --read-ahead-queue-size option.
+[WARN] [1793302058.398612945] [rosbag2_player]: Message queue starved. Messages will be delayed. Consider increasing the --read-ahead-queue-size option.
+[WARN] [1793302059.398737800] [rosbag2_player]: Message queue starved. Messages will be delayed. Consider increasing the --read-ahead-queue-size option.

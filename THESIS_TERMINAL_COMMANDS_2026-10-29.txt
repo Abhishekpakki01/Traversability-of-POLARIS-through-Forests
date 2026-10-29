@@ -1,3 +1,39 @@
+# LATEST SEPARATE CALIBRATION CHECK — choose this or an older run, not both.
+# Full guide: src/semantic_mapping/docs/TARTAN_CALIBRATION_CHECK.md
+
+# Terminal 1 (build already completed; source this checkout to use the new files)
+cd ~/Traversability-of-POLARIS-through-Forests
+source /opt/ros/humble/setup.bash
+source ~/semantic_map_ws/install/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=111
+export ROS_LOCALHOST_ONLY=1
+ros2 launch semantic_mapping tartan_recorded_calibration.launch.py
+
+# Terminal 2, after Camera projection reference appears in Terminal 1
+cd ~/Traversability-of-POLARIS-through-Forests
+source /opt/ros/humble/setup.bash
+source ~/semantic_map_ws/install/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=111
+export ROS_LOCALHOST_ONLY=1
+ros2 bag play ~/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2 \
+  --clock --delay 3 --rate 0.5 --read-ahead-queue-size 10 \
+  --qos-profile-overrides-path src/semantic_mapping/config/tartan_playback_qos.yaml \
+  --topics /tf /tf_static /velodyne_1/velodyne_points \
+  /multisense/left/image_rect_color /lidar_odometry
+
+# Terminal 3, with the same source/export block as Terminal 2
+ros2 topic echo /camera_lidar_projection/status --once
+
+# Stop player and launch with Ctrl+C before any fresh replay.
+# The check uses uniform green occupancy geometry; those are not class colors.
+# Optional semantic view: append semantic:=true to the new launch command,
+# then enable Optional semantic voxels in RViz and disable Occupied OHM geometry.
+# Camera calibration accuracy is still unverified; read the full guide.
+
+# EARLIER BASELINE COMMANDS — retained for returning to the previous versions
+
 # THESIS TERMINAL COMMANDS — 29 October 2026
 # Reference sheet, not an executable script. Copy one appropriate block at a time.
 # Choose either RELLIS or Tartan; do not run duplicate mappers.

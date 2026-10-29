@@ -1,0 +1,19 @@
+[INFO] [launch]: All log files can be found below /home/abhishek/.ros/log/2026-10-29-21-26-19-593259-Abhishek-47265
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [ohm_occupancy_pose_node-1]: process started with pid [47274]
+[INFO] [tartan_recorded_camera_adapter.py-2]: process started with pid [47276]
+[INFO] [camera_lidar_projection_node.py-3]: process started with pid [47278]
+[ohm_occupancy_pose_node-1] [INFO] [1793301981.075270943] [ohm_occupancy_pose_node]: C++ OHM Engine Active | Frame: sensor_init | Max Range: 10.00m | Resolution: 0.35m
+[tartan_recorded_camera_adapter.py-2] [INFO] [1793301984.334934346] [tartan_recorded_camera_adapter]: Camera mounting transforms match the original recording; image pixels and timestamps are preserved.
+[tartan_recorded_camera_adapter.py-2] [WARN] [1793301984.338316130] [tartan_recorded_camera_adapter]: Camera intrinsics/rectification remain provisional: Rectified P cross-checked against original stereo cloud and its exact camera exposure. No factory CameraInfo is present; physical calibration accuracy remains unmeasured.
+[camera_lidar_projection_node.py-3] [INFO] [1793301985.903439269] [camera_lidar_projection]: Camera projection reference | frame=sensor_init | slop=0.05s | RGB appearance only; no semantic predictions or OHM map updates
+[ohm_occupancy_pose_node-1] [WARN] [1793301991.892403201] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [camera_lidar_projection_node.py-3]: sending signal 'SIGINT' to process[camera_lidar_projection_node.py-3]
+[INFO] [tartan_recorded_camera_adapter.py-2]: sending signal 'SIGINT' to process[tartan_recorded_camera_adapter.py-2]
+[INFO] [ohm_occupancy_pose_node-1]: sending signal 'SIGINT' to process[ohm_occupancy_pose_node-1]
+[ohm_occupancy_pose_node-1] [INFO] [1793302068.929454399] [rclcpp]: signal_handler(signum=2)
+[ohm_occupancy_pose_node-1] [WARN] [1793302069.073964267] [ohm_occupancy_pose_node]: Skipping cloud: no sensor_init <- velodyne_1 pose at scan time: Lookup would require extrapolation into the future.  Requested time 1698955334.855477 but the latest data is at time 1698955334.755280, when looking up transform from frame [velodyne_1] to frame [sensor_init]
+[INFO] [ohm_occupancy_pose_node-1]: process has finished cleanly [pid 47274]
+[INFO] [tartan_recorded_camera_adapter.py-2]: process has finished cleanly [pid 47276]
+[INFO] [camera_lidar_projection_node.py-3]: process has finished cleanly [pid 47278]

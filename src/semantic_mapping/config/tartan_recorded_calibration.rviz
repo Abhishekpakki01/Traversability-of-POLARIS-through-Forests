@@ -1,0 +1,118 @@
+Panels:
+- Class: rviz_common/Displays
+  Help Height: 70
+  Name: Displays
+  Property Tree Widget:
+    Expanded: null
+    Splitter Ratio: 0.5
+  Tree Height: 124
+- Class: rviz_common/Views
+  Expanded:
+  - /Current View1
+  Name: Views
+  Splitter Ratio: 0.5
+Visualization Manager:
+  Class: ''
+  Displays:
+  - Class: rviz_default_plugins/Marker
+    Name: Occupied OHM geometry
+    Enabled: true
+    Topic:
+      Value: /semantic_voxel_map_cpp
+      Reliability Policy: Reliable
+      Depth: 10
+  - Class: rviz_default_plugins/Pose
+    Name: Vehicle pose
+    Enabled: true
+    Topic:
+      Value: /vehicle_pose
+    Shape: Arrow
+    Color: 255; 25; 0
+    Alpha: 1
+    Shaft Length: 2
+    Shaft Radius: 0.1
+    Head Length: 0.5
+    Head Radius: 0.25
+  - Class: rviz_default_plugins/Image
+    Name: Original camera
+    Enabled: true
+    Topic:
+      Value: /multisense/left/image_rect_color
+      Reliability Policy: Best Effort
+      Depth: 1
+  - Class: rviz_default_plugins/Image
+    Name: Recorded-TF projection (intrinsics provisional)
+    Enabled: true
+    Topic:
+      Value: /camera_lidar_projection/projection_image
+      Reliability Policy: Best Effort
+      Depth: 1
+  - Class: rviz_default_plugins/PointCloud2
+    Name: Optional semantic voxels
+    Enabled: false
+    Topic:
+      Value: /semantic_voxel_map
+      Reliability Policy: Reliable
+      Durability Policy: Transient Local
+      Depth: 1
+    Style: Boxes
+    Size (m): 0.35
+    Position Transformer: XYZ
+    Color Transformer: RGB8
+    Decay Time: 0
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: sensor_init
+    Frame Rate: 20
+  Name: root
+  Tools:
+  - Class: rviz_default_plugins/Interact
+    Hide Inactive Objects: true
+  - Class: rviz_default_plugins/MoveCamera
+  - Class: rviz_default_plugins/Select
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 22
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05000000074505806
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 0.5600000023841858
+      Target Frame: vehicle
+      Value: Orbit (rviz_default_plugins)
+      Yaw: 0.699999988079071
+    Saved: null
+Window Geometry:
+  Camera reference:
+    collapsed: false
+  Displays:
+    collapsed: false
+  Height: 987
+  Hide Left Dock: false
+  Hide Right Dock: false
+  Predicted terrain classes:
+    collapsed: false
+  Projection alignment reference:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd00000001000000000000019b00000385fc0200000005fb0000002000430061006d0065007200610020007200650066006500720065006e00630065010000003b0000008c0000002800fffffffb000000320050007200650064006900630074006500640020007400650072007200610069006e00200063006c0061007300730065007301000000cd0000008d0000002800fffffffb0000003c00500072006f006a0065006300740069006f006e00200061006c00690067006e006d0065006e00740020007200650066006500720065006e0063006501000001600000008c0000002800fffffffb000000100044006900730070006c00610079007301000001f2000000fd000000c700fffffffb0000000a0056006900650077007301000002f5000000cb000000a000ffffff000005d30000038500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Views:
+    collapsed: false
+  Width: 1908
+  X: 0
+  Y: 0

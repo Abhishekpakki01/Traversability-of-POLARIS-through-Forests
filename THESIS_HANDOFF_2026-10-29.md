@@ -6,6 +6,34 @@
 
 This is a self-contained handoff for the owner or another coding agent. It describes the actual local files and saved results, including the unfinished parts. It was prepared from read-only source inspection and saved test reports on 29 October. No mapping/model/launch code was changed to prepare this handoff.
 
+
+## Later update on 29 October: separate recorded-transform correction
+
+The initial handoff below is retained as historical context. A separate variant
+was subsequently implemented in the GitHub checkout at
+`~/Traversability-of-POLARIS-through-Forests`; the original `~/semantic_map_ws`
+source is unchanged. Read
+`src/semantic_mapping/docs/TARTAN_CALIBRATION_CHECK.md` for the new commands.
+
+- New launch: `tartan_recorded_calibration.launch.py`; projection-only by default,
+  with optional `semantic:=true`. Previous launches and calibration are retained.
+- Restores the original vehicle/head/camera optical transform chain. The earlier
+  head mount differed by 11.5 cm and 1.62 degrees.
+- Uses rectified P and the recorded rectified-frame convention, without the
+  later example's extra R. Original stereo-cloud/matching-image color checks
+  support this choice; they do not prove physical LiDAR calibration accuracy.
+- The original bag has no CameraInfo. Physical calibration remains unverified;
+  the configuration explicitly records that limitation.
+- Current regression total: 33 passing tests. The moving projection check
+  produced 91 overlays, with matching camera stamps, 31.56 s pose span and
+  80.75 m endpoint displacement. This was not lossless processing of all inputs.
+- Backup: 49 pre-change package files under
+  `src/semantic_mapping/backups/before_recorded_calibration/`.
+- New evidence: `artifacts/calibration_review_2026_10_29/` and
+  `data_provenance/tartan_calibration_review/`. No geometric ground-truth
+  reprojection error was measured. Existing frame-loss and semantic-accuracy
+  problems remain separate work.
+
 ## 1. Read this first
 
 - The pipeline runs locally in Ubuntu/WSL. ROS, OHM, the local PyTorch model, and RViz perform the work; this chat is not part of the running pipeline.

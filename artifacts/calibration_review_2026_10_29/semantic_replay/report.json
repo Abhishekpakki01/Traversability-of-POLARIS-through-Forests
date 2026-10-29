@@ -1,0 +1,71 @@
+{
+  "launch_file": "tartan_recorded_calibration.launch.py",
+  "physical_calibration_validated": false,
+  "bag": "/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2",
+  "rate": 0.5,
+  "wall_seconds": 80.0,
+  "received": {
+    "status": 104,
+    "camera": 214,
+    "pose": 142,
+    "occupied": 142,
+    "map": 169,
+    "segmentation": 24,
+    "projection": 20
+  },
+  "status": {
+    "paired": 118,
+    "projected": 27,
+    "fused_frames": 27,
+    "dropped": 91,
+    "last_status": "Semantic observations fused",
+    "occupied_voxels": 23015,
+    "class_counts": {
+      "unknown": 22493,
+      "ground": 48,
+      "vegetation": 465,
+      "trunk": 0,
+      "water": 0,
+      "obstacle": 9
+    },
+    "voxels_with_evidence": 3433,
+    "processing_seconds": 4.494258649003314,
+    "updated_voxels": 428,
+    "visibility": {
+      "samples": 3097,
+      "missing_surface": 350,
+      "occluded": 0,
+      "visible_voxels": 632
+    },
+    "image_stamp_ns": 1698955330017007000,
+    "lidar_stamp_ns": 1698955330046052000,
+    "image_minus_lidar_ms": -29.045,
+    "pending": 0,
+    "inference_busy": false,
+    "model": "GOOSE PP-LiteSeg-B 64 classes",
+    "min_observations": 2,
+    "min_confidence": 0.6,
+    "visibility_mode": "measured_lidar_depth"
+  },
+  "first_to_last_vehicle_displacement_m": 80.21031445141465,
+  "pose_stamp_span_seconds": 31.361464,
+  "saved_image_stamps_ns": {
+    "camera": 1698955329317094000,
+    "segmentation": 1698955329317094000,
+    "projection": 1698955328017712000
+  },
+  "saved_camera_matches_segmentation": true,
+  "occupied_geometry_matched": true,
+  "occupied_voxels": 23015,
+  "classified_voxels": 522,
+  "max_observations": 4,
+  "class_counts": {
+    "unknown": 22493,
+    "ground": 48,
+    "vegetation": 465,
+    "trunk": 0,
+    "water": 0,
+    "obstacle": 9
+  },
+  "passed": true
+}

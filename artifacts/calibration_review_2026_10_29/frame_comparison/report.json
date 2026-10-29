@@ -1,0 +1,67 @@
+{
+  "bag": "/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2",
+  "intrinsics_verified": false,
+  "ground_truth_reprojection_error_measured": false,
+  "frames": [
+    {
+      "image_stamp_ns": 1698955305017867000,
+      "lidar_stamp_ns": 1698955304996957000,
+      "image_minus_lidar_ms": 20.91,
+      "projected_points": {
+        "previous": 6457,
+        "recorded": 6522
+      },
+      "common_points": 6292,
+      "median_model_pixel_shift": 14.560219778561036,
+      "p90_model_pixel_shift": 21.400934559032695
+    },
+    {
+      "image_stamp_ns": 1698955311017915000,
+      "lidar_stamp_ns": 1698955311008741000,
+      "image_minus_lidar_ms": 9.174,
+      "projected_points": {
+        "previous": 6794,
+        "recorded": 6878
+      },
+      "common_points": 6630,
+      "median_model_pixel_shift": 13.601470508735444,
+      "p90_model_pixel_shift": 20.518284528683193
+    },
+    {
+      "image_stamp_ns": 1698955319018238000,
+      "lidar_stamp_ns": 1698955319024450000,
+      "image_minus_lidar_ms": -6.212,
+      "projected_points": {
+        "previous": 13371,
+        "recorded": 13335
+      },
+      "common_points": 12977,
+      "median_model_pixel_shift": 15.652475842498529,
+      "p90_model_pixel_shift": 24.20743687382041
+    },
+    {
+      "image_stamp_ns": 1698955327018221000,
+      "lidar_stamp_ns": 1698955327040161000,
+      "image_minus_lidar_ms": -21.94,
+      "projected_points": {
+        "previous": 10871,
+        "recorded": 11072
+      },
+      "common_points": 10313,
+      "median_model_pixel_shift": 15.524174696260024,
+      "p90_model_pixel_shift": 28.635642126552707
+    },
+    {
+      "image_stamp_ns": 1698955333016957000,
+      "lidar_stamp_ns": 1698955333051943000,
+      "image_minus_lidar_ms": -34.986,
+      "projected_points": {
+        "previous": 9279,
+        "recorded": 9368
+      },
+      "common_points": 8650,
+      "median_model_pixel_shift": 18.110770276274835,
+      "p90_model_pixel_shift": 24.08318915758459
+    }
+  ]
+}
