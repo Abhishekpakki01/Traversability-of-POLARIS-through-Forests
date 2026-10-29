@@ -1,0 +1,11 @@
+/os1_cloud_node/points:
+  history: keep_last
+  depth: 10
+  reliability: best_effort
+  durability: volatile
+
+/tf_static:
+  history: keep_last
+  depth: 10
+  reliability: reliable
+  durability: transient_local

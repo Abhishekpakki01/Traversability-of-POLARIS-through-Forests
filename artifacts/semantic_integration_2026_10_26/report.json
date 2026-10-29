@@ -1,0 +1,59 @@
+{
+  "bag": "/home/abhishek/RELLIS-3D/example_filtered_ros2",
+  "rate": 0.25,
+  "wall_seconds": 55.0,
+  "received": {
+    "status": 115,
+    "camera": 98,
+    "pose": 91,
+    "occupied": 91,
+    "map": 146,
+    "segmentation": 54,
+    "projection": 53
+  },
+  "status": {
+    "paired": 89,
+    "projected": 55,
+    "fused_frames": 55,
+    "dropped": 28,
+    "last_status": "Semantic observations fused",
+    "occupied_voxels": 3401,
+    "class_counts": {
+      "unknown": 3267,
+      "ground": 12,
+      "vegetation": 105,
+      "trunk": 0,
+      "water": 0,
+      "obstacle": 17
+    },
+    "voxels_with_evidence": 243,
+    "processing_seconds": 0.7954043249992537,
+    "updated_voxels": 24,
+    "visibility": {
+      "samples": 4458,
+      "missing_surface": 1740,
+      "occluded": 2466,
+      "visible_voxels": 27
+    },
+    "image_stamp_ns": 1581791690408571342,
+    "lidar_stamp_ns": 1581791690433176576,
+    "image_minus_lidar_ms": -24.605234,
+    "pending": 6,
+    "inference_busy": true,
+    "model": "GOOSE PP-LiteSeg-B 64 classes",
+    "min_observations": 2,
+    "min_confidence": 0.6
+  },
+  "occupied_voxels": 3401,
+  "classified_voxels": 134,
+  "max_observations": 54,
+  "class_counts": {
+    "unknown": 3267,
+    "ground": 12,
+    "vegetation": 105,
+    "trunk": 0,
+    "water": 0,
+    "obstacle": 17
+  },
+  "passed": true
+}

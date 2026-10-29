@@ -1,0 +1,12 @@
+{
+  "projected_points": 1176,
+  "image_minus_cloud_ms": 22.663,
+  "class_pixels": {
+    "unknown": 67034,
+    "ground": 230038,
+    "vegetation": 256604,
+    "trunk": 0,
+    "water": 930,
+    "obstacle": 2450
+  }
+}

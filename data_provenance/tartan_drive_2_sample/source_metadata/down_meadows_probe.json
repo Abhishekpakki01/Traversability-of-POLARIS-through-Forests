@@ -1,0 +1,896 @@
+{
+  "url": "https://airlab-cloud.andrew.cmu.edu:8080/swift/v1/AUTH_ac8533a83cff4d48bc8c608ad222d330/tartandrive2/bags/2023-11-02-16-00-43_down_meadows/down_meadows_0.bag",
+  "source_bytes": 32496218206,
+  "etag": "cffe33c5dde4a5919911418ff0c2a96e-1937",
+  "start_ns": 1698955259007389633,
+  "stop_ns": 1698955378961261392,
+  "duration_seconds": 119.953871759,
+  "chunk_count": 5467,
+  "topics": [
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 87,
+      "caller": "/result_recording",
+      "connection_id": 0
+    },
+    {
+      "name": "/clock",
+      "type": "rosgraph_msgs/msg/Clock",
+      "count": 26658,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 1
+    },
+    {
+      "name": "/rosout_agg",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 22283,
+      "caller": "/rosout",
+      "connection_id": 2
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 5454,
+      "caller": "/multisense_multisense_head",
+      "connection_id": 3
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 1,
+      "caller": "/roughness_cost",
+      "connection_id": 4
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 132,
+      "caller": "/stereo_node_multisense",
+      "connection_id": 5
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 125,
+      "caller": "/tartanvo_node",
+      "connection_id": 6
+    },
+    {
+      "name": "/local_mapping_node/parameter_updates",
+      "type": "dynamic_reconfigure/msg/Config",
+      "count": 1,
+      "caller": "/local_mapping_node",
+      "connection_id": 7
+    },
+    {
+      "name": "/local_mapping_node/parameter_descriptions",
+      "type": "dynamic_reconfigure/msg/ConfigDescription",
+      "count": 1,
+      "caller": "/local_mapping_node",
+      "connection_id": 8
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 1142,
+      "caller": "/gps_to_imu",
+      "connection_id": 9
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 1142,
+      "caller": "/multisense_to_base",
+      "connection_id": 10
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 1142,
+      "caller": "/sensor_init_to_sensor_init_rot",
+      "connection_id": 11
+    },
+    {
+      "name": "/cmd",
+      "type": "geometry_msgs/msg/TwistStamped",
+      "count": 11989,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 12
+    },
+    {
+      "name": "/received_messages",
+      "type": "can_msgs/msg/Frame",
+      "count": 23221,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 13
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 20686,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 14
+    },
+    {
+      "name": "/odom",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 6049,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 15
+    },
+    {
+      "name": "/odometry/filtered_odom",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 6047,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 16
+    },
+    {
+      "name": "/ros_talon/status",
+      "type": "ros_talon/msg/Status",
+      "count": 2398,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 17
+    },
+    {
+      "name": "/novatel/imu/data",
+      "type": "sensor_msgs/msg/Imu",
+      "count": 11988,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 18
+    },
+    {
+      "name": "/controls",
+      "type": "racepak/msg/rp_controls",
+      "count": 5994,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 19
+    },
+    {
+      "name": "/mux/joy",
+      "type": "sensor_msgs/msg/Joy",
+      "count": 3596,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 20
+    },
+    {
+      "name": "/mux/intervention",
+      "type": "common_msgs/msg/BoolStamped",
+      "count": 3596,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 21
+    },
+    {
+      "name": "/goal_dynamixel_position",
+      "type": "sensor_msgs/msg/JointState",
+      "count": 3596,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 22
+    },
+    {
+      "name": "/ros_talon/steering_angle",
+      "type": "std_msgs/msg/Float32",
+      "count": 3596,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 23
+    },
+    {
+      "name": "/dynamixel_state",
+      "type": "dynamixel_workbench_msgs/msg/DynamixelStateList",
+      "count": 487,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 24
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 2,
+      "caller": "/feature_extraction_node",
+      "connection_id": 25
+    },
+    {
+      "name": "/traversability_breakdown",
+      "type": "std_msgs/msg/Float32MultiArray",
+      "count": 11692,
+      "caller": "/roughness_cost",
+      "connection_id": 26
+    },
+    {
+      "name": "/traversability_cost",
+      "type": "std_msgs/msg/Float32",
+      "count": 11692,
+      "caller": "/roughness_cost",
+      "connection_id": 27
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 16682,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 28
+    },
+    {
+      "name": "/tf_static",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 1,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 29
+    },
+    {
+      "name": "/shock_pos",
+      "type": "racepak/msg/rp_shock_sensors",
+      "count": 5992,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 30
+    },
+    {
+      "name": "/rosout_agg",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 20668,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 31
+    },
+    {
+      "name": "/span/status",
+      "type": "novatel_span/msg/Status",
+      "count": 6047,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 32
+    },
+    {
+      "name": "/velodyne_1/velodyne_1_nodelet_manager_driver/parameter_descriptions",
+      "type": "dynamic_reconfigure/msg/ConfigDescription",
+      "count": 2,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 33
+    },
+    {
+      "name": "/multisense/left/image_rect",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1198,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 34
+    },
+    {
+      "name": "/velodyne_1/velodyne_1_nodelet_manager_driver/parameter_updates",
+      "type": "dynamic_reconfigure/msg/Config",
+      "count": 2,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 35
+    },
+    {
+      "name": "/multisense/right/image_rect",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1199,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 36
+    },
+    {
+      "name": "/multisense/left/image_rect_color",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1199,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 37
+    },
+    {
+      "name": "/joint_states",
+      "type": "sensor_msgs/msg/JointState",
+      "count": 487,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 38
+    },
+    {
+      "name": "/wheel_rpm",
+      "type": "racepak/msg/rp_shock_sensors",
+      "count": 5991,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 39
+    },
+    {
+      "name": "/vehicle_state/velocity",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 5989,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 40
+    },
+    {
+      "name": "/ros_talon/current_position",
+      "type": "std_msgs/msg/Float32",
+      "count": 746,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 41
+    },
+    {
+      "name": "/livox/lidar",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1198,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 42
+    },
+    {
+      "name": "/velodyne_1/velodyne_packets",
+      "type": "velodyne_msgs/msg/VelodyneScan",
+      "count": 1196,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 43
+    },
+    {
+      "name": "/velodyne_1/scan",
+      "type": "sensor_msgs/msg/LaserScan",
+      "count": 1196,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 44
+    },
+    {
+      "name": "/velodyne_2/velodyne_packets",
+      "type": "velodyne_msgs/msg/VelodyneScan",
+      "count": 1196,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 45
+    },
+    {
+      "name": "/velodyne_1/velodyne_1_nodelet_manager/bond",
+      "type": "bond/msg/Status",
+      "count": 720,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 46
+    },
+    {
+      "name": "/velodyne_2/velodyne_2_nodelet_manager/bond",
+      "type": "bond/msg/Status",
+      "count": 720,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 47
+    },
+    {
+      "name": "/velodyne_1/velodyne_points",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1196,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 48
+    },
+    {
+      "name": "/full_cloud",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1195,
+      "caller": "/pointcloud_subscriber",
+      "connection_id": 49
+    },
+    {
+      "name": "/velodyne_2/scan",
+      "type": "sensor_msgs/msg/LaserScan",
+      "count": 1195,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 50
+    },
+    {
+      "name": "/velodyne_2/velodyne_points",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1195,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 51
+    },
+    {
+      "name": "/velodyne_cloud_2",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1195,
+      "caller": "/feature_extraction_node",
+      "connection_id": 52
+    },
+    {
+      "name": "/superodom/feature_info",
+      "type": "super_odometry/msg/LaserFeature",
+      "count": 1195,
+      "caller": "/feature_extraction_node",
+      "connection_id": 53
+    },
+    {
+      "name": "/planar_points",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1195,
+      "caller": "/feature_extraction_node",
+      "connection_id": 54
+    },
+    {
+      "name": "/edge_points",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1195,
+      "caller": "/feature_extraction_node",
+      "connection_id": 55
+    },
+    {
+      "name": "/multisense/imu/imu_data",
+      "type": "sensor_msgs/msg/Imu",
+      "count": 48948,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 56
+    },
+    {
+      "name": "/diagnostics",
+      "type": "diagnostic_msgs/msg/DiagnosticArray",
+      "count": 577,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 57
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 10,
+      "caller": "/lidar_odometry_node",
+      "connection_id": 58
+    },
+    {
+      "name": "/velodyne_cloud_registered_with_features",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1162,
+      "caller": "/lidar_odometry_node",
+      "connection_id": 59
+    },
+    {
+      "name": "/aft_mapped_to_init",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 1162,
+      "caller": "/lidar_odometry_node",
+      "connection_id": 60
+    },
+    {
+      "name": "/lidar_odometry",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 1162,
+      "caller": "/lidar_odometry_node",
+      "connection_id": 61
+    },
+    {
+      "name": "/super_odometry_stats",
+      "type": "super_odometry/msg/OptimizationStats",
+      "count": 1162,
+      "caller": "/lidar_odometry_node",
+      "connection_id": 62
+    },
+    {
+      "name": "/sent_messages",
+      "type": "can_msgs/msg/Frame",
+      "count": 4782,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 63
+    },
+    {
+      "name": "/integrated_to_init",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 11942,
+      "caller": "/imu_odometry_node",
+      "connection_id": 64
+    },
+    {
+      "name": "/tf_static",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 597,
+      "caller": "/map_to_sensor_init",
+      "connection_id": 65
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 24,
+      "caller": "/map_to_sensor_init",
+      "connection_id": 66
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 11932,
+      "caller": "/imu_odometry_node",
+      "connection_id": 67
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 1175,
+      "caller": "/local_mapping_node",
+      "connection_id": 68
+    },
+    {
+      "name": "/local_gridmap",
+      "type": "grid_map_msgs/msg/GridMap",
+      "count": 1175,
+      "caller": "/local_mapping_node",
+      "connection_id": 69
+    },
+    {
+      "name": "/deep_cloud",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1152,
+      "caller": "/stereo_node_multisense",
+      "connection_id": 70
+    },
+    {
+      "name": "/tartanvo_transform",
+      "type": "geometry_msgs/msg/TransformStamped",
+      "count": 1155,
+      "caller": "/tartanvo_node",
+      "connection_id": 71
+    },
+    {
+      "name": "/tartanvo_odom",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 1155,
+      "caller": "/tartanvo_node",
+      "connection_id": 72
+    },
+    {
+      "name": "/tartanvo_pose",
+      "type": "geometry_msgs/msg/PoseStamped",
+      "count": 1155,
+      "caller": "/tartanvo_node",
+      "connection_id": 73
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 1155,
+      "caller": "/tartanvo_node",
+      "connection_id": 74
+    },
+    {
+      "name": "/debug/voxel/density",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119,
+      "caller": "/local_mapping_node",
+      "connection_id": 75
+    },
+    {
+      "name": "/debug/ground/raw",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119,
+      "caller": "/local_mapping_node",
+      "connection_id": 76
+    },
+    {
+      "name": "/debug/ground/noise",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119,
+      "caller": "/local_mapping_node",
+      "connection_id": 77
+    },
+    {
+      "name": "/debug/ground/inflated",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119,
+      "caller": "/local_mapping_node",
+      "connection_id": 78
+    },
+    {
+      "name": "/debug/ground/estimated",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119,
+      "caller": "/local_mapping_node",
+      "connection_id": 79
+    },
+    {
+      "name": "/debug/ground/object",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119,
+      "caller": "/local_mapping_node",
+      "connection_id": 80
+    },
+    {
+      "name": "/debug/ground/slope_x",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119,
+      "caller": "/local_mapping_node",
+      "connection_id": 81
+    },
+    {
+      "name": "/debug/ground/slope_y",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119,
+      "caller": "/local_mapping_node",
+      "connection_id": 82
+    },
+    {
+      "name": "/debug/ground/slope_magnitude",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119,
+      "caller": "/local_mapping_node",
+      "connection_id": 83
+    },
+    {
+      "name": "/debug/ground/svd1",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119,
+      "caller": "/local_mapping_node",
+      "connection_id": 84
+    },
+    {
+      "name": "/debug/ground/svd2",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119,
+      "caller": "/local_mapping_node",
+      "connection_id": 85
+    },
+    {
+      "name": "/debug/ground/svd3",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119,
+      "caller": "/local_mapping_node",
+      "connection_id": 86
+    },
+    {
+      "name": "/debug/ground/roughness",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119,
+      "caller": "/local_mapping_node",
+      "connection_id": 87
+    },
+    {
+      "name": "/local_rgb_map",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1146,
+      "caller": "/localmapping_node",
+      "connection_id": 88
+    },
+    {
+      "name": "/local_height_map",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1146,
+      "caller": "/localmapping_node",
+      "connection_id": 89
+    },
+    {
+      "name": "/local_rgb_map_inflate",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1146,
+      "caller": "/localmapping_node",
+      "connection_id": 90
+    },
+    {
+      "name": "/local_height_map_inflate",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1146,
+      "caller": "/localmapping_node",
+      "connection_id": 91
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 112,
+      "caller": "/localmapping_node",
+      "connection_id": 92
+    },
+    {
+      "name": "/joy",
+      "type": "sensor_msgs/msg/Joy",
+      "count": 2590,
+      "caller": "/play_1706118490602255889",
+      "connection_id": 93
+    }
+  ],
+  "network_bytes": 348986302,
+  "network_requests": 175,
+  "output": "/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_probe_ros2",
+  "requested_start_ns": 1698955304007389633,
+  "requested_stop_ns": 1698955304207389633,
+  "selected_counts": {
+    "/tf_static": 2,
+    "/lidar_odometry": 19,
+    "/velodyne_1/velodyne_points": 22,
+    "/multisense/left/image_rect_color": 22
+  },
+  "first_headers": {
+    "static_transforms": [
+      {
+        "parent": "multisense/head",
+        "child": "multisense/accel",
+        "xyz": [
+          -0.0475,
+          0.0302,
+          -0.00275
+        ],
+        "xyzw": [
+          0.0,
+          0.7070727237014777,
+          0.0,
+          0.7071408370313327
+        ]
+      },
+      {
+        "parent": "multisense/head",
+        "child": "multisense/center_bottom_led_frame",
+        "xyz": [
+          0.01125,
+          0.0,
+          -0.0155
+        ],
+        "xyzw": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "parent": "multisense/head",
+        "child": "multisense/center_top_led_frame",
+        "xyz": [
+          0.01125,
+          0.0,
+          0.0105
+        ],
+        "xyzw": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "parent": "multisense/head",
+        "child": "multisense/gyro",
+        "xyz": [
+          -0.0476,
+          0.0388,
+          -0.00075
+        ],
+        "xyzw": [
+          -0.4999993342824018,
+          0.5000488267304791,
+          -0.4999993342824018,
+          0.49995250006353736
+        ]
+      },
+      {
+        "parent": "multisense/hokuyo_link",
+        "child": "multisense/head_hokuyo_frame",
+        "xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "xyzw": [
+          -0.5,
+          -0.5,
+          -0.49999999999755174,
+          0.5000000000024483
+        ]
+      },
+      {
+        "parent": "multisense/head",
+        "child": "multisense/left_camera_frame",
+        "xyz": [
+          0.0,
+          0.035,
+          -0.002
+        ],
+        "xyzw": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "parent": "multisense/left_camera_frame",
+        "child": "multisense/left_camera_optical_frame",
+        "xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "xyzw": [
+          -0.5,
+          0.49999999999755174,
+          -0.5,
+          0.5000000000024483
+        ]
+      },
+      {
+        "parent": "multisense/head",
+        "child": "multisense/left_led_frame",
+        "xyz": [
+          -0.01443,
+          0.07452,
+          0.050346
+        ],
+        "xyzw": [
+          0.01962478479446204,
+          -0.0723140985821569,
+          0.2611729935586574,
+          0.9623794503228082
+        ]
+      },
+      {
+        "parent": "multisense/head",
+        "child": "multisense/mag",
+        "xyz": [
+          -0.0475,
+          0.0302,
+          -0.00275
+        ],
+        "xyzw": [
+          0.0,
+          0.7070727237014777,
+          0.0,
+          0.7071408370313327
+        ]
+      },
+      {
+        "parent": "multisense/head",
+        "child": "multisense/right_camera_frame",
+        "xyz": [
+          0.0,
+          -0.035,
+          -0.002
+        ],
+        "xyzw": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "parent": "multisense/right_camera_frame",
+        "child": "multisense/right_camera_optical_frame",
+        "xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "xyzw": [
+          -0.4999999999966269,
+          0.5000018366025517,
+          -0.4999999999966269,
+          0.49999816339744835
+        ]
+      },
+      {
+        "parent": "multisense/head",
+        "child": "multisense/right_led_frame",
+        "xyz": [
+          -0.01443,
+          -0.07452,
+          0.050346
+        ],
+        "xyzw": [
+          -0.01962478479446204,
+          -0.0723140985821569,
+          -0.2611729935586574,
+          0.9623794503228082
+        ]
+      },
+      {
+        "parent": "map",
+        "child": "sensor_init",
+        "xyz": [
+          4479835.486140083,
+          -603075.4636821877,
+          309.02429151907563
+        ],
+        "xyzw": [
+          0.08315377143551135,
+          -0.038823562140010356,
+          -0.7303446987730855,
+          0.6768861073274164
+        ]
+      }
+    ],
+    "/lidar_odometry": {
+      "frame": "sensor_init",
+      "stamp_ns": 1698955302792638063,
+      "child": "vehicle"
+    },
+    "/velodyne_1/velodyne_points": {
+      "frame": "velodyne_1",
+      "stamp_ns": 1698955302993030000,
+      "width": 36624,
+      "height": 1
+    },
+    "/multisense/left/image_rect_color": {
+      "frame": "multisense/left_camera_optical_frame",
+      "stamp_ns": 1698955303017857000,
+      "width": 1024,
+      "height": 544
+    }
+  }
+}

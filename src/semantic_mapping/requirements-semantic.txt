@@ -1,0 +1,2 @@
+# Already available on this machine. Kept separate from the ROS-only mapper.
+torch>=2.0,<3

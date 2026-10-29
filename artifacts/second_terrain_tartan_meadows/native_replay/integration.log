@@ -1,0 +1,19 @@
+[INFO] [launch]: All log files can be found below /home/abhishek/.ros/log/2026-10-27-20-35-39-074228-Abhishek-32455
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [ohm_occupancy_pose_node-1]: process started with pid [32456]
+[INFO] [tartan_camera_adapter.py-2]: process started with pid [32458]
+[INFO] [camera_semantic_voxel_node.py-3]: process started with pid [32460]
+[ohm_occupancy_pose_node-1] [INFO] [1793126139.184702047] [ohm_occupancy_pose_node]: C++ OHM Engine Active | Frame: sensor_init | Max Range: 10.00m | Resolution: 0.35m
+[tartan_camera_adapter.py-2] [INFO] [1793126140.294962623] [tartan_camera_adapter]: Using publisher S21 calibration and a rectified optical frame; camera timestamps/pixels preserved. Recorded default camera URDF is not used.
+[camera_semantic_voxel_node.py-3] [INFO] [1793126143.259035531] [camera_semantic_voxel]: Loading official GOOSE 64-class model: /home/abhishek/semantic_map_ws/models/goose/ppliteseg_class_512.pth
+[camera_semantic_voxel_node.py-3] [INFO] [1793126145.516658813] [camera_semantic_voxel]: Ready: camera classes -> measured visible occupied surface -> multi-frame evidence. Unknown voxels remain gray; occupancy integration is unchanged.
+[ohm_occupancy_pose_node-1] [WARN] [1793126148.506842217] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [camera_semantic_voxel_node.py-3]: sending signal 'SIGINT' to process[camera_semantic_voxel_node.py-3]
+[INFO] [tartan_camera_adapter.py-2]: sending signal 'SIGINT' to process[tartan_camera_adapter.py-2]
+[INFO] [ohm_occupancy_pose_node-1]: sending signal 'SIGINT' to process[ohm_occupancy_pose_node-1]
+[ohm_occupancy_pose_node-1] [INFO] [1793126193.921318638] [rclcpp]: signal_handler(signum=2)
+[ohm_occupancy_pose_node-1] [WARN] [1793126193.932280276] [ohm_occupancy_pose_node]: Skipping cloud: no sensor_init <- velodyne_1 pose at scan time: Lookup would require extrapolation into the future.  Requested time 1698955334.955673 but the latest data is at time 1698955334.755280, when looking up transform from frame [velodyne_1] to frame [sensor_init]
+[INFO] [ohm_occupancy_pose_node-1]: process has finished cleanly [pid 32456]
+[INFO] [tartan_camera_adapter.py-2]: process has finished cleanly [pid 32458]
+[INFO] [camera_semantic_voxel_node.py-3]: process has finished cleanly [pid 32460]

@@ -1,0 +1,6 @@
+stdin is not a terminal device. Keyboard handling disabled.[INFO] [1793127070.103780463] [rosbag2_storage]: Opened database '/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2/down_meadows_moving_ros2.db3' for READ_ONLY.
+[INFO] [1793127070.103961993] [rosbag2_player]: Set rate to 0.5
+[INFO] [1793127070.105749483] [rosbag2_player]: Overriding QoS profile for topic /tf_static
+[INFO] [1793127070.113575433] [rosbag2_player]: Overriding QoS profile for topic /velodyne_1/velodyne_points
+[INFO] [1793127070.139124273] [rosbag2_player]: Sleep 2000000000 ns
+[INFO] [1793127072.139907703] [rosbag2_storage]: Opened database '/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2/down_meadows_moving_ros2.db3' for READ_ONLY.

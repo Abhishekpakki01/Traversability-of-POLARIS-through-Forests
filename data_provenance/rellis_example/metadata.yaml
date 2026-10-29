@@ -1,0 +1,302 @@
+rosbag2_bagfile_information:
+  compression_format: ''
+  compression_mode: ''
+  custom_data: null
+  duration:
+    nanoseconds: 59996382002
+  files:
+  - duration:
+      nanoseconds: 59996382002
+    message_count: 142111
+    path: example_filtered_ros2.db3
+    starting_time:
+      nanoseconds_since_epoch: 1581791678229661588
+  message_count: 142111
+  relative_file_paths:
+  - example_filtered_ros2.db3
+  ros_distro: rosbags
+  starting_time:
+    nanoseconds_since_epoch: 1581791678229661588
+  storage_identifier: sqlite3
+  topics_with_message_count:
+  - message_count: 2501
+    topic_metadata:
+      name: /imu/data_raw
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Imu
+      type_description_hash: 
+        RIHS01_7d9a00ff131080897a5ec7e26e315954b8eae3353c3f995c55faf71574000b5b
+  - message_count: 2501
+    topic_metadata:
+      name: /imu/mag
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/MagneticField
+      type_description_hash: 
+        RIHS01_e80f32f56a20486c9923008fc1a1db07bbb273cbbf6a5b3bfa00835ee00e4dff
+  - message_count: 2501
+    topic_metadata:
+      name: /imu/data
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Imu
+      type_description_hash: 
+        RIHS01_7d9a00ff131080897a5ec7e26e315954b8eae3353c3f995c55faf71574000b5b
+  - message_count: 60
+    topic_metadata:
+      name: /left_drive/status/battery_voltage
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: std_msgs/msg/Float64
+      type_description_hash: 
+        RIHS01_705ba9c3d1a09df43737eb67095534de36fd426c0587779bda2bc51fe790182a
+  - message_count: 60
+    topic_metadata:
+      name: /left_drive/status/battery_current
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: std_msgs/msg/Float64
+      type_description_hash: 
+        RIHS01_705ba9c3d1a09df43737eb67095534de36fd426c0587779bda2bc51fe790182a
+  - message_count: 2985
+    topic_metadata:
+      name: /odometry/filtered
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: nav_msgs/msg/Odometry
+      type_description_hash: 
+        RIHS01_3cc97dc7fb7502f8714462c526d369e35b603cfc34d946e3f2eda2766dfec6e0
+  - message_count: 600
+    topic_metadata:
+      name: /img_node/range_image
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Image
+      type_description_hash: 
+        RIHS01_d31d41a9a4c4bc8eae9be757b0beed306564f7526c88ea6a4588fb9582527d47
+  - message_count: 600
+    topic_metadata:
+      name: /img_node/noise_image
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Image
+      type_description_hash: 
+        RIHS01_d31d41a9a4c4bc8eae9be757b0beed306564f7526c88ea6a4588fb9582527d47
+  - message_count: 600
+    topic_metadata:
+      name: /img_node/intensity_image
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Image
+      type_description_hash: 
+        RIHS01_d31d41a9a4c4bc8eae9be757b0beed306564f7526c88ea6a4588fb9582527d47
+  - message_count: 5996
+    topic_metadata:
+      name: /os1_cloud_node/imu
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Imu
+      type_description_hash: 
+        RIHS01_7d9a00ff131080897a5ec7e26e315954b8eae3353c3f995c55faf71574000b5b
+  - message_count: 651
+    topic_metadata:
+      name: /nerian_left/camera_info
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/CameraInfo
+      type_description_hash: 
+        RIHS01_b303399feda782bcc44e57b8eec9baaa9e0e5a7cd4a89fee8cffe588d6dc93ed
+  - message_count: 651
+    topic_metadata:
+      name: /nerian_right/camera_info
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/CameraInfo
+      type_description_hash: 
+        RIHS01_b303399feda782bcc44e57b8eec9baaa9e0e5a7cd4a89fee8cffe588d6dc93ed
+  - message_count: 76748
+    topic_metadata:
+      name: /os1_node/lidar_packets
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: ouster_ros/msg/PacketMsg
+      type_description_hash: 
+        RIHS01_ca71e9039eadbeea8324902a20f29f523282d57aa3f0f20dfedfb3df980c26d3
+  - message_count: 5995
+    topic_metadata:
+      name: /os1_node/imu_packets
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: ouster_ros/msg/PacketMsg
+      type_description_hash: 
+        RIHS01_ca71e9039eadbeea8324902a20f29f523282d57aa3f0f20dfedfb3df980c26d3
+  - message_count: 599
+    topic_metadata:
+      name: /os1_cloud_node/points
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/PointCloud2
+      type_description_hash: 
+        RIHS01_9198cabf7da3796ae6fe19c4cb3bdd3525492988c70522628af5daa124bae2b5
+  - message_count: 5770
+    topic_metadata:
+      name: /tf
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: tf2_msgs/msg/TFMessage
+      type_description_hash: 
+        RIHS01_e369d0f05a23ae52508854b66f6aa0437f3449d652e8cbf22d5abe85d020f087
+  - message_count: 3418
+    topic_metadata:
+      name: /vectornav/Pres
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/FluidPressure
+      type_description_hash: 
+        RIHS01_22dfb2b145a0bd5a31a1ac3882a1b32148b51d9b2f3bab250290d66f3595bc32
+  - message_count: 3418
+    topic_metadata:
+      name: /vectornav/IMU
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Imu
+      type_description_hash: 
+        RIHS01_7d9a00ff131080897a5ec7e26e315954b8eae3353c3f995c55faf71574000b5b
+  - message_count: 3418
+    topic_metadata:
+      name: /vectornav/Mag
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/MagneticField
+      type_description_hash: 
+        RIHS01_e80f32f56a20486c9923008fc1a1db07bbb273cbbf6a5b3bfa00835ee00e4dff
+  - message_count: 9399
+    topic_metadata:
+      name: /vectornav/GPS
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/NavSatFix
+      type_description_hash: 
+        RIHS01_62223ab3fe210a15976021da7afddc9e200dc9ec75231c1b6a557fc598a65404
+  - message_count: 3417
+    topic_metadata:
+      name: /vectornav/Odom
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: nav_msgs/msg/Odometry
+      type_description_hash: 
+        RIHS01_3cc97dc7fb7502f8714462c526d369e35b603cfc34d946e3f2eda2766dfec6e0
+  - message_count: 3416
+    topic_metadata:
+      name: /vectornav/Temp
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Temperature
+      type_description_hash: 
+        RIHS01_72514a14126ab9f8a9abec974c78e5610a367b59db5da355ff1fb982d5bad4b8
+  - message_count: 1048
+    topic_metadata:
+      name: /warthog_velocity_controller/cmd_vel
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: geometry_msgs/msg/Twist
+      type_description_hash: 
+        RIHS01_9c45bf16fe0983d80e3cfe750d6835843d265a9a6c46bd2e609fcddde6fb8d2a
+  - message_count: 598
+    topic_metadata:
+      name: /pylon_camera_node/camera_info
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/CameraInfo
+      type_description_hash: 
+        RIHS01_b303399feda782bcc44e57b8eec9baaa9e0e5a7cd4a89fee8cffe588d6dc93ed
+  - message_count: 598
+    topic_metadata:
+      name: /pylon_camera_node/image_raw
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Image
+      type_description_hash: 
+        RIHS01_d31d41a9a4c4bc8eae9be757b0beed306564f7526c88ea6a4588fb9582527d47
+  - message_count: 1195
+    topic_metadata:
+      name: /warthog_velocity_controller/odom
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: nav_msgs/msg/Odometry
+      type_description_hash: 
+        RIHS01_3cc97dc7fb7502f8714462c526d369e35b603cfc34d946e3f2eda2766dfec6e0
+  - message_count: 597
+    topic_metadata:
+      name: /velodyne_points
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/PointCloud2
+      type_description_hash: 
+        RIHS01_9198cabf7da3796ae6fe19c4cb3bdd3525492988c70522628af5daa124bae2b5
+  - message_count: 648
+    topic_metadata:
+      name: /nerian/right/camera_info
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/CameraInfo
+      type_description_hash: 
+        RIHS01_b303399feda782bcc44e57b8eec9baaa9e0e5a7cd4a89fee8cffe588d6dc93ed
+  - message_count: 648
+    topic_metadata:
+      name: /nerian/right/image_raw
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Image
+      type_description_hash: 
+        RIHS01_d31d41a9a4c4bc8eae9be757b0beed306564f7526c88ea6a4588fb9582527d47
+  - message_count: 648
+    topic_metadata:
+      name: /nerian/left/camera_info
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/CameraInfo
+      type_description_hash: 
+        RIHS01_b303399feda782bcc44e57b8eec9baaa9e0e5a7cd4a89fee8cffe588d6dc93ed
+  - message_count: 648
+    topic_metadata:
+      name: /nerian/left/image_raw
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Image
+      type_description_hash: 
+        RIHS01_d31d41a9a4c4bc8eae9be757b0beed306564f7526c88ea6a4588fb9582527d47
+  - message_count: 60
+    topic_metadata:
+      name: /mcu/status
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: warthog_msgs/msg/Status
+      type_description_hash: 
+        RIHS01_a692573e74e3e23b5562a64add11ed2d539d8ce5120e38d7d7f420bbfac282ac
+  - message_count: 1
+    topic_metadata:
+      name: /tf_static
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: tf2_msgs/msg/TFMessage
+      type_description_hash: 
+        RIHS01_e369d0f05a23ae52508854b66f6aa0437f3449d652e8cbf22d5abe85d020f087
+  - message_count: 59
+    topic_metadata:
+      name: /right_drive/status/battery_voltage
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: std_msgs/msg/Float64
+      type_description_hash: 
+        RIHS01_705ba9c3d1a09df43737eb67095534de36fd426c0587779bda2bc51fe790182a
+  - message_count: 59
+    topic_metadata:
+      name: /right_drive/status/battery_current
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: std_msgs/msg/Float64
+      type_description_hash: 
+        RIHS01_705ba9c3d1a09df43737eb67095534de36fd426c0587779bda2bc51fe790182a
+  version: 8

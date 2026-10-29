@@ -1,0 +1,7 @@
+stdin is not a terminal device. Keyboard handling disabled.[INFO] [1793049118.479395214] [rosbag2_storage]: Opened database '/home/abhishek/RELLIS-3D/example_filtered_ros2/example_filtered_ros2.db3' for READ_ONLY.
+[INFO] [1793049118.479702205] [rosbag2_player]: Set rate to 0.5
+[INFO] [1793049118.482355953] [rosbag2_player]: Overriding QoS profile for topic /os1_cloud_node/points
+[INFO] [1793049118.496633388] [rosbag2_player]: Overriding QoS profile for topic /tf_static
+[INFO] [1793049118.520484206] [rosbag2_player]: Sleep 2000000000 ns
+[INFO] [1793049120.521327932] [rosbag2_storage]: Opened database '/home/abhishek/RELLIS-3D/example_filtered_ros2/example_filtered_ros2.db3' for READ_ONLY.
+[INFO] [1793049151.918173951] [rclcpp]: signal_handler(signum=2)

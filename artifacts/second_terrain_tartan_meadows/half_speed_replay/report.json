@@ -1,0 +1,69 @@
+{
+  "bag": "/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2",
+  "rate": 0.5,
+  "wall_seconds": 80.0,
+  "received": {
+    "status": 112,
+    "camera": 169,
+    "pose": 174,
+    "occupied": 174,
+    "map": 203,
+    "segmentation": 25,
+    "projection": 27
+  },
+  "status": {
+    "paired": 115,
+    "projected": 29,
+    "fused_frames": 29,
+    "dropped": 86,
+    "last_status": "Waiting for occupied map at the paired LiDAR timestamp",
+    "occupied_voxels": 24888,
+    "class_counts": {
+      "unknown": 24319,
+      "ground": 39,
+      "vegetation": 530,
+      "trunk": 0,
+      "water": 0,
+      "obstacle": 0
+    },
+    "voxels_with_evidence": 3683,
+    "processing_seconds": 6.037425325001095,
+    "updated_voxels": 597,
+    "visibility": {
+      "samples": 4548,
+      "missing_surface": 381,
+      "occluded": 0,
+      "visible_voxels": 854
+    },
+    "image_stamp_ns": 1698955331917020000,
+    "lidar_stamp_ns": 1698955331949782000,
+    "image_minus_lidar_ms": -32.762,
+    "pending": 0,
+    "inference_busy": false,
+    "model": "GOOSE PP-LiteSeg-B 64 classes",
+    "min_observations": 2,
+    "min_confidence": 0.6,
+    "visibility_mode": "measured_lidar_depth"
+  },
+  "first_to_last_vehicle_displacement_m": 81.03273228693351,
+  "pose_stamp_span_seconds": 31.662053,
+  "saved_image_stamps_ns": {
+    "camera": 1698955331917020000,
+    "segmentation": 1698955331917020000,
+    "projection": 1698955331917020000
+  },
+  "saved_camera_matches_segmentation": true,
+  "occupied_geometry_matched": true,
+  "occupied_voxels": 24888,
+  "classified_voxels": 569,
+  "max_observations": 6,
+  "class_counts": {
+    "unknown": 24319,
+    "ground": 39,
+    "vegetation": 530,
+    "trunk": 0,
+    "water": 0,
+    "obstacle": 0
+  },
+  "passed": true
+}

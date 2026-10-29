@@ -1,0 +1,87 @@
+source_intrinsics_url: https://raw.githubusercontent.com/castacks/tartan_drive_2.0/main/calibration/multisense_intrinsics.txt
+source_extrinsics_url: https://raw.githubusercontent.com/castacks/tartan_drive_2.0/main/calibration/extrinsics.yaml
+sensor: MultiSense S21
+input_is_rectified: true
+width: 1024
+height: 544
+camera_K_raw:
+- 455.77496337890625
+- 0.0
+- 497.1180114746094
+- 0.0
+- 456.319091796875
+- 251.58502197265625
+- 0.0
+- 0.0
+- 1.0
+camera_D_raw:
+- -0.03597196191549301
+- 0.08101943135261536
+- -0.00028405245393514633
+- 0.0011874435003846884
+- -0.03709280863404274
+- 0.0
+- 0.0
+- 0.0
+camera_R:
+- 0.9999926686286926
+- -0.001692004851065576
+- 0.003427336923778057
+- 0.0016923071816563606
+- 0.9999985694885254
+- -8.531315688742325e-05
+- -0.003427187679335475
+- 9.11126408027485e-05
+- 0.9999940991401672
+camera_P:
+- 477.6049499511719
+- 0.0
+- 499.5
+- 0.0
+- 0.0
+- 477.6049499511719
+- 252.0
+- 0.0
+- 0.0
+- 0.0
+- 1.0
+- 0.0
+vehicle_from_head:
+  translation:
+  - -0.0949
+  - 0.0641
+  - -0.136
+  quaternion:
+  - -0.0119
+  - 0.1131
+  - 0.0003
+  - 0.9935
+  from_frame: vehicle
+  to_frame: multisense/head
+head_from_camera:
+  translation:
+  - 0.005
+  - 0.105
+  - 0.0
+  quaternion:
+  - -0.5
+  - 0.5
+  - -0.5
+  - 0.5
+  from_frame: multisense/head
+  to_frame: multisense/left_camera_optical_frame
+vehicle_from_lidar:
+  translation:
+  - 0.0
+  - 0.0
+  - 0.0
+  quaternion:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+  from_frame: vehicle
+  to_frame: velodyne_1
+provenance_note: Publisher-provided S21 calibration; original bag lacks CameraInfo.
+  Published optical extrinsic is used instead of the recorded default URDF optical
+  offset. Numerical calibration accuracy is not established by replay.

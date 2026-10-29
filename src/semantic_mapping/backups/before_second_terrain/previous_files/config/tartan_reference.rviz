@@ -1,0 +1,55 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: sensor_init
+    Frame Rate: 30
+  Displays:
+    - Class: rviz_default_plugins/Marker
+      Name: Occupied OHM voxels
+      Enabled: true
+      Topic:
+        Value: /semantic_voxel_map_cpp
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        Depth: 5
+    - Class: rviz_default_plugins/Pose
+      Name: Vehicle pose
+      Enabled: true
+      Topic:
+        Value: /vehicle_pose
+      Shape: Arrow
+      Color: 255; 25; 0
+      Alpha: 1
+      Shaft Length: 2
+      Shaft Radius: 0.1
+      Head Length: 0.5
+      Head Radius: 0.25
+    - Class: rviz_default_plugins/Image
+      Name: TartanDrive camera reference
+      Enabled: true
+      Topic:
+        Value: /multisense/left/image_rect_color
+        Reliability Policy: Best Effort
+        Depth: 1
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Name: Current View
+      Target Frame: vehicle
+      Distance: 22
+      Focal Point: {X: 0, Y: 0, Z: 0}
+      Yaw: 0.7
+      Pitch: 0.56
+Window Geometry:
+  Width: 1280
+  Height: 800

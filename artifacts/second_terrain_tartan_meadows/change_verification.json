@@ -1,0 +1,17 @@
+{
+  "verified_previous_files": 39,
+  "existing_files_different_from_baseline": [
+    "CMakeLists.txt",
+    "config/semantic_integration.rviz"
+  ],
+  "planned_existing_source_edits": {
+    "CMakeLists.txt": "Two added lines: adapter installation and calibration test registration"
+  },
+  "additional_view_change": "RELLIS RViz view/panels saved during session; current view retained and backed up separately",
+  "backup_hashes_match": true,
+  "tests": {
+    "passed": 26,
+    "failures": 0
+  },
+  "core_mapper_model_and_fusion_unchanged": true
+}

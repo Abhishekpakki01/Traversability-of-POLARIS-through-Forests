@@ -1,0 +1,12 @@
+[INFO] [launch]: All log files can be found below /home/abhishek/.ros/log/2026-10-27-19-41-26-035482-Abhishek-23948
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [ohm_occupancy_pose_node-1]: process started with pid [23952]
+[INFO] [camera_color_preview.py-2]: process started with pid [23954]
+[INFO] [camera_semantic_voxel_node.py-3]: process started with pid [23956]
+[ohm_occupancy_pose_node-1] [INFO] [1793122886.190970947] [ohm_occupancy_pose_node]: C++ OHM Engine Active | Frame: odom | Max Range: 10.00m | Resolution: 0.35m
+[camera_color_preview.py-2] [INFO] [1793122886.979687645] [camera_color_preview]: Camera reference: /pylon_camera_node/image_raw -> /pylon_camera_node/image_color
+[camera_semantic_voxel_node.py-3] [INFO] [1793122889.880368598] [camera_semantic_voxel]: Loading official GOOSE 64-class model: /home/abhishek/semantic_map_ws/models/goose/ppliteseg_class_512.pth
+[camera_semantic_voxel_node.py-3] [INFO] [1793122890.817931110] [camera_semantic_voxel]: Ready: camera classes -> measured visible occupied surface -> multi-frame evidence. Unknown voxels remain gray; occupancy integration is unchanged.
+[ohm_occupancy_pose_node-1] [WARN] [1793122893.575940326] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[camera_color_preview.py-2] [INFO] [1793122894.677054307] [camera_color_preview]: Publishing 1920x1200 bgr8 images; original timestamps and camera frame are preserved
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)

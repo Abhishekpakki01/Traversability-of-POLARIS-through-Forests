@@ -1,0 +1,110 @@
+# THESIS TERMINAL COMMANDS — 29 October 2026
+# Reference sheet, not an executable script. Copy one appropriate block at a time.
+# Choose either RELLIS or Tartan; do not run duplicate mappers.
+# Read THESIS_HANDOFF_2026-10-29.md for explanations, limitations and stopping/restarting.
+
+# Build after future code changes — already built on this PC
+cd ~/semantic_map_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+colcon build --packages-select semantic_mapping --symlink-install
+source install/setup.bash
+
+# RELLIS — Terminal 1: processing and RViz
+cd ~/semantic_map_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=101
+export ROS_LOCALHOST_ONLY=1
+ros2 launch semantic_mapping semantic_integration.launch.py
+
+# RELLIS — Terminal 2: recorded data
+cd ~/semantic_map_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=101
+export ROS_LOCALHOST_ONLY=1
+ros2 bag play ~/RELLIS-3D/example_filtered_ros2 \
+  --clock --delay 3 --rate 0.25 --read-ahead-queue-size 10 \
+  --qos-profile-overrides-path artifacts/semantic_integration_2026_10_26/playback_qos.yaml \
+  --topics /tf /tf_static /os1_cloud_node/points \
+  /pylon_camera_node/image_raw /pylon_camera_node/camera_info
+
+# Tartan — Terminal 1: separate processing and RViz
+cd ~/semantic_map_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=104
+export ROS_LOCALHOST_ONLY=1
+ros2 launch semantic_mapping tartan_semantic.launch.py
+
+# Tartan — Terminal 2: second-terrain data
+cd ~/semantic_map_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=104
+export ROS_LOCALHOST_ONLY=1
+ros2 bag play ~/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2 \
+  --clock --delay 3 --rate 0.5 --read-ahead-queue-size 10 \
+  --qos-profile-overrides-path src/semantic_mapping/config/tartan_playback_qos.yaml \
+  --topics /tf /tf_static /velodyne_1/velodyne_points \
+  /multisense/left/image_rect_color /lidar_odometry
+
+# Either dataset — Terminal 3: check operation
+cd ~/semantic_map_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=101
+export ROS_LOCALHOST_ONLY=1
+ros2 node list
+ros2 topic list -t
+ros2 topic echo /camera_semantic_voxel/status --once --qos-durability transient_local
+
+# Either dataset — Terminal 3: check operation
+ros2 topic echo /semantic_voxel_map --field header --once --qos-durability transient_local
+ros2 topic echo /vehicle_pose --once
+ros2 topic info /semantic_voxel_map --verbose
+ros2 topic hz /semantic_voxel_map
+
+# Stop, replay, and return to the earlier green view
+source /opt/ros/humble/setup.bash
+source ~/semantic_map_ws/install/setup.bash
+export ROS_DOMAIN_ID=101
+export ROS_LOCALHOST_ONLY=1
+ros2 launch semantic_mapping mapping_reference.launch.py dataset:=rellis
+
+# Stored unit/integration test results, and rerunning after code edits
+cd ~/semantic_map_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+colcon test --packages-select semantic_mapping --return-code-on-test-failure
+colcon test-result --test-result-base build/semantic_mapping/test_results --verbose
+
+# Full-duration RELLIS example bag check
+cd ~/semantic_map_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+ROS_DOMAIN_ID=99 ROS_LOCALHOST_ONLY=1 python3 \
+  src/semantic_mapping/tools/check_semantic_integration.py \
+  --seconds 130 --rate 0.5 --output artifacts/rellis_handoff_check
+cat artifacts/rellis_handoff_check/report.json
+
+# Moving Tartan excerpt check
+cd ~/semantic_map_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+ROS_DOMAIN_ID=103 ROS_LOCALHOST_ONLY=1 python3 \
+  src/semantic_mapping/tools/check_second_terrain.py \
+  --seconds 80 --rate 0.5 --output artifacts/tartan_handoff_check
+cat artifacts/tartan_handoff_check/report.json
+
+# Optional recovery of model weights or Tartan data
+sha256sum ~/semantic_map_ws/models/goose/ppliteseg_class_512.pth
+
+# Optional recovery of model weights or Tartan data
+cd ~/semantic_map_ws
+TARTAN_MEADOWS_SOURCE='https://airlab-cloud.andrew.cmu.edu:8080/swift/v1/AUTH_ac8533a83cff4d48bc8c608ad222d330/tartandrive2/bags/2023-11-02-16-00-43_down_meadows/down_meadows_0.bag'
+.dataset_venv/bin/python src/semantic_mapping/tools/extract_remote_tartan.py \
+  --url "$TARTAN_MEADOWS_SOURCE" --offset 45 --seconds 30 \
+  --metadata ~/thesis_data/tartan_drive_2_sample/source_metadata/down_meadows_recovery.json \
+  --output ~/thesis_data/tartan_drive_2_sample/down_meadows_recovery_ros2

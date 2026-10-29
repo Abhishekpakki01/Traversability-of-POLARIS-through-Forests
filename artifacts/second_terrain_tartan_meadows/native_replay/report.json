@@ -1,0 +1,63 @@
+{
+  "bag": "/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2",
+  "rate": 1.0,
+  "wall_seconds": 45.0,
+  "received": {
+    "status": 65,
+    "camera": 239,
+    "pose": 115,
+    "occupied": 115,
+    "map": 134,
+    "projection": 16,
+    "segmentation": 16
+  },
+  "status": {
+    "paired": 144,
+    "projected": 19,
+    "fused_frames": 19,
+    "dropped": 125,
+    "last_status": "Semantic observations fused",
+    "occupied_voxels": 23662,
+    "class_counts": {
+      "unknown": 23338,
+      "ground": 25,
+      "vegetation": 299,
+      "trunk": 0,
+      "water": 0,
+      "obstacle": 0
+    },
+    "voxels_with_evidence": 3268,
+    "processing_seconds": 1.2903273339998123,
+    "updated_voxels": 584,
+    "visibility": {
+      "samples": 3431,
+      "missing_surface": 477,
+      "occluded": 0,
+      "visible_voxels": 662
+    },
+    "image_stamp_ns": 1698955334516840000,
+    "lidar_stamp_ns": 1698955334554888000,
+    "image_minus_lidar_ms": -38.048,
+    "pending": 0,
+    "inference_busy": false,
+    "model": "GOOSE PP-LiteSeg-B 64 classes",
+    "min_observations": 2,
+    "min_confidence": 0.6,
+    "visibility_mode": "measured_lidar_depth"
+  },
+  "first_to_last_vehicle_displacement_m": 81.03273228693351,
+  "pose_stamp_span_seconds": 31.662053,
+  "occupied_geometry_matched": true,
+  "occupied_voxels": 23662,
+  "classified_voxels": 324,
+  "max_observations": 3,
+  "class_counts": {
+    "unknown": 23338,
+    "ground": 25,
+    "vegetation": 299,
+    "trunk": 0,
+    "water": 0,
+    "obstacle": 0
+  },
+  "passed": true
+}

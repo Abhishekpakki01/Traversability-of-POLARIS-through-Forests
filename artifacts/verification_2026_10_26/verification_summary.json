@@ -1,0 +1,72 @@
+{
+  "automated_tests": {
+    "mapping": 4,
+    "projection": 5,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "checks": {
+    "tartan_figure8": {
+      "bag": "/home/abhishek/thesis_data/tartan_drive_2_sample/figure_8_ros2",
+      "fixed_frame": "sensor_init",
+      "base_frame": "vehicle",
+      "cloud_topic": "/velodyne_1/velodyne_points",
+      "playback_rate": 0.2,
+      "wall_seconds": 18.0,
+      "received": {
+        "cloud": 15,
+        "marker": 5,
+        "pose": 5,
+        "image": 13,
+        "projection": 0,
+        "rgb_cloud": 0
+      },
+      "last_projection_status": null,
+      "first_to_last_vehicle_displacement_m": 0.010466999880125966,
+      "camera_stamp_ns": 1694706247112028000,
+      "camera_frame": "multisense/left_camera_optical_frame",
+      "occupied_voxels": 1506,
+      "map_stamp_ns": 1694706247184176422,
+      "passed": true
+    },
+    "rellis_projection": {
+      "bag": "/home/abhishek/RELLIS-3D/example_filtered_ros2",
+      "fixed_frame": "odom",
+      "base_frame": "base_link",
+      "cloud_topic": "/os1_cloud_node/points",
+      "playback_rate": 0.5,
+      "wall_seconds": 25.0,
+      "received": {
+        "cloud": 22,
+        "marker": 4,
+        "pose": 4,
+        "image": 46,
+        "projection": 8,
+        "rgb_cloud": 8
+      },
+      "last_projection_status": {
+        "images": 45,
+        "lidar_scans": 14,
+        "calibrated_images": 44,
+        "paired": 9,
+        "projected": 8,
+        "dropped": 1,
+        "last_status": "Projection published",
+        "visible_points": 3513,
+        "image_stamp_ns": 1581791688108721214,
+        "lidar_stamp_ns": 1581791688133051904,
+        "image_minus_lidar_ms": -24.33069,
+        "pending": 0
+      },
+      "first_to_last_vehicle_displacement_m": 0.015034837825796569,
+      "camera_stamp_ns": 1581791689008708782,
+      "camera_frame": "pylon_camera",
+      "rgb_surface_point_count": 3513,
+      "rgb_cloud_frame": "odom",
+      "occupied_voxels": 2258,
+      "map_stamp_ns": 1581791686333390592,
+      "passed": true
+    }
+  }
+}

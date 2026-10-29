@@ -1,0 +1,12 @@
+{
+  "topic": "/pylon_camera_node/image_raw",
+  "frame_id": "pylon_camera",
+  "original_encoding": "bayer_rggb8",
+  "stamp_sec": 1581791708,
+  "stamp_nanosec": 508545566,
+  "screenshot_approx_stamp_sec": 1581791708.55,
+  "difference_ms": -41.454434,
+  "width": 1920,
+  "height": 1200,
+  "note": "Camera frame nearest the approximate ROS time visible in the voxel-map screenshot; not semantic predictions."
+}

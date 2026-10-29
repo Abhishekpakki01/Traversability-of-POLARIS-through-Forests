@@ -1,0 +1,64 @@
+{
+  "bag": "/home/abhishek/RELLIS-3D/example_filtered_ros2",
+  "fixed_frame": "odom",
+  "base_frame": "base_link",
+  "cloud_topic": "/os1_cloud_node/points",
+  "playback_rate": 0.5,
+  "wall_seconds": 25.0,
+  "received": {
+    "cloud": 22,
+    "marker": 4,
+    "pose": 4,
+    "image": 46,
+    "projection": 8,
+    "rgb_cloud": 8
+  },
+  "last_projection_status": {
+    "images": 45,
+    "lidar_scans": 14,
+    "calibrated_images": 44,
+    "paired": 9,
+    "projected": 8,
+    "dropped": 1,
+    "last_status": "Projection published",
+    "visible_points": 3513,
+    "image_stamp_ns": 1581791688108721214,
+    "lidar_stamp_ns": 1581791688133051904,
+    "image_minus_lidar_ms": -24.33069,
+    "pending": 0
+  },
+  "poses": [
+    [
+      1581791683533441024,
+      57.93015971958701,
+      -131.03458576359907,
+      -1.8409282180507464e-40
+    ],
+    [
+      1581791684633277696,
+      57.9314455728114,
+      -131.02906628993242,
+      1.1715956504930678e-40
+    ],
+    [
+      1581791684933362688,
+      57.93183262657364,
+      -131.02748865838652,
+      -3.9115216751674646e-40
+    ],
+    [
+      1581791686333390592,
+      57.93362181791103,
+      -131.0199549665038,
+      4.4096689534234476e-41
+    ]
+  ],
+  "first_to_last_vehicle_displacement_m": 0.015034837825796569,
+  "camera_stamp_ns": 1581791689008708782,
+  "camera_frame": "pylon_camera",
+  "rgb_surface_point_count": 3513,
+  "rgb_cloud_frame": "odom",
+  "occupied_voxels": 2258,
+  "map_stamp_ns": 1581791686333390592,
+  "passed": true
+}

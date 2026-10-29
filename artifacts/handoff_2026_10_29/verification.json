@@ -1,0 +1,38 @@
+{
+  "prepared_date": "2026-10-29",
+  "purpose": "Documentation and export only; no mapping runtime changes",
+  "stored_test_summary": "Summary: 26 tests, 0 errors, 0 failures, 0 skipped",
+  "tests_rerun_for_handoff": false,
+  "validated_bash_blocks": 13,
+  "backups": {
+    "before_semantic_integration": {
+      "verified_snapshot_files": 25,
+      "all_snapshot_hashes_match": true,
+      "current_differences_from_stage_baseline": [
+        "CMakeLists.txt"
+      ]
+    },
+    "before_second_terrain": {
+      "verified_snapshot_files": 39,
+      "all_snapshot_hashes_match": true,
+      "current_differences_from_stage_baseline": [
+        "CMakeLists.txt",
+        "config/semantic_integration.rviz"
+      ]
+    }
+  },
+  "core_files_unchanged_since_second_terrain_baseline": [
+    "src/ohm_occupancy_pose_node.cpp",
+    "src/ohm_occupancy_node.cpp",
+    "scripts/camera_semantic_voxel_node.py",
+    "semantic_mapping/goose_model.py",
+    "semantic_mapping/semantic_fusion.py",
+    "semantic_mapping/camera_projection.py",
+    "launch/semantic_integration.launch.py"
+  ],
+  "checkpoint_sha256_matches_manifest": true,
+  "ohm_git_head": "4e2e76945e550eb8a96cef9c4434e7c1811dd030",
+  "ohm_working_tree_clean": true,
+  "python_version": "3.10.12",
+  "kernel": "6.6.87.2-microsoft-standard-WSL2"
+}

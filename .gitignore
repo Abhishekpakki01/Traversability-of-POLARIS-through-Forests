@@ -1,0 +1,39 @@
+# ROS/colcon output and local environments
+build/
+install/
+log/
+**/build/
+**/install/
+**/log/
+.dataset_venv/
+.venv/
+venv/
+**/__pycache__/
+**/.pytest_cache/
+*.py[cod]
+*.egg-info/
+.DS_Store
+
+# Sensor payloads, learned weights, and large local exports are not Git source.
+*.bag
+*.db3
+*.db3-shm
+*.db3-wal
+*.mcap
+*.mp4
+*.pth
+*.pt
+*.onnx
+*.safetensors
+THESIS_HANDOFF_*.zip
+
+# Local authentication/configuration must never be committed.
+.env
+.env.*
+!.env.example
+credentials.json
+hosts.yml
+id_rsa
+id_ed25519
+*.pem
+

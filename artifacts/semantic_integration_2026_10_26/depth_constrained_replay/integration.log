@@ -1,0 +1,20 @@
+[INFO] [launch]: All log files can be found below /home/abhishek/.ros/log/2026-10-27-01-25-41-352094-Abhishek-61010
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [ohm_occupancy_pose_node-1]: process started with pid [61011]
+[INFO] [camera_color_preview.py-2]: process started with pid [61013]
+[INFO] [camera_semantic_voxel_node.py-3]: process started with pid [61015]
+[ohm_occupancy_pose_node-1] [INFO] [1793057141.437569601] [ohm_occupancy_pose_node]: C++ OHM Engine Active | Frame: odom | Max Range: 10.00m | Resolution: 0.35m
+[camera_color_preview.py-2] [INFO] [1793057141.931701101] [camera_color_preview]: Camera reference: /pylon_camera_node/image_raw -> /pylon_camera_node/image_color
+[camera_semantic_voxel_node.py-3] [INFO] [1793057143.363780741] [camera_semantic_voxel]: Loading official GOOSE 64-class model: /home/abhishek/semantic_map_ws/models/goose/ppliteseg_class_512.pth
+[camera_semantic_voxel_node.py-3] [INFO] [1793057143.718225761] [camera_semantic_voxel]: Ready: camera classes -> measured visible occupied surface -> multi-frame evidence. Unknown voxels remain gray; occupancy integration is unchanged.
+[ohm_occupancy_pose_node-1] [WARN] [1793057146.367714611] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[ohm_occupancy_pose_node-1] [WARN] [1793057146.999686601] [ohm_occupancy_pose_node]: Skipping cloud: no odom <- ouster1/os1_lidar pose at scan time: "ouster1/os1_lidar" passed to lookupTransform argument source_frame does not exist. 
+[camera_color_preview.py-2] [INFO] [1793057147.002551121] [camera_color_preview]: Publishing 1920x1200 bgr8 images; original timestamps and camera frame are preserved
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [camera_semantic_voxel_node.py-3]: sending signal 'SIGINT' to process[camera_semantic_voxel_node.py-3]
+[INFO] [camera_color_preview.py-2]: sending signal 'SIGINT' to process[camera_color_preview.py-2]
+[INFO] [ohm_occupancy_pose_node-1]: sending signal 'SIGINT' to process[ohm_occupancy_pose_node-1]
+[ohm_occupancy_pose_node-1] [INFO] [1793057289.463955237] [rclcpp]: signal_handler(signum=2)
+[INFO] [ohm_occupancy_pose_node-1]: process has finished cleanly [pid 61011]
+[INFO] [camera_color_preview.py-2]: process has finished cleanly [pid 61013]
+[INFO] [camera_semantic_voxel_node.py-3]: process has finished cleanly [pid 61015]

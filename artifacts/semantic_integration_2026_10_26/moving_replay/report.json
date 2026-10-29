@@ -1,0 +1,62 @@
+{
+  "bag": "/home/abhishek/RELLIS-3D/example_filtered_ros2",
+  "rate": 0.5,
+  "wall_seconds": 130.0,
+  "received": {
+    "status": 221,
+    "camera": 464,
+    "pose": 233,
+    "occupied": 233,
+    "map": 313,
+    "segmentation": 69,
+    "projection": 72
+  },
+  "status": {
+    "paired": 412,
+    "projected": 80,
+    "fused_frames": 80,
+    "dropped": 332,
+    "last_status": "Semantic observations fused",
+    "occupied_voxels": 33761,
+    "class_counts": {
+      "unknown": 33747,
+      "ground": 1,
+      "vegetation": 13,
+      "trunk": 0,
+      "water": 0,
+      "obstacle": 0
+    },
+    "voxels_with_evidence": 192,
+    "processing_seconds": 1.699723884001287,
+    "updated_voxels": 27,
+    "visibility": {
+      "samples": 4045,
+      "missing_surface": 1487,
+      "occluded": 2198,
+      "visible_voxels": 34
+    },
+    "image_stamp_ns": 1581791737708939902,
+    "lidar_stamp_ns": 1581791737732408832,
+    "image_minus_lidar_ms": -23.46893,
+    "pending": 0,
+    "inference_busy": false,
+    "model": "GOOSE PP-LiteSeg-B 64 classes",
+    "min_observations": 2,
+    "min_confidence": 0.6
+  },
+  "first_to_last_vehicle_displacement_m": 55.28983070410817,
+  "pose_stamp_span_seconds": 58.99916544,
+  "occupied_geometry_matched": true,
+  "occupied_voxels": 33761,
+  "classified_voxels": 14,
+  "max_observations": 8,
+  "class_counts": {
+    "unknown": 33747,
+    "ground": 1,
+    "vegetation": 13,
+    "trunk": 0,
+    "water": 0,
+    "obstacle": 0
+  },
+  "passed": true
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "local_path": "/home/abhishek/Different environment testing.mp4",
+    "bytes": 111320460,
+    "role": "Recorded RViz demonstration",
+    "tracked_in_git": false
+  },
+  {
+    "local_path": "/home/abhishek/THESIS_HANDOFF_2026-10-29.zip",
+    "bytes": 50603049,
+    "role": "Portable source/evidence handoff",
+    "tracked_in_git": false
+  },
+  {
+    "local_path": "/home/abhishek/semantic_map_ws/models/goose/ppliteseg_class_512.pth",
+    "bytes": 98208249,
+    "role": "Official pretrained model weights",
+    "tracked_in_git": false
+  },
+  {
+    "local_path": "/home/abhishek/RELLIS-3D/example_filtered_ros2/example_filtered_ros2.db3",
+    "bytes": 8906702848,
+    "role": "RELLIS raw sensor payload",
+    "tracked_in_git": false
+  },
+  {
+    "local_path": "/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2/down_meadows_moving_ros2.db3",
+    "bytes": 797265920,
+    "role": "Moving Tartan raw sensor payload",
+    "tracked_in_git": false
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "file": "/home/abhishek/semantic_map_ws/artifacts/camera_reference/camera_reference_00s.png",
+    "stamp_sec": 1581791678,
+    "stamp_nanosec": 408547950,
+    "frame_id": "pylon_camera",
+    "original_encoding": "bayer_rggb8"
+  },
+  {
+    "file": "/home/abhishek/semantic_map_ws/artifacts/camera_reference/camera_reference_15s.png",
+    "stamp_sec": 1581791693,
+    "stamp_nanosec": 509166350,
+    "frame_id": "pylon_camera",
+    "original_encoding": "bayer_rggb8"
+  }
+]

@@ -1,0 +1,177 @@
+PAGE 1
+Universität der Bundeswehr München
+Fakultät für Luft- und Raumfahrttechnik
+Institut für Technik Autonomer Systeme
+UniBwM / LRT / TAS / TR 2022:1
+GOOSE Dataset Labeling Policy
+Class Deﬁnitions and Examples for the
+Labeling Process
+Peter Mortimer, Juan David González
+20. Oktober 2023
+PAGE 2
+
+PAGE 3
+1 Class Deﬁnitions
+Table 1.1 shows all the labels which are divided into groups. Speciﬁc labels for
+diﬀerent classes are then deﬁned on the following pages. Examples for images and
+point clouds are shown for diﬀerent labels.
+Table 1.1:Class Deﬁnitions
+Group Class Labels
+Animal animal
+Construction bridge, building, container, debris, fence, guard_rail,tunnel, wall, wire
+Human person, rider
+Object barrel, obstacle, pipe, pole, rock, street_light,
+Road bikeway, curb, pedestrian_crossing, rail_track,road_marking, sidewalk
+Sign barrier_tape, misc_sign, traﬃc_cone, traﬃc_light,traﬃc_sign, road_block, boom_barrier
+Sky sky
+Terrain asphalt, cobble, gravel, soil, snow
+Vegetation bush, crops, forest, hedge, high_grass, leaves, low_grass,moss, scenery_vegetation, tree_crown, tree_root, tree_trunk
+Vehicle bicycle, bus, car, caravan, heavy_machinery, kick_scooter,military_vehicle, motorcycle, on_rails, trailer, truck
+Void ego_vehicle, outlier, undeﬁned
+Water water
+Semantic Segmentation
+All images have to be labeled pixel-wise; the same holds for 3D point clouds.
+Instances-Wise Labeling
+Classes that are marked red have to be labeled instance-wise with aninstance_id.
+Example: For an image with multiple cars one has to usecar 0, car 1, car 2
+etc. In the case of labeling a sequence where the same object can be found in
+consecutive frames one should use the sameinstance_id for the object.Example:
+car 0should have the sameinstance_id in frame 0 and frame 1. In addition, the
+same instance_id should be used for the same object if it is visible in frames of
+multiple sensors. Example: Instance-label car 0is used across the frames of all
+sensors (LiDAR, camera1, camera2 and so on).
+GOOSE Dataset Labeling Policy
+Class Deﬁnitions and Examples for the Labeling Process
+UniBwM / LRT / TAS / TR 2022:1
+1
+PAGE 4
+1 Class Deﬁnitions
+Alphabetically ordered class labels: A – Mi
+Class Label ID RGB Color Page
+animal 33 rgb(0,0,53) ■ 65
+asphalt 23 rgb(255,47,128) ■ 45
+barrel 60 rgb(208,208,0) ■ 105
+barrier_tape 48 rgb(190,196,89) ■ 89
+bicycle 13 rgb(0,77,67) ■ 26
+bikeway 7 rgb(163,0,89) ■ 17
+boom_barrier 25 rgb(52,54,45) ■ 48
+bridge 43 rgb(160,121,191) ■ 82
+building 38 rgb(1,51,73) ■ 72
+bus 15 rgb(153,125,135) ■ 30
+bush 17 rgb(128,150,147) ■ 35
+car 12 rgb(183,151,98) ■ 24
+caravan 36 rgb(48,0,24) ■ 69
+cobble 3 rgb(255,52,255) ■ 10
+container 58 rgb(255,138,154) ■ 101
+crops 30 rgb(0,134,237) ■ 57
+curb 22 rgb(74,59,83) ■ 44
+debris 29 rgb(136,111,76) ■ 55
+ego_vehicle 8 rgb(255,219,229) ■ 18
+fence 41 rgb(255,181,0) ■ 78
+forest 16 rgb(90,0,7) ■ 32
+gravel 24 rgb(97,97,90) ■ 46
+guard_rail 42 rgb(194,255,237) ■ 81
+heavy_machinery 57 rgb(250,208,159) ■ 100
+hedge 59 rgb(209,87,160) ■ 103
+high_grass 51 rgb(238,195,255) ■ 92
+kick_scooter 49 rgb(111,0,98) ■ 90
+leaves 5 rgb(0,137,65) ■ 14
+2 GOOSE Dataset Labeling PolicyClass Deﬁnitions and Examples for the Labeling Process
+UniBwM / LRT / TAS / TR 2022:1
+PAGE 5
+Alphabetically ordered class labels: Mo – U
+Class Label ID RGB Color Page
+low_grass 50 rgb(12,189,102) ■ 91
+military_vehicle 63 rgb(64, 64, 64) ■ 108
+misc_sign 47 rgb(0,30,9) ■ 88
+moss 18 rgb(180,168,189) ■ 38
+motorcycle 20 rgb(79,198,1) ■ 41
+obstacle 4 rgb(255,74,70) ■ 12
+on_rails 35 rgb(161,194,153) ■ 68
+outlier 56 rgb(120,141,102) ■ 99
+pedestrian_crossing 9 rgb(122,73,0) ■ 20
+person 14 rgb(143,176,255) ■ 29
+pipe 61 rgb(221,0,0) ■ 106
+pole 45 rgb(192,185,178) ■ 85
+rail_track 26 rgb(107,121,0) ■ 49
+rider 32 rgb(221,239,255) ■ 63
+road_block 10 rgb(0,0,166) ■ 21
+road_marking 11 rgb(99,255,172) ■ 22
+rock 40 rgb(55,33,1) ■ 77
+scenery_vegetation 52 rgb(69,109,117) ■ 93
+sidewalk 21 rgb(59,93,255) ■ 42
+sky 53 rgb(183,123,104) ■ 95
+snow 2 rgb(209,87,160) ■ 8
+soil 31 rgb(209,97,0) ■ 59
+street_light 6 rgb(0,111,166) ■ 16
+traﬃc_cone 1 rgb(255,255,0) ■ 7
+traﬃc_light 19 rgb(27,68,0) ■ 40
+traﬃc_sign 46 rgb(194,255,153) ■ 87
+trailer 37 rgb(10,166,216) ■ 71
+GOOSE Dataset Labeling Policy
+Class Deﬁnitions and Examples for the Labeling Process
+UniBwM / LRT / TAS / TR 2022:1
+3
+PAGE 6
+1 Class Deﬁnitions
+Alphabetically ordered class labels: Wa – Wi
+Class Label ID RGB Color Page
+tree_crown 27 rgb(0,194,160) ■ 50
+tree_root 62 rgb(196,164,132) ■ 107
+tree_trunk 28 rgb(255,170,146) ■ 53
+truck 34 rgb(123,79,75) ■ 67
+tunnel 44 rgb(204,7,68) ■ 83
+undeﬁned 0 rgb(0,0,0) ■ 5
+wall 39 rgb(0,132,111) ■ 74
+water 54 rgb(122,135,161) ■ 96
+wire 55 rgb(255,140,0) ■ 97
+4 GOOSE Dataset Labeling PolicyClass Deﬁnitions and Examples for the Labeling Process
+UniBwM / LRT / TAS / TR 2022:1
+PAGE 7
+ID#0: undeﬁned rgb(0,0,0) ■
+All unlabeled pixels are deﬁned with the labelundeﬁned.
+Figure 0.1:
+Annotation examples of undeﬁned (■) for an overexposed area of the camera image.
+GOOSE Dataset Labeling Policy
+Class Deﬁnitions and Examples for the Labeling Process
+UniBwM / LRT / TAS / TR 2022:1
+5
+PAGE 8
+1 Class Deﬁnitions
+Figure 0.2:
+Annotation examples of undeﬁned (■) for an overexposed area of the camera image.
+6 GOOSE Dataset Labeling PolicyClass Deﬁnitions and Examples for the Labeling Process
+UniBwM / LRT / TAS / TR 2022:1
+PAGE 9
+ID#1: traﬃc_cone rgb(255,255,0) ■
+Traﬃc cones, also called pylons, witches’ hats, road cones, highway cones, safety
+cones, channelizing devices, or construction cones, are usually cone-shaped markers
+that are placed on roads or footpaths to temporarily redirect traﬃc in a safe manner.
+Figure 1:Annotation examples of traﬃc cone (■).
+GOOSE Dataset Labeling Policy
+Class Deﬁnitions and Examples for the Labeling Process
+UniBwM / LRT / TAS / TR 2022:1
+7
+PAGE 10
+1 Class Deﬁnitions
+ID#2: snow rgb(209,87,160) ■
+Snow that covers surfaces and objects in the winter should be annotated as snow
+(■). We want to avoid labeling too many small patches as snow since this could
+obscure the underlying object or surface. Therefore, only clearly visible snow patches
+of 150 px2 in area should be annotated as snow.
+Figure 2.1:Annotation examples of snow (■).
+8 GOOSE Dataset Labeling PolicyClass Deﬁnitions and Examples for the Labeling Process
+UniBwM / LRT / TAS / TR 2022:1
+PAGE 11
+Figure 2.2:Annotation examples of snow (■).
+GOOSE Dataset Labeling Policy
+Class Deﬁnitions and Examples for the Labeling Process
+UniBwM / LRT / TAS / TR 2022:1
+9
+PAGE 12
+1 Class Deﬁnitions
+ID#3: cobble rgb(255,52,255) ■
+A drivable surface that consists of cobble/cobblestone.
+Figure 3.1:Annotation examples of cobble (■).
+10 GOOSE Dataset Labeling PolicyClass Deﬁnitions and Examples for the Labeling Process
+UniBwM / LRT / TAS / TR 2022:1

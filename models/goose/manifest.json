@@ -1,0 +1,22 @@
+{
+  "checkpoint_url": "https://goose-dataset.de/models/ppliteseg_class_512.pth",
+  "framework_source": "https://github.com/Deci-AI/super-gradients",
+  "framework_tree_commit": "63de22c404d5740f34f7706c302b37fce3c8fe5d",
+  "preprocessing_source": "https://github.com/FraunhoferIOSB/goose_dataset/blob/main/image_processing/goosetools/inference.py",
+  "input_size": [
+    512,
+    512
+  ],
+  "preprocessing": "RGB float32 [0,1], bilinear antialiased resize, no ImageNet normalization",
+  "classes": 64,
+  "checkpoint_sha256": "6dd412c0c99115e359896c4cab43a8e6bce9e09b843e7fa885fe597b0a6121cd",
+  "upstream_source_sha256": {
+    "context_modules.py": "09c522aa90cf5b68b206ecf3729146118bb9d2c9715de9d1aca74f549fb3853a",
+    "stdc.py": "09c2d01a3df1c5af0a330e40e3596f6b570c7c2f592749906f53f9dd63ab14b0",
+    "conv_bn_relu_block.py": "a59d0e6b332ca0fecfc6357afa5b6047c232b63b05eadb02ef5187e244601201",
+    "ppliteseg.py": "c1a4eb10f9dd27fc00ed275c295965bed94adb5d272518a20b1cb680c6b166dd",
+    "conv_bn_act_block.py": "eee4da61e59f7defccd904b09276c5de9bf5010fa496ff23d73f005b7c657940",
+    "common.py": "e7c995b801371ddb3fe5fff986bddafa8bc7cd8a0632c94a065c1046197fe5d6"
+  },
+  "label_policy_sha256": "11d0a7027c3c3acb78a745d1caf403519ef508daf80def40d0471e49ba00ced5"
+}

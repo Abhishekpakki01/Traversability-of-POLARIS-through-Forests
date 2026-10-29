@@ -1,0 +1,483 @@
+{
+  "url": "https://airlab-cloud.andrew.cmu.edu:8080/swift/v1/AUTH_ac8533a83cff4d48bc8c608ad222d330/tartandrive2/bags/2023-11-02-16-00-43_down_meadows/down_meadows_0.bag",
+  "source_bytes": 32496218206,
+  "etag": "cffe33c5dde4a5919911418ff0c2a96e-1937",
+  "start_ns": 1698955259007389633,
+  "stop_ns": 1698955378961261392,
+  "duration_seconds": 119.953871759,
+  "chunk_count": 5467,
+  "topics": [
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 87
+    },
+    {
+      "name": "/clock",
+      "type": "rosgraph_msgs/msg/Clock",
+      "count": 26658
+    },
+    {
+      "name": "/rosout_agg",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 22283
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 5454
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 1
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 132
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 125
+    },
+    {
+      "name": "/local_mapping_node/parameter_updates",
+      "type": "dynamic_reconfigure/msg/Config",
+      "count": 1
+    },
+    {
+      "name": "/local_mapping_node/parameter_descriptions",
+      "type": "dynamic_reconfigure/msg/ConfigDescription",
+      "count": 1
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 1142
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 1142
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 1142
+    },
+    {
+      "name": "/cmd",
+      "type": "geometry_msgs/msg/TwistStamped",
+      "count": 11989
+    },
+    {
+      "name": "/received_messages",
+      "type": "can_msgs/msg/Frame",
+      "count": 23221
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 20686
+    },
+    {
+      "name": "/odom",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 6049
+    },
+    {
+      "name": "/odometry/filtered_odom",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 6047
+    },
+    {
+      "name": "/ros_talon/status",
+      "type": "ros_talon/msg/Status",
+      "count": 2398
+    },
+    {
+      "name": "/novatel/imu/data",
+      "type": "sensor_msgs/msg/Imu",
+      "count": 11988
+    },
+    {
+      "name": "/controls",
+      "type": "racepak/msg/rp_controls",
+      "count": 5994
+    },
+    {
+      "name": "/mux/joy",
+      "type": "sensor_msgs/msg/Joy",
+      "count": 3596
+    },
+    {
+      "name": "/mux/intervention",
+      "type": "common_msgs/msg/BoolStamped",
+      "count": 3596
+    },
+    {
+      "name": "/goal_dynamixel_position",
+      "type": "sensor_msgs/msg/JointState",
+      "count": 3596
+    },
+    {
+      "name": "/ros_talon/steering_angle",
+      "type": "std_msgs/msg/Float32",
+      "count": 3596
+    },
+    {
+      "name": "/dynamixel_state",
+      "type": "dynamixel_workbench_msgs/msg/DynamixelStateList",
+      "count": 487
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 2
+    },
+    {
+      "name": "/traversability_breakdown",
+      "type": "std_msgs/msg/Float32MultiArray",
+      "count": 11692
+    },
+    {
+      "name": "/traversability_cost",
+      "type": "std_msgs/msg/Float32",
+      "count": 11692
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 16682
+    },
+    {
+      "name": "/tf_static",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 1
+    },
+    {
+      "name": "/shock_pos",
+      "type": "racepak/msg/rp_shock_sensors",
+      "count": 5992
+    },
+    {
+      "name": "/rosout_agg",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 20668
+    },
+    {
+      "name": "/span/status",
+      "type": "novatel_span/msg/Status",
+      "count": 6047
+    },
+    {
+      "name": "/velodyne_1/velodyne_1_nodelet_manager_driver/parameter_descriptions",
+      "type": "dynamic_reconfigure/msg/ConfigDescription",
+      "count": 2
+    },
+    {
+      "name": "/multisense/left/image_rect",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1198
+    },
+    {
+      "name": "/velodyne_1/velodyne_1_nodelet_manager_driver/parameter_updates",
+      "type": "dynamic_reconfigure/msg/Config",
+      "count": 2
+    },
+    {
+      "name": "/multisense/right/image_rect",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1199
+    },
+    {
+      "name": "/multisense/left/image_rect_color",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1199
+    },
+    {
+      "name": "/joint_states",
+      "type": "sensor_msgs/msg/JointState",
+      "count": 487
+    },
+    {
+      "name": "/wheel_rpm",
+      "type": "racepak/msg/rp_shock_sensors",
+      "count": 5991
+    },
+    {
+      "name": "/vehicle_state/velocity",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 5989
+    },
+    {
+      "name": "/ros_talon/current_position",
+      "type": "std_msgs/msg/Float32",
+      "count": 746
+    },
+    {
+      "name": "/livox/lidar",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1198
+    },
+    {
+      "name": "/velodyne_1/velodyne_packets",
+      "type": "velodyne_msgs/msg/VelodyneScan",
+      "count": 1196
+    },
+    {
+      "name": "/velodyne_1/scan",
+      "type": "sensor_msgs/msg/LaserScan",
+      "count": 1196
+    },
+    {
+      "name": "/velodyne_2/velodyne_packets",
+      "type": "velodyne_msgs/msg/VelodyneScan",
+      "count": 1196
+    },
+    {
+      "name": "/velodyne_1/velodyne_1_nodelet_manager/bond",
+      "type": "bond/msg/Status",
+      "count": 720
+    },
+    {
+      "name": "/velodyne_2/velodyne_2_nodelet_manager/bond",
+      "type": "bond/msg/Status",
+      "count": 720
+    },
+    {
+      "name": "/velodyne_1/velodyne_points",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1196
+    },
+    {
+      "name": "/full_cloud",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1195
+    },
+    {
+      "name": "/velodyne_2/scan",
+      "type": "sensor_msgs/msg/LaserScan",
+      "count": 1195
+    },
+    {
+      "name": "/velodyne_2/velodyne_points",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1195
+    },
+    {
+      "name": "/velodyne_cloud_2",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1195
+    },
+    {
+      "name": "/superodom/feature_info",
+      "type": "super_odometry/msg/LaserFeature",
+      "count": 1195
+    },
+    {
+      "name": "/planar_points",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1195
+    },
+    {
+      "name": "/edge_points",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1195
+    },
+    {
+      "name": "/multisense/imu/imu_data",
+      "type": "sensor_msgs/msg/Imu",
+      "count": 48948
+    },
+    {
+      "name": "/diagnostics",
+      "type": "diagnostic_msgs/msg/DiagnosticArray",
+      "count": 577
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 10
+    },
+    {
+      "name": "/velodyne_cloud_registered_with_features",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1162
+    },
+    {
+      "name": "/aft_mapped_to_init",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 1162
+    },
+    {
+      "name": "/lidar_odometry",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 1162
+    },
+    {
+      "name": "/super_odometry_stats",
+      "type": "super_odometry/msg/OptimizationStats",
+      "count": 1162
+    },
+    {
+      "name": "/sent_messages",
+      "type": "can_msgs/msg/Frame",
+      "count": 4782
+    },
+    {
+      "name": "/integrated_to_init",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 11942
+    },
+    {
+      "name": "/tf_static",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 597
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 24
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 11932
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 1175
+    },
+    {
+      "name": "/local_gridmap",
+      "type": "grid_map_msgs/msg/GridMap",
+      "count": 1175
+    },
+    {
+      "name": "/deep_cloud",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 1152
+    },
+    {
+      "name": "/tartanvo_transform",
+      "type": "geometry_msgs/msg/TransformStamped",
+      "count": 1155
+    },
+    {
+      "name": "/tartanvo_odom",
+      "type": "nav_msgs/msg/Odometry",
+      "count": 1155
+    },
+    {
+      "name": "/tartanvo_pose",
+      "type": "geometry_msgs/msg/PoseStamped",
+      "count": 1155
+    },
+    {
+      "name": "/tf",
+      "type": "tf2_msgs/msg/TFMessage",
+      "count": 1155
+    },
+    {
+      "name": "/debug/voxel/density",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119
+    },
+    {
+      "name": "/debug/ground/raw",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119
+    },
+    {
+      "name": "/debug/ground/noise",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119
+    },
+    {
+      "name": "/debug/ground/inflated",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119
+    },
+    {
+      "name": "/debug/ground/estimated",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119
+    },
+    {
+      "name": "/debug/ground/object",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119
+    },
+    {
+      "name": "/debug/ground/slope_x",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119
+    },
+    {
+      "name": "/debug/ground/slope_y",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119
+    },
+    {
+      "name": "/debug/ground/slope_magnitude",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119
+    },
+    {
+      "name": "/debug/ground/svd1",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119
+    },
+    {
+      "name": "/debug/ground/svd2",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119
+    },
+    {
+      "name": "/debug/ground/svd3",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119
+    },
+    {
+      "name": "/debug/ground/roughness",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 119
+    },
+    {
+      "name": "/local_rgb_map",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1146
+    },
+    {
+      "name": "/local_height_map",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1146
+    },
+    {
+      "name": "/local_rgb_map_inflate",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1146
+    },
+    {
+      "name": "/local_height_map_inflate",
+      "type": "sensor_msgs/msg/Image",
+      "count": 1146
+    },
+    {
+      "name": "/rosout",
+      "type": "rosgraph_msgs/msg/Log",
+      "count": 112
+    },
+    {
+      "name": "/joy",
+      "type": "sensor_msgs/msg/Joy",
+      "count": 2590
+    }
+  ],
+  "network_bytes": 2027614,
+  "network_requests": 31
+}

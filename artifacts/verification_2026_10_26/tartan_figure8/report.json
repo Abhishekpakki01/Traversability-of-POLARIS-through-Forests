@@ -1,0 +1,55 @@
+{
+  "bag": "/home/abhishek/thesis_data/tartan_drive_2_sample/figure_8_ros2",
+  "fixed_frame": "sensor_init",
+  "base_frame": "vehicle",
+  "cloud_topic": "/velodyne_1/velodyne_points",
+  "playback_rate": 0.2,
+  "wall_seconds": 18.0,
+  "received": {
+    "cloud": 15,
+    "marker": 5,
+    "pose": 5,
+    "image": 13,
+    "projection": 0,
+    "rgb_cloud": 0
+  },
+  "last_projection_status": null,
+  "poses": [
+    [
+      1694706246784876545,
+      -125.27890387303641,
+      493.4214048980878,
+      -46.67603476062072
+    ],
+    [
+      1694706246885394903,
+      -125.28121370447653,
+      493.41941489872477,
+      -46.6767235688829
+    ],
+    [
+      1694706246984507179,
+      -125.2830854259597,
+      493.4172813938455,
+      -46.67968312131941
+    ],
+    [
+      1694706247085933111,
+      -125.28467765288937,
+      493.41608264943983,
+      -46.68054677088169
+    ],
+    [
+      1694706247184176422,
+      -125.28539094100883,
+      493.41669283712986,
+      -46.68276324612196
+    ]
+  ],
+  "first_to_last_vehicle_displacement_m": 0.010466999880125966,
+  "camera_stamp_ns": 1694706247112028000,
+  "camera_frame": "multisense/left_camera_optical_frame",
+  "occupied_voxels": 1506,
+  "map_stamp_ns": 1694706247184176422,
+  "passed": true
+}

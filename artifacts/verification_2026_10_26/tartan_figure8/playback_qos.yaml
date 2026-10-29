@@ -1,0 +1,10 @@
+/tf_static:
+  depth: 10
+  durability: transient_local
+  history: keep_last
+  reliability: reliable
+/velodyne_1/velodyne_points:
+  depth: 5
+  durability: volatile
+  history: keep_last
+  reliability: best_effort

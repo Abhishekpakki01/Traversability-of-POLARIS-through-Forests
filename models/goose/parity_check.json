@@ -1,0 +1,12 @@
+{
+  "reference": "Original upstream forward classes; framework registration/training base omitted",
+  "state_tensors": 421,
+  "shape": [
+    1,
+    64,
+    512,
+    512
+  ],
+  "max_absolute_logit_error": 0.0,
+  "passed": true
+}
