@@ -42,6 +42,8 @@ do not automatically change the other.
 The full terminal commands are in:
 
 - [New recorded-transform calibration check](src/semantic_mapping/docs/TARTAN_CALIBRATION_CHECK.md)
+- [Offline demo](src/semantic_mapping/docs/OFFLINE_DEMO.md) and [terrain analysis and validation checks](src/semantic_mapping/docs/TERRAIN_AND_VALIDATION.md)
+- [LiDAR-only features: permeability, shape and the labelled RELLIS scan](src/semantic_mapping/docs/LIDAR_FEATURES.md)
 
 - [RELLIS run guide](src/semantic_mapping/docs/RUN_IT_YOURSELF.md)
 - [TartanDrive run guide](src/semantic_mapping/docs/SECOND_TERRAIN_TARTAN.md)

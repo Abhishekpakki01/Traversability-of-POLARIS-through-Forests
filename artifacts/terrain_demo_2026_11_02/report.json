@@ -1,0 +1,40 @@
+{
+  "source_run": "/home/abhishek/Traversability-of-POLARIS-through-Forests/artifacts/offline_demo_ego_filtered_2026_11_02",
+  "config": "/home/abhishek/Traversability-of-POLARIS-through-Forests/src/semantic_mapping/config/traversability_placeholder.yaml",
+  "vehicle_parameters_verified": false,
+  "settings": {
+    "cell_m": 0.35,
+    "ground_window_m": 1.5,
+    "max_ground_rise_deg": 35.0,
+    "plane_half_width_m": 1.05,
+    "min_plane_cells": 6,
+    "ground_clearance_m": 0.3,
+    "overhang_clearance_m": 2.0,
+    "max_slope_deg": 20.0,
+    "max_roughness_m": 0.2,
+    "caution_fraction": 0.5,
+    "compliant_vegetation_max_height_m": 1.0,
+    "vegetation_cost": 0.6,
+    "rigid_labels": [
+      "trunk",
+      "obstacle"
+    ],
+    "hazard_labels": [
+      "water"
+    ]
+  },
+  "copied_messages": 3816,
+  "added_messages": 1272,
+  "frames": 318,
+  "final": {
+    "frame": "00318",
+    "lidar_stamp_ns": 1698955334755280000,
+    "ground_cells": 12819,
+    "above_ground_voxels": 11720,
+    "unknown": 7.800920508620017e-05,
+    "traversable": 0.12871518839223028,
+    "caution": 0.50503159372806,
+    "non_traversable": 0.3661752086746236
+  },
+  "navigation_validated": false
+}

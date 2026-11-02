@@ -1,0 +1,225 @@
+{
+  "image": "/home/abhishek/RELLIS-3D/utils/example/frame000104-1581624663_149.jpg",
+  "image_sha256": "b4c0772762fb07887c1a8c42b152a7f7e71ef4b61a7889ca90928177fd640740",
+  "labels": "/home/abhishek/RELLIS-3D/utils/example/frame000104-1581624663_149.png",
+  "labels_sha256": "b12f2b4ae0c274b3785974ed66baab20f8966d95ecf4d37eadd4e94a2514b478",
+  "mapping_sha256": "21b6c0573e8562dc3ed76477af5a3088cdec2b809cc3e8da870d08cf7db35a17",
+  "checkpoint_sha256": "6dd412c0c99115e359896c4cab43a8e6bce9e09b843e7fa885fe597b0a6121cd",
+  "frames_evaluated": 1,
+  "note": "Single human-labelled frame: a sanity check, not dataset accuracy.",
+  "evaluated_pixel_fraction": 0.5771701388888889,
+  "pixel_accuracy": 0.6004158520078208,
+  "mean_iou_present_groups": 0.27918849481847413,
+  "per_group": {
+    "ground": {
+      "truth_pixels": 22443,
+      "predicted_pixels": 256087,
+      "iou": 0.031948041362395194,
+      "precision": 0.033672150480110276,
+      "recall": 0.3842177961948046
+    },
+    "vegetation": {
+      "truth_pixels": 845143,
+      "predicted_pixels": 805335,
+      "iou": 0.7059715485011954,
+      "precision": 0.8481029633630726,
+      "recall": 0.8081555429081232
+    },
+    "water": {
+      "truth_pixels": 401363,
+      "predicted_pixels": 50743,
+      "iou": 0.126426701016287,
+      "precision": 1.0,
+      "recall": 0.126426701016287
+    },
+    "obstacle": {
+      "truth_pixels": 60851,
+      "predicted_pixels": 217310,
+      "iou": 0.25240768839401895,
+      "precision": 0.25797248170815884,
+      "recall": 0.9212667006294063
+    }
+  },
+  "per_group_at_display_threshold_0_6": {
+    "ground": {
+      "truth_pixels": 22443,
+      "predicted_pixels": 183839,
+      "iou": 0.028161011204593484,
+      "precision": 0.030733413475921866,
+      "recall": 0.25174887492759435
+    },
+    "vegetation": {
+      "truth_pixels": 845143,
+      "predicted_pixels": 767636,
+      "iou": 0.7165989015667575,
+      "precision": 0.8770550104476601,
+      "recall": 0.7966214001654158
+    },
+    "water": {
+      "truth_pixels": 401363,
+      "predicted_pixels": 21120,
+      "iou": 0.05262069498184935,
+      "precision": 1.0,
+      "recall": 0.05262069498184935
+    },
+    "obstacle": {
+      "truth_pixels": 60851,
+      "predicted_pixels": 201211,
+      "iou": 0.23871242200794102,
+      "precision": 0.25099025401195757,
+      "recall": 0.829928842582702
+    }
+  },
+  "confusion_by_rellis_class": {
+    "grass": {
+      "rellis_id": 3,
+      "group": "vegetation",
+      "reason": "GOOSE low_grass/high_grass are vegetation",
+      "pixels": 415080,
+      "predicted_fraction": {
+        "unknown": 0.0,
+        "ground": 0.006006071118820468,
+        "vegetation": 0.8338055314638142,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.16018839741736532
+      },
+      "confident_fraction": 0.9680904885805146
+    },
+    "tree": {
+      "rellis_id": 4,
+      "group": null,
+      "reason": "RELLIS does not separate trunk and crown (trunk vs vegetation)",
+      "pixels": 475286,
+      "predicted_fraction": {
+        "unknown": 0.007618570713212676,
+        "ground": 0.0,
+        "vegetation": 0.9331434125978885,
+        "trunk": 0.012735489789305807,
+        "water": 0.0,
+        "obstacle": 0.04650252689959309
+      },
+      "confident_fraction": 0.9460030381707014
+    },
+    "sky": {
+      "rellis_id": 7,
+      "group": null,
+      "reason": "not a mapped surface; GOOSE sky is unknown",
+      "pixels": 498914,
+      "predicted_fraction": {
+        "unknown": 0.971570250584269,
+        "ground": 0.0,
+        "vegetation": 0.027283259239067253,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.0011464901766637136
+      },
+      "confident_fraction": 0.9849032097716239
+    },
+    "vehicle": {
+      "rellis_id": 8,
+      "group": "obstacle",
+      "reason": null,
+      "pixels": 207,
+      "predicted_fraction": {
+        "unknown": 0.0,
+        "ground": 0.0,
+        "vegetation": 0.0,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 1.0
+      },
+      "confident_fraction": 1.0
+    },
+    "object": {
+      "rellis_id": 9,
+      "group": "obstacle",
+      "reason": null,
+      "pixels": 6727,
+      "predicted_fraction": {
+        "unknown": 0.016797978296417423,
+        "ground": 0.0,
+        "vegetation": 0.41385461572766463,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.5693474059759179
+      },
+      "confident_fraction": 0.4713839750260146
+    },
+    "person": {
+      "rellis_id": 17,
+      "group": "obstacle",
+      "reason": null,
+      "pixels": 49037,
+      "predicted_fraction": {
+        "unknown": 0.00432326610518588,
+        "ground": 0.0,
+        "vegetation": 0.03428023737178049,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.9613964965230336
+      },
+      "confident_fraction": 0.9012378408140792
+    },
+    "fence": {
+      "rellis_id": 18,
+      "group": "obstacle",
+      "reason": null,
+      "pixels": 4880,
+      "predicted_fraction": {
+        "unknown": 0.0,
+        "ground": 0.0,
+        "vegetation": 0.00020491803278688525,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.9997950819672131
+      },
+      "confident_fraction": 0.9819672131147541
+    },
+    "bush": {
+      "rellis_id": 19,
+      "group": "vegetation",
+      "reason": null,
+      "pixels": 430063,
+      "predicted_fraction": {
+        "unknown": 0.0,
+        "ground": 0.0,
+        "vegetation": 0.7833991763997368,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.21660082360026323
+      },
+      "confident_fraction": 0.982300267635207
+    },
+    "puddle": {
+      "rellis_id": 31,
+      "group": "water",
+      "reason": null,
+      "pixels": 401363,
+      "predicted_fraction": {
+        "unknown": 0.0,
+        "ground": 0.610347740075692,
+        "vegetation": 0.25922170205026374,
+        "trunk": 0.0,
+        "water": 0.126426701016287,
+        "obstacle": 0.004003856857757193
+      },
+      "confident_fraction": 0.697844594544091
+    },
+    "mud": {
+      "rellis_id": 33,
+      "group": "ground",
+      "reason": "GOOSE soil is ground; traversability of mud is not represented",
+      "pixels": 22443,
+      "predicted_fraction": {
+        "unknown": 0.0,
+        "ground": 0.3842177961948046,
+        "vegetation": 0.6157822038051954,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.0
+      },
+      "confident_fraction": 0.7625094684311366
+    }
+  }
+}

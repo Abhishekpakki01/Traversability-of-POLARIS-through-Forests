@@ -1,0 +1,34 @@
+{
+  "bag": "/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2",
+  "sampled_scans": 80,
+  "cell_m": 0.2,
+  "persistent_fraction": 0.8,
+  "persistent_cells": 68,
+  "persistent_bounds_m": [
+    [
+      -1.6,
+      -1.4000000000000001,
+      -0.8
+    ],
+    [
+      0.2,
+      1.2,
+      0.2
+    ]
+  ],
+  "margin_m": 0.2,
+  "proposed_box_m": [
+    [
+      -1.8,
+      -1.6,
+      -1.0
+    ],
+    [
+      0.4,
+      1.4,
+      0.4
+    ]
+  ],
+  "frame": "vehicle",
+  "caution": "Data-derived for this recording and sensor mount; terrain inside the box is also removed. Inspect before reuse; POLARIS needs its own measurement."
+}

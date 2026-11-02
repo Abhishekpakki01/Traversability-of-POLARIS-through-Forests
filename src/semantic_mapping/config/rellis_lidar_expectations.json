@@ -1,0 +1,23 @@
+{
+  "note": "Which LiDAR-only classes count as consistent with each RELLIS point label. Set before looking at results; void and sky are not scored.",
+  "classes": {
+    "1": {"name": "dirt", "accept": ["ground"]},
+    "3": {"name": "grass", "accept": ["ground", "low_vegetation"]},
+    "4": {"name": "tree", "accept": ["tall_vegetation", "trunk_like"]},
+    "5": {"name": "pole", "accept": ["trunk_like", "solid_obstacle"]},
+    "6": {"name": "water", "accept": ["ground"]},
+    "8": {"name": "vehicle", "accept": ["solid_obstacle"]},
+    "9": {"name": "object", "accept": ["solid_obstacle"]},
+    "10": {"name": "asphalt", "accept": ["ground"]},
+    "12": {"name": "building", "accept": ["solid_obstacle"]},
+    "15": {"name": "log", "accept": ["solid_obstacle", "ground"]},
+    "17": {"name": "person", "accept": ["solid_obstacle", "trunk_like"]},
+    "18": {"name": "fence", "accept": ["solid_obstacle", "trunk_like"]},
+    "19": {"name": "bush", "accept": ["low_vegetation", "tall_vegetation"]},
+    "23": {"name": "concrete", "accept": ["ground"]},
+    "27": {"name": "barrier", "accept": ["solid_obstacle"]},
+    "31": {"name": "puddle", "accept": ["ground"]},
+    "33": {"name": "mud", "accept": ["ground"]},
+    "34": {"name": "rubble", "accept": ["solid_obstacle", "ground"]}
+  }
+}

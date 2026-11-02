@@ -1,0 +1,24 @@
+{
+  "purpose": "Rebuild the offline Tartan run after the uncommitted NearestImage change (strictly increasing exposures) and compare with the saved run.",
+  "saved_run": "artifacts/offline_demo_tartan_2026_11_02",
+  "rebuilt_run": "artifacts/offline_demo_rerun_2026_11_02",
+  "report_fields_differing_excluding_timing": [],
+  "frames": [
+    318,
+    318
+  ],
+  "image_stamps_identical": true,
+  "all_318_frame_arrays_identical": {
+    "centres": true,
+    "labels": true,
+    "confidence": true,
+    "observations": true,
+    "relative_z": true,
+    "world_vehicle": true,
+    "trajectory": true
+  },
+  "wall_seconds": [
+    303.0463610190002,
+    246.81118988100025
+  ]
+}

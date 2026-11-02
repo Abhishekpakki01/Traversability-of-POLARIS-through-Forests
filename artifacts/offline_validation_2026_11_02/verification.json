@@ -1,0 +1,32 @@
+{
+  "backup_files_verified": 66,
+  "changed_existing_source_files": [
+    "src/semantic_mapping/CMakeLists.txt",
+    ".gitignore"
+  ],
+  "generated_cache_changes": [
+    "src/semantic_mapping/.pytest_cache/v/cache/nodeids"
+  ],
+  "tests": {
+    "tests": 37,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "rviz_launch_and_replay_completed": true,
+  "rviz_screenshot_available": false,
+  "rviz_screenshot_limitation": "WSL window capture returned black; video frames were visually reviewed",
+  "video_decoding": {
+    "semantic_demo.mp4": {
+      "frames": 737,
+      "sha256": "4dec0e549756d32d6ff7ab7a69c0fb13aeb9f73800213ed9e3798e23423580ca",
+      "bytes": 69951289
+    },
+    "elevation_demo.mp4": {
+      "frames": 737,
+      "sha256": "51b01d541cdd301f46b42b7e9f1d9ea90ccbf7fd82f3ae85d17ee1c7b24dff91",
+      "bytes": 73815256
+    }
+  },
+  "non_elevation_messages_unchanged_after_scale_fix": true
+}

@@ -1,0 +1,26 @@
+{
+  "source": "RELLIS-3D ontology, benchmarks/SalsaNext/train/tasks/semantic/config/labels/rellis.yaml",
+  "note": "Groups follow the same meaning as config/goose_classes.json. Excluded classes are reported in the confusion table but not scored.",
+  "labels": {
+    "0": {"name": "void", "group": null, "reason": "unlabelled"},
+    "1": {"name": "dirt", "group": "ground"},
+    "3": {"name": "grass", "group": "vegetation", "reason": "GOOSE low_grass/high_grass are vegetation"},
+    "4": {"name": "tree", "group": null, "reason": "RELLIS does not separate trunk and crown (trunk vs vegetation)"},
+    "5": {"name": "pole", "group": "obstacle"},
+    "6": {"name": "water", "group": "water"},
+    "7": {"name": "sky", "group": null, "reason": "not a mapped surface; GOOSE sky is unknown"},
+    "8": {"name": "vehicle", "group": "obstacle"},
+    "9": {"name": "object", "group": "obstacle"},
+    "10": {"name": "asphalt", "group": "ground"},
+    "12": {"name": "building", "group": "obstacle"},
+    "15": {"name": "log", "group": "obstacle", "reason": "fallen wood; GOOSE debris is obstacle"},
+    "17": {"name": "person", "group": "obstacle"},
+    "18": {"name": "fence", "group": "obstacle"},
+    "19": {"name": "bush", "group": "vegetation"},
+    "23": {"name": "concrete", "group": "ground"},
+    "27": {"name": "barrier", "group": "obstacle"},
+    "31": {"name": "puddle", "group": "water"},
+    "33": {"name": "mud", "group": "ground", "reason": "GOOSE soil is ground; traversability of mud is not represented"},
+    "34": {"name": "rubble", "group": "obstacle"}
+  }
+}

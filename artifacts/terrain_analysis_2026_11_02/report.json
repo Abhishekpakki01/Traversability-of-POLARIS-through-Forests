@@ -1,0 +1,158 @@
+{
+  "source_run": "/home/abhishek/Traversability-of-POLARIS-through-Forests/artifacts/offline_demo_tartan_2026_11_02",
+  "source_report_sha256": "26e93e607e320fdfec983a3a26c48a9a3dc149e70f0186875e662bf2629663c6",
+  "source_final_frame": "00318",
+  "config": "/home/abhishek/Traversability-of-POLARIS-through-Forests/src/semantic_mapping/config/traversability_placeholder.yaml",
+  "config_sha256": "97373831869869e54d8443c041efcf05bd35c222547b08e8363c5dc35e25d365",
+  "source_full_recording_processed": true,
+  "vehicle_parameters_verified": false,
+  "settings": {
+    "cell_m": 0.35,
+    "ground_window_m": 1.5,
+    "max_ground_rise_deg": 35.0,
+    "plane_half_width_m": 1.05,
+    "min_plane_cells": 6,
+    "ground_clearance_m": 0.3,
+    "overhang_clearance_m": 2.0,
+    "max_slope_deg": 20.0,
+    "max_roughness_m": 0.2,
+    "caution_fraction": 0.5,
+    "compliant_vegetation_max_height_m": 1.0,
+    "vegetation_cost": 0.6,
+    "rigid_labels": [
+      "trunk",
+      "obstacle"
+    ],
+    "hazard_labels": [
+      "water"
+    ]
+  },
+  "footprint_radius_m": 0.6,
+  "assumptions": [
+    "map Z treated as gravity-up (not independently verified)",
+    "ground = lowest occupied voxel per column unless far above the local minimum",
+    "semantics change a column only with confirmed labels (>=2 observations, >=0.6 confidence)",
+    "confirmed vegetation below compliant height is assumed drivable at reduced cost"
+  ],
+  "resolution_limits": {
+    "height_quantum_m": 0.35,
+    "slope_error_deg": "median within ~2, single windows up to ~5.5 (synthetic test)",
+    "roughness_floor_m": 0.101
+  },
+  "grid_shape": [
+    172,
+    269
+  ],
+  "observed_columns": 13593,
+  "ground_measured_columns": 12676,
+  "ground_interpolated_columns": 917,
+  "geometric_state_fraction_of_observed": {
+    "unobserved": 0.0,
+    "unknown": 0.0038254984183035386,
+    "traversable": 0.10740822482159935,
+    "caution": 0.4420657691458839,
+    "non_traversable": 0.4467005076142132
+  },
+  "combined_state_fraction_of_observed": {
+    "unobserved": 0.0,
+    "unknown": 0.0038254984183035386,
+    "traversable": 0.10740822482159935,
+    "caution": 0.4665636724784816,
+    "non_traversable": 0.42220260428161555
+  },
+  "semantic_effects": {
+    "rigid_columns": 19,
+    "hazard_columns": 3,
+    "vegetation_relaxed_columns": 409
+  },
+  "slope_deg": {
+    "count": 13541,
+    "median": 12.01235535588941,
+    "p05": 3.8536618603281844e-09,
+    "p95": 18.865415142595317,
+    "min": 0.0,
+    "max": 46.08152974824487
+  },
+  "roughness_m": {
+    "count": 13541,
+    "median": 0.1018059658162807,
+    "p05": 3.3717478794366717e-07,
+    "p95": 0.2141383130143156,
+    "min": 0.0,
+    "max": 0.3466517618940075
+  },
+  "obstacle_height_m": {
+    "count": 13593,
+    "median": 0.0,
+    "p05": 0.0,
+    "p95": 1.75,
+    "min": 0.0,
+    "max": 1.9983861984745133
+  },
+  "driven_path": {
+    "poses": 318,
+    "note": "The recording vehicle drove these cells, so they are positive (traversable) examples for that vehicle only. This measures false alarms, not hazard detection.",
+    "geometric_worst_state_fraction": {
+      "unobserved": 0.0,
+      "unknown": 0.015723270440251572,
+      "traversable": 0.0031446540880503146,
+      "caution": 0.0,
+      "non_traversable": 0.9811320754716981
+    },
+    "combined_worst_state_fraction": {
+      "unobserved": 0.0,
+      "unknown": 0.015723270440251572,
+      "traversable": 0.0031446540880503146,
+      "caution": 0.0,
+      "non_traversable": 0.9811320754716981
+    }
+  },
+  "vehicle_consistency": {
+    "note": "Internal consistency of map and poses; not absolute accuracy.",
+    "origin_height_above_ground_m": {
+      "count": 318,
+      "median": 1.9872824982608943,
+      "p05": 1.6858653812765387,
+      "p95": 2.07594661246279,
+      "min": 0.1566214410491895,
+      "max": 2.1347288909107878
+    },
+    "tilt_vs_ground_normal_deg": {
+      "count": 313,
+      "median": 3.4980984957118655,
+      "p05": 0.7937447891277823,
+      "p95": 8.710056429239284,
+      "min": 0.10989627862874722,
+      "max": 23.514538739499514
+    }
+  },
+  "confirmed_label_height_agreement": {
+    "ground": {
+      "voxels": 538,
+      "median_height_above_ground_m": 0.0,
+      "fraction_in_ground_layer": 0.9925650557620818
+    },
+    "vegetation": {
+      "voxels": 5203,
+      "median_height_above_ground_m": 0.34999847412109375,
+      "fraction_in_ground_layer": 0.4764558908322122
+    },
+    "trunk": {
+      "voxels": 1,
+      "median_height_above_ground_m": 3.0775875551947216,
+      "fraction_in_ground_layer": 0.0
+    },
+    "water": {
+      "voxels": 3,
+      "median_height_above_ground_m": 0.0,
+      "fraction_in_ground_layer": 1.0
+    },
+    "obstacle": {
+      "voxels": 29,
+      "median_height_above_ground_m": 0.35000038146972656,
+      "fraction_in_ground_layer": 0.27586206896551724
+    }
+  },
+  "confirmed_labels_with_observations": 5774,
+  "navigation_validated": false
+}

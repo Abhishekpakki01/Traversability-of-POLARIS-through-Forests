@@ -28,8 +28,12 @@ add_executable(ohm_occupancy_pose_node src/ohm_occupancy_pose_node.cpp)
 ament_target_dependencies(ohm_occupancy_pose_node rclcpp sensor_msgs visualization_msgs geometry_msgs tf2 tf2_ros)
 target_link_libraries(ohm_occupancy_pose_node ohm::ohm)
 
+# Separate synchronous bridge for offline processing; existing ROS nodes stay available.
+add_executable(ohm_offline_mapper src/ohm_offline_mapper.cpp)
+target_link_libraries(ohm_offline_mapper ohm::ohm)
+
 # Install C++ Executables
-install(TARGETS ohm_occupancy_node ohm_occupancy_pose_node
+install(TARGETS ohm_occupancy_node ohm_occupancy_pose_node ohm_offline_mapper
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -42,6 +46,7 @@ install(PROGRAMS
   scripts/camera_semantic_voxel_node.py
   scripts/tartan_camera_adapter.py
   scripts/tartan_recorded_camera_adapter.py
+  scripts/offline_demo_view.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -61,6 +66,10 @@ if(BUILD_TESTING)
   ament_add_pytest_test(semantic_fusion test/test_semantic_fusion.py TIMEOUT 30)
   ament_add_pytest_test(tartan_camera test/test_tartan_camera.py TIMEOUT 30)
   ament_add_pytest_test(recorded_calibration test/test_recorded_calibration.py TIMEOUT 30)
+  ament_add_pytest_test(offline_demo test/test_offline_demo.py TIMEOUT 30
+    ENV OHM_OFFLINE_EXECUTABLE=$<TARGET_FILE:ohm_offline_mapper>)
+  ament_add_pytest_test(terrain_analysis test/test_terrain_analysis.py TIMEOUT 30)
+  ament_add_pytest_test(lidar_features test/test_lidar_features.py TIMEOUT 30)
 endif()
 
 ament_package()

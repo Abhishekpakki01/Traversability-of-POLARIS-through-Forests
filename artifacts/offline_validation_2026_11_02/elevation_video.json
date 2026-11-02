@@ -1,0 +1,18 @@
+{
+  "file": "elevation_demo.mp4",
+  "mode": "elevation",
+  "rendered_frames": 737,
+  "fps": 20,
+  "duration_seconds": 36.85,
+  "source_map_frames": 318,
+  "offline_playback": true,
+  "playback_rate": 1.0,
+  "final_orbit_seconds": 5.0,
+  "full_recording_processed": true,
+  "renderer": "VTK cubes from saved OHM occupied centres",
+  "physical_calibration_validated": false,
+  "elevation_range_m": [
+    -20.0,
+    5.0
+  ]
+}
