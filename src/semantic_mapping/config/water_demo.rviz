@@ -1,0 +1,556 @@
+# Water demo layout, derived from lidar_features_demo.rviz (unchanged).
+# LiDAR-only classes plus water: camera water pixels projected onto the mapped
+# ground. Bright blue = no LiDAR return there, light blue = LiDAR return.
+# All /lidar, /terrain and /water clouds must use Volatile durability.
+Panels:
+- Class: rviz_common/Displays
+  Help Height: 70
+  Name: Displays
+  Property Tree Widget:
+    Expanded: null
+    Splitter Ratio: 0.5
+  Tree Height: 70
+- Class: rviz_common/Views
+  Expanded:
+  - /Current View1
+  Name: Views
+  Splitter Ratio: 0.5
+Visualization Manager:
+  Class: ''
+  Displays:
+  - Alpha: 1
+    Autocompute Intensity Bounds: true
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
+      Value: true
+    Axis: Z
+    Channel Name: intensity
+    Class: rviz_default_plugins/PointCloud2
+    Color: 255; 255; 255
+    Color Transformer: RGB8
+    Decay Time: 0
+    Enabled: false
+    Invert Rainbow: false
+    Max Color: 255; 255; 255
+    Max Intensity: 4096
+    Min Color: 0; 0; 0
+    Min Intensity: 0
+    Name: Traversability carpet (optional; different colour meaning)
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.3499999940395355
+    Style: Boxes
+    Topic:
+      Depth: 1
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /terrain/traversability
+    Use Fixed Frame: true
+    Use rainbow: true
+    Value: false
+  - Alpha: 1
+    Autocompute Intensity Bounds: true
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
+      Value: true
+    Axis: Z
+    Channel Name: intensity
+    Class: rviz_default_plugins/PointCloud2
+    Color: 255; 255; 255
+    Color Transformer: RGB8
+    Decay Time: 0
+    Enabled: false
+    Invert Rainbow: false
+    Max Color: 255; 255; 255
+    Max Intensity: 4096
+    Min Color: 0; 0; 0
+    Min Intensity: 0
+    Name: Traversability (geometry only, optional)
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.3499999940395355
+    Style: Boxes
+    Topic:
+      Depth: 1
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /terrain/geometric_traversability
+    Use Fixed Frame: true
+    Use rainbow: true
+    Value: false
+  - Alpha: 1
+    Autocompute Intensity Bounds: true
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
+      Value: true
+    Axis: Z
+    Channel Name: intensity
+    Class: rviz_default_plugins/PointCloud2
+    Color: 255; 255; 255
+    Color Transformer: RGB8
+    Decay Time: 0
+    Enabled: true
+    Invert Rainbow: false
+    Max Color: 255; 255; 255
+    Max Intensity: 4096
+    Min Color: 0; 0; 0
+    Min Intensity: 0
+    Name: LiDAR-only classes (ground + above ground)
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.3499999940395355
+    Style: Boxes
+    Topic:
+      Depth: 1
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /lidar/features
+    Use Fixed Frame: true
+    Use rainbow: true
+    Value: true
+  - Alpha: 1
+    Autocompute Intensity Bounds: true
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
+      Value: true
+    Axis: Z
+    Channel Name: intensity
+    Class: rviz_default_plugins/PointCloud2
+    Color: 255; 255; 255
+    Color Transformer: RGB8
+    Decay Time: 0
+    Enabled: true
+    Invert Rainbow: false
+    Max Color: 255; 255; 255
+    Max Intensity: 4096
+    Min Color: 0; 0; 0
+    Min Intensity: 0
+    Name: Water on ground (camera + LiDAR gaps)
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.3499999940395355
+    Style: Boxes
+    Topic:
+      Depth: 1
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /water/cells
+    Use Fixed Frame: true
+    Use rainbow: true
+    Value: true
+  - Alpha: 1
+    Autocompute Intensity Bounds: true
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
+      Value: true
+    Axis: Z
+    Channel Name: intensity
+    Class: rviz_default_plugins/PointCloud2
+    Color: 255; 255; 255
+    Color Transformer: RGB8
+    Decay Time: 0
+    Enabled: false
+    Invert Rainbow: false
+    Max Color: 255; 255; 255
+    Max Intensity: 4096
+    Min Color: 0; 0; 0
+    Min Intensity: 0
+    Name: Camera classes projected on ground (optional)
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.3499999940395355
+    Style: Boxes
+    Topic:
+      Depth: 1
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /water/camera_ground
+    Use Fixed Frame: true
+    Use rainbow: true
+    Value: false
+  - Alpha: 1
+    Autocompute Intensity Bounds: false
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
+      Value: true
+    Axis: Z
+    Channel Name: permeability
+    Class: rviz_default_plugins/PointCloud2
+    Color: 255; 255; 255
+    Color Transformer: Intensity
+    Decay Time: 0
+    Enabled: false
+    Invert Rainbow: false
+    Max Color: 120; 230; 255
+    Max Intensity: 1
+    Min Color: 40; 40; 70
+    Min Intensity: 0
+    Name: LiDAR permeability (dark solid, bright see-through)
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.3499999940395355
+    Style: Boxes
+    Topic:
+      Depth: 1
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /lidar/features
+    Use Fixed Frame: true
+    Use rainbow: false
+    Value: false
+  - Alpha: 1
+    Autocompute Intensity Bounds: false
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
+      Value: true
+    Axis: Z
+    Channel Name: linearity
+    Class: rviz_default_plugins/PointCloud2
+    Color: 255; 255; 255
+    Color Transformer: Intensity
+    Decay Time: 0
+    Enabled: false
+    Invert Rainbow: false
+    Max Color: 255; 200; 60
+    Max Intensity: 1
+    Min Color: 40; 40; 70
+    Min Intensity: 0
+    Name: LiDAR linearity (bright = trunk/pole-like)
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.3499999940395355
+    Style: Boxes
+    Topic:
+      Depth: 1
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /lidar/features
+    Use Fixed Frame: true
+    Use rainbow: false
+    Value: false
+  - Alpha: 1
+    Autocompute Intensity Bounds: true
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
+      Value: true
+    Axis: Z
+    Channel Name: intensity
+    Class: rviz_default_plugins/PointCloud2
+    Color: 255; 255; 255
+    Color Transformer: RGB8
+    Decay Time: 0
+    Enabled: false
+    Invert Rainbow: false
+    Max Color: 255; 255; 255
+    Max Intensity: 4096
+    Min Color: 0; 0; 0
+    Min Intensity: 0
+    Name: Camera classes above ground (compare)
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.3499999940395355
+    Style: Boxes
+    Topic:
+      Depth: 1
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /terrain/above_ground
+    Use Fixed Frame: true
+    Use rainbow: true
+    Value: false
+  - Alpha: 1
+    Autocompute Intensity Bounds: true
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
+      Value: true
+    Axis: Z
+    Channel Name: intensity
+    Class: rviz_default_plugins/PointCloud2
+    Color: 255; 255; 255
+    Color Transformer: RGB8
+    Decay Time: 0
+    Enabled: false
+    Invert Rainbow: false
+    Max Color: 255; 255; 255
+    Max Intensity: 4096
+    Min Color: 0; 0; 0
+    Min Intensity: 0
+    Name: Local semantic map incl. ground (optional)
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.3499999940395355
+    Style: Boxes
+    Topic:
+      Depth: 1
+      Durability Policy: Transient Local
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /offline_demo/local_semantic
+    Use Fixed Frame: true
+    Use rainbow: true
+    Value: false
+  - Alpha: 1
+    Autocompute Intensity Bounds: true
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
+      Value: true
+    Axis: Z
+    Channel Name: intensity
+    Class: rviz_default_plugins/PointCloud2
+    Color: 255; 255; 255
+    Color Transformer: RGB8
+    Decay Time: 0
+    Enabled: false
+    Invert Rainbow: false
+    Max Color: 255; 255; 255
+    Max Intensity: 4096
+    Min Color: 0; 0; 0
+    Min Intensity: 0
+    Name: Full accumulated map (optional)
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.3499999940395355
+    Style: Boxes
+    Topic:
+      Depth: 1
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /semantic_voxel_map
+    Use Fixed Frame: true
+    Use rainbow: true
+    Value: false
+  - Alpha: 1
+    Axes Length: 1
+    Axes Radius: 0.10000000149011612
+    Class: rviz_default_plugins/Pose
+    Color: 255; 25; 0
+    Enabled: true
+    Head Length: 0.5
+    Head Radius: 0.25
+    Name: Vehicle pose
+    Shaft Length: 2
+    Shaft Radius: 0.10000000149011612
+    Shape: Arrow
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /vehicle_pose
+    Value: true
+  - Class: rviz_default_plugins/Image
+    Enabled: true
+    Max Value: 1
+    Median window: 5
+    Min Value: 0
+    Name: Camera reference
+    Normalize Range: true
+    Topic:
+      Depth: 1
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Best Effort
+      Value: /offline_demo/camera
+    Value: true
+  - Class: rviz_default_plugins/Image
+    Enabled: true
+    Max Value: 1
+    Median window: 5
+    Min Value: 0
+    Name: Predicted terrain classes
+    Normalize Range: true
+    Topic:
+      Depth: 1
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Best Effort
+      Value: /offline_demo/segmentation
+    Value: true
+  - Class: rviz_default_plugins/Image
+    Enabled: true
+    Max Value: 1
+    Median window: 5
+    Min Value: 0
+    Name: Projection alignment reference
+    Normalize Range: true
+    Topic:
+      Depth: 1
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Best Effort
+      Value: /offline_demo/projection
+    Value: true
+  - Alpha: 1
+    Autocompute Intensity Bounds: true
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
+      Value: true
+    Axis: Z
+    Channel Name: intensity
+    Class: rviz_default_plugins/PointCloud2
+    Color: 255; 255; 255
+    Color Transformer: RGB8
+    Decay Time: 0
+    Enabled: false
+    Invert Rainbow: false
+    Max Color: 255; 255; 255
+    Max Intensity: 4096
+    Min Color: 0; 0; 0
+    Min Intensity: 0
+    Name: Local elevation (optional; not clearance)
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.3499999940395355
+    Style: Boxes
+    Topic:
+      Depth: 1
+      Durability Policy: Transient Local
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /offline_demo/local_elevation
+    Use Fixed Frame: true
+    Use rainbow: true
+    Value: false
+  - Alpha: 1
+    Buffer Length: 1
+    Class: rviz_default_plugins/Path
+    Color: 255; 70; 30
+    Enabled: true
+    Head Diameter: 0.30000001192092896
+    Head Length: 0.20000000298023224
+    Length: 0.30000001192092896
+    Line Style: Lines
+    Line Width: 0.05000000074505806
+    Name: Vehicle trail
+    Offset:
+      X: 0
+      Y: 0
+      Z: 0
+    Pose Color: 255; 85; 255
+    Pose Style: None
+    Radius: 0.029999999329447746
+    Shaft Diameter: 0.10000000149011612
+    Shaft Length: 0.10000000149011612
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /offline_demo/vehicle_path
+    Value: true
+  - Class: rviz_default_plugins/Image
+    Enabled: true
+    Max Value: 1
+    Median window: 5
+    Min Value: 0
+    Name: 'LiDAR classes + water: key'
+    Normalize Range: true
+    Topic:
+      Depth: 1
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Best Effort
+      Value: /water/legend
+    Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 33; 41; 51
+    Fixed Frame: sensor_init
+    Frame Rate: 20
+  Name: root
+  Tools:
+  - Class: rviz_default_plugins/Interact
+    Hide Inactive Objects: true
+  - Class: rviz_default_plugins/MoveCamera
+  - Class: rviz_default_plugins/Select
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 30.0
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05000000074505806
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 0.75
+      Target Frame: vehicle
+      Value: Orbit (rviz_default_plugins)
+      Yaw: 2.2
+    Saved: null
+Window Geometry:
+  Camera reference:
+    collapsed: false
+  Displays:
+    collapsed: false
+  Height: 987
+  Hide Left Dock: false
+  Hide Right Dock: false
+  Predicted terrain classes:
+    collapsed: false
+  Projection alignment reference:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd0000000100000000000001b800000385fc0200000006fb0000002000430061006d0065007200610020007200650066006500720065006e00630065010000003b000000850000002800fffffffb000000320050007200650064006900630074006500640020007400650072007200610069006e00200063006c0061007300730065007301000000c6000000860000002800fffffffb0000003c00500072006f006a0065006300740069006f006e00200061006c00690067006e006d0065006e00740020007200650066006500720065006e006300650100000152000000850000002800fffffffb000000100044006900730070006c00610079007301000001dd000000c7000000c700fffffffb00000034004c006900440041005200200063006c006100730073006500730020002b002000770061007400650072003a0020006b0065007901000002aa000000650000002800fffffffb0000000a005600690065007700730100000315000000ab000000a000ffffff000005b60000038500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Views:
+    collapsed: false
+  Width: 1908
+  X: -32
+  Y: -32
+  'LiDAR classes + water: key':
+    collapsed: false

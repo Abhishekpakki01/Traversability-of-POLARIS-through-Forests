@@ -70,6 +70,7 @@ if(BUILD_TESTING)
     ENV OHM_OFFLINE_EXECUTABLE=$<TARGET_FILE:ohm_offline_mapper>)
   ament_add_pytest_test(terrain_analysis test/test_terrain_analysis.py TIMEOUT 30)
   ament_add_pytest_test(lidar_features test/test_lidar_features.py TIMEOUT 30)
+  ament_add_pytest_test(water_detection test/test_water_detection.py TIMEOUT 30)
 endif()
 
 ament_package()
