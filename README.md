@@ -46,6 +46,7 @@ The full terminal commands are in:
 - [LiDAR-only features: permeability, shape and the labelled RELLIS scan](src/semantic_mapping/docs/LIDAR_FEATURES.md)
 - [Water on the map: camera water projected onto LiDAR ground](src/semantic_mapping/docs/WATER_DETECTION.md)
 - [Accuracy v2: aspect-correct camera input, hood mask, 0.2 m / 20 m map, cloth ground, LiDAR-aware traversability](src/semantic_mapping/docs/ACCURACY_V2.md)
+- [How do we know the map is right? GPS comparison, map sharpness, open checks](src/semantic_mapping/docs/MAPPING_ACCURACY.md)
 
 - [RELLIS run guide](src/semantic_mapping/docs/RUN_IT_YOURSELF.md)
 - [TartanDrive run guide](src/semantic_mapping/docs/SECOND_TERRAIN_TARTAN.md)

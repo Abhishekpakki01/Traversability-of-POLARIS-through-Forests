@@ -1,0 +1,25 @@
+{
+  "run": "/home/abhishek/Traversability-of-POLARIS-through-Forests/artifacts/offline_v2_2026_11_03",
+  "scans_used": 159,
+  "patch_m": 0.4,
+  "single_scan": {
+    "patches": 109,
+    "median_m": 0.018915835257034733,
+    "p90_m": 0.037356371505485694
+  },
+  "accumulated_recorded_poses": {
+    "patches": 7230,
+    "median_m": 0.02778816629180813,
+    "p90_m": 0.040618411354429465
+  },
+  "accumulated_perturbed_poses": {
+    "patches": 2776,
+    "median_m": 0.04617253550949024,
+    "p90_m": 0.06520538767362832
+  },
+  "perturbation": {
+    "rotation_sigma_deg": 0.5,
+    "translation_sigma_m": 0.05
+  },
+  "note": "Flat horizontal patches only. Thickness near the single-scan value means the scans register consistently; it does not measure absolute position accuracy."
+}

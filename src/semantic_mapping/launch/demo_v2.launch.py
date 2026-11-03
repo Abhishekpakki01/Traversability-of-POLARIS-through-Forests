@@ -21,7 +21,7 @@ def generate_launch_description():
         DeclareLaunchArgument('rate', default_value='1.0'),
         DeclareLaunchArgument('rviz', default_value='true'),
         Node(package='semantic_mapping', executable='offline_demo_view.py',
-             parameters=[{'radius_m': 15., 'use_sim_time': True}],
+             parameters=[{'radius_m': 20., 'max_rate_hz': 2., 'use_sim_time': True}],
              condition=IfCondition(LaunchConfiguration('rviz'))),
         Node(package='rviz2', executable='rviz2', parameters=[{'use_sim_time': True}],
              arguments=['-d', str(shared/'config/demo_v2.rviz')],

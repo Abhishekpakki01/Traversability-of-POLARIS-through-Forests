@@ -1,0 +1,39 @@
+{
+  "run": "/home/abhishek/Traversability-of-POLARIS-through-Forests/artifacts/offline_v2_2026_11_03",
+  "gps": "/home/abhishek/thesis_data/tartan_drive_2_sample/gps_odom.npy",
+  "poses": 318,
+  "mapped_seconds": 31.76224994659424,
+  "max_gps_sample_gap_s": 0.009979009628295898,
+  "path_length_m": {
+    "lidar_odometry": 101.97086062727658,
+    "gps": 100.9602959037376
+  },
+  "height_change_m": {
+    "lidar_odometry": -11.631513034920605,
+    "gps": -12.084387851875693
+  },
+  "ate_rigid_m": {
+    "rmse": 0.17929290375230703,
+    "median": 0.13893509830936573,
+    "p95": 0.32508094732988096,
+    "max": 0.34869857310685687
+  },
+  "ate_with_lever_arm_m": {
+    "rmse": 0.06239667377765019,
+    "median": 0.056208277783068944,
+    "p95": 0.09955191486161002,
+    "max": 0.1317196586183276
+  },
+  "estimated_lever_arm_vehicle_frame_m": [
+    -0.10700285060587317,
+    -0.27594447912114617,
+    0.26190239322959785
+  ],
+  "map_z_vs_gravity_tilt_deg": 0.35234467948415404,
+  "relative_distance_error_per_segment": {
+    "segment_m": 10.0,
+    "median": 0.004157104834456682,
+    "p95": 0.009937122986715164
+  },
+  "note": "GPS/INS is an independent reference with its own error; agreement, not ground truth."
+}

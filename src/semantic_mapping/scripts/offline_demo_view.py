@@ -15,11 +15,16 @@ class LocalView(Node):
     def __init__(self):
         super().__init__('offline_demo_local_view')
         self.radius = self.declare_parameter('radius_m', 15.).value
+        # Large clouds (e.g. 180k LiDAR-class voxels) make RViz sluggish; cap local updates.
+        self.min_period_ns = int(1e9/self.declare_parameter('max_rate_hz', 0.).value) if \
+            self.get_parameter('max_rate_hz').value > 0 else 0
+        self.last_published = {}
         self.poses, self.pending = OrderedDict(), OrderedDict()
         self.last_pose = -1
         self.publishers_by_kind = {}
         self.subscriptions_by_kind = {}
-        for kind, topic in [('semantic', '/semantic_voxel_map'), ('elevation', '/offline_demo/elevation')]:
+        for kind, topic in [('semantic', '/semantic_voxel_map'), ('elevation', '/offline_demo/elevation'),
+                            ('lidar', '/lidar/features')]:
             self.publishers_by_kind[kind] = self.create_publisher(PointCloud2,
                 '/offline_demo/local_'+kind, QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL))
             self.subscriptions_by_kind[kind] = self.create_subscription(PointCloud2, topic,
@@ -30,7 +35,7 @@ class LocalView(Node):
     def on_pose(self, pose):
         stamp = stamp_ns(pose)
         if stamp < self.last_pose:
-            self.poses.clear(); self.pending.clear()
+            self.poses.clear(); self.pending.clear(); self.last_published.clear()
         self.last_pose = stamp
         self.poses[stamp] = pose
         while len(self.poses) > 16:
@@ -46,6 +51,9 @@ class LocalView(Node):
             while len(self.pending) > 32:
                 self.pending.popitem(last=False)
             return
+        if self.min_period_ns and 0 <= stamp-self.last_published.get(kind, -10**19) < self.min_period_ns:
+            return
+        self.last_published[kind] = stamp
         self.publishers_by_kind[kind].publish(local_cloud(cloud, self.poses[stamp], self.radius))
 
 
