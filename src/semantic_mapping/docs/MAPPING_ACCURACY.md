@@ -99,5 +99,25 @@ a download (several GB).
   still available as "LiDAR-only classes, full map (slow)".
 - **While playing,** the camera follows the vehicle (Target Frame `vehicle`).
   To look around freely, set Views → Target Frame to `sensor_init`.
-- **Slow machine:** set the display's Style to *Points* instead of *Boxes*,
-  which is much faster to draw.
+- **Slow machine, or no GPU:** use the light layout, which draws flat squares
+  instead of boxes:
+  `ros2 launch semantic_mapping demo_v2.launch.py rate:=0.5 layout:=demo_v2_light.rviz`
+
+### Is RViz using the GPU?
+
+On 3 November, RViz on this PC was drawing on the CPU: the OpenGL renderer was
+`llvmpipe`, `nvidia-smi` in Ubuntu failed, and the kernel log showed
+`dxgkio_query_adapter_info: Ioctl failed`. WSL could not reach the Windows
+GPU. Fix this on the Windows side:
+
+1. In Windows PowerShell, run `nvidia-smi`. If it fails, the NVIDIA driver is
+   not running: update or reinstall it, check Device Manager → Display
+   adapters, and reboot.
+2. Then run `wsl --update` and `wsl --shutdown` in PowerShell (this closes all
+   Ubuntu terminals), and reopen Ubuntu.
+3. Check in Ubuntu: `nvidia-smi` should list the GPU, and
+   `glxinfo -B | grep renderer` (from `sudo apt install mesa-utils`) should
+   say `D3D12 (NVIDIA ...)`, not `llvmpipe`.
+
+On a laptop, also plug in the charger and make sure the NVIDIA GPU is not
+disabled in power or graphics settings.

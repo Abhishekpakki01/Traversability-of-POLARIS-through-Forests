@@ -9,7 +9,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, ExecuteProcess
 from launch.conditions import IfCondition
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 
 
@@ -20,11 +20,13 @@ def generate_launch_description():
         DeclareLaunchArgument('bag', default_value=str(default)),
         DeclareLaunchArgument('rate', default_value='1.0'),
         DeclareLaunchArgument('rviz', default_value='true'),
+        DeclareLaunchArgument('layout', default_value='demo_v2.rviz',
+                              description='demo_v2_light.rviz for software (CPU) rendering'),
         Node(package='semantic_mapping', executable='offline_demo_view.py',
              parameters=[{'radius_m': 15., 'max_rate_hz': 2., 'use_sim_time': True}],
              condition=IfCondition(LaunchConfiguration('rviz'))),
         Node(package='rviz2', executable='rviz2', parameters=[{'use_sim_time': True}],
-             arguments=['-d', str(shared/'config/demo_v2.rviz')],
+             arguments=['-d', PathJoinSubstitution([str(shared/'config'), LaunchConfiguration('layout')])],
              condition=IfCondition(LaunchConfiguration('rviz'))),
         ExecuteProcess(cmd=['ros2', 'bag', 'play', LaunchConfiguration('bag'),
             '--clock', '--delay', '4', '--rate', LaunchConfiguration('rate'),
