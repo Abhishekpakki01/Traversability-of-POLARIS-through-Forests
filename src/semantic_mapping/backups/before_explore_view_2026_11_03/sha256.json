@@ -1,0 +1,5 @@
+{
+  "src/semantic_mapping/launch/demo_v2.launch.py": "96de1822b90ba79fe8f50844976cc5176af38bffa442050dcb74920b2fe4b730",
+  "src/semantic_mapping/config/demo_v2.rviz": "41c12cb1d1d7af80873ba99033fb267ae11d5c0848498700897f539ad4f9548e",
+  "src/semantic_mapping/config/demo_v2_light.rviz": "3aeca99e01aa1ca7d0bdd9c5a2737b4712b2ef62675d8ff79e963b80201856dc"
+}

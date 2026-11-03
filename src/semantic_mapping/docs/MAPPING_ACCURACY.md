@@ -91,6 +91,22 @@ a download (several GB).
 
 ## Viewing the map in RViz
 
+Start it from your own terminal so you stay in control:
+
+```bash
+cd ~/Traversability-of-POLARIS-through-Forests
+src/semantic_mapping/tools/view_demo.sh explore      # whole map, free camera
+src/semantic_mapping/tools/view_demo.sh              # follow the vehicle, with camera panels
+src/semantic_mapping/tools/view_demo.sh light        # if RViz falls back to CPU rendering
+```
+
+- **While it plays:** SPACE pauses and resumes, RIGHT ARROW steps one message,
+  UP/DOWN change speed. Type these in the terminal, not in RViz.
+- **After playback:** RViz stays open with the final map. Press Ctrl+C in the
+  terminal to close it.
+- **Speed:** an optional second argument sets the rate, e.g.
+  `view_demo.sh explore 0.25`.
+
 - **Rotate:** with *Interact* selected, left-drag in the 3D view.
   Middle-drag (or Shift + left-drag) pans, and the scroll wheel zooms.
 - **Why it felt stuck:** each update delivered a 9 MB cloud of 183k voxels, so

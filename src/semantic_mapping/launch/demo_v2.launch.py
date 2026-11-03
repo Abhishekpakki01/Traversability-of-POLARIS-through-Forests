@@ -20,8 +20,10 @@ def generate_launch_description():
         DeclareLaunchArgument('bag', default_value=str(default)),
         DeclareLaunchArgument('rate', default_value='1.0'),
         DeclareLaunchArgument('rviz', default_value='true'),
+        DeclareLaunchArgument('play', default_value='true',
+                              description='false: only RViz + local view; play the bag yourself (tools/view_demo.sh)'),
         DeclareLaunchArgument('layout', default_value='demo_v2.rviz',
-                              description='demo_v2_light.rviz for software (CPU) rendering'),
+                              description='demo_v2_explore.rviz (whole map, free camera) or demo_v2_light.rviz (CPU rendering)'),
         Node(package='semantic_mapping', executable='offline_demo_view.py',
              parameters=[{'radius_m': 15., 'max_rate_hz': 2., 'use_sim_time': True}],
              condition=IfCondition(LaunchConfiguration('rviz'))),
@@ -30,5 +32,6 @@ def generate_launch_description():
              condition=IfCondition(LaunchConfiguration('rviz'))),
         ExecuteProcess(cmd=['ros2', 'bag', 'play', LaunchConfiguration('bag'),
             '--clock', '--delay', '4', '--rate', LaunchConfiguration('rate'),
-            '--read-ahead-queue-size', '100', '--disable-keyboard-controls'], output='screen')
+            '--read-ahead-queue-size', '100', '--disable-keyboard-controls'], output='screen',
+            condition=IfCondition(LaunchConfiguration('play')))
     ])

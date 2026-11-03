@@ -4,6 +4,7 @@ from collections import OrderedDict
 
 from geometry_msgs.msg import PoseStamped
 import rclpy
+import rclpy.executors
 from rclpy.clock import Clock, ClockType
 from rclpy.node import Node
 from rclpy.qos import DurabilityPolicy, QoSProfile
@@ -64,7 +65,8 @@ class LocalView(Node):
     def publish(self, kind, cloud, pose):
         self.last_published[kind] = stamp_ns(cloud)
         self.deferred.pop(kind, None)
-        self.publishers_by_kind[kind].publish(local_cloud(cloud, pose, self.radius))
+        if rclpy.ok():  # skip publishing while shutting down (Ctrl+C)
+            self.publishers_by_kind[kind].publish(local_cloud(cloud, pose, self.radius))
 
     def flush_deferred(self):
         for kind, (cloud, pose) in list(self.deferred.items()):
@@ -77,7 +79,7 @@ def main():
     node = LocalView()
     try:
         rclpy.spin(node)
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, rclpy.executors.ExternalShutdownException):
         pass
     finally:
         node.destroy_node()
