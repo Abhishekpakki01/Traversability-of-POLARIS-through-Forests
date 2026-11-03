@@ -59,7 +59,7 @@ def main():
             xyz = np.column_stack([points[k] for k in ('x', 'y', 'z')])
             np.testing.assert_array_equal(xyz, saved['centres'])
             assert np.isfinite(xyz).all()
-            keys = voxel_keys(xyz, .35)
+            keys = voxel_keys(xyz, report['resolution_m'])
             assert len(np.unique(keys, axis=0)) == len(keys)
             for key in ('confidence', 'observations', 'relative_z'):
                 np.testing.assert_allclose(points[key], saved[key], atol=1e-6)

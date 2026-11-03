@@ -58,10 +58,14 @@ def shape_features(n, total, outer, min_points):
 class VoxelStatistics:
     """Incremental per-voxel point moments, reflectance and pass-throughs."""
 
-    def __init__(self, resolution, min_points=4, regularization_m=.05, pass_distance=3.):
+    def __init__(self, resolution, min_points=4, regularization_m=.05, pass_distance=3., ray_step=None,
+                 ray_chunk=4000):
         if resolution <= 0 or min_points < 3 or regularization_m <= 0 or pass_distance <= 0:
             raise ValueError('Invalid LiDAR feature settings')
         self.resolution, self.min_points = resolution, min_points
+        # Samples only locate traversed voxels (the distance test is analytic);
+        # chunks bound memory for long rays.
+        self.ray_step, self.ray_chunk = ray_step or resolution/4, ray_chunk
         self.regularization, self.pass_d2 = regularization_m**2, pass_distance**2
         self.codes = np.empty(0, dtype=np.int64)
         self.n = np.empty(0)
@@ -101,6 +105,10 @@ class VoxelStatistics:
         """Count, once per ray and voxel, rays passing near a stored distribution."""
         origin = np.asarray(origin, dtype=np.float64).reshape(3)
         endpoints = np.asarray(endpoints, dtype=np.float64).reshape(-1, 3)
+        return sum(self._add_rays(origin, endpoints[i:i+self.ray_chunk])
+                   for i in range(0, len(endpoints), self.ray_chunk))
+
+    def _add_rays(self, origin, endpoints):
         delta = endpoints-origin
         length = np.linalg.norm(delta, axis=1)
         keep = length > 1e-6
@@ -108,9 +116,7 @@ class VoxelStatistics:
         if not len(length):
             return 0
         direction = delta/length[:, None]
-        # Quarter-voxel samples find the traversed voxels; the distance test
-        # below is analytic, so sampling only affects corner-clipping cells.
-        step = self.resolution/4
+        step = self.ray_step
         counts = np.ceil(length/step).astype(np.int64)
         ray = np.repeat(np.arange(len(length)), counts)
         offset = np.arange(len(ray))-np.repeat(np.cumsum(counts)-counts, counts)

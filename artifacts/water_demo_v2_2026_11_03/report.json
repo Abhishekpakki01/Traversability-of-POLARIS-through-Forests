@@ -1,0 +1,23 @@
+{
+  "run": "/home/abhishek/Traversability-of-POLARIS-through-Forests/artifacts/offline_v2_2026_11_03",
+  "copied_messages": 6042,
+  "frames": 318,
+  "pixel_stride": 8,
+  "ground_method": "cloth",
+  "fill_iterations": 14,
+  "max_range_m": 20.0,
+  "rays_cast": 2767872,
+  "rays_hit_ground": 1029941,
+  "frames_without_camera_pose": 0,
+  "thresholds": {
+    "min_frames": 3,
+    "min_pixels": 5,
+    "min_water_fraction": 0.5,
+    "camera_confidence": 0.6
+  },
+  "final_water_cells_no_lidar_return": 120,
+  "final_water_cells_with_lidar_return": 759,
+  "final_water_area_m2": 35.160000000000004,
+  "fused_water_voxels_in_run": 84,
+  "note": "Water comes from camera predictions (unvalidated) projected onto LiDAR ground; heights in filled LiDAR holes are interpolated."
+}

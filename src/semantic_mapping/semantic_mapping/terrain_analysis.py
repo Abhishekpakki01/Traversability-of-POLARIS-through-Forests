@@ -34,6 +34,17 @@ class TerrainSettings:
     vegetation_cost: float = .6
     rigid_labels: tuple = ('trunk', 'obstacle')
     hazard_labels: tuple = ('water',)
+    # 'lowest': lowest voxel per column (original). 'cloth': cloth simulation
+    # filter (Zhang et al. 2016) on the inverted lowest surface; a stiff cloth
+    # bridges over low vegetation/understory that hides the ground.
+    # Cost of a confirmed hazard label (water). 1 = non-traversable (original);
+    # lower values treat camera water on LiDAR-returned surfaces as caution.
+    hazard_cost: float = 1.
+    ground_method: str = 'lowest'
+    cloth_step_m: float = .05
+    cloth_rigidness: int = 3
+    cloth_iterations: int = 80
+    cloth_threshold_m: float = .3
 
     def __post_init__(self):
         positive = ['cell_m', 'ground_window_m', 'plane_half_width_m', 'ground_clearance_m',
@@ -49,6 +60,13 @@ class TerrainSettings:
             raise ValueError('Costs are fractions of the non-traversable limit')
         if self.overhang_clearance_m <= self.ground_clearance_m:
             raise ValueError('Overhang clearance must exceed ground clearance')
+        if not 0 < self.hazard_cost <= 1:
+            raise ValueError('hazard_cost must be in (0, 1]')
+        if self.ground_method not in ('lowest', 'cloth'):
+            raise ValueError("ground_method must be 'lowest' or 'cloth'")
+        if (self.cloth_step_m <= 0 or self.cloth_rigidness < 1 or self.cloth_iterations < 1
+                or self.cloth_threshold_m <= 0):
+            raise ValueError('Invalid cloth settings')
         unknown = set(self.rigid_labels) | set(self.hazard_labels)
         if not unknown <= set(CLASS_NAMES[1:]) or 'vegetation' in unknown:
             raise ValueError('Rigid/hazard labels must be confirmed non-vegetation classes')
@@ -138,13 +156,55 @@ def states_from_cost(cost, observed, settings):
     return state.astype(np.uint8)
 
 
-def analyze(centres, labels, settings=TerrainSettings()):
+def cloth_surface(lowest, observed, r, settings):
+    """Ground height from a cloth dropped onto the upside-down lowest surface.
+
+    Particles start just above the local ground envelope, fall by one step per
+    iteration, relax toward their neighbours (rigidness passes) and stop when
+    they touch an observed column. Pits in the inverted surface (objects on the
+    real ground) are bridged. Returns NaN outside observed columns' reach.
+    """
+    inverted = np.where(observed, -lowest, np.nan)
+    start = -box_min(lowest, r)  # highest inverted value nearby = lowest real ground
+    reach = np.isfinite(start)
+    cloth = np.where(reach, start+2*settings.cloth_step_m, 0.)
+    movable = reach.copy()
+    # Neighbour counts are fixed: cells outside the reach never take part.
+    padded_reach = np.pad(reach, 1)
+    neighbours = (padded_reach[:-2, 1:-1].astype(int)+padded_reach[2:, 1:-1]
+                  + padded_reach[1:-1, :-2]+padded_reach[1:-1, 2:])
+    relax = movable & (neighbours > 0)
+    history = [int((movable & observed).sum())]
+    for _ in range(settings.cloth_iterations):
+        cloth[movable] -= settings.cloth_step_m
+        for _ in range(settings.cloth_rigidness):
+            padded = np.pad(np.where(reach, cloth, 0.), 1)
+            mean = (padded[:-2, 1:-1]+padded[2:, 1:-1]+padded[1:-1, :-2]+padded[1:-1, 2:])/np.maximum(neighbours, 1)
+            cloth = np.where(relax, mean, cloth)
+        with np.errstate(invalid='ignore'):
+            hit = movable & observed & (cloth <= inverted)
+        cloth[hit] = inverted[hit]
+        movable &= ~hit
+        relax &= ~hit
+        history.append(int((movable & observed).sum()))
+        # Stop when almost no particle lands any more (<0.2% of columns in 5
+        # iterations): the rest bridge gaps (objects on the ground) and only sag.
+        if not history[-1] or (len(history) > 5 and history[-6]-history[-1] < .002*history[0]):
+            break
+    cloth[~reach] = np.nan
+    return -cloth
+
+
+def analyze(centres, labels, settings=TerrainSettings(), compliant=None):
     """Compute column descriptors and geometry-only and geometry+semantic states.
 
     Semantics only change a column when class evidence is confirmed: rigid or
     hazard labels make it non-traversable, and a geometric obstacle consisting
     entirely of confirmed vegetation below the compliant height is relaxed to
     the vegetation cost. Unknown-label voxels keep the geometric decision.
+    ``compliant`` optionally marks further voxels as vegetation for that
+    relaxation (e.g. LiDAR-permeable low vegetation); it never overrides rigid
+    or hazard labels.
     """
     centres = np.asarray(centres, dtype=np.float64).reshape(-1, 3)
     labels = np.asarray(labels).reshape(-1)
@@ -162,17 +222,29 @@ def analyze(centres, labels, settings=TerrainSettings()):
     lowest = np.full(shape, np.inf)
     np.minimum.at(lowest, (ix, iy), z)
     observed = np.isfinite(lowest)
-    # A column's lowest voxel is ground unless it rises far above the local
-    # lower envelope, e.g. canopy-only columns next to observed ground.
     r = cells(s.ground_window_m, cell)
-    tolerance = np.tan(np.radians(s.max_ground_rise_deg))*r*cell+cell
-    with np.errstate(invalid='ignore'):  # inf-inf in unobserved columns
-        measured = observed & (lowest-box_min(lowest, r) <= tolerance)
-    ground = np.where(measured, lowest, np.nan)
-    count = box_sum(measured, r)
-    total = box_sum(np.where(measured, lowest, 0.), r)
-    fill = observed & ~measured & (count > 0)
-    ground[fill] = total[fill]/count[fill]
+    if s.ground_method == 'cloth':
+        surface = cloth_surface(lowest, observed, r, s)
+        with np.errstate(invalid='ignore'):
+            measured = observed & (lowest-surface <= s.cloth_threshold_m)
+        # The cloth classifies; heights come from the accepted ground nearby
+        # (the cloth itself sags slightly over wide gaps).
+        ground = np.where(measured, lowest, np.nan)
+        count = box_sum(measured, r)
+        total = box_sum(np.where(measured, lowest, 0.), r)
+        fill = observed & ~measured
+        ground[fill] = np.where(count[fill] > 0, total[fill]/np.maximum(count[fill], 1), surface[fill])
+    else:
+        # A column's lowest voxel is ground unless it rises far above the local
+        # lower envelope, e.g. canopy-only columns next to observed ground.
+        tolerance = np.tan(np.radians(s.max_ground_rise_deg))*r*cell+cell
+        with np.errstate(invalid='ignore'):  # inf-inf in unobserved columns
+            measured = observed & (lowest-box_min(lowest, r) <= tolerance)
+        ground = np.where(measured, lowest, np.nan)
+        count = box_sum(measured, r)
+        total = box_sum(np.where(measured, lowest, 0.), r)
+        fill = observed & ~measured & (count > 0)
+        ground[fill] = total[fill]/count[fill]
 
     # Least-squares plane z = a x + b y + c over measured ground in each window.
     rp = cells(s.plane_half_width_m, cell)
@@ -210,7 +282,13 @@ def analyze(centres, labels, settings=TerrainSettings()):
     # Hazards include the ground layer itself (e.g. a water surface).
     selected = np.isfinite(height) & (height < s.overhang_clearance_m) & np.isin(labels, hazard_ids)
     hazard[ix[selected], iy[selected]] = True
-    selected = band & (height > s.ground_clearance_m) & (labels != CLASS_NAMES.index('vegetation'))
+    vegetation = labels == CLASS_NAMES.index('vegetation')
+    if compliant is not None:
+        compliant = np.asarray(compliant, dtype=bool).reshape(-1)
+        if len(compliant) != len(labels):
+            raise ValueError('Need one compliant flag per voxel')
+        vegetation = vegetation | (compliant & ~np.isin(labels, rigid_ids+hazard_ids))
+    selected = band & (height > s.ground_clearance_m) & ~vegetation
     unexplained[ix[selected], iy[selected]] = True
     compliant = ((obstacle > s.ground_clearance_m) & ~unexplained
                  & (obstacle <= s.compliant_vegetation_max_height_m))
@@ -219,7 +297,7 @@ def analyze(centres, labels, settings=TerrainSettings()):
     terms = [slope_term, roughness/s.max_roughness_m, obstacle/s.ground_clearance_m]
     geometric = np.clip(np.maximum.reduce(terms), 0, 1)
     terms[2] = np.where(compliant, s.vegetation_cost, terms[2])
-    terms.append(np.where(rigid | hazard, 1., 0.))
+    terms.append(np.maximum(np.where(rigid, 1., 0.), np.where(hazard, s.hazard_cost, 0.)))
     combined = np.clip(np.maximum.reduce(terms), 0, 1)
     return TerrainMap(s, origin, observed, measured, ground, gradient, slope, roughness,
                       obstacle, rigid, hazard, compliant, geometric, combined,
@@ -270,3 +348,9 @@ def vehicle_consistency(terrain, world_vehicle, radius_m):
         angles.append(np.degrees(np.arccos(np.clip(up @ normal, -1, 1))))
     heights = np.asarray(world_vehicle)[:, 2, 3]-np.array(heights)
     return heights, np.array(angles)
+
+
+def settings_for_run(config, resolution):
+    """Terrain settings from a parsed YAML config, with the cell size of the map it analyses."""
+    from dataclasses import replace
+    return replace(TerrainSettings.from_config(config), cell_m=float(resolution))

@@ -18,7 +18,8 @@ import numpy as np
 from semantic_mapping.lidar_features import (
     LIDAR_CLASSES, LIDAR_PALETTE, LidarClassSettings, VoxelStatistics, lidar_classes)
 from semantic_mapping.semantic_fusion import voxel_keys
-from semantic_mapping.terrain_analysis import analyze
+from semantic_mapping.terrain_analysis import analyze, settings_for_run
+import yaml
 
 EXAMPLE = Path.home()/'RELLIS-3D/utils/example'
 FEATURES = ['permeability', 'linearity_neighbourhood', 'planarity_neighbourhood',
@@ -34,6 +35,9 @@ def main():
     parser.add_argument('--expectations', type=Path, default=package/'config/rellis_lidar_expectations.json')
     parser.add_argument('--max-range', type=float, default=10., help='same 10 m limit as the mapping pipeline')
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--terrain-config', type=Path,
+                        default=package/'config/traversability_placeholder.yaml',
+                        help='ground/height settings (traversability_v2.yaml = cloth ground)')
     args = parser.parse_args()
     if args.output.exists():
         parser.error('Output already exists; choose a new folder to preserve previous results')
@@ -53,7 +57,8 @@ def main():
     keys, inverse = np.unique(voxel_keys(points, cell), axis=0, return_inverse=True)
     centres = (keys+.5)*cell
     features = stats.features(centres)
-    terrain = analyze(centres, np.zeros(len(centres), dtype=np.uint8))
+    terrain_settings = settings_for_run(yaml.safe_load(args.terrain_config.read_text()), cell)
+    terrain = analyze(centres, np.zeros(len(centres), dtype=np.uint8), terrain_settings)
     height = terrain.voxel_height_m
     classes = lidar_classes(features, height, cell)
     point_class = classes[inverse]
@@ -77,7 +82,7 @@ def main():
                                  if np.isfinite(features[f][voxels]).any() else None) for f in FEATURES})
     report = dict(scan=str(args.scan.resolve()), labels=str(args.labels.resolve()), frames_evaluated=1,
                   max_range_m=args.max_range, points_used=int(len(points)), voxels=int(len(centres)),
-                  class_settings=vars(LidarClassSettings()),
+                  class_settings=vars(LidarClassSettings()), ground_method=terrain_settings.ground_method,
                   note='One labelled scan from one viewpoint: a sanity check, not accuracy. '
                        'Thresholds are a priori, not fitted to this scan.',
                   consistent_fraction_scored_points=consistent/max(scored, 1), scored_points=scored,

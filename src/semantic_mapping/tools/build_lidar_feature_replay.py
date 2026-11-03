@@ -11,6 +11,8 @@ saved map timestamp publishes every map voxel classified from LiDAR alone
                    permeability, linearity, planarity, scattering, verticality,
                    intensity, evidence, height and the camera label
   /lidar/legend    class colours and shares
+  /terrain/traversability_fused  traversability carpet where LiDAR-permeable
+                   vegetation (as well as camera vegetation) relaxes obstacles
 
 Every message of the input replay is copied unchanged. Features at a frame use
 only scans up to that frame. Thresholds are a priori, not fitted.
@@ -38,7 +40,9 @@ from semantic_mapping.lidar_features import (  # noqa: E402
     LIDAR_CLASSES, LIDAR_PALETTE, LidarClassSettings, VoxelStatistics, lidar_classes)
 from semantic_mapping.recorded_calibration import recorded_geometry  # noqa: E402
 from semantic_mapping.semantic_fusion import CLASS_NAMES  # noqa: E402
-from semantic_mapping.terrain_analysis import analyze  # noqa: E402
+from semantic_mapping.terrain_analysis import (  # noqa: E402
+    STATES, analyze, carpet, path_states, settings_for_run)
+from build_terrain_replay import terrain_cloud  # noqa: E402
 
 FIELDS = [('x', 'f4'), ('y', 'f4'), ('z', 'f4'), ('rgb', 'u4'), ('lidar_class', 'u1'), ('camera_label', 'u1'),
           ('permeability', 'f4'), ('linearity', 'f4'), ('planarity', 'f4'), ('scattering', 'f4'),
@@ -77,6 +81,10 @@ def main():
     parser.add_argument('--run', type=Path, required=True, help='offline_demo run folder (poses, map, settings)')
     parser.add_argument('--replay', type=Path, required=True, help='bag folder to copy, e.g. a terrain demo replay')
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--terrain-config', type=Path,
+                        default=Path(__file__).resolve().parents[1]/'config/traversability_placeholder.yaml',
+                        help='ground/height settings (traversability_v2.yaml = cloth ground)')
+    parser.add_argument('--ray-step', type=float, default=0., help='ray sampling step in m (0 = voxel/4)')
     args = parser.parse_args()
     if args.output.exists():
         parser.error('Output already exists; choose a new folder to preserve previous results')
@@ -99,10 +107,12 @@ def main():
         parser.error('Input replay already contains LiDAR feature topics')
     for topic in source_topics:
         writer.create_topic(topic)
-    for name, kind in [('/lidar/features', 'sensor_msgs/msg/PointCloud2'), ('/lidar/legend', 'sensor_msgs/msg/Image')]:
+    for name, kind in [('/lidar/features', 'sensor_msgs/msg/PointCloud2'), ('/lidar/legend', 'sensor_msgs/msg/Image'),
+                       ('/terrain/traversability_fused', 'sensor_msgs/msg/PointCloud2')]:
         writer.create_topic(rosbag2_py.TopicMetadata(name=name, type=kind, serialization_format='cdr'))
 
-    stats, bridge, settings = VoxelStatistics(cell), CvBridge(), LidarClassSettings()
+    terrain_settings = settings_for_run(yaml.safe_load(args.terrain_config.read_text()), cell)
+    stats, bridge, settings = VoxelStatistics(cell, ray_step=args.ray_step or None), CvBridge(), LidarClassSettings()
     done, summaries, final = 0, [], None
     for cloud in recording.messages('/velodyne_1/velodyne_points', PointCloud2):
         stamp = cloud.header.stamp.sec*10**9+cloud.header.stamp.nanosec
@@ -126,8 +136,10 @@ def main():
         stats.add_rays(world_lidar[:3, 3], world)
 
         features = stats.features(centres)
-        height = analyze(centres, labels).voxel_height_m
+        height = analyze(centres, labels, terrain_settings).voxel_height_m
         classes = lidar_classes(features, height, cell, settings)
+        permeable = np.isin(classes, [LIDAR_CLASSES.index('low_vegetation'), LIDAR_CLASSES.index('tall_vegetation')])
+        fused = analyze(centres, labels, terrain_settings, compliant=permeable)
         shown = np.ones(len(height), dtype=bool)  # ground too: a self-contained LiDAR-only picture
         rgb = LIDAR_PALETTE[classes[shown]].astype(np.uint32)
         values = dict(x=centres[shown, 0], y=centres[shown, 1], z=centres[shown, 2],
@@ -147,9 +159,11 @@ def main():
         image = bridge.cv2_to_imgmsg(legend(frame['frame'], len(frames), shares), 'bgr8')
         image.header = header
         writer.write('/lidar/legend', serialize_message(image), stamp)
+        writer.write('/terrain/traversability_fused', serialize_message(terrain_cloud(header, *carpet(fused))), stamp)
         summaries.append(dict(frame=frame['frame'], lidar_stamp_ns=stamp, published_voxels=int(shown.sum()),
                               classes=dict(counts)))
         final = (centres, labels, classes, height, features)
+        final_terrain = fused
         done += 1
         if done % 50 == 0:
             print(f'{done}/{len(frames)} frames, {len(stats.codes)} feature voxels', flush=True)
@@ -163,6 +177,12 @@ def main():
     del writer
 
     centres, labels, classes, height, features = final
+    with np.load(args.run/'frames'/frames[-1]['frame']/'voxels.npz') as saved:
+        trajectory = saved['trajectory']
+    path_fused = path_states(final_terrain, trajectory, .6)
+    plain = analyze(centres, labels, terrain_settings)
+    path_plain = path_states(plain, trajectory, .6)
+    share = lambda states: {name: float(np.mean(states == i)) for i, name in enumerate(STATES)}
     above = ~(height <= .5*cell)
     cross = {}
     for i, name in enumerate(CLASS_NAMES):
@@ -179,10 +199,14 @@ def main():
     report = dict(run=str(args.run.resolve()), source_bag=run['bag'], copied_messages=copied,
                   frames=done, vehicle_box_m=run.get('vehicle_box_m'), maximum_range_m=max_range,
                   class_settings=vars(settings), lidar_classes=LIDAR_CLASSES,
+                  terrain_config=str(args.terrain_config.resolve()), ground_method=terrain_settings.ground_method,
                   final_above_ground_voxels=int(above.sum()),
                   final_class_counts={k: int(np.sum(classes[above] == i)) for i, k in enumerate(LIDAR_CLASSES)},
                   final_permeability_evidence_voxels=int(np.sum((features['points']+features['passes'] >= 5) & above)),
                   camera_label_vs_lidar_class_above_ground=cross,
+                  driven_path_worst_state_camera_semantics=share(path_plain),
+                  driven_path_worst_state_camera_plus_lidar_compliance=share(path_fused),
+                  driven_path_note='0.6 m footprint per recorded pose; positive examples for the recording vehicle only.',
                   note='LiDAR-only classes use a-priori thresholds; no labelled Tartan data exists, so the '
                        'camera comparison measures agreement between two unvalidated sources, not accuracy.')
     (args.output/'report.json').write_text(json.dumps(report, indent=2)+'\n')

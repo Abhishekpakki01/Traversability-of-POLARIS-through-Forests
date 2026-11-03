@@ -44,7 +44,7 @@ def main():
     fig, ax = plt.subplots(figsize=(8, 9), constrained_layout=True)
     labels = ground['camera_label'].astype(int)
     ax.scatter(ground['x'], ground['y'], s=2, c=PALETTE[labels]/255., marker='s', linewidths=0)
-    for state, colour, name in [(0, '#1e78ff', 'water, no LiDAR return'), (1, '#82c8ff', 'water, LiDAR return')]:
+    for state, colour, name in [(0, '#1e78ff', 'water: camera + no LiDAR return'), (1, '#82c8ff', 'camera-only water (LiDAR sees surface)')]:
         mask = water['lidar_return'] == state
         ax.scatter(water['x'][mask], water['y'][mask], s=14, c=colour, marker='s',
                    edgecolors='#0b0b0b', linewidths=.3, label=name)

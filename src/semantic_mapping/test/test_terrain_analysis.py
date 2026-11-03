@@ -150,3 +150,46 @@ def test_carpet_places_cells_on_ground_and_omits_unreferenced_columns():
     # Geometry-only carpet differs only through semantics.
     _, geometric, _, _ = carpet(terrain, combined=False)
     assert STATES[geometric[centre]] == 'non_traversable'
+
+
+def test_cloth_ground_bridges_understory_that_lowest_voxel_takes_as_ground():
+    from dataclasses import replace
+    floor = ground()
+    keys = voxel_keys(floor[:, :2], CELL)
+    patch = (np.abs(floor[:, 0]-1.) < 1.) & (np.abs(floor[:, 1]) < 1.)  # 2 m x 2 m hidden ground
+    understory = floor[patch]+[0, 0, 3*CELL]
+    points = np.vstack([floor[~patch], understory])
+    labels = np.zeros(len(points), dtype=int)
+    lowest = analyze(points, labels)
+    cloth = analyze(points, labels, replace(TerrainSettings(), ground_method='cloth'))
+    index = lowest.footprint(np.array([1., 0.]), .01)
+    assert lowest.ground_measured[index][0]           # original method: understory = ground
+    assert not cloth.ground_measured[index][0]        # cloth bridges over it
+    assert cloth.ground_z[index][0] == pytest.approx(.5*CELL, abs=.1)
+    h = cloth.voxel_height_m[len(floor[~patch]):]
+    assert np.median(h) == pytest.approx(3*CELL, abs=.12)
+    # Open sloped ground stays measured ground under the cloth.
+    slope = ground(slope_deg=10.)
+    tilted = analyze(slope, np.zeros(len(slope), dtype=int), replace(TerrainSettings(), ground_method='cloth'))
+    assert tilted.ground_measured[tilted.observed].mean() > .97
+    with pytest.raises(ValueError):
+        TerrainSettings(ground_method='magic')
+
+
+def test_lidar_compliance_relaxes_unlabelled_obstacles_and_hazard_cost():
+    from dataclasses import replace
+    points, labels = with_box(ground(), 'unknown')
+    box = labels == LABEL['unknown']
+    assert state_at(analyze(points, labels), (0., 0.)) == 'non_traversable'
+    relaxed = analyze(points, labels, compliant=box)
+    assert state_at(relaxed, (0., 0.)) == 'caution'
+    # A rigid camera label is never overridden by LiDAR compliance.
+    points, labels = with_box(ground(), 'trunk')
+    assert state_at(analyze(points, labels, compliant=labels == LABEL['trunk']), (0., 0.)) == 'non_traversable'
+    with pytest.raises(ValueError):
+        analyze(points, labels, compliant=np.ones(3, dtype=bool))
+    floor = ground()
+    labels = np.full(len(floor), LABEL['ground'])
+    labels[np.hypot(floor[:, 0], floor[:, 1]) < .5] = LABEL['water']
+    soft = analyze(floor, labels, replace(TerrainSettings(), hazard_cost=.6))
+    assert state_at(soft, (0., 0.)) == 'caution'

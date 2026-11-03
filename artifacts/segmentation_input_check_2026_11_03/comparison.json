@@ -1,0 +1,56 @@
+{
+  "frame": "RELLIS-3D utils/example frame000104 (one human-labelled frame)",
+  "note": "Single frame: indicative, not dataset accuracy. Mirror averaging was rejected because it lowered scores with the aspect-preserving input.",
+  "results": {
+    "512x512 squash (original)": {
+      "pixel_accuracy": 0.6,
+      "mean_iou": 0.279,
+      "iou": {
+        "ground": 0.032,
+        "vegetation": 0.706,
+        "water": 0.126,
+        "obstacle": 0.252
+      }
+    },
+    "512x832 aspect kept (v2 choice)": {
+      "pixel_accuracy": 0.678,
+      "mean_iou": 0.363,
+      "iou": {
+        "ground": 0.032,
+        "vegetation": 0.824,
+        "water": 0.116,
+        "obstacle": 0.478
+      }
+    },
+    "512x512 + mirror average": {
+      "pixel_accuracy": 0.622,
+      "mean_iou": 0.297,
+      "iou": {
+        "ground": 0.026,
+        "vegetation": 0.735,
+        "water": 0.114,
+        "obstacle": 0.313
+      }
+    },
+    "768x1216 aspect kept": {
+      "pixel_accuracy": 0.692,
+      "mean_iou": 0.364,
+      "iou": {
+        "ground": 0.055,
+        "vegetation": 0.782,
+        "water": 0.246,
+        "obstacle": 0.372
+      }
+    },
+    "768x1216 + mirror average": {
+      "pixel_accuracy": 0.662,
+      "mean_iou": 0.333,
+      "iou": {
+        "ground": 0.053,
+        "vegetation": 0.766,
+        "water": 0.183,
+        "obstacle": 0.331
+      }
+    }
+  }
+}

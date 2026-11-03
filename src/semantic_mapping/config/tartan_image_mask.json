@@ -1,0 +1,8 @@
+{
+  "note": "Recording vehicle hood in the TartanDrive multisense left image (1024x544). Traced on frame 00150 of the offline run against the per-pixel variance over all 318 frames; dilated by 'margin_px'. Masked pixels give no camera observation.",
+  "width": 1024,
+  "height": 544,
+  "margin_px": 4,
+  "polygon": [[170, 544], [215, 516], [300, 507], [420, 499], [440, 494], [470, 494], [480, 505],
+              [600, 497], [650, 499], [800, 506], [860, 515], [915, 544]]
+}

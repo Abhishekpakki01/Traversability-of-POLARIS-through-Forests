@@ -1,0 +1,149 @@
+{
+  "run": "/home/abhishek/Traversability-of-POLARIS-through-Forests/artifacts/offline_v2_2026_11_03",
+  "source_bag": "/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2",
+  "copied_messages": 5088,
+  "frames": 318,
+  "vehicle_box_m": [
+    [
+      -1.8,
+      -1.6,
+      -1.0
+    ],
+    [
+      0.4,
+      1.4,
+      0.4
+    ]
+  ],
+  "maximum_range_m": 20.0,
+  "class_settings": {
+    "min_evidence": 5,
+    "permeable": 0.25,
+    "linear": 0.6,
+    "vertical": 0.8,
+    "low_vegetation_max_height_m": 1.0,
+    "ground_clearance_m": 0.3
+  },
+  "lidar_classes": [
+    "unknown",
+    "ground",
+    "low_vegetation",
+    "tall_vegetation",
+    "trunk_like",
+    "solid_obstacle"
+  ],
+  "terrain_config": "/home/abhishek/Traversability-of-POLARIS-through-Forests/src/semantic_mapping/config/traversability_v2.yaml",
+  "ground_method": "cloth",
+  "final_above_ground_voxels": 103360,
+  "final_class_counts": {
+    "unknown": 39610,
+    "ground": 0,
+    "low_vegetation": 37029,
+    "tall_vegetation": 19419,
+    "trunk_like": 962,
+    "solid_obstacle": 6340
+  },
+  "final_permeability_evidence_voxels": 68188,
+  "camera_label_vs_lidar_class_above_ground": {
+    "unknown": {
+      "voxels": 87127,
+      "lidar_class_fraction": {
+        "unknown": 0.43055539614585603,
+        "ground": 0.0,
+        "low_vegetation": 0.3354643221963341,
+        "tall_vegetation": 0.16334775672294466,
+        "trunk_like": 0.009916558586890402,
+        "solid_obstacle": 0.0607159663479748
+      },
+      "median_permeability": 0.2398830409356725,
+      "median_linearity": 0.3833982422912815,
+      "median_scattering": 0.26940240236713453
+    },
+    "ground": {
+      "voxels": 1231,
+      "lidar_class_fraction": {
+        "unknown": 0.1429731925264013,
+        "ground": 0.0,
+        "low_vegetation": 0.8350934199837531,
+        "tall_vegetation": 0.0,
+        "trunk_like": 0.0016246953696181965,
+        "solid_obstacle": 0.020308692120227456
+      },
+      "median_permeability": 0.4909090909090909,
+      "median_linearity": 0.3453501857365317,
+      "median_scattering": 0.2373890966759818
+    },
+    "vegetation": {
+      "voxels": 14939,
+      "lidar_class_fraction": {
+        "unknown": 0.12792020884932057,
+        "ground": 0.0,
+        "low_vegetation": 0.45090032800053553,
+        "tall_vegetation": 0.3462748510609813,
+        "trunk_like": 0.006292255171028851,
+        "solid_obstacle": 0.06861235691813375
+      },
+      "median_permeability": 0.5104166666666666,
+      "median_linearity": 0.3142764124410518,
+      "median_scattering": 0.39788847964028945
+    },
+    "trunk": {
+      "voxels": 12,
+      "lidar_class_fraction": {
+        "unknown": 0.25,
+        "ground": 0.0,
+        "low_vegetation": 0.0,
+        "tall_vegetation": 0.6666666666666666,
+        "trunk_like": 0.08333333333333333,
+        "solid_obstacle": 0.0
+      },
+      "median_permeability": 0.38421052631578945,
+      "median_linearity": 0.22410172462638495,
+      "median_scattering": 0.37312005143228144
+    },
+    "water": {
+      "voxels": 27,
+      "lidar_class_fraction": {
+        "unknown": 0.14814814814814814,
+        "ground": 0.0,
+        "low_vegetation": 0.8518518518518519,
+        "tall_vegetation": 0.0,
+        "trunk_like": 0.0,
+        "solid_obstacle": 0.0
+      },
+      "median_permeability": 0.6526946107784432,
+      "median_linearity": 0.39310889445839897,
+      "median_scattering": 0.35738021656920516
+    },
+    "obstacle": {
+      "voxels": 24,
+      "lidar_class_fraction": {
+        "unknown": 0.125,
+        "ground": 0.0,
+        "low_vegetation": 0.5833333333333334,
+        "tall_vegetation": 0.25,
+        "trunk_like": 0.041666666666666664,
+        "solid_obstacle": 0.0
+      },
+      "median_permeability": 0.5875420875420876,
+      "median_linearity": 0.3618807423206478,
+      "median_scattering": 0.3548034826657318
+    }
+  },
+  "driven_path_worst_state_camera_semantics": {
+    "unobserved": 0.02830188679245283,
+    "unknown": 0.0,
+    "traversable": 0.1289308176100629,
+    "caution": 0.7012578616352201,
+    "non_traversable": 0.14150943396226415
+  },
+  "driven_path_worst_state_camera_plus_lidar_compliance": {
+    "unobserved": 0.02830188679245283,
+    "unknown": 0.0,
+    "traversable": 0.1289308176100629,
+    "caution": 0.8270440251572327,
+    "non_traversable": 0.015723270440251572
+  },
+  "driven_path_note": "0.6 m footprint per recorded pose; positive examples for the recording vehicle only.",
+  "note": "LiDAR-only classes use a-priori thresholds; no labelled Tartan data exists, so the camera comparison measures agreement between two unvalidated sources, not accuracy."
+}

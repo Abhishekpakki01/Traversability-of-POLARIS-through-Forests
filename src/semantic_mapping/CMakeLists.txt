@@ -71,6 +71,7 @@ if(BUILD_TESTING)
   ament_add_pytest_test(terrain_analysis test/test_terrain_analysis.py TIMEOUT 30)
   ament_add_pytest_test(lidar_features test/test_lidar_features.py TIMEOUT 30)
   ament_add_pytest_test(water_detection test/test_water_detection.py TIMEOUT 30)
+  ament_add_pytest_test(goose_inference test/test_goose_inference.py TIMEOUT 60)
 endif()
 
 ament_package()

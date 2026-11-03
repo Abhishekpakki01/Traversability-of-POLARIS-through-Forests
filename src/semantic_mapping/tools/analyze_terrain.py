@@ -20,7 +20,7 @@ import yaml
 
 from semantic_mapping.semantic_fusion import CLASS_NAMES
 from semantic_mapping.terrain_analysis import (
-    STATES, TerrainSettings, analyze, path_states, vehicle_consistency)
+    STATES, analyze, path_states, settings_for_run, vehicle_consistency)
 
 # Status colours carry state with a text legend; unobserved uses the surface.
 STATE_COLORS = ['#fcfcfb', '#c3c2b7', '#0ca30c', '#fab219', '#d03b3b']
@@ -126,9 +126,7 @@ def main():
     if not frames:
         parser.error('Run has no saved frames')
     config = yaml.safe_load(args.config.read_text())
-    settings = TerrainSettings.from_config(config)
-    if abs(settings.cell_m-run['resolution_m']) > 1e-9:
-        parser.error('Terrain cell size must equal the mapping resolution')
+    settings = settings_for_run(config, run['resolution_m'])  # cell size always equals the map's
     footprint = float(config['vehicle']['footprint_radius_m'])
     verified = bool(config.get('vehicle_parameters_verified', False))
 

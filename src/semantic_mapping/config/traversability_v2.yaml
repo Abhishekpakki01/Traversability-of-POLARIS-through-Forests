@@ -1,0 +1,37 @@
+# Terrain analysis settings v2 (cloth-simulation ground) for the terrain, LiDAR-feature
+# and water tools. cell_m is taken from the analysed run.
+#
+# PLACEHOLDER VEHICLE LIMITS — these are NOT POLARIS specifications. Replace the
+# `vehicle` and `limits` values with documented POLARIS dimensions and agreed
+# terrain limits (supervisors / vehicle manual), then set
+# vehicle_parameters_verified: true. Until then, states are an illustration of
+# the method, not a POLARIS traversability decision.
+vehicle_parameters_verified: false
+
+vehicle:
+  footprint_radius_m: 0.6       # driven-path check only
+  ground_clearance_m: 0.30      # taller voxels above ground count as obstacles
+  overhang_clearance_m: 2.0     # voxels higher than this above ground are passable canopy
+
+limits:
+  max_slope_deg: 20.0
+  max_roughness_m: 0.20         # 0.35 m voxels give a ~0.1 m quantization floor
+  caution_fraction: 0.5         # cost >= this is "caution"; cost >= 1 is non-traversable
+
+analysis:
+  ground_window_m: 1.5
+  max_ground_rise_deg: 35.0
+  plane_half_width_m: 1.05
+  min_plane_cells: 6
+  ground_method: cloth          # cloth simulation filter; lowest = original method
+  cloth_threshold_m: 0.3
+
+semantics:
+  # Only confirmed labels (>= 2 observations, >= 0.6 confidence) are used.
+  compliant_vegetation_max_height_m: 1.0  # assumption: low vegetation can be driven through
+  vegetation_cost: 0.6
+  rigid_labels: [trunk, obstacle]
+  hazard_labels: [water]
+  # Water voxel labels sit on LiDAR-returned surfaces, i.e. camera-only water,
+  # which the labelled checks showed to be unreliable: caution, not a hard stop.
+  hazard_cost: 0.6

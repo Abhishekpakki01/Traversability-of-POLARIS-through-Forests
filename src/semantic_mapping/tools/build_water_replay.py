@@ -8,7 +8,7 @@ holes filled from surrounding height). Occluded rays are discarded. Evidence
 accumulates over frames up to the current one:
 
   /water/cells          ground columns whose camera pixels are mostly water;
-                        bright blue = no LiDAR return there, light blue = LiDAR return
+                        bright blue = camera water + no LiDAR return, light blue = camera-only (LiDAR sees a surface; doubtful)
   /water/camera_ground  majority camera class per ground column (optional view)
   /water/legend         colour key and counts
 
@@ -40,7 +40,7 @@ from semantic_mapping.camera_projection import transform_matrix  # noqa: E402
 from semantic_mapping.lidar_features import LIDAR_CLASSES, LIDAR_PALETTE, encode  # noqa: E402
 from semantic_mapping.recorded_calibration import recorded_geometry  # noqa: E402
 from semantic_mapping.semantic_fusion import PALETTE, voxel_keys  # noqa: E402
-from semantic_mapping.terrain_analysis import analyze  # noqa: E402
+from semantic_mapping.terrain_analysis import analyze, settings_for_run  # noqa: E402
 from semantic_mapping.water_detection import (  # noqa: E402
     WATER_RGB, GroundEvidence, camera_directions, fill_ground, ground_hits, pixel_grid)
 
@@ -75,8 +75,8 @@ def legend(frame, total, no_return, with_return, cell):
         put(text, x+30, 36, .62)
     put('= LiDAR only', 770, 36, .62, (160, 160, 160))
     area = cell*cell
-    for x, state, text in [(14, 1, f'water, no LiDAR return {no_return*area:.1f} m2'),
-                           (540, 2, f'water, LiDAR return {with_return*area:.1f} m2')]:
+    for x, state, text in [(14, 1, f'water: camera + no LiDAR return {no_return*area:.1f} m2'),
+                           (540, 2, f'camera-only, LiDAR sees surface {with_return*area:.1f} m2')]:
         cv2.rectangle(image, (x, 60), (x+24, 84), tuple(int(c) for c in WATER_RGB[state][::-1]), -1)
         put(text, x+30, 80, .62)
     put(f'Water = camera pixels projected on ground | scan {frame}/{total} | unvalidated', 14, 126, .62, (25, 178, 250))
@@ -88,6 +88,9 @@ def main():
     parser.add_argument('--run', type=Path, required=True, help='offline_demo run folder')
     parser.add_argument('--replay', type=Path, required=True, help='bag folder to copy, e.g. the LiDAR feature demo')
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--terrain-config', type=Path,
+                        default=Path(__file__).resolve().parents[1]/'config/traversability_placeholder.yaml',
+                        help='ground/height settings (traversability_v2.yaml = cloth ground)')
     parser.add_argument('--stride', type=int, default=8, help='pixel sampling stride')
     parser.add_argument('--fill-iterations', type=int, default=8, help='LiDAR hole filling, cells')
     args = parser.parse_args()
@@ -96,6 +99,7 @@ def main():
     run = json.loads((args.run/'report.json').read_text())
     frames = [json.loads(line) for line in (args.run/'frames.jsonl').read_text().splitlines()]
     cell, max_range = run['resolution_m'], run['maximum_range_m']
+    terrain_settings = settings_for_run(yaml.safe_load(args.terrain_config.read_text()), cell)
     _, vehicle_camera, _ = recorded_geometry(yaml.safe_load((args.run/'calibration.yaml').read_text()))
 
     recording = Recording(Path(run['bag']))
@@ -139,7 +143,7 @@ def main():
         stamp = frame['lidar_stamp_ns']
         with np.load(args.run/'frames'/frame['frame']/'voxels.npz') as saved:
             centres, labels = saved['centres'].astype(np.float64), saved['labels']
-        terrain = analyze(centres, labels)
+        terrain = analyze(centres, labels, terrain_settings)
         image = label_images.get(stamp)
         if image is not None:
             info = infos[stamp]
@@ -194,7 +198,7 @@ def main():
     del writer
     final = summaries[-1]
     report = dict(run=str(args.run.resolve()), copied_messages=copied, frames=len(frames),
-                  pixel_stride=args.stride, fill_iterations=args.fill_iterations, max_range_m=max_range,
+                  pixel_stride=args.stride, ground_method=terrain_settings.ground_method, fill_iterations=args.fill_iterations, max_range_m=max_range,
                   rays_cast=rays_cast, rays_hit_ground=rays_hit, frames_without_camera_pose=missing_pose,
                   thresholds=dict(min_frames=3, min_pixels=5, min_water_fraction=.5, camera_confidence=.6),
                   final_water_cells_no_lidar_return=final['water_no_lidar_return'],

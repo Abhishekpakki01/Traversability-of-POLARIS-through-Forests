@@ -30,6 +30,7 @@ import yaml
 
 from semantic_mapping.camera_projection import (
     draw_projection, project_visible_points, transform_matrix, transform_points, xyz_from_cloud)
+from semantic_mapping.goose_inference import AspectPredictor, aspect_size, polygon_mask
 from semantic_mapping.goose_model import GoosePredictor
 from semantic_mapping.offline_demo import ELEVATION_RANGE, NearestImage, OfflineOhm, cloud_message, stamp_ns
 from semantic_mapping.recorded_calibration import recorded_geometry
@@ -106,6 +107,13 @@ def main():
     parser.add_argument('--strict-voxel-occlusion', action='store_true')
     parser.add_argument('--exclude-vehicle-box', type=float, nargs=6, metavar=('XMIN', 'YMIN', 'ZMIN', 'XMAX', 'YMAX', 'ZMAX'),
                         help='drop LiDAR returns inside this vehicle-frame box (ego-vehicle self-returns); off by default')
+    parser.add_argument('--resolution', type=float, default=.35, help='voxel size in metres')
+    parser.add_argument('--max-range', type=float, default=10., help='LiDAR and projection range in metres')
+    parser.add_argument('--inference-short-side', type=int, default=0,
+                        help='0 keeps the original 512x512 squash; e.g. 512 keeps the aspect ratio')
+    parser.add_argument('--mirror-average', action='store_true', help='average predictions with the mirrored image')
+    parser.add_argument('--image-mask', type=Path, help='polygon JSON of image pixels to ignore (e.g. hood)')
+    parser.add_argument('--threads', type=int, default=2, help='CPU threads for inference')
     args = parser.parse_args()
     if args.max_scans < 0:
         parser.error('--max-scans must be nonnegative')
@@ -138,9 +146,22 @@ def main():
     classes = json.loads(classes_file.read_text())['classes']
     groups = [CLASS_NAMES.index(c['group']) for c in classes]
     print('Loading the existing pretrained model; thresholds remain 2 observations / 0.6 confidence.', flush=True)
-    predictor = GoosePredictor(args.model, groups, 2)
+    legacy = not (args.inference_short_side or args.mirror_average or args.image_mask)
+    if legacy:
+        predictor = GoosePredictor(args.model, groups, args.threads)
+        inference = dict(input='512x512 squash', mirror_average=False, image_mask=None)
+    else:
+        size = (aspect_size(config['width'], config['height'], args.inference_short_side)
+                if args.inference_short_side else (512, 512))
+        mask = polygon_mask(args.image_mask, config['width'], config['height']) if args.image_mask else None
+        predictor = AspectPredictor(args.model, groups, args.threads, size, args.mirror_average, mask)
+        inference = dict(input=f'{size[0]}x{size[1]}', mirror_average=args.mirror_average,
+                         image_mask=None if mask is None else str(args.image_mask.resolve()),
+                         masked_pixels=0 if mask is None else int(mask.sum()))
+    if args.resolution <= 0 or args.max_range <= 0:
+        parser.error('Resolution and range must be positive')
     executable = Path(get_package_prefix('semantic_mapping'))/'lib/semantic_mapping/ohm_offline_mapper'
-    mapper = OfflineOhm(executable, .35)
+    mapper = OfflineOhm(executable, args.resolution)
     args.output.mkdir(parents=True)
     (args.output/'frames').mkdir()
     (args.output/'calibration.yaml').write_text(args.calibration.read_text())
@@ -176,7 +197,7 @@ def main():
                   source_images=recording.count(config['image_topic']),
                   bag=str(args.bag.resolve()), calibration_sha256=sha(args.calibration),
                   checkpoint_sha256=sha(args.model), source_db_sha256=sha(recording.file),
-                  resolution_m=.35, maximum_range_m=10., min_observations=2, min_confidence=.6,
+                  resolution_m=args.resolution, maximum_range_m=args.max_range, inference=inference, min_observations=2, min_confidence=.6,
                   physical_calibration_validated=False, semantic_accuracy_measured=False,
                   traversability_implemented=False, elevation_reference='world_z_minus_first_mapped_vehicle_z',
                   elevation_range_m=list(ELEVATION_RANGE),
@@ -215,13 +236,13 @@ def main():
                 counters['vehicle_box_points_removed'] += int(inside.sum())
                 points = points[~inside]
             ranges = np.linalg.norm(points, axis=1)
-            valid = np.isfinite(points).all(axis=1) & (ranges > .1) & (ranges <= 10.)
+            valid = np.isfinite(points).all(axis=1) & (ranges > .1) & (ranges <= args.max_range)
             if not valid.any():
                 counters['empty_cloud'] += 1
                 continue
             centres = mapper.integrate(world_lidar[:3, 3], transform_points(points[valid], world_lidar))
             counters['mapped_scans'] += 1
-            keys = voxel_keys(centres, .35)
+            keys = voxel_keys(centres, args.resolution)
             occupied = frozenset(map(tuple, keys))
             evidence.retain_occupied(occupied)
             header = Header(stamp=cloud.header.stamp, frame_id='sensor_init')
@@ -254,22 +275,27 @@ def main():
             if image is not None:
                 bgr = bridge.imgmsg_to_cv2(image, 'bgr8')
                 projection = project_visible_points(points, bgr, intrinsic, [],
-                    np.linalg.solve(world_camera, world_lidar), max_range=10., visibility_cell=4, depth_tolerance=0.)
+                    np.linalg.solve(world_camera, world_lidar), max_range=args.max_range, visibility_cell=4, depth_tolerance=0.)
                 probabilities = predictor.predict(bgr)
-                pixels = np.floor((projection.pixels+.5)*[512/image.width, 512/image.height]).astype(int)
-                pixels = np.clip(pixels, 0, 511)
+                rows, columns = probabilities.shape[:2]
+                pixels = np.floor((projection.pixels+.5)*[columns/image.width, rows/image.height]).astype(int)
+                pixels = np.clip(pixels, 0, [columns-1, rows-1])
+                sampled = probabilities[pixels[:, 1], pixels[:, 0]]
+                usable = np.isfinite(sampled).all(axis=1)  # masked pixels (e.g. hood) give no observation
                 observations, visibility = surface_observations(
-                    transform_points(points[projection.source_indices], world_lidar),
-                    probabilities[pixels[:, 1], pixels[:, 0]], world_camera[:3, 3], occupied,
-                    .35, args.strict_voxel_occlusion)
+                    transform_points(points[projection.source_indices[usable]], world_lidar),
+                    sampled[usable], world_camera[:3, 3], occupied,
+                    args.resolution, args.strict_voxel_occlusion)
+                visibility['masked_samples'] = int((~usable).sum())
                 updated = evidence.update(observations, stamp_ns(image), occupied)
                 counters['inferred_images'] += 1
                 counters['fused_frames'] += int(updated > 0)
-                labels_image = probabilities.argmax(axis=2).astype(np.uint8)
-                labels_image[probabilities.max(axis=2) < .6] = 0
+                masked = ~np.isfinite(probabilities).all(axis=2)
+                labels_image = np.nan_to_num(probabilities, nan=0.).argmax(axis=2).astype(np.uint8)
+                labels_image[(np.nan_to_num(probabilities, nan=0.).max(axis=2) < .6) | masked] = 0
                 labels_image = cv2.resize(labels_image, (image.width, image.height), interpolation=cv2.INTER_NEAREST)
                 segmentation = cv2.addWeighted(bgr, .4, PALETTE[labels_image][:, :, ::-1], .6, 0)
-                projected = draw_projection(bgr, projection, 10.)
+                projected = draw_projection(bgr, projection, args.max_range)
                 write('/offline_demo/camera', image, stamp)
                 info = CameraInfo(header=image.header, width=image.width, height=image.height,
                     distortion_model='plumb_bob', d=[0.]*5, k=intrinsic.reshape(-1).tolist(),

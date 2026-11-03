@@ -1,0 +1,330 @@
+{
+  "source": "https://goose-dataset.de/docs/resources/labeling_policy.pdf",
+  "source_table_pdf_pages": [
+    4,
+    5,
+    6
+  ],
+  "classes": [
+    {
+      "id": 0,
+      "name": "undefined",
+      "group": "unknown"
+    },
+    {
+      "id": 1,
+      "name": "traffic_cone",
+      "group": "obstacle"
+    },
+    {
+      "id": 2,
+      "name": "snow",
+      "group": "ground"
+    },
+    {
+      "id": 3,
+      "name": "cobble",
+      "group": "ground"
+    },
+    {
+      "id": 4,
+      "name": "obstacle",
+      "group": "obstacle"
+    },
+    {
+      "id": 5,
+      "name": "leaves",
+      "group": "vegetation"
+    },
+    {
+      "id": 6,
+      "name": "street_light",
+      "group": "obstacle"
+    },
+    {
+      "id": 7,
+      "name": "bikeway",
+      "group": "ground"
+    },
+    {
+      "id": 8,
+      "name": "ego_vehicle",
+      "group": "unknown"
+    },
+    {
+      "id": 9,
+      "name": "pedestrian_crossing",
+      "group": "ground"
+    },
+    {
+      "id": 10,
+      "name": "road_block",
+      "group": "obstacle"
+    },
+    {
+      "id": 11,
+      "name": "road_marking",
+      "group": "ground"
+    },
+    {
+      "id": 12,
+      "name": "car",
+      "group": "obstacle"
+    },
+    {
+      "id": 13,
+      "name": "bicycle",
+      "group": "obstacle"
+    },
+    {
+      "id": 14,
+      "name": "person",
+      "group": "obstacle"
+    },
+    {
+      "id": 15,
+      "name": "bus",
+      "group": "obstacle"
+    },
+    {
+      "id": 16,
+      "name": "forest",
+      "group": "vegetation"
+    },
+    {
+      "id": 17,
+      "name": "bush",
+      "group": "vegetation"
+    },
+    {
+      "id": 18,
+      "name": "moss",
+      "group": "vegetation"
+    },
+    {
+      "id": 19,
+      "name": "traffic_light",
+      "group": "obstacle"
+    },
+    {
+      "id": 20,
+      "name": "motorcycle",
+      "group": "obstacle"
+    },
+    {
+      "id": 21,
+      "name": "sidewalk",
+      "group": "ground"
+    },
+    {
+      "id": 22,
+      "name": "curb",
+      "group": "obstacle"
+    },
+    {
+      "id": 23,
+      "name": "asphalt",
+      "group": "ground"
+    },
+    {
+      "id": 24,
+      "name": "gravel",
+      "group": "ground"
+    },
+    {
+      "id": 25,
+      "name": "boom_barrier",
+      "group": "obstacle"
+    },
+    {
+      "id": 26,
+      "name": "rail_track",
+      "group": "obstacle"
+    },
+    {
+      "id": 27,
+      "name": "tree_crown",
+      "group": "vegetation"
+    },
+    {
+      "id": 28,
+      "name": "tree_trunk",
+      "group": "trunk"
+    },
+    {
+      "id": 29,
+      "name": "debris",
+      "group": "obstacle"
+    },
+    {
+      "id": 30,
+      "name": "crops",
+      "group": "vegetation"
+    },
+    {
+      "id": 31,
+      "name": "soil",
+      "group": "ground"
+    },
+    {
+      "id": 32,
+      "name": "rider",
+      "group": "obstacle"
+    },
+    {
+      "id": 33,
+      "name": "animal",
+      "group": "obstacle"
+    },
+    {
+      "id": 34,
+      "name": "truck",
+      "group": "obstacle"
+    },
+    {
+      "id": 35,
+      "name": "on_rails",
+      "group": "obstacle"
+    },
+    {
+      "id": 36,
+      "name": "caravan",
+      "group": "obstacle"
+    },
+    {
+      "id": 37,
+      "name": "trailer",
+      "group": "obstacle"
+    },
+    {
+      "id": 38,
+      "name": "building",
+      "group": "obstacle"
+    },
+    {
+      "id": 39,
+      "name": "wall",
+      "group": "obstacle"
+    },
+    {
+      "id": 40,
+      "name": "rock",
+      "group": "obstacle"
+    },
+    {
+      "id": 41,
+      "name": "fence",
+      "group": "obstacle"
+    },
+    {
+      "id": 42,
+      "name": "guard_rail",
+      "group": "obstacle"
+    },
+    {
+      "id": 43,
+      "name": "bridge",
+      "group": "obstacle"
+    },
+    {
+      "id": 44,
+      "name": "tunnel",
+      "group": "obstacle"
+    },
+    {
+      "id": 45,
+      "name": "pole",
+      "group": "obstacle"
+    },
+    {
+      "id": 46,
+      "name": "traffic_sign",
+      "group": "obstacle"
+    },
+    {
+      "id": 47,
+      "name": "misc_sign",
+      "group": "obstacle"
+    },
+    {
+      "id": 48,
+      "name": "barrier_tape",
+      "group": "obstacle"
+    },
+    {
+      "id": 49,
+      "name": "kick_scooter",
+      "group": "obstacle"
+    },
+    {
+      "id": 50,
+      "name": "low_grass",
+      "group": "vegetation"
+    },
+    {
+      "id": 51,
+      "name": "high_grass",
+      "group": "vegetation"
+    },
+    {
+      "id": 52,
+      "name": "scenery_vegetation",
+      "group": "vegetation"
+    },
+    {
+      "id": 53,
+      "name": "sky",
+      "group": "unknown"
+    },
+    {
+      "id": 54,
+      "name": "water",
+      "group": "water"
+    },
+    {
+      "id": 55,
+      "name": "wire",
+      "group": "obstacle"
+    },
+    {
+      "id": 56,
+      "name": "outlier",
+      "group": "unknown"
+    },
+    {
+      "id": 57,
+      "name": "heavy_machinery",
+      "group": "obstacle"
+    },
+    {
+      "id": 58,
+      "name": "container",
+      "group": "obstacle"
+    },
+    {
+      "id": 59,
+      "name": "hedge",
+      "group": "vegetation"
+    },
+    {
+      "id": 60,
+      "name": "barrel",
+      "group": "obstacle"
+    },
+    {
+      "id": 61,
+      "name": "pipe",
+      "group": "obstacle"
+    },
+    {
+      "id": 62,
+      "name": "tree_root",
+      "group": "trunk"
+    },
+    {
+      "id": 63,
+      "name": "military_vehicle",
+      "group": "obstacle"
+    }
+  ]
+}

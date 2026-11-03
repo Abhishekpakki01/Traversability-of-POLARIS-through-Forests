@@ -1,0 +1,134 @@
+Loading the existing pretrained model; thresholds remain 2 observations / 0.6 confidence.
+[INFO] [1793718885.293320622] [rosbag2_storage]: Opened database 'artifacts/offline_v2_2026_11_03/replay/replay_0.db3' for READ_WRITE.
+Scan 10/320: fused 10, classified 2443/15936, 1.44s
+Scan 20/320: fused 20, classified 3343/21702, 4.21s
+Scan 30/320: fused 30, classified 3713/24165, 1.48s
+Scan 40/320: fused 40, classified 4484/27695, 1.58s
+Scan 50/320: fused 50, classified 5057/30911, 1.58s
+Scan 60/320: fused 60, classified 5759/34335, 1.91s
+Scan 70/320: fused 70, classified 6666/38907, 1.97s
+Scan 80/320: fused 80, classified 7006/40771, 2.28s
+Scan 90/320: fused 90, classified 8171/44981, 2.71s
+Scan 100/320: fused 100, classified 9054/48536, 3.10s
+Scan 110/320: fused 110, classified 9278/51088, 2.05s
+Scan 120/320: fused 120, classified 9587/54746, 1.97s
+Scan 130/320: fused 130, classified 9967/58821, 2.22s
+Scan 140/320: fused 140, classified 11179/62804, 2.24s
+Scan 150/320: fused 150, classified 12059/68547, 2.23s
+Scan 160/320: fused 160, classified 12809/73533, 2.56s
+Scan 170/320: fused 170, classified 13365/77335, 2.71s
+Scan 180/320: fused 180, classified 13990/81631, 2.56s
+Scan 190/320: fused 190, classified 14400/85240, 3.04s
+Scan 200/320: fused 200, classified 15491/89635, 2.70s
+Scan 210/320: fused 210, classified 16787/95059, 3.07s
+Scan 220/320: fused 220, classified 18269/102415, 2.98s
+Scan 230/320: fused 230, classified 19726/112722, 3.31s
+Scan 240/320: fused 240, classified 21564/122555, 3.08s
+Scan 250/320: fused 250, classified 22636/131192, 3.25s
+Scan 260/320: fused 260, classified 23526/140815, 3.43s
+Scan 270/320: fused 270, classified 25061/148548, 3.54s
+Scan 280/320: fused 280, classified 25272/154772, 3.50s
+Scan 290/320: fused 290, classified 26697/160911, 3.45s
+Scan 300/320: fused 300, classified 27493/168541, 3.32s
+Scan 310/320: fused 310, classified 29460/177023, 3.36s
+{
+  "mode": "offline_sequential",
+  "source_scans": 320,
+  "source_images": 320,
+  "bag": "/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2",
+  "calibration_sha256": "317f5e8f27e86e149538ebf7dacf7ab42c621fa95dd470fb87e215f9ed0350ef",
+  "checkpoint_sha256": "6dd412c0c99115e359896c4cab43a8e6bce9e09b843e7fa885fe597b0a6121cd",
+  "source_db_sha256": "040de042576c7a1bbf8aa3cddf980a4e25b1828de39aa2ab076ae43afd195896",
+  "resolution_m": 0.2,
+  "maximum_range_m": 20.0,
+  "inference": {
+    "input": "512x960",
+    "mirror_average": false,
+    "image_mask": "/home/abhishek/Traversability-of-POLARIS-through-Forests/src/semantic_mapping/config/tartan_image_mask.json",
+    "masked_pixels": 31193
+  },
+  "min_observations": 2,
+  "min_confidence": 0.6,
+  "physical_calibration_validated": false,
+  "semantic_accuracy_measured": false,
+  "traversability_implemented": false,
+  "elevation_reference": "world_z_minus_first_mapped_vehicle_z",
+  "elevation_range_m": [
+    -20.0,
+    5.0
+  ],
+  "visibility_mode": "measured_lidar_depth",
+  "requested_scan_limit": 0,
+  "completed_requested_input": true,
+  "vehicle_box_m": [
+    [
+      -1.8,
+      -1.6,
+      -1.0
+    ],
+    [
+      0.4,
+      1.4,
+      0.4
+    ]
+  ],
+  "scans_seen": 320,
+  "mapped_scans": 318,
+  "matched_images": 320,
+  "inferred_images": 318,
+  "fused_frames": 318,
+  "missing_lidar_pose": 2,
+  "missing_camera_pose": 0,
+  "no_unique_image": 0,
+  "empty_cloud": 0,
+  "vehicle_box_points_removed": 613790,
+  "wall_seconds": 853.229324302,
+  "full_recording_processed": true,
+  "last_frame": {
+    "frame": "00318",
+    "lidar_stamp_ns": 1698955334755280000,
+    "image_stamp_ns": 1698955334716857000,
+    "elapsed_recording_seconds": 31.76225,
+    "projection_points": 5555,
+    "updated_voxels": 2648,
+    "image_minus_lidar_ms": -38.423,
+    "visibility": {
+      "samples": 5555,
+      "missing_surface": 612,
+      "occluded": 0,
+      "visible_voxels": 2648,
+      "masked_samples": 0
+    },
+    "scans_seen": 318,
+    "mapped_scans": 318,
+    "matched_images": 318,
+    "inferred_images": 318,
+    "fused_frames": 318,
+    "missing_lidar_pose": 0,
+    "missing_camera_pose": 0,
+    "no_unique_image": 0,
+    "empty_cloud": 0,
+    "vehicle_box_points_removed": 613790,
+    "source_scans": 320,
+    "occupied_voxels": 182996,
+    "classified_voxels": 31056,
+    "voxels_with_evidence": 61279,
+    "class_counts": {
+      "unknown": 151940,
+      "ground": 5298,
+      "vegetation": 25631,
+      "trunk": 12,
+      "water": 84,
+      "obstacle": 31
+    },
+    "physical_calibration_validated": false,
+    "offline_processed": true,
+    "processing_seconds": 3.7900624030000927
+  },
+  "processing_seconds_median": 2.6915048344999377,
+  "processing_seconds_p95": 3.70955041109986,
+  "saved_frames": 318,
+  "input_accounting_ok": true,
+  "passed_functional_checks": true
+}
+exit=0

@@ -26,7 +26,7 @@ from std_msgs.msg import Header
 import yaml
 
 from semantic_mapping.offline_demo import cloud_message
-from semantic_mapping.terrain_analysis import STATES, TerrainSettings, analyze, carpet
+from semantic_mapping.terrain_analysis import STATES, analyze, carpet, settings_for_run
 
 # RGB per state; unobserved columns are never drawn.
 STATE_RGB = np.array([[0, 0, 0], [137, 135, 129], [12, 163, 12], [250, 178, 25], [208, 59, 59]], dtype=np.uint32)
@@ -78,11 +78,9 @@ def main():
     if args.output.exists():
         parser.error('Output already exists; choose a new folder to preserve previous results')
     config = yaml.safe_load(args.config.read_text())
-    settings = TerrainSettings.from_config(config)
     verified = bool(config.get('vehicle_parameters_verified', False))
     run = json.loads((args.input/'report.json').read_text())
-    if abs(settings.cell_m-run['resolution_m']) > 1e-9:
-        parser.error('Terrain cell size must equal the mapping resolution')
+    settings = settings_for_run(config, run['resolution_m'])  # cell size always equals the map's
     frames = {f['lidar_stamp_ns']: f for f in map(json.loads, (args.input/'frames.jsonl').read_text().splitlines())}
 
     reader = rosbag2_py.SequentialReader()

@@ -1,0 +1,100 @@
+{
+  "mode": "offline_sequential",
+  "source_scans": 320,
+  "source_images": 320,
+  "bag": "/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2",
+  "calibration_sha256": "317f5e8f27e86e149538ebf7dacf7ab42c621fa95dd470fb87e215f9ed0350ef",
+  "checkpoint_sha256": "6dd412c0c99115e359896c4cab43a8e6bce9e09b843e7fa885fe597b0a6121cd",
+  "source_db_sha256": "040de042576c7a1bbf8aa3cddf980a4e25b1828de39aa2ab076ae43afd195896",
+  "resolution_m": 0.2,
+  "maximum_range_m": 20.0,
+  "inference": {
+    "input": "512x960",
+    "mirror_average": false,
+    "image_mask": "/home/abhishek/Traversability-of-POLARIS-through-Forests/src/semantic_mapping/config/tartan_image_mask.json",
+    "masked_pixels": 31193
+  },
+  "min_observations": 2,
+  "min_confidence": 0.6,
+  "physical_calibration_validated": false,
+  "semantic_accuracy_measured": false,
+  "traversability_implemented": false,
+  "elevation_reference": "world_z_minus_first_mapped_vehicle_z",
+  "elevation_range_m": [
+    -20.0,
+    5.0
+  ],
+  "visibility_mode": "measured_lidar_depth",
+  "requested_scan_limit": 0,
+  "completed_requested_input": true,
+  "vehicle_box_m": [
+    [
+      -1.8,
+      -1.6,
+      -1.0
+    ],
+    [
+      0.4,
+      1.4,
+      0.4
+    ]
+  ],
+  "scans_seen": 320,
+  "mapped_scans": 318,
+  "matched_images": 320,
+  "inferred_images": 318,
+  "fused_frames": 318,
+  "missing_lidar_pose": 2,
+  "missing_camera_pose": 0,
+  "no_unique_image": 0,
+  "empty_cloud": 0,
+  "vehicle_box_points_removed": 613790,
+  "wall_seconds": 853.229324302,
+  "full_recording_processed": true,
+  "last_frame": {
+    "frame": "00318",
+    "lidar_stamp_ns": 1698955334755280000,
+    "image_stamp_ns": 1698955334716857000,
+    "elapsed_recording_seconds": 31.76225,
+    "projection_points": 5555,
+    "updated_voxels": 2648,
+    "image_minus_lidar_ms": -38.423,
+    "visibility": {
+      "samples": 5555,
+      "missing_surface": 612,
+      "occluded": 0,
+      "visible_voxels": 2648,
+      "masked_samples": 0
+    },
+    "scans_seen": 318,
+    "mapped_scans": 318,
+    "matched_images": 318,
+    "inferred_images": 318,
+    "fused_frames": 318,
+    "missing_lidar_pose": 0,
+    "missing_camera_pose": 0,
+    "no_unique_image": 0,
+    "empty_cloud": 0,
+    "vehicle_box_points_removed": 613790,
+    "source_scans": 320,
+    "occupied_voxels": 182996,
+    "classified_voxels": 31056,
+    "voxels_with_evidence": 61279,
+    "class_counts": {
+      "unknown": 151940,
+      "ground": 5298,
+      "vegetation": 25631,
+      "trunk": 12,
+      "water": 84,
+      "obstacle": 31
+    },
+    "physical_calibration_validated": false,
+    "offline_processed": true,
+    "processing_seconds": 3.7900624030000927
+  },
+  "processing_seconds_median": 2.6915048344999377,
+  "processing_seconds_p95": 3.70955041109986,
+  "saved_frames": 318,
+  "input_accounting_ok": true,
+  "passed_functional_checks": true
+}

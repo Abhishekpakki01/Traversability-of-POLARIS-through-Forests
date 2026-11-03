@@ -12,6 +12,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+from semantic_mapping.goose_inference import AspectPredictor, aspect_size
 from semantic_mapping.goose_model import GoosePredictor
 from semantic_mapping.semantic_fusion import CLASS_NAMES, PALETTE
 
@@ -44,6 +45,8 @@ def main():
     parser.add_argument('--mapping', type=Path, default=package/'config/rellis_label_groups.json')
     parser.add_argument('--model', type=Path, default=Path.home()/'semantic_map_ws/models/goose/ppliteseg_class_512.pth')
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--inference-short-side', type=int, default=0, help='0 = original 512x512 squash')
+    parser.add_argument('--mirror-average', action='store_true')
     args = parser.parse_args()
     if args.output.exists():
         parser.error('Output already exists; choose a new folder to preserve previous results')
@@ -56,7 +59,13 @@ def main():
     if missing:
         raise ValueError(f'Label IDs without an explicit mapping: {sorted(missing)}')
     goose = json.loads((package/'config/goose_classes.json').read_text())['classes']
-    predictor = GoosePredictor(args.model, [CLASS_NAMES.index(c['group']) for c in goose], 2)
+    groups = [CLASS_NAMES.index(c['group']) for c in goose]
+    if args.inference_short_side or args.mirror_average:
+        size = aspect_size(bgr.shape[1], bgr.shape[0], args.inference_short_side) if args.inference_short_side else (512, 512)
+        predictor, inference = AspectPredictor(args.model, groups, 4, size, args.mirror_average), dict(
+            input=f'{size[0]}x{size[1]}', mirror_average=args.mirror_average)
+    else:
+        predictor, inference = GoosePredictor(args.model, groups, 2), dict(input='512x512 squash', mirror_average=False)
     probabilities = predictor.predict(bgr)
     # Upsample probabilities, not labels, to the annotation resolution.
     probabilities = cv2.resize(probabilities, (raw.shape[1], raw.shape[0]), interpolation=cv2.INTER_LINEAR)
@@ -83,7 +92,7 @@ def main():
     report = dict(
         image=str(args.image.resolve()), image_sha256=sha(args.image),
         labels=str(args.labels.resolve()), labels_sha256=sha(args.labels),
-        mapping_sha256=sha(args.mapping), checkpoint_sha256=sha(args.model),
+        mapping_sha256=sha(args.mapping), checkpoint_sha256=sha(args.model), inference=inference,
         frames_evaluated=1,
         note='Single human-labelled frame: a sanity check, not dataset accuracy.',
         evaluated_pixel_fraction=float(evaluated.mean()),
