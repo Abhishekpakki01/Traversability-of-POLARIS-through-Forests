@@ -95,7 +95,7 @@ a download (several GB).
   Middle-drag (or Shift + left-drag) pans, and the scroll wheel zooms.
 - **Why it felt stuck:** each update delivered a 9 MB cloud of 183k voxels, so
   RViz ran at about 5 fps and barely reacted to the mouse. `demo_v2` now shows
-  LiDAR classes within 20 m of the vehicle, updated at 2 Hz. The full map is
+  LiDAR classes within 15 m of the vehicle, updated at 2 Hz (the newest map is always shown, including after playback ends). The full map is
   still available as "LiDAR-only classes, full map (slow)".
 - **While playing,** the camera follows the vehicle (Target Frame `vehicle`).
   To look around freely, set Views → Target Frame to `sensor_init`.

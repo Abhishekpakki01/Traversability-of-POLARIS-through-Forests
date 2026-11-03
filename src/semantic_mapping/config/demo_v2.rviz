@@ -2,7 +2,7 @@
 # LiDAR-only classes plus water: camera water pixels projected onto the mapped
 # ground. Bright blue = camera water + no LiDAR return; light blue = camera-only (doubtful).
 # All /lidar, /terrain and /water clouds must use Volatile durability.
-# Default LiDAR display is a 20 m crop updated at 2 Hz (offline_demo_view) to keep RViz responsive.
+# Default LiDAR display is a 15 m crop updated at 2 Hz (offline_demo_view) to keep RViz responsive.
 Panels:
 - Class: rviz_common/Displays
   Help Height: 70
@@ -139,7 +139,7 @@ Visualization Manager:
     Max Intensity: 4096
     Min Color: 0; 0; 0
     Min Intensity: 0
-    Name: LiDAR-only classes, 20 m around vehicle (fast)
+    Name: LiDAR-only classes, 15 m around vehicle (fast)
     Position Transformer: XYZ
     Selectable: true
     Size (Pixels): 3
