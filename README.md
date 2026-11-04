@@ -105,13 +105,13 @@ and the recordings; this repository is not a complete environment installer.
 - `legacy/original_upload/`: the ten files from the earlier GitHub upload,
   preserved without changing their contents.
 
-[The handoff file](THESIS_HANDOFF_2026-10-29.md) explains the code and remaining
+The [project guide](docs/PROJECT_GUIDE.md) explains the code and remaining
 tasks. [The GitHub guide](docs/GITHUB_WORKFLOW.md) explains how to edit, build,
 commit and upload later changes.
 
 Raw recordings, model weights and build files are kept outside normal Git
 tracking. The [release downloads](https://github.com/Abhishekpakki01/Traversability-of-POLARIS-through-Forests/releases/tag/handoff-2026-10-29)
-contain the demonstration video and portable handoff ZIP.
+contain the demonstration video.
 
 ## Sources
 

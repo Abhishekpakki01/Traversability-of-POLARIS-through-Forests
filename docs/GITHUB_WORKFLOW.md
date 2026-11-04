@@ -76,7 +76,7 @@ the user's global Git configuration was not changed.
 ## Large files
 
 Sensor payloads and learned weights are excluded by `.gitignore`. The demo video
-and portable handoff archive are suitable release assets rather than ordinary
+and portable archives are suitable release assets rather than ordinary
 source changes. Uploading datasets is a separate data-distribution task; the
 README/provenance records how the current files can be located or recovered.
 Do not remove the ignore rules just to add multi-GB recordings to a commit.

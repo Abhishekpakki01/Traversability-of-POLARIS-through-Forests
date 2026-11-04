@@ -25,7 +25,9 @@ venv/
 *.pt
 *.onnx
 *.safetensors
-THESIS_HANDOFF_*.zip
+THESIS_HANDOFF_*
+THESIS_CALIBRATION_UPDATE_*
+artifacts/handoff_*/
 artifacts/offline_demo_*/
 
 # Local authentication/configuration must never be committed.

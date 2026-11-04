@@ -37,7 +37,7 @@ ros2 topic echo /camera_lidar_projection/status --once
 # THESIS TERMINAL COMMANDS — 29 October 2026
 # Reference sheet, not an executable script. Copy one appropriate block at a time.
 # Choose either RELLIS or Tartan; do not run duplicate mappers.
-# Read THESIS_HANDOFF_2026-10-29.md for explanations, limitations and stopping/restarting.
+# Read docs/PROJECT_GUIDE.md for explanations, limitations and stopping/restarting.
 
 # Build after future code changes — already built on this PC
 cd ~/semantic_map_ws

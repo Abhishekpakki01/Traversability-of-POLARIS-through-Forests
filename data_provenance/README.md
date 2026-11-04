@@ -20,7 +20,7 @@ The Tartan excerpt came from the publisher's
 `2023-11-02-16-00-43_down_meadows/down_meadows_0.bag`, selecting source offset
 45–75 seconds with synchronization margins. The source is about 32.50 GB;
 selective HTTP range extraction transferred about 940 MB. The pinned extractor
-and exact recovery command are in the handoff and Tartan guide.
+and exact recovery command are in the Tartan guide.
 
 Important limitations: CameraInfo was generated from publisher S21 calibration;
 the chosen optical extrinsic differs from the bag's default URDF. Pose TF was
