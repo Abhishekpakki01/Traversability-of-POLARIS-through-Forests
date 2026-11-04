@@ -76,12 +76,22 @@ Evidence: `artifacts/map_sharpness_2026_11_03/report.json`.
 ## What is still needed, and how
 
 **Camera–LiDAR calibration (question 3).** The automatic edge test was
-inconclusive on this meadow (`ACCURACY_V2.md`). A reliable method:
+inconclusive on this meadow (`ACCURACY_V2.md`). The clicked check is ready:
 
-1. In about 5 frames, click about 10 points where a LiDAR feature is clear in
-   the image, such as trunk edges, posts or sharp ground edges.
-2. Report the pixel error between the projected LiDAR point and the clicked
-   pixel. Fewer than about 5 px at 10 m corresponds to roughly 10 cm.
+```bash
+cd ~/Traversability-of-POLARIS-through-Forests
+src/semantic_mapping/tools/click_calibration.sh
+```
+
+`tools/prepare_calibration_check.py` draws the LiDAR points from the camera's
+pose at the image time, using the recorded calibration unchanged. A feature
+clicked in the camera view and again in that LiDAR view therefore differs only
+by the alignment error, plus click noise. It also includes timing and pose error,
+so it is an upper bound on calibration error alone.
+
+The six frames (196, 214, 262, 271, 292, 301) were picked by eye for hedge and
+bush outlines against the sky, because this meadow has few sharp vertical
+features. At the 478 px focal length, 5 px at 10 m corresponds to about 10 cm.
 
 **Class accuracy (question 4).** RELLIS-3D publishes thousands of labelled
 camera frames and LiDAR scans, together with poses. Running this pipeline on a

@@ -74,6 +74,7 @@ if(BUILD_TESTING)
   ament_add_pytest_test(goose_inference test/test_goose_inference.py TIMEOUT 60)
   ament_add_pytest_test(trajectory_gps test/test_trajectory_gps.py TIMEOUT 30)
   ament_add_pytest_test(map_sharpness test/test_map_sharpness.py TIMEOUT 30)
+  ament_add_pytest_test(calibration_check test/test_calibration_check.py TIMEOUT 30)
 endif()
 
 ament_package()
