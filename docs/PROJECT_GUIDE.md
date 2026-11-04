@@ -164,6 +164,7 @@ backed up first and hash-verified in `backups/before_*_2026_11_0*/`.
 | `view_demo.sh` | Opens RViz so you control playback from your terminal |
 | `capture_demo_media.py`, `capture_rviz_window.ps1` | Pictures and videos of RViz with the camera beside the map |
 | `prepare_calibration_check.py`, `click_calibration_check.py`, `click_calibration.sh` | Clicked camera–LiDAR alignment check |
+| `check_outline_alignment.py`, `nudge_calibration_check.py`, `nudge_calibration.sh` | Camera–LiDAR offset from outlines against the sky, and a check by eye |
 
 ### Existing files that were edited (options added, defaults unchanged)
 
@@ -196,7 +197,7 @@ New tests: 30 more (68 in total, all passing) in `test/test_terrain_analysis.py`
 
 | Priority | Task | Needs |
 |---|---|---|
-| 1 | Camera–LiDAR calibration check: click about 3 matching points in 6 frames with `tools/click_calibration.sh` | About 15 min of clicking |
+| 1 | Confirm the candidate camera–LiDAR offset by eye with `tools/nudge_calibration.sh` | About 5 minutes |
 | 2 | Real class accuracy on a labelled RELLIS-3D sequence | Download approval (several GB) |
 | 3 | A forest recording, since the meadow has almost no trees | Download approval (~1 GB) |
 | 4 | Supervisor video: record RViz with Win + Alt + R, or rendered MP4s | Recording choice |

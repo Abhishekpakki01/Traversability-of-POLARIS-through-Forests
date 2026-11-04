@@ -46,8 +46,9 @@ comparison between two systems, not ground truth.
 - The vehicle limits are placeholders, not POLARIS values.
 - Class accuracy has only been checked on one labelled frame and one scan. A
   labelled RELLIS-3D sequence is still needed.
-- Camera–LiDAR alignment has not been verified with clicked point pairs. The
-  automatic edge test was inconclusive on this recording.
+- Camera–LiDAR alignment is not confirmed. An outline check suggests an offset of
+  about 22 px (2.6°), but it comes from two places in one recording, and other
+  tests were inconclusive. The camera labels use the uncorrected calibration.
 - Camera water detection is unreliable, for example on dark wet soil.
 - The recording has almost no trees, so forest performance is untested.
 - The self-return filter is not yet in the live C++ mapper.

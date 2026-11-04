@@ -7,7 +7,7 @@ evidence:
 |---|---|---|
 | 1. Are the poses right (where each scan was taken)? | Compare with independent GPS/INS | **Done: 6–18 cm** |
 | 2. Do the scans fit together (no smearing)? | Thickness of flat ground in the accumulated map | **Done: 2.8 cm vs 1.9 cm single scan** |
-| 3. Do camera pixels land on the right LiDAR points? | Clicked point pairs → reprojection error | Open (needs about 15 min of clicking) |
+| 3. Do camera pixels land on the right LiDAR points? | Scene outlines against the sky, then a check by eye | **Candidate offset of about 22 px (2.6°), not confirmed** |
 | 4. Are the class labels right? | Human-labelled data | Partial: one RELLIS frame and one scan; more needs a download |
 
 ## 1. Poses versus GPS/INS
@@ -75,23 +75,47 @@ Evidence: `artifacts/map_sharpness_2026_11_03/report.json`.
 
 ## What is still needed, and how
 
-**Camera–LiDAR calibration (question 3).** The automatic edge test was
-inconclusive on this meadow (`ACCURACY_V2.md`). The clicked check is ready:
+**Camera–LiDAR calibration (question 3).** `tools/prepare_calibration_check.py`
+draws the LiDAR points from the camera's pose at the image time, with the
+recorded calibration unchanged. `tools/check_outline_alignment.py` then compares
+the outline of the scene against the sky in both views, using only solid
+vegetation away from sun glare.
+
+| Result, 4 November | Value |
+|---|---:|
+| Frames tried / with a usable outline / accepted | 49 / 9 / 6 |
+| Median horizontal offset, LiDAR minus camera | −21.5 px (−2.6°) |
+| Range of accepted horizontal offsets | −23 to −13 px |
+| Median vertical offset | −3.5 px |
+
+How to read this:
+
+- The accepted frames come from only two places (frames 196–208 and 262–274),
+  with features 26–40 m away. The offset stays about the same at turn rates from
+  +7 to −14 °/s, so a timing error is unlikely to be the cause.
+- A rotation of this size would move a label about 45 cm at 10 m, which is more
+  than two 0.2 m voxels. **All v2 camera labels use the uncorrected calibration.**
+- This is a candidate, not a measurement of the calibration. Two other tests
+  could not confirm it: depth edges against image edges, and LiDAR vegetation
+  against camera vegetation by shift. Both were flat. They did not contradict it,
+  but they show that this meadow gives little to measure.
+- The older publisher calibration would give about −11 px, plus a small tilt, so
+  neither calibration clearly fits. Nothing has been changed.
+- The vertical offset is less certain than the horizontal one, because a camera
+  sees thin branch tips that a LiDAR rarely hits.
+
+Figure: `artifacts/calibration_outline_2026_11_04/automatic/before_after.jpg`.
+
+A check by eye is independent of this code:
 
 ```bash
 cd ~/Traversability-of-POLARIS-through-Forests
-src/semantic_mapping/tools/click_calibration.sh
+src/semantic_mapping/tools/nudge_calibration.sh
 ```
 
-`tools/prepare_calibration_check.py` draws the LiDAR points from the camera's
-pose at the image time, using the recorded calibration unchanged. A feature
-clicked in the camera view and again in that LiDAR view therefore differs only
-by the alignment error, plus click noise. It also includes timing and pose error,
-so it is an upper bound on calibration error alone.
-
-The six frames (196, 214, 262, 271, 292, 301) were picked by eye for hedge and
-bush outlines against the sky, because this meadow has few sharp vertical
-features. At the 478 px focal length, 5 px at 10 m corresponds to about 10 cm.
+The earlier click-matching tool (`click_calibration.sh`) is kept, but the LiDAR
+view proved too hard to match by eye. Its first 8 pairs were not valid matches
+and are not used anywhere.
 
 **Class accuracy (question 4).** RELLIS-3D publishes thousands of labelled
 camera frames and LiDAR scans, together with poses. Running this pipeline on a

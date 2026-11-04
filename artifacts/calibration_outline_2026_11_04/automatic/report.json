@@ -1,0 +1,87 @@
+{
+  "frames_tried": 49,
+  "frames_with_outline": 9,
+  "frames_accepted": 6,
+  "median_dx_px": -21.5,
+  "median_dy_px": -3.5,
+  "dx_range_px": [
+    -23.0,
+    -13.0
+  ],
+  "median_dx_deg": -2.577502940547156,
+  "sign": "LiDAR outline minus camera outline: negative dx means LiDAR is drawn left of the camera",
+  "frames": [
+    {
+      "frame": "00028",
+      "dx_px": 43,
+      "dy_px": 159.0,
+      "spread_px": 10.0,
+      "columns": 145,
+      "accepted": false
+    },
+    {
+      "frame": "00040",
+      "dx_px": 1,
+      "dy_px": 170.0,
+      "spread_px": 1.5,
+      "columns": 120,
+      "accepted": false
+    },
+    {
+      "frame": "00196",
+      "dx_px": -21,
+      "dy_px": -6.0,
+      "spread_px": 5.0,
+      "columns": 176,
+      "accepted": true
+    },
+    {
+      "frame": "00202",
+      "dx_px": -22,
+      "dy_px": -6.0,
+      "spread_px": 6.0,
+      "columns": 142,
+      "accepted": true
+    },
+    {
+      "frame": "00208",
+      "dx_px": -13,
+      "dy_px": -12.0,
+      "spread_px": 7.0,
+      "columns": 140,
+      "accepted": true
+    },
+    {
+      "frame": "00256",
+      "dx_px": -45,
+      "dy_px": 13.5,
+      "spread_px": 3.5,
+      "columns": 230,
+      "accepted": false
+    },
+    {
+      "frame": "00262",
+      "dx_px": -23,
+      "dy_px": 0.0,
+      "spread_px": 3.0,
+      "columns": 315,
+      "accepted": true
+    },
+    {
+      "frame": "00268",
+      "dx_px": -20,
+      "dy_px": 2.0,
+      "spread_px": 6.0,
+      "columns": 331,
+      "accepted": true
+    },
+    {
+      "frame": "00274",
+      "dx_px": -23,
+      "dy_px": -1.0,
+      "spread_px": 5.0,
+      "columns": 170,
+      "accepted": true
+    }
+  ]
+}

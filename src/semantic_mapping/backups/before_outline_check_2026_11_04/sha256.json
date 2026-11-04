@@ -1,0 +1,7 @@
+{
+ "src/semantic_mapping/CMakeLists.txt": "fcb1f992b0cb37dc7f248e057e69d7dc650b184f789cdfd8c973fe0b4e04a822",
+ "src/semantic_mapping/docs/MAPPING_ACCURACY.md": "e2b50aeb70a8d5ded43b4834e495fe05f5f254658aa073343f33823f643c5192",
+ "docs/PROJECT_GUIDE.md": "9153c7b545c27fadbf4cf6b37e8cba2bcce44828d681e681c3a91b31138d04bf",
+ "README.md": "8caf5fa3a9c61d505c73450a97c6139705c86fc627db851e5f16f7304dae0327",
+ ".gitignore": "8e7e0240cf2651bae6df18f52361e848f612e49692ebe50d523eb69d4217edb2"
+}

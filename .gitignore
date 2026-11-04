@@ -28,6 +28,8 @@ venv/
 THESIS_HANDOFF_*
 THESIS_CALIBRATION_UPDATE_*
 artifacts/handoff_*/
+artifacts/calibration_clicks_*/
+artifacts/calibration_outline_*/nudge_frames/
 artifacts/offline_demo_*/
 
 # Local authentication/configuration must never be committed.
