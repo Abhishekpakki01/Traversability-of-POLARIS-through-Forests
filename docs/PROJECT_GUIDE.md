@@ -86,6 +86,14 @@ ros2 launch semantic_mapping lidar_features_demo.launch.py rate:=0.5   # LiDAR-o
 ros2 launch semantic_mapping water_demo.launch.py rate:=0.5            # water layer
 ```
 
+**Make pictures and videos for sharing** (about 12 minutes; RViz windows open and close by themselves):
+
+```bash
+/usr/bin/python3 src/semantic_mapping/tools/capture_demo_media.py --output artifacts/my_media
+```
+
+See `src/semantic_mapping/docs/RVIZ_MEDIA.md`.
+
 **Check the GPU** (if RViz is slow):
 
 ```bash
@@ -154,6 +162,7 @@ backed up first and hash-verified in `backups/before_*_2026_11_0*/`.
 | `check_map_sharpness.py` | Ground thickness: single scan, all scans, deliberately perturbed poses |
 | `build_v2_demo.sh` | Rebuilds the whole v2 chain with one command |
 | `view_demo.sh` | Opens RViz so you control playback from your terminal |
+| `capture_demo_media.py`, `capture_rviz_window.ps1` | Pictures and videos of RViz with the camera beside the map |
 
 ### Existing files that were edited (options added, defaults unchanged)
 
