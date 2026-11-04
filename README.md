@@ -6,32 +6,51 @@ POLARIS vehicle in forest environments.
 
 ## What runs so far
 
-- ROS 2 reads recorded LiDAR scans and vehicle poses.
-- OHM accumulates the accepted scans in a fixed coordinate frame.
-- RViz shows occupied voxels, the vehicle pose and camera images.
-- An initial camera-label fusion node is included. It still needs alignment and
-  accuracy checks.
+- ROS 2 reads recorded LiDAR scans and vehicle poses, and OHM accumulates them
+  into a 3D voxel map in a fixed frame. An offline mode processes every frame
+  in order, and rebuilding gives identical results.
+- Returns from the recording vehicle's own body (about 28% of each TartanDrive
+  scan) are filtered out in the offline pipeline.
+- Camera labels are fused into the voxels. The camera input keeps the image
+  aspect ratio and masks the vehicle hood.
+- A terrain layer gives ground height, slope, roughness, obstacle height and
+  traversability classes.
+- LiDAR-only features (how see-through a voxel is and its shape) help separate
+  vegetation from solid obstacles.
+- A water layer projects camera water pixels onto the mapped ground.
+- RViz shows all of this, and `src/semantic_mapping/tools/view_demo.sh` replays
+  it from a single terminal.
 
 The mapping tests use RELLIS-3D and a short moving TartanDrive 2.0 recording.
 Camera labels come from public pretrained PP-LiteSeg-B weights provided by the
 GOOSE project. I have not trained a new segmentation model.
 
+## Results so far
+
+These come from one TartanDrive excerpt (a meadow, 318 mapped scans, about
+100 m) and one labelled RELLIS-3D frame and scan.
+
+| Check | Result |
+|---|---|
+| Map poses against independent GPS/INS | 0.06–0.18 m RMSE, map vertical within 0.35° |
+| Ground thickness in the accumulated map | 2.8 cm (1.9 cm in a single scan) |
+| Driven path wrongly marked non-traversable | 1.6% with camera + LiDAR |
+| LiDAR vegetation agreement with camera labels | 80–84% |
+| Labelled RELLIS-3D camera frame | pixel accuracy 0.68, mean IoU 0.36 |
+
+The driven-path figure only tests positive examples, and GPS/INS agreement is a
+comparison between two systems, not ground truth.
+
 ## What is still unfinished
 
-A separate calibration check now uses the mounting transforms from the original
-TartanDrive recording. It also avoids adding a rectification rotation from a
-later example. The old version is kept for comparison. The camera matrix has
-been cross-checked against the recorded stereo output, but physical alignment
-and the resulting voxel labels still need validation.
-
-There are also dropped frames and limited semantic coverage. In an earlier
-Tartan run, 569 of 24,888 occupied voxels received a confirmed class. Most voxels
-remain gray because their class is unknown. Water/trunk recognition, height
-above local ground, slope, clearance and navigation still need work.
-
-The next step is to verify the calibration and projection on the exact
-recording, then check frame losses and repeat the test over a longer sequence.
-The current results are an initial integration test.
+- The vehicle limits are placeholders, not POLARIS values.
+- Class accuracy has only been checked on one labelled frame and one scan. A
+  labelled RELLIS-3D sequence is still needed.
+- Camera–LiDAR alignment has not been verified with clicked point pairs. The
+  automatic edge test was inconclusive on this recording.
+- Camera water detection is unreliable, for example on dark wet soil.
+- The recording has almost no trees, so forest performance is untested.
+- The self-return filter is not yet in the live C++ mapper.
 
 ## Running it
 
@@ -39,8 +58,17 @@ The existing working workspace is `~/semantic_map_ws`. This Git checkout is
 separate, at `~/Traversability-of-POLARIS-through-Forests`; changes in one folder
 do not automatically change the other.
 
-The full terminal commands are in:
+To replay the newest demo:
 
+```bash
+cd ~/Traversability-of-POLARIS-through-Forests
+src/semantic_mapping/tools/view_demo.sh explore
+```
+
+This needs the locally built results in `artifacts/`; large replay files are not
+in Git. The full terminal commands are in:
+
+- [Project guide: commands, work done and code changes](docs/PROJECT_GUIDE.md)
 - [New recorded-transform calibration check](src/semantic_mapping/docs/TARTAN_CALIBRATION_CHECK.md)
 - [Offline demo](src/semantic_mapping/docs/OFFLINE_DEMO.md) and [terrain analysis and validation checks](src/semantic_mapping/docs/TERRAIN_AND_VALIDATION.md)
 - [LiDAR-only features: permeability, shape and the labelled RELLIS scan](src/semantic_mapping/docs/LIDAR_FEATURES.md)
