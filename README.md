@@ -48,9 +48,8 @@ comparison between two systems, not ground truth.
 - LiDAR-only classes agree with human labels on 55% of RELLIS-3D voxels, and many
   tree voxels get no class. The camera evaluation on the RELLIS-3D test split is
   still to be reported.
-- Camera–LiDAR alignment is not confirmed. An outline check suggests an offset of
-  about 22 px (2.6°), but it comes from two places in one recording, and other
-  tests were inconclusive. The camera labels use the uncorrected calibration.
+- Camera–LiDAR alignment on TartanDrive has not been measured. Automatic checks
+  were inconclusive, and one failed its control test on RELLIS-3D.
 - Camera water detection is unreliable, for example on dark wet soil.
 - The recording has almost no trees, so forest performance is untested.
 

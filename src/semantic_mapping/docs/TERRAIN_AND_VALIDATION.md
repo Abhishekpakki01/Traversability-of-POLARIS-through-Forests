@@ -317,9 +317,8 @@ is needed. The original `~/semantic_map_ws` was not touched.
 ## Still open
 
 - Real POLARIS dimensions and terrain limits, and a POLARIS self-return box.
-- The live launches (`tartan_semantic`, `tartan_recorded_calibration`, RELLIS)
-  still integrate self-returns. Porting the box filter to the C++ live mapper is
-  a separate, backed-up change.
+- The live mapper now has the filter as the `vehicle_box` parameter, but it is off
+  by default, so the live launches still integrate self-returns unless it is set.
 - No labelled Tartan data: traversability and class accuracy beyond the one
   RELLIS frame are unmeasured. The driven-path check has positive examples only.
 - Physical camera calibration and gravity alignment remain unverified.

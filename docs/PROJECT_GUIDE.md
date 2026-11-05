@@ -165,6 +165,7 @@ backed up first and hash-verified in `backups/before_*_2026_11_0*/`.
 | `capture_demo_media.py`, `capture_rviz_window.ps1` | Pictures and videos of RViz with the camera beside the map |
 | `prepare_calibration_check.py`, `click_calibration_check.py`, `click_calibration.sh` | Clicked camera–LiDAR alignment check |
 | `check_outline_alignment.py`, `nudge_calibration_check.py`, `nudge_calibration.sh` | Camera–LiDAR offset from outlines against the sky, and a check by eye |
+| `check_outline_alignment_rellis.py`, `check_label_alignment_rellis.py` | Control tests on RELLIS-3D; the outline method failed its control |
 
 ### Existing files that were edited (options added, defaults unchanged)
 
@@ -198,7 +199,7 @@ New tests: 30 more (68 in total, all passing) in `test/test_terrain_analysis.py`
 
 | Priority | Task | Needs |
 |---|---|---|
-| 1 | Confirm the candidate camera–LiDAR offset by eye with `tools/nudge_calibration.sh` | About 5 minutes |
+| 1 | Measure camera–LiDAR alignment; automatic checks failed or were inconclusive | A sharp target or a recording with clear vertical structures |
 | 2 | Real class accuracy on a labelled RELLIS-3D sequence | Download approval (several GB) |
 | 3 | A forest recording, since the meadow has almost no trees | Download approval (~1 GB) |
 | 4 | Supervisor video: record RViz with Win + Alt + R, or rendered MP4s | Recording choice |

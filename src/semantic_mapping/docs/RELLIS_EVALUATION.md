@@ -22,6 +22,8 @@ majority human label of its points.
 | Scored voxels | 1,247,999 |
 | Voxels with an accepted class | 55% |
 | Mean over the 14 labelled classes | 44% |
+| Voxels given a class | 71% |
+| Accepted class, among classified voxels | 77% |
 
 | Human label | Voxels | Accepted class | Left unknown |
 |---|---:|---:|---:|
@@ -40,3 +42,12 @@ How to read this:
 - This measures agreement with labels, not traversability.
 
 Report: `artifacts/rellis_lidar_voxels_2026_11_04/report.json`.
+
+## Published calibration
+
+`tools/check_label_alignment_rellis.py` projects human-labelled LiDAR points onto
+human-labelled images. Over 250 frames the labels match on 82% of points, and the
+best match is at 0.0° across and −0.5° vertical. The published transform must be
+inverted: as given, the labels match on only 28%.
+
+Report: `artifacts/calibration_outline_2026_11_04/rellis_label_reference/report.json`.

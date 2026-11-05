@@ -7,7 +7,7 @@ evidence:
 |---|---|---|
 | 1. Are the poses right (where each scan was taken)? | Compare with independent GPS/INS | **Done: 6–18 cm** |
 | 2. Do the scans fit together (no smearing)? | Thickness of flat ground in the accumulated map | **Done: 2.8 cm vs 1.9 cm single scan** |
-| 3. Do camera pixels land on the right LiDAR points? | Scene outlines against the sky, then a check by eye | **Candidate offset of about 22 px (2.6°), not confirmed** |
+| 3. Do camera pixels land on the right LiDAR points? | Several methods tried | **Not measured: no method passed its control test** |
 | 4. Are the class labels right? | Human-labelled data | Partial: one RELLIS frame and one scan; more needs a download |
 
 ## 1. Poses versus GPS/INS
@@ -75,47 +75,40 @@ Evidence: `artifacts/map_sharpness_2026_11_03/report.json`.
 
 ## What is still needed, and how
 
-**Camera–LiDAR calibration (question 3).** `tools/prepare_calibration_check.py`
-draws the LiDAR points from the camera's pose at the image time, with the
-recorded calibration unchanged. `tools/check_outline_alignment.py` then compares
-the outline of the scene against the sky in both views, using only solid
-vegetation away from sun glare.
+**Camera–LiDAR calibration (question 3).** This is still not measured.
 
-| Result, 4 November | Value |
+`tools/check_outline_alignment.py` compares the scene outline against the sky in
+the camera image and in the LiDAR view. On Tartan it gave −21.5 px (−2.6°) in 6 of
+49 frames. **This is withdrawn as evidence of a calibration error**, because the
+method failed its control test on RELLIS-3D, which has a published calibration:
+
+| Control, 5 November | Result |
 |---|---:|
-| Frames tried / with a usable outline / accepted | 49 / 9 / 6 |
-| Median horizontal offset, LiDAR minus camera | −21.5 px (−2.6°) |
-| Range of accepted horizontal offsets | −23 to −13 px |
-| Median vertical offset | −3.5 px |
+| Reference offset from human labels on both sensors, 250 frames | 0.0° across, −0.5° vertical |
+| Outline method, accepted frames | 69 of 166 |
+| Outline method, median offset | −0.4° (95% interval −1.1° to +0.2°) |
+| Outline method, single-frame spread (standard deviation) | 2.7° |
+| Accepted frames within 2.6° of zero | 58% |
+| Same share expected from random guessing in the search range | 58% |
 
 How to read this:
 
-- The accepted frames come from only two places (frames 196–208 and 262–274),
-  with features 26–40 m away. The offset stays about the same at turn rates from
-  +7 to −14 °/s, so a timing error is unlikely to be the cause.
-- A rotation of this size would move a label about 45 cm at 10 m, which is more
-  than two 0.2 m voxels. **All v2 camera labels use the uncorrected calibration.**
-- This is a candidate, not a measurement of the calibration. Two other tests
-  could not confirm it: depth edges against image edges, and LiDAR vegetation
-  against camera vegetation by shift. Both were flat. They did not contradict it,
-  but they show that this meadow gives little to measure.
-- The older publisher calibration would give about −11 px, plus a small tilt, so
-  neither calibration clearly fits. Nothing has been changed.
-- The vertical offset is less certain than the horizontal one, because a camera
-  sees thin branch tips that a LiDAR rarely hits.
+- The median across many frames is close to the true value, but single frames are
+  no better than chance. Stricter acceptance rules did not fix this.
+- A median of six independent frames from this spread would reach 2.6° or more in
+  about 8% of cases. The Tartan frames also cluster tightly, but they are neighbours
+  seeing the same two scenes, so they are not independent.
+- The Tartan offset could still be real. This control only shows that this method
+  cannot establish it.
+- The depth-edge test and the LiDAR-against-camera vegetation test were flat. The
+  older publisher calibration would differ by about 11 px. Nothing has been changed.
+- Two click-based tools (`click_calibration.sh`, `nudge_calibration.sh`) proved
+  hard to use. Their first results were not valid and are not used anywhere.
 
-Figure: `artifacts/calibration_outline_2026_11_04/automatic/before_after.jpg`.
+Evidence: `artifacts/calibration_outline_2026_11_04/`.
 
-A check by eye is independent of this code:
-
-```bash
-cd ~/Traversability-of-POLARIS-through-Forests
-src/semantic_mapping/tools/nudge_calibration.sh
-```
-
-The earlier click-matching tool (`click_calibration.sh`) is kept, but the LiDAR
-view proved too hard to match by eye. Its first 8 pairs were not valid matches
-and are not used anywhere.
+A reliable measurement needs a target with sharp, known geometry, such as a
+calibration board or poles, or a recording with clear vertical structures.
 
 **Class accuracy (question 4).** RELLIS-3D publishes thousands of labelled
 camera frames and LiDAR scans, together with poses. Running this pipeline on a
