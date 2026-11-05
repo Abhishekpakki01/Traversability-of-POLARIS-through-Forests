@@ -44,8 +44,9 @@ comparison between two systems, not ground truth.
 ## What is still unfinished
 
 - The vehicle limits are placeholders, not POLARIS values.
-- Class accuracy has only been checked on one labelled frame and one scan. A
-  labelled RELLIS-3D sequence is still needed.
+- LiDAR-only classes agree with human labels on 55% of RELLIS-3D voxels, and many
+  tree voxels get no class. The camera evaluation on the RELLIS-3D test split is
+  still to be reported.
 - Camera–LiDAR alignment is not confirmed. An outline check suggests an offset of
   about 22 px (2.6°), but it comes from two places in one recording, and other
   tests were inconclusive. The camera labels use the uncorrected calibration.
@@ -77,6 +78,7 @@ in Git. The full terminal commands are in:
 - [Accuracy v2: aspect-correct camera input, hood mask, 0.2 m / 20 m map, cloth ground, LiDAR-aware traversability](src/semantic_mapping/docs/ACCURACY_V2.md)
 - [How do we know the map is right? GPS comparison, map sharpness, open checks](src/semantic_mapping/docs/MAPPING_ACCURACY.md)
 - [Pictures and videos from RViz, with the camera beside the map](src/semantic_mapping/docs/RVIZ_MEDIA.md)
+- [RELLIS-3D evaluation against human labels](src/semantic_mapping/docs/RELLIS_EVALUATION.md)
 
 - [RELLIS run guide](src/semantic_mapping/docs/RUN_IT_YOURSELF.md)
 - [TartanDrive run guide](src/semantic_mapping/docs/SECOND_TERRAIN_TARTAN.md)

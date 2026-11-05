@@ -76,6 +76,7 @@ if(BUILD_TESTING)
   ament_add_pytest_test(map_sharpness test/test_map_sharpness.py TIMEOUT 30)
   ament_add_pytest_test(calibration_check test/test_calibration_check.py TIMEOUT 30)
   ament_add_pytest_test(silhouette_alignment test/test_silhouette_alignment.py TIMEOUT 30)
+  ament_add_pytest_test(rellis_evaluation test/test_rellis_evaluation.py TIMEOUT 30)
 endif()
 
 ament_package()
