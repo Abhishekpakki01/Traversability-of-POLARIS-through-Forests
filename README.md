@@ -10,7 +10,8 @@ POLARIS vehicle in forest environments.
   into a 3D voxel map in a fixed frame. An offline mode processes every frame
   in order, and rebuilding gives identical results.
 - Returns from the recording vehicle's own body (about 28% of each TartanDrive
-  scan) are filtered out in the offline pipeline.
+  scan) are filtered out in the offline pipeline. The live mapper has the same
+  filter as an option, `vehicle_box`, which is off by default.
 - Camera labels are fused into the voxels. The camera input keeps the image
   aspect ratio and masks the vehicle hood.
 - A terrain layer gives ground height, slope, roughness, obstacle height and
@@ -52,7 +53,6 @@ comparison between two systems, not ground truth.
   tests were inconclusive. The camera labels use the uncorrected calibration.
 - Camera water detection is unreliable, for example on dark wet soil.
 - The recording has almost no trees, so forest performance is untested.
-- The self-return filter is not yet in the live C++ mapper.
 
 ## Running it
 

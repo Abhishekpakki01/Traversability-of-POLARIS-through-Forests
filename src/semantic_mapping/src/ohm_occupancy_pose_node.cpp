@@ -20,6 +20,8 @@
 #include <ohm/VoxelOccupancy.h>
 #include <ohm/MapLayout.h>
 #include <glm/glm.hpp>
+#include <stdexcept>
+#include <vector>
 
 class OhmOccupancyNode : public rclcpp::Node {
 public:
@@ -28,6 +30,11 @@ public:
         this->declare_parameter<double>("resolution", 0.35);
         fixed_frame_ = this->declare_parameter<std::string>("fixed_frame", "odom");
         base_frame_ = this->declare_parameter<std::string>("base_frame", "base_link");
+        // [xmin, ymin, zmin, xmax, ymax, zmax] in base_frame. Empty keeps every return.
+        vehicle_box_ = this->declare_parameter<std::vector<double>>("vehicle_box", std::vector<double>{});
+        if (!vehicle_box_.empty() && vehicle_box_.size() != 6) {
+            throw std::invalid_argument("vehicle_box needs six values: xmin ymin zmin xmax ymax zmax");
+        }
 
         max_range_ = this->get_parameter("max_range").as_double();
         resolution_ = this->get_parameter("resolution").as_double();
@@ -56,6 +63,11 @@ public:
     }
 
 private:
+    bool insideVehicleBox(const tf2::Vector3 &point) const {
+        return point.x() >= vehicle_box_[0] && point.y() >= vehicle_box_[1] && point.z() >= vehicle_box_[2] &&
+               point.x() <= vehicle_box_[3] && point.y() <= vehicle_box_[4] && point.z() <= vehicle_box_[5];
+    }
+
     void cloudCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg) {
         // Time zero means "latest" in TF, which must not be used for scan integration.
         if (msg->header.frame_id.empty() ||
@@ -85,6 +97,24 @@ private:
             tf2::Vector3(translation.x, translation.y, translation.z));
         const glm::dvec3 sensor_origin(translation.x, translation.y, translation.z);
 
+        tf2::Transform base_from_sensor;
+        if (!vehicle_box_.empty()) {
+            try {
+                const auto base_pose = tf_buffer_->lookupTransform(
+                    base_frame_, msg->header.frame_id, scan_time,
+                    rclcpp::Duration::from_seconds(0.1));
+                const auto &t = base_pose.transform.translation;
+                const auto &q = base_pose.transform.rotation;
+                base_from_sensor = tf2::Transform(tf2::Quaternion(q.x, q.y, q.z, q.w), tf2::Vector3(t.x, t.y, t.z));
+            } catch (const tf2::TransformException &error) {
+                // Mapping this scan unfiltered would add the vehicle's own body as obstacles.
+                RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 2000,
+                                    "Skipping cloud: no %s <- %s transform for the vehicle box: %s",
+                                    base_frame_.c_str(), msg->header.frame_id.c_str(), error.what());
+                return;
+            }
+        }
+
         // 1. Parse PointCloud2
         sensor_msgs::PointCloud2ConstIterator<float> iter_x(*msg, "x");
         sensor_msgs::PointCloud2ConstIterator<float> iter_y(*msg, "y");
@@ -103,6 +133,9 @@ private:
 
             float dist = std::sqrt(x * x + y * y + z * z);
             if (dist <= max_range_ && dist > 0.1f) {
+                if (!vehicle_box_.empty() && insideVehicleBox(base_from_sensor * tf2::Vector3(x, y, z))) {
+                    continue;
+                }
                 const tf2::Vector3 target = world_from_sensor * tf2::Vector3(x, y, z);
                 valid_targets.emplace_back(target.x(), target.y(), target.z());
             }
@@ -182,6 +215,7 @@ private:
     }
 
     double max_range_;
+    std::vector<double> vehicle_box_;
     double resolution_;
     std::string fixed_frame_;
     std::string base_frame_;

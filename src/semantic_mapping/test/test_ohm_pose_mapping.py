@@ -21,7 +21,7 @@ from visualization_msgs.msg import Marker
 
 
 class MappingHarness:
-    def __init__(self):
+    def __init__(self, parameters=()):
         self.node = rclpy.create_node('ohm_pose_test_' + uuid.uuid4().hex)
         prefix = '/ohm_test_' + uuid.uuid4().hex
         self.cloud_pub = self.node.create_publisher(
@@ -39,7 +39,7 @@ class MappingHarness:
             Path(__file__).resolve().parents[3] / 'build/semantic_mapping/ohm_occupancy_pose_node'))
         self.log = tempfile.TemporaryFile(mode='w+')
         self.process = subprocess.Popen([
-            executable, '--ros-args', '-p', 'resolution:=1.0',
+            executable, '--ros-args', '-p', 'resolution:=1.0', *parameters,
             '-r', '/os1_cloud_node/points:=' + prefix + '/cloud',
             '-r', '/semantic_voxel_map_cpp:=' + prefix + '/map',
             '-r', '/vehicle_pose:=' + prefix + '/pose',
@@ -191,3 +191,23 @@ def test_free_space_rays_start_at_the_moving_sensor(mapping):
         result = mapping.map_for(stamp, [(2.2, 0.2, 0.2)])
     # Starting rays at world zero would incorrectly clear the earlier obstacle.
     assert result == {(2.5, 0.5, 0.5), (12.5, 0.5, 0.5)}
+
+
+def test_vehicle_box_removes_returns_in_the_vehicle_frame():
+    rclpy.init()
+    harness = None
+    try:
+        harness = MappingHarness(('-p', 'vehicle_box:=[-1.0,-1.0,-1.0,1.0,1.0,1.0]'))
+        harness.wait_for(lambda: harness.cloud_pub.get_subscription_count() > 0
+                         and harness.tf_pub.get_subscription_count() > 0
+                         and harness.static_pub.get_subscription_count() > 0
+                         and harness.node.count_publishers(harness.marker_sub.topic_name) > 0)
+        harness.set_poses([harness.transform('odom', 'base_link', 10, (10.0, 20.0, 0.0))])
+        # The LiDAR sits 0.5 m ahead of base_link, so these two are decided by the vehicle frame:
+        # (-1.2, 0, 0) is inside the box at x = -0.7, and (0.8, 0, 0) is outside it at x = 1.3.
+        occupied = harness.map_for(10, [(-1.2, 0.0, 0.0), (0.8, 0.0, 0.0)])
+        assert [math.floor(x) for x, _, _ in occupied] == [11]
+    finally:
+        if harness is not None:
+            harness.close()
+        rclpy.shutdown()

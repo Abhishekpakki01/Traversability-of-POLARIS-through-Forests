@@ -172,6 +172,7 @@ backed up first and hash-verified in `backups/before_*_2026_11_0*/`.
 |---|---|
 | `tools/build_offline_demo.py` | `--exclude-vehicle-box`, `--resolution`, `--max-range`, `--inference-short-side`, `--image-mask`, `--threads` |
 | `tools/check_offline_demo.py` | Reads the voxel size from the run instead of assuming 0.35 m |
+| `src/ohm_occupancy_pose_node.cpp` | Optional `vehicle_box` parameter removes the vehicle's own returns; off by default |
 | `scripts/offline_demo_view.py` | Also crops the LiDAR layer around the vehicle, can cap the update rate, shows the final map after playback, and shuts down cleanly |
 | `CMakeLists.txt` | Registers the new tests |
 
@@ -202,7 +203,6 @@ New tests: 30 more (68 in total, all passing) in `test/test_terrain_analysis.py`
 | 3 | A forest recording, since the meadow has almost no trees | Download approval (~1 GB) |
 | 4 | Supervisor video: record RViz with Win + Alt + R, or rendered MP4s | Recording choice |
 | 5 | POLARIS limits (clearance, maximum slope, height) | Vehicle documentation |
-| 6 | Self-return filter in the live C++ mapper | Code change |
 | 7 | Thesis writing (deadline 23 November) | About 10 days |
 
 Optional disk clean-up (keep `offline_v2_*` and `water_demo_v2_*`):
