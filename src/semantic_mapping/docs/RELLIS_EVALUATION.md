@@ -21,7 +21,7 @@ model input.
 | Vegetation | 0.82 | 0.97 | 0.84 |
 | Ground | 0.36 | 0.43 | 0.71 |
 | Water | 0.09 | 0.91 | 0.09 |
-| Obstacle | 0.05 | 0.05 | 0.55 |
+| Obstacle | 0.04 | 0.05 | 0.55 |
 
 Pixel accuracy is 0.81 and mean IoU is 0.33.
 

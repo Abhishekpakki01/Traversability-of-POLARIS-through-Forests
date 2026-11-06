@@ -32,8 +32,9 @@ Evidence: `artifacts/reproducibility_check_2026_11_02/comparison.json`. The
 ## 2. Ego-vehicle self-returns (a mapping fault that was found)
 
 **Finding.** The terrain self-check (section 3) showed 98% of driven poses as
-non-traversable. The cause: about **28% of every LiDAR scan hits the recording
-vehicle itself**. Those returns were integrated as occupied voxels at the LiDAR's
+non-traversable. The cause: LiDAR returns from the recording vehicle itself. Measured over 40 scans,
+about **5.2% of all returns and 19.5% of returns within 10 m** fall in the vehicle box
+(corrected on 6 November from an earlier figure of 28%, which could not be reproduced). Those returns were integrated as occupied voxels at the LiDAR's
 height (~2 m above ground) all along the route — the "long map trail" in the
 offline demo is the vehicle body, not terrain. The live launches have the same
 fault; they were not changed.

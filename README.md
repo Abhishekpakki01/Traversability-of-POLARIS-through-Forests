@@ -9,8 +9,8 @@ POLARIS vehicle in forest environments.
 - ROS 2 reads recorded LiDAR scans and vehicle poses, and OHM accumulates them
   into a 3D voxel map in a fixed frame. An offline mode processes every frame
   in order, and rebuilding gives identical results.
-- Returns from the recording vehicle's own body (about 28% of each TartanDrive
-  scan) are filtered out in the offline pipeline. The live mapper has the same
+- Returns from the recording vehicle's own body (about 5% of all TartanDrive points,
+  and 20% of those within 10 m) are filtered out in the offline pipeline. The live mapper has the same
   filter as an option, `vehicle_box`, which is off by default.
 - Camera labels are fused into the voxels. The camera input keeps the image
   aspect ratio and masks the vehicle hood.
@@ -47,7 +47,7 @@ comparison between two systems, not ground truth.
 
 - The vehicle limits are placeholders, not POLARIS values.
 - On RELLIS-3D, the camera model reaches mean IoU 0.33 (vegetation 0.82, water 0.09,
-  obstacle 0.05), and LiDAR-only classes agree with human labels on 55% of voxels.
+  obstacle 0.04), and LiDAR-only classes agree with human labels on 55% of voxels.
   Many tree voxels get no class.
 - Camera–LiDAR alignment on TartanDrive has not been measured. Automatic checks
   were inconclusive, and one failed its control test on RELLIS-3D.

@@ -28,8 +28,11 @@ def read_poses(path):
     return poses
 
 
-def stretch(folder, poses, first, scans, stride, cell, max_range, settings):
-    """Return RELLIS label and LiDAR class per voxel for one stretch of a sequence."""
+def stretch(folder, poses, first, scans, stride, cell, max_range, settings, details=False):
+    """Return RELLIS label and LiDAR class per voxel for one stretch of a sequence.
+
+    With details, also return the features and height above ground.
+    """
     stats = VoxelStatistics(cell)
     points_all, labels_all = [], []
     for index in range(first, first+scans*stride, stride):
@@ -48,7 +51,8 @@ def stretch(folder, poses, first, scans, stride, cell, max_range, settings):
     inverse = inverse.ravel()
     centres = (keys+.5)*cell
     height = analyze(centres, np.zeros(len(centres), np.uint8), settings).voxel_height_m
-    classes = lidar_classes(stats.features(centres), height, cell)
+    features = stats.features(centres)
+    classes = lidar_classes(features, height, cell)
     # Majority label per voxel.
     order = np.lexsort((labels, inverse))
     voxel, label = inverse[order], labels[order]
@@ -59,7 +63,7 @@ def stretch(folder, poses, first, scans, stride, cell, max_range, settings):
     for start, count in zip(starts, counts):
         if count > best[voxel[start]]:
             best[voxel[start]], majority[voxel[start]] = count, label[start]
-    return majority, classes
+    return (majority, classes, features, height) if details else (majority, classes)
 
 
 def main():

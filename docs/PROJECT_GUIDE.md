@@ -114,7 +114,7 @@ built with Codex on 2 November. Everything below came afterwards.
 | # | Work | Result |
 |---|---|---|
 | 1 | Rebuilt the offline demo with the newest code | Identical in all 318 frames: reproducible |
-| 2 | Found that **about 28% of every LiDAR scan was the vehicle itself** and added a filter | False obstacles along the driven path removed (path false alarms 98% → 3.5%) |
+| 2 | Found that **about 5% of LiDAR points, and 20% within 10 m, were the vehicle itself** and added a filter | False obstacles along the driven path removed (path false alarms 98% → 3.5%) |
 | 3 | Terrain analysis: ground, slope, roughness, obstacle height, traversability | Limits are **placeholders**, not POLARIS values |
 | 4 | LiDAR-only features: permeability (how see-through), shape (line, plane or scatter) | Agrees with the camera on vegetation 80–84% of the time |
 | 5 | Water layer: camera water pixels projected onto the ground and combined with LiDAR gaps | 3 water voxels became a visible water layer; camera water is **unreliable** (false water on dark wet soil) |
@@ -166,6 +166,8 @@ backed up first and hash-verified in `backups/before_*_2026_11_0*/`.
 | `prepare_calibration_check.py`, `click_calibration_check.py`, `click_calibration.sh` | Clicked camera–LiDAR alignment check |
 | `check_outline_alignment.py`, `nudge_calibration_check.py`, `nudge_calibration.sh` | Camera–LiDAR offset from outlines against the sky, and a check by eye |
 | `check_outline_alignment_rellis.py`, `check_label_alignment_rellis.py` | Control tests on RELLIS-3D; the outline method failed its control |
+| `build_results_pack.py` | Collects result numbers and figures, each traced to its source report |
+| `diagnose_rellis_coverage.py` | Finds why tree and bush voxels get no class, on development sequences only |
 
 ### Existing files that were edited (options added, defaults unchanged)
 

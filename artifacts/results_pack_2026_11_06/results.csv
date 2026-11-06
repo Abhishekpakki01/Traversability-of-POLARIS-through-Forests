@@ -1,0 +1,43 @@
+section,measure,value,unit,source,key
+Mapping,Source scans,320,scans,artifacts/offline_v2_2026_11_03/report.json,source_scans
+Mapping,Mapped scans,318,scans,artifacts/offline_v2_2026_11_03/report.json,mapped_scans
+Mapping,Voxel size,0.20,m,artifacts/offline_v2_2026_11_03/report.json,resolution_m
+Mapping,Maximum range,20,m,artifacts/offline_v2_2026_11_03/report.json,maximum_range_m
+Mapping,"Median processing time per scan, offline",2.7,s,artifacts/offline_v2_2026_11_03/report.json,processing_seconds_median
+Self-returns,"Driven path non-traversable before filter, geometry, v1",98.1,%,artifacts/terrain_analysis_2026_11_02/report.json,driven_path.geometric_worst_state_fraction.non_traversable
+Self-returns,"Driven path non-traversable after filter, geometry, v1",3.5,%,artifacts/terrain_analysis_ego_filtered_2026_11_02/report.json,driven_path.geometric_worst_state_fraction.non_traversable
+Traversability,"Driven path non-traversable, camera semantics, v2",14.2,%,artifacts/lidar_features_demo_v2_2026_11_03/report.json,driven_path_worst_state_camera_semantics.non_traversable
+Traversability,"Driven path non-traversable, camera + LiDAR, v2",1.6,%,artifacts/lidar_features_demo_v2_2026_11_03/report.json,driven_path_worst_state_camera_plus_lidar_compliance.non_traversable
+Pose check,"Path length, LiDAR odometry",102.0,m,artifacts/trajectory_vs_gps_2026_11_03/report.json,path_length_m.lidar_odometry
+Pose check,"Path length, GPS",101.0,m,artifacts/trajectory_vs_gps_2026_11_03/report.json,path_length_m.gps
+Pose check,"Position RMSE, rigid fit",0.18,m,artifacts/trajectory_vs_gps_2026_11_03/report.json,ate_rigid_m.rmse
+Pose check,"Position RMSE, with antenna offset",0.06,m,artifacts/trajectory_vs_gps_2026_11_03/report.json,ate_with_lever_arm_m.rmse
+Pose check,Map vertical against gravity,0.35,deg,artifacts/trajectory_vs_gps_2026_11_03/report.json,map_z_vs_gravity_tilt_deg
+Pose check,"Distance error per 10 m, median",0.4,%,artifacts/trajectory_vs_gps_2026_11_03/report.json,relative_distance_error_per_segment.median
+Map sharpness,"Ground thickness, single scan",1.9,cm,artifacts/map_sharpness_2026_11_03/report.json,single_scan.median_m
+Map sharpness,"Ground thickness, recorded poses",2.8,cm,artifacts/map_sharpness_2026_11_03/report.json,accumulated_recorded_poses.median_m
+Map sharpness,"Ground thickness, perturbed poses",4.6,cm,artifacts/map_sharpness_2026_11_03/report.json,accumulated_perturbed_poses.median_m
+Water,"Water cells, no LiDAR return",120,cells,artifacts/water_demo_v2_2026_11_03/report.json,final_water_cells_no_lidar_return
+Water,"Water cells, LiDAR return",759,cells,artifacts/water_demo_v2_2026_11_03/report.json,final_water_cells_with_lidar_return
+RELLIS camera,Test images,"1,672",images,artifacts/rellis_test_split_camera_2026_11_04/report.json,images
+RELLIS camera,Pixel accuracy,0.81,,artifacts/rellis_test_split_camera_2026_11_04/report.json,pixel_accuracy
+RELLIS camera,Mean IoU,0.33,,artifacts/rellis_test_split_camera_2026_11_04/report.json,mean_iou
+RELLIS camera,Vegetation IoU,0.82,,artifacts/rellis_test_split_camera_2026_11_04/report.json,per_group.vegetation.iou
+RELLIS camera,Ground IoU,0.36,,artifacts/rellis_test_split_camera_2026_11_04/report.json,per_group.ground.iou
+RELLIS camera,Water IoU,0.09,,artifacts/rellis_test_split_camera_2026_11_04/report.json,per_group.water.iou
+RELLIS camera,Obstacle IoU,0.04,,artifacts/rellis_test_split_camera_2026_11_04/report.json,per_group.obstacle.iou
+RELLIS LiDAR,Scored voxels,"1,247,999",voxels,artifacts/rellis_lidar_voxels_2026_11_04/report.json,scored_voxels
+RELLIS LiDAR,Voxels with an accepted class,54.8,%,artifacts/rellis_lidar_voxels_2026_11_04/report.json,consistent_fraction
+RELLIS LiDAR,Mean over labelled classes,44.3,%,artifacts/rellis_lidar_voxels_2026_11_04/report.json,mean_class_consistent_fraction
+RELLIS LiDAR,Tree voxels with an accepted class,34.8,%,artifacts/rellis_lidar_voxels_2026_11_04/report.json,per_rellis_class.tree.consistent_fraction
+RELLIS LiDAR,Tree voxels left unknown,45.3,%,artifacts/rellis_lidar_voxels_2026_11_04/report.json,per_rellis_class.tree.lidar_class_fraction.unknown
+RELLIS LiDAR,Bush voxels with an accepted class,46.6,%,artifacts/rellis_lidar_voxels_2026_11_04/report.json,per_rellis_class.bush.consistent_fraction
+Calibration control,"RELLIS label reference, horizontal offset",0.00,deg,artifacts/calibration_outline_2026_11_04/rellis_label_reference/report.json,dx_deg
+Calibration control,"RELLIS label reference, vertical offset",-0.50,deg,artifacts/calibration_outline_2026_11_04/rellis_label_reference/report.json,dy_deg
+Calibration control,"Outline method on RELLIS, median offset",-0.38,deg,artifacts/calibration_outline_2026_11_04/rellis_control/report.json,median_dx_deg
+Calibration control,"Outline method, accepted frames",69,frames,artifacts/calibration_outline_2026_11_04/rellis_control/report.json,frames_accepted
+Mapping,Occupied voxels,"182,996",voxels,artifacts/offline_v2_2026_11_03/frames.jsonl,"last line, occupied_voxels"
+Mapping,Voxels with a confirmed camera class,"31,056",voxels,artifacts/offline_v2_2026_11_03/frames.jsonl,"last line, classified_voxels"
+Self-returns,Share of all returns inside the vehicle box,5.2,%,/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2,measured from every 8th scan; vehicle and LiDAR frames coincide
+Self-returns,Share of returns within 10 m inside the vehicle box,19.5,%,/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2,measured from every 8th scan; vehicle and LiDAR frames coincide
+Self-returns,Share of returns within 20 m inside the vehicle box,9.3,%,/home/abhishek/thesis_data/tartan_drive_2_sample/down_meadows_moving_ros2,measured from every 8th scan; vehicle and LiDAR frames coincide
