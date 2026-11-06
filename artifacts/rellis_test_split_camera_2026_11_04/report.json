@@ -1,0 +1,389 @@
+{
+  "images": 1672,
+  "split": "/home/abhishek/thesis_data/rellis_3d_full/splits/test.lst",
+  "model_input": "512x832",
+  "mapping_sha256": "21b6c0573e8562dc3ed76477af5a3088cdec2b809cc3e8da870d08cf7db35a17",
+  "evaluated_pixels": 2261561382,
+  "pixel_accuracy": 0.8101355154816665,
+  "mean_iou": 0.3285584530603245,
+  "per_group": {
+    "ground": {
+      "truth_pixels": 160384340,
+      "predicted_pixels": 266628397,
+      "iou": 0.3622015305692847,
+      "precision": 0.42583695239333413,
+      "recall": 0.7079258735609724
+    },
+    "vegetation": {
+      "truth_pixels": 2027465034,
+      "predicted_pixels": 1760885987,
+      "iou": 0.8168046559168696,
+      "precision": 0.9672281911344439,
+      "recall": 0.8400532386197492
+    },
+    "water": {
+      "truth_pixels": 54571458,
+      "predicted_pixels": 5471912,
+      "iou": 0.09047713470076528,
+      "precision": 0.910433501123556,
+      "recall": 0.09128969946157568
+    },
+    "obstacle": {
+      "truth_pixels": 19140550,
+      "predicted_pixels": 225307184,
+      "iou": 0.0447504910543783,
+      "precision": 0.04647251727224108,
+      "recall": 0.547037154104767
+    }
+  },
+  "by_sequence": {
+    "00000": {
+      "evaluated_pixels": 205013391,
+      "pixel_accuracy": 0.6891372573804215,
+      "mean_iou": 0.30665686663654224,
+      "per_group": {
+        "ground": {
+          "truth_pixels": 7674579,
+          "predicted_pixels": 35146046,
+          "iou": 0.14324715096796137,
+          "precision": 0.152658993276228,
+          "recall": 0.6991080553083108
+        },
+        "vegetation": {
+          "truth_pixels": 148897981,
+          "predicted_pixels": 138840881,
+          "iou": 0.7789098491426674,
+          "precision": 0.9074326818770331,
+          "recall": 0.8461414463370057
+        },
+        "water": {
+          "truth_pixels": 42873077,
+          "predicted_pixels": 4832808,
+          "iou": 0.11252411191824586,
+          "precision": 0.9984092064075378,
+          "recall": 0.11254428974155506
+        },
+        "obstacle": {
+          "truth_pixels": 5567754,
+          "predicted_pixels": 26121625,
+          "iou": 0.1919463545172944,
+          "precision": 0.19536047240552606,
+          "recall": 0.9165514496509723
+        }
+      }
+    },
+    "00001": {
+      "evaluated_pixels": 663152814,
+      "pixel_accuracy": 0.882856763388476,
+      "mean_iou": 0.28862665997925874,
+      "per_group": {
+        "ground": {
+          "truth_pixels": 21697022,
+          "predicted_pixels": 21114010,
+          "iou": 0.24349600605159277,
+          "precision": 0.39703831721212596,
+          "recall": 0.3863696593938099
+        },
+        "vegetation": {
+          "truth_pixels": 628583477,
+          "predicted_pixels": 595660751,
+          "iou": 0.8904162802129805,
+          "precision": 0.9680654567754121,
+          "recall": 0.9173620021832041
+        },
+        "water": {
+          "truth_pixels": 10734423,
+          "predicted_pixels": 176117,
+          "iou": 0.014497106315801317,
+          "precision": 0.8852694515577713,
+          "recall": 0.014524395023374801
+        },
+        "obstacle": {
+          "truth_pixels": 2137892,
+          "predicted_pixels": 45940286,
+          "iou": 0.006097247336660472,
+          "precision": 0.006342320115290532,
+          "recall": 0.13628752060440846
+        }
+      }
+    },
+    "00002": {
+      "evaluated_pixels": 1393395177,
+      "pixel_accuracy": 0.7933283401913196,
+      "mean_iou": 0.30741485143309966,
+      "per_group": {
+        "ground": {
+          "truth_pixels": 131012739,
+          "predicted_pixels": 210368341,
+          "iou": 0.41306381685707777,
+          "precision": 0.47436697235730924,
+          "recall": 0.7616953417026111
+        },
+        "vegetation": {
+          "truth_pixels": 1249983576,
+          "predicted_pixels": 1026384355,
+          "iou": 0.7842436988047201,
+          "precision": 0.9748309326090614,
+          "recall": 0.8004514916922396
+        },
+        "water": {
+          "truth_pixels": 963958,
+          "predicted_pixels": 462987,
+          "iou": 0.0005476228540336175,
+          "precision": 0.001686872417584079,
+          "recall": 0.0008102012743293795
+        },
+        "obstacle": {
+          "truth_pixels": 11434904,
+          "predicted_pixels": 153245273,
+          "iou": 0.03180426721656737,
+          "precision": 0.033123964613251074,
+          "recall": 0.44391199086586125
+        }
+      }
+    }
+  },
+  "by_rellis_class": {
+    "void": {
+      "group": null,
+      "pixels": 455,
+      "predicted_fraction": {
+        "unknown": 0.05054945054945055,
+        "ground": 0.07252747252747253,
+        "vegetation": 0.7604395604395604,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.11648351648351649
+      }
+    },
+    "dirt": {
+      "group": "ground",
+      "pixels": 9690,
+      "predicted_fraction": {
+        "unknown": 0.0,
+        "ground": 0.018575851393188854,
+        "vegetation": 0.8162022703818369,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.1652218782249742
+      }
+    },
+    "grass": {
+      "group": "vegetation",
+      "pixels": 1364538849,
+      "predicted_fraction": {
+        "unknown": 2.4836229488692265e-06,
+        "ground": 0.05493016344307834,
+        "vegetation": 0.900154814866689,
+        "trunk": 2.0446468065344177e-07,
+        "water": 3.443067966473119e-05,
+        "obstacle": 0.04487790292293833
+      }
+    },
+    "tree": {
+      "group": null,
+      "pixels": 421358453,
+      "predicted_fraction": {
+        "unknown": 0.021822846876647328,
+        "ground": 0.0009370477729563906,
+        "vegetation": 0.8457635807771489,
+        "trunk": 0.0023803794438176373,
+        "water": 2.240372759295279e-06,
+        "obstacle": 0.12909390475667046
+      }
+    },
+    "pole": {
+      "group": "obstacle",
+      "pixels": 1820068,
+      "predicted_fraction": {
+        "unknown": 0.3482199566170055,
+        "ground": 0.004369067529345057,
+        "vegetation": 0.2116975849253984,
+        "trunk": 0.00029174734130812697,
+        "water": 0.0,
+        "obstacle": 0.4354216435869429
+      }
+    },
+    "water": {
+      "group": "water",
+      "pixels": 959662,
+      "predicted_fraction": {
+        "unknown": 0.0008898966511125793,
+        "ground": 0.012129270513993469,
+        "vegetation": 0.9733781268821731,
+        "trunk": 0.0,
+        "water": 0.000813828202012792,
+        "obstacle": 0.012788877750708062
+      }
+    },
+    "sky": {
+      "group": null,
+      "pixels": 1169367710,
+      "predicted_fraction": {
+        "unknown": 0.9747398301258037,
+        "ground": 1.706905349729556e-06,
+        "vegetation": 0.02025072335886545,
+        "trunk": 6.400895061485835e-06,
+        "water": 0.0,
+        "obstacle": 0.005001338714919707
+      }
+    },
+    "vehicle": {
+      "group": "obstacle",
+      "pixels": 2184284,
+      "predicted_fraction": {
+        "unknown": 0.01131629403502475,
+        "ground": 0.012427413285085639,
+        "vegetation": 0.6233960419066386,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.3528602507732511
+      }
+    },
+    "object": {
+      "group": "obstacle",
+      "pixels": 2696747,
+      "predicted_fraction": {
+        "unknown": 0.010877549877685968,
+        "ground": 0.06530645996825064,
+        "vegetation": 0.2607786344065646,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.6630373557474988
+      }
+    },
+    "asphalt": {
+      "group": "ground",
+      "pixels": 3850438,
+      "predicted_fraction": {
+        "unknown": 0.00011063676392140323,
+        "ground": 0.8897216368631309,
+        "vegetation": 0.09602725715879597,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.01414046921415174
+      }
+    },
+    "building": {
+      "group": "obstacle",
+      "pixels": 620290,
+      "predicted_fraction": {
+        "unknown": 0.009013525931419174,
+        "ground": 0.06369762530429315,
+        "vegetation": 0.600607780231827,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.32668106853246065
+      }
+    },
+    "log": {
+      "group": "obstacle",
+      "pixels": 29728,
+      "predicted_fraction": {
+        "unknown": 0.0,
+        "ground": 0.28135091496232506,
+        "vegetation": 0.4986544671689989,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.219994617868676
+      }
+    },
+    "person": {
+      "group": "obstacle",
+      "pixels": 3216634,
+      "predicted_fraction": {
+        "unknown": 0.004695902611238954,
+        "ground": 0.0011232238420659608,
+        "vegetation": 0.07160684118864627,
+        "trunk": 0.0040383829804696465,
+        "water": 0.0,
+        "obstacle": 0.9185356493775791
+      }
+    },
+    "fence": {
+      "group": "obstacle",
+      "pixels": 2067483,
+      "predicted_fraction": {
+        "unknown": 0.0004817451945191327,
+        "ground": 0.0,
+        "vegetation": 0.07572396000354054,
+        "trunk": 0.005649865077487941,
+        "water": 0.0,
+        "obstacle": 0.9181444297244524
+      }
+    },
+    "bush": {
+      "group": "vegetation",
+      "pixels": 662926185,
+      "predicted_fraction": {
+        "unknown": 0.0034113813138939445,
+        "ground": 0.0640112775150072,
+        "vegetation": 0.7163427297716412,
+        "trunk": 1.385523789500033e-05,
+        "water": 0.0006626258095386592,
+        "obstacle": 0.21555813035202404
+      }
+    },
+    "concrete": {
+      "group": "ground",
+      "pixels": 126705811,
+      "predicted_fraction": {
+        "unknown": 0.0019116723857282283,
+        "ground": 0.7603783933792903,
+        "vegetation": 0.15694202849149516,
+        "trunk": 8.91829657283832e-07,
+        "water": 3.035377753905857e-05,
+        "obstacle": 0.08073666013629004
+      }
+    },
+    "barrier": {
+      "group": "obstacle",
+      "pixels": 4598056,
+      "predicted_fraction": {
+        "unknown": 0.0033077022115433133,
+        "ground": 0.2185216969954259,
+        "vegetation": 0.38847830474443984,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.38969229604859096
+      }
+    },
+    "puddle": {
+      "group": "water",
+      "pixels": 53611796,
+      "predicted_fraction": {
+        "unknown": 0.0,
+        "ground": 0.6386970322725245,
+        "vegetation": 0.2650154641340499,
+        "trunk": 0.0,
+        "water": 0.09290923587040434,
+        "obstacle": 0.0033782677230212543
+      }
+    },
+    "mud": {
+      "group": "ground",
+      "pixels": 29818401,
+      "predicted_fraction": {
+        "unknown": 0.0,
+        "ground": 0.46179085860438995,
+        "vegetation": 0.5308115616259906,
+        "trunk": 1.006090165599423e-07,
+        "water": 0.0,
+        "obstacle": 0.0073974791606028776
+      }
+    },
+    "rubble": {
+      "group": "obstacle",
+      "pixels": 1907260,
+      "predicted_fraction": {
+        "unknown": 0.0,
+        "ground": 0.09346864087748917,
+        "vegetation": 0.7673479231987249,
+        "trunk": 0.0,
+        "water": 0.0,
+        "obstacle": 0.13918343592378596
+      }
+    }
+  },
+  "note": "Pretrained GOOSE model on another dataset, grouped classes. Tree and sky are not scored."
+}

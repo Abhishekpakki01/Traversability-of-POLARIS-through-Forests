@@ -28,8 +28,8 @@ GOOSE project. I have not trained a new segmentation model.
 
 ## Results so far
 
-These come from one TartanDrive excerpt (a meadow, 318 mapped scans, about
-100 m) and one labelled RELLIS-3D frame and scan.
+The first four rows come from one TartanDrive excerpt (a meadow, 318 mapped scans,
+about 100 m). The last two use human labels in RELLIS-3D.
 
 | Check | Result |
 |---|---|
@@ -37,7 +37,8 @@ These come from one TartanDrive excerpt (a meadow, 318 mapped scans, about
 | Ground thickness in the accumulated map | 2.8 cm (1.9 cm in a single scan) |
 | Driven path wrongly marked non-traversable | 1.6% with camera + LiDAR |
 | LiDAR vegetation agreement with camera labels | 80–84% |
-| Labelled RELLIS-3D camera frame | pixel accuracy 0.68, mean IoU 0.36 |
+| RELLIS-3D camera test split, 1,672 images | pixel accuracy 0.81, mean IoU 0.33 |
+| RELLIS-3D LiDAR-only voxels, 1.25 million | 55% agree with human labels |
 
 The driven-path figure only tests positive examples, and GPS/INS agreement is a
 comparison between two systems, not ground truth.
@@ -45,9 +46,9 @@ comparison between two systems, not ground truth.
 ## What is still unfinished
 
 - The vehicle limits are placeholders, not POLARIS values.
-- LiDAR-only classes agree with human labels on 55% of RELLIS-3D voxels, and many
-  tree voxels get no class. The camera evaluation on the RELLIS-3D test split is
-  still to be reported.
+- On RELLIS-3D, the camera model reaches mean IoU 0.33 (vegetation 0.82, water 0.09,
+  obstacle 0.05), and LiDAR-only classes agree with human labels on 55% of voxels.
+  Many tree voxels get no class.
 - Camera–LiDAR alignment on TartanDrive has not been measured. Automatic checks
   were inconclusive, and one failed its control test on RELLIS-3D.
 - Camera water detection is unreliable, for example on dark wet soil.

@@ -7,6 +7,39 @@ model nor the LiDAR thresholds were fitted to it. The class grouping
 
 The data is in `~/thesis_data/rellis_3d_full/` and is not in Git.
 
+## Camera model on the official test split
+
+```bash
+/usr/bin/python3 src/semantic_mapping/tools/evaluate_rellis_images.py --output artifacts/my_rellis_camera
+```
+
+All 1,672 images of `test.lst`, which come from sequences 00000 to 00002, with 512×832
+model input.
+
+| Group | IoU | Precision | Recall |
+|---|---:|---:|---:|
+| Vegetation | 0.82 | 0.97 | 0.84 |
+| Ground | 0.36 | 0.43 | 0.71 |
+| Water | 0.09 | 0.91 | 0.09 |
+| Obstacle | 0.05 | 0.05 | 0.55 |
+
+Pixel accuracy is 0.81 and mean IoU is 0.33.
+
+How to read this:
+
+- Pixel accuracy is high mainly because vegetation covers about 90% of scored
+  pixels. Mean IoU is the fairer summary.
+- Water is mostly missed: 64% of puddle pixels are called ground. The Tartan drive also
+  showed false water on damp soil, so camera water should not be relied on.
+- Obstacle precision is very low because bush is often called obstacle (22% of bush
+  pixels), and real obstacles are rare in these scenes.
+- Tree and sky are not scored, because RELLIS does not separate trunk from crown.
+- Mud is often called vegetation (53%).
+- The model was not trained on RELLIS-3D, so this measures how well it transfers, and
+  its classes are grouped. It is not a benchmark of the model itself.
+
+Report: `artifacts/rellis_test_split_camera_2026_11_04/report.json`.
+
 ## LiDAR-only classes on voxel maps
 
 ```bash
