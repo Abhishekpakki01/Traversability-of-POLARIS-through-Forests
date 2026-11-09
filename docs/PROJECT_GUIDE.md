@@ -200,14 +200,18 @@ New tests: 30 more (68 in total, all passing) in `test/test_terrain_analysis.py`
 
 ## 4. Still to do
 
-| Priority | Task | Needs |
+| Priority | Task | Status / needs |
 |---|---|---|
-| 1 | Measure camera–LiDAR alignment; automatic checks failed or were inconclusive | A sharp target or a recording with clear vertical structures |
-| 2 | Real class accuracy on a labelled RELLIS-3D sequence | Download approval (several GB) |
-| 3 | A forest recording, since the meadow has almost no trees | Download approval (~1 GB) |
-| 4 | Supervisor video: record RViz with Win + Alt + R, or rendered MP4s | Recording choice |
-| 5 | POLARIS limits (clearance, maximum slope, height) | Vehicle documentation |
-| 7 | Thesis writing (deadline 23 November) | About 10 days |
+| 1 | Thesis writing (deadline 23 November) | Author's own work; not started in the repo |
+| 2 | POLARIS limits (clearance, maximum slope, step height, dimensions) | Supervisor or vehicle documentation; placeholders until then |
+| 3 | Supervisor decisions: GOOSE weights, AI-use approval, evaluation scope, real-time scope | Supervisor reply |
+| 4 | Camera–LiDAR alignment on TartanDrive | Still unmeasured. RELLIS-3D has a label-based reference (0.0° horizontal, −0.5° vertical); TartanDrive needs a recording with clear vertical structures |
+| 5 | A forest recording, since the meadow has almost no trees | Optional; download approval (~1 GB). Tree classes are covered by RELLIS-3D |
+| 6 | Rebuild the TartanDrive maps with `fill_sparse` | Optional; the demos and videos were made without it |
+
+Done since the first version of this list: RELLIS-3D class accuracy (camera
+test split and LiDAR voxels, see `docs/RELLIS_EVALUATION.md`) and the RViz
+pictures and videos (`docs/RVIZ_MEDIA.md`).
 
 Optional disk clean-up (keep `offline_v2_*` and `water_demo_v2_*`):
 `artifacts/offline_demo_rerun_2026_11_02` (2.3 GB duplicate),
