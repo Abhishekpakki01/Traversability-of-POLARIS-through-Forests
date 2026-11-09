@@ -168,6 +168,7 @@ backed up first and hash-verified in `backups/before_*_2026_11_0*/`.
 | `check_outline_alignment_rellis.py`, `check_label_alignment_rellis.py` | Control tests on RELLIS-3D; the outline method failed its control |
 | `build_results_pack.py` | Collects result numbers and figures, each traced to its source report |
 | `diagnose_rellis_coverage.py` | Finds why tree and bush voxels get no class, on development sequences only |
+| `lidar_features.fill_sparse`, `evaluate_rellis_lidar_map.py --fill-sparse` | Fills sparse voxels from classified neighbours; tested on held-out sequences |
 
 ### Existing files that were edited (options added, defaults unchanged)
 

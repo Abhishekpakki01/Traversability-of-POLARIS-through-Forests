@@ -84,3 +84,42 @@ best match is at 0.0° across and −0.5° vertical. The published transform mus
 inverted: as given, the labels match on only 28%.
 
 Report: `artifacts/calibration_outline_2026_11_04/rellis_label_reference/report.json`.
+
+## Filling sparse voxels from their neighbours (9 November)
+
+A diagnosis on sequences 00000 and 00001 found that tree voxels are left unknown
+mainly because they get fewer than 3 points (39% of tree voxels), not because the
+rules are wrong. Three times more scans only cut unknown tree voxels from 48% to 40%.
+
+The rule tested, `fill_sparse` in `lidar_features.py`: an unknown voxel with fewer
+than 3 points, or fewer than 5 hits plus passes, takes the most common known class of
+its 26 neighbours, if at least 3 of them have one. The rule and the decision were
+written down before testing (`artifacts/rellis_tree_coverage_2026_11_06/PLAN.md`).
+It passed on the development sequences and was then scored once on 00002 to 00004.
+
+| Held-out sequences 00002–00004 | As measured | With fill |
+|---|---:|---:|
+| Voxels with an accepted class | 60.8% | 76.4% |
+| Mean over labelled classes | 45.1% | 55.3% |
+| Tree, accepted / unknown | 39.9% / 40.1% | 59.5% / 9.0% |
+| Bush, accepted / unknown | 47.9% / 30.9% | 66.5% / 5.2% |
+| Grass, accepted | 85.4% | 97.5% |
+| Concrete, accepted | 59.9% | 68.4% |
+
+Filled voxels on their own were accepted 75% of the time, close to the 77% of measured
+voxels that get a class. Development sequences 00000 and 00001 showed the same pattern:
+overall 48.0% to 64.6%, tree 32.4% to 53.7%.
+
+How to read this:
+
+- Filled classes are inferred from neighbours, not measured, so the map should keep
+  them marked as inferred.
+- Grass is scored leniently, because ground and low vegetation both count.
+- The fill is an option. The TartanDrive maps and demos were built without it.
+
+```bash
+/usr/bin/python3 src/semantic_mapping/tools/evaluate_rellis_lidar_map.py --sequences 00002 00003 00004 --fill-sparse --output artifacts/my_fill_check
+```
+
+Reports: `artifacts/rellis_tree_coverage_2026_11_06/`.
+

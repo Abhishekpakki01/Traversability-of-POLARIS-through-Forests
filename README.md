@@ -48,7 +48,8 @@ comparison between two systems, not ground truth.
 - The vehicle limits are placeholders, not POLARIS values.
 - On RELLIS-3D, the camera model reaches mean IoU 0.33 (vegetation 0.82, water 0.09,
   obstacle 0.04), and LiDAR-only classes agree with human labels on 55% of voxels.
-  Many tree voxels get no class.
+  Many tree voxels get no class because few points reach them. Filling them from
+  their neighbours raises held-out agreement from 61% to 76% (trees 40% to 60%).
 - Camera–LiDAR alignment on TartanDrive has not been measured. Automatic checks
   were inconclusive, and one failed its control test on RELLIS-3D.
 - Camera water detection is unreliable, for example on dark wet soil.

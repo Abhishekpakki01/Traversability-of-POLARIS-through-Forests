@@ -1,0 +1,5 @@
+{
+ "src/semantic_mapping/semantic_mapping/lidar_features.py": "9b535669c05761dbd301889ecc7812a20cadf86dad5f12ef039ba279b1c6f835",
+ "src/semantic_mapping/test/test_lidar_features.py": "1f3265c2465b8343f6ec7e8fa4b281af9c370044de1e3543e3cf9d70aa478515",
+ "src/semantic_mapping/tools/evaluate_rellis_lidar_map.py": "5622199e9433891fc930296120fef0b611751502226a2f0308a0e6358aeb87ca"
+}

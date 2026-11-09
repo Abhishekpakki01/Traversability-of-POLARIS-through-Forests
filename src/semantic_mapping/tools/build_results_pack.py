@@ -37,6 +37,7 @@ SOURCES = dict(
     voxels='artifacts/rellis_lidar_voxels_2026_11_04/report.json',
     labels='artifacts/calibration_outline_2026_11_04/rellis_label_reference/report.json',
     outline='artifacts/calibration_outline_2026_11_04/rellis_control/report.json',
+    held_out='artifacts/rellis_tree_coverage_2026_11_06/held_out/report.json',
 )
 # section, measure, source, path into the report, unit, scale, decimals
 ROWS = [
@@ -77,6 +78,11 @@ ROWS = [
     ('RELLIS LiDAR', 'Tree voxels with an accepted class', 'voxels', 'per_rellis_class.tree.consistent_fraction', '%', 100, 1),
     ('RELLIS LiDAR', 'Tree voxels left unknown', 'voxels', 'per_rellis_class.tree.lidar_class_fraction.unknown', '%', 100, 1),
     ('RELLIS LiDAR', 'Bush voxels with an accepted class', 'voxels', 'per_rellis_class.bush.consistent_fraction', '%', 100, 1),
+    ('RELLIS sparse fill', 'Held-out voxels with an accepted class, as measured', 'held_out', 'consistent_fraction', '%', 100, 1),
+    ('RELLIS sparse fill', 'Held-out voxels with an accepted class, with fill', 'held_out', 'sparse_filled.consistent_fraction', '%', 100, 1),
+    ('RELLIS sparse fill', 'Held-out tree voxels accepted, as measured', 'held_out', 'per_rellis_class.tree.consistent_fraction', '%', 100, 1),
+    ('RELLIS sparse fill', 'Held-out tree voxels accepted, with fill', 'held_out', 'sparse_filled.per_rellis_class.tree.consistent_fraction', '%', 100, 1),
+    ('RELLIS sparse fill', 'Filled voxels accepted', 'held_out', 'filled_voxels_only.consistent_fraction', '%', 100, 1),
     ('Calibration control', 'RELLIS label reference, horizontal offset', 'labels', 'dx_deg', 'deg', 1, 2),
     ('Calibration control', 'RELLIS label reference, vertical offset', 'labels', 'dy_deg', 'deg', 1, 2),
     ('Calibration control', 'Outline method on RELLIS, median offset', 'outline', 'median_dx_deg', 'deg', 1, 2),

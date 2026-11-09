@@ -1,0 +1,370 @@
+[
+  {
+    "sequence": "00000",
+    "first_scan": 979,
+    "stride": 3,
+    "label": "tree",
+    "voxels": 91677,
+    "unknown": 48877,
+    "reasons": {
+      "under_3_points": 40326,
+      "under_5_hits_and_passes": 8434,
+      "solid_but_under_0_3_m": 117,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 48877,
+      "ground": 5064,
+      "low_vegetation": 5282,
+      "tall_vegetation": 29530,
+      "trunk_like": 356,
+      "solid_obstacle": 2568
+    },
+    "median_points": 3.0
+  },
+  {
+    "sequence": "00000",
+    "first_scan": 979,
+    "stride": 3,
+    "label": "bush",
+    "voxels": 9208,
+    "unknown": 2964,
+    "reasons": {
+      "under_3_points": 2279,
+      "under_5_hits_and_passes": 664,
+      "solid_but_under_0_3_m": 21,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 2964,
+      "ground": 251,
+      "low_vegetation": 2633,
+      "tall_vegetation": 3136,
+      "trunk_like": 27,
+      "solid_obstacle": 197
+    },
+    "median_points": 8.0
+  },
+  {
+    "sequence": "00000",
+    "first_scan": 979,
+    "stride": 1,
+    "label": "tree",
+    "voxels": 128125,
+    "unknown": 57925,
+    "reasons": {
+      "under_3_points": 46582,
+      "under_5_hits_and_passes": 11164,
+      "solid_but_under_0_3_m": 179,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 57925,
+      "ground": 6301,
+      "low_vegetation": 8800,
+      "tall_vegetation": 50307,
+      "trunk_like": 599,
+      "solid_obstacle": 4193
+    },
+    "median_points": 4.0
+  },
+  {
+    "sequence": "00000",
+    "first_scan": 979,
+    "stride": 1,
+    "label": "bush",
+    "voxels": 10880,
+    "unknown": 2704,
+    "reasons": {
+      "under_3_points": 2057,
+      "under_5_hits_and_passes": 623,
+      "solid_but_under_0_3_m": 24,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 2704,
+      "ground": 228,
+      "low_vegetation": 3506,
+      "tall_vegetation": 4158,
+      "trunk_like": 42,
+      "solid_obstacle": 242
+    },
+    "median_points": 15.0
+  },
+  {
+    "sequence": "00000",
+    "first_scan": 1778,
+    "stride": 3,
+    "label": "tree",
+    "voxels": 153539,
+    "unknown": 69121,
+    "reasons": {
+      "under_3_points": 55310,
+      "under_5_hits_and_passes": 13336,
+      "solid_but_under_0_3_m": 475,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 69121,
+      "ground": 11393,
+      "low_vegetation": 14037,
+      "tall_vegetation": 50315,
+      "trunk_like": 1351,
+      "solid_obstacle": 7322
+    },
+    "median_points": 4.0
+  },
+  {
+    "sequence": "00000",
+    "first_scan": 1778,
+    "stride": 3,
+    "label": "bush",
+    "voxels": 5120,
+    "unknown": 1682,
+    "reasons": {
+      "under_3_points": 1318,
+      "under_5_hits_and_passes": 350,
+      "solid_but_under_0_3_m": 14,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 1682,
+      "ground": 355,
+      "low_vegetation": 1900,
+      "tall_vegetation": 1076,
+      "trunk_like": 9,
+      "solid_obstacle": 98
+    },
+    "median_points": 7.0
+  },
+  {
+    "sequence": "00000",
+    "first_scan": 1778,
+    "stride": 1,
+    "label": "tree",
+    "voxels": 203221,
+    "unknown": 76360,
+    "reasons": {
+      "under_3_points": 60093,
+      "under_5_hits_and_passes": 15604,
+      "solid_but_under_0_3_m": 663,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 76360,
+      "ground": 13728,
+      "low_vegetation": 20870,
+      "tall_vegetation": 78929,
+      "trunk_like": 1929,
+      "solid_obstacle": 11405
+    },
+    "median_points": 6.0
+  },
+  {
+    "sequence": "00000",
+    "first_scan": 1778,
+    "stride": 1,
+    "label": "bush",
+    "voxels": 6273,
+    "unknown": 1679,
+    "reasons": {
+      "under_3_points": 1288,
+      "under_5_hits_and_passes": 370,
+      "solid_but_under_0_3_m": 21,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 1679,
+      "ground": 411,
+      "low_vegetation": 2481,
+      "tall_vegetation": 1497,
+      "trunk_like": 20,
+      "solid_obstacle": 185
+    },
+    "median_points": 12.0
+  },
+  {
+    "sequence": "00001",
+    "first_scan": 803,
+    "stride": 3,
+    "label": "tree",
+    "voxels": 46527,
+    "unknown": 21791,
+    "reasons": {
+      "under_3_points": 17194,
+      "under_5_hits_and_passes": 4546,
+      "solid_but_under_0_3_m": 51,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 21791,
+      "ground": 1052,
+      "low_vegetation": 2386,
+      "tall_vegetation": 17819,
+      "trunk_like": 339,
+      "solid_obstacle": 3140
+    },
+    "median_points": 4.0
+  },
+  {
+    "sequence": "00001",
+    "first_scan": 803,
+    "stride": 3,
+    "label": "bush",
+    "voxels": 71446,
+    "unknown": 19211,
+    "reasons": {
+      "under_3_points": 14307,
+      "under_5_hits_and_passes": 4340,
+      "solid_but_under_0_3_m": 564,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 19211,
+      "ground": 21088,
+      "low_vegetation": 28613,
+      "tall_vegetation": 1861,
+      "trunk_like": 97,
+      "solid_obstacle": 576
+    },
+    "median_points": 5.0
+  },
+  {
+    "sequence": "00001",
+    "first_scan": 803,
+    "stride": 1,
+    "label": "tree",
+    "voxels": 60548,
+    "unknown": 22116,
+    "reasons": {
+      "under_3_points": 17150,
+      "under_5_hits_and_passes": 4894,
+      "solid_but_under_0_3_m": 72,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 22116,
+      "ground": 1081,
+      "low_vegetation": 4194,
+      "tall_vegetation": 28233,
+      "trunk_like": 469,
+      "solid_obstacle": 4455
+    },
+    "median_points": 7.0
+  },
+  {
+    "sequence": "00001",
+    "first_scan": 803,
+    "stride": 1,
+    "label": "bush",
+    "voxels": 90464,
+    "unknown": 19390,
+    "reasons": {
+      "under_3_points": 14189,
+      "under_5_hits_and_passes": 4364,
+      "solid_but_under_0_3_m": 837,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 19390,
+      "ground": 24021,
+      "low_vegetation": 42917,
+      "tall_vegetation": 3117,
+      "trunk_like": 104,
+      "solid_obstacle": 915
+    },
+    "median_points": 8.0
+  },
+  {
+    "sequence": "00001",
+    "first_scan": 1426,
+    "stride": 3,
+    "label": "tree",
+    "voxels": 2,
+    "unknown": 2,
+    "reasons": {
+      "under_3_points": 2,
+      "under_5_hits_and_passes": 0,
+      "solid_but_under_0_3_m": 0,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 2,
+      "ground": 0,
+      "low_vegetation": 0,
+      "tall_vegetation": 0,
+      "trunk_like": 0,
+      "solid_obstacle": 0
+    },
+    "median_points": 1.0
+  },
+  {
+    "sequence": "00001",
+    "first_scan": 1426,
+    "stride": 3,
+    "label": "bush",
+    "voxels": 58874,
+    "unknown": 19287,
+    "reasons": {
+      "under_3_points": 14798,
+      "under_5_hits_and_passes": 4041,
+      "solid_but_under_0_3_m": 448,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 19287,
+      "ground": 16700,
+      "low_vegetation": 20807,
+      "tall_vegetation": 1389,
+      "trunk_like": 66,
+      "solid_obstacle": 625
+    },
+    "median_points": 4.0
+  },
+  {
+    "sequence": "00001",
+    "first_scan": 1426,
+    "stride": 1,
+    "label": "tree",
+    "voxels": 12,
+    "unknown": 11,
+    "reasons": {
+      "under_3_points": 11,
+      "under_5_hits_and_passes": 0,
+      "solid_but_under_0_3_m": 0,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 11,
+      "ground": 0,
+      "low_vegetation": 0,
+      "tall_vegetation": 1,
+      "trunk_like": 0,
+      "solid_obstacle": 0
+    },
+    "median_points": 1.0
+  },
+  {
+    "sequence": "00001",
+    "first_scan": 1426,
+    "stride": 1,
+    "label": "bush",
+    "voxels": 77349,
+    "unknown": 20733,
+    "reasons": {
+      "under_3_points": 15346,
+      "under_5_hits_and_passes": 4575,
+      "solid_but_under_0_3_m": 812,
+      "other": 0
+    },
+    "classes": {
+      "unknown": 20733,
+      "ground": 19056,
+      "low_vegetation": 33339,
+      "tall_vegetation": 3132,
+      "trunk_like": 88,
+      "solid_obstacle": 1001
+    },
+    "median_points": 6.0
+  }
+]

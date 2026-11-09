@@ -88,3 +88,25 @@ def test_class_rules():
     features['points'][:] = 1.
     features['passes'][:] = 0.
     assert set(lidar_classes(features, np.full(n, .7), CELL)) == {0}
+
+
+def test_fill_sparse_uses_classified_neighbours_only():
+    from semantic_mapping.lidar_features import fill_sparse
+    cell = .2
+    grid = np.array([[x, y, 0] for x in range(3) for y in range(3)], dtype=float)*cell+cell/2
+    tall = LIDAR_CLASSES.index('tall_vegetation')
+    unknown = LIDAR_CLASSES.index('unknown')
+    classes = np.full(len(grid), tall)
+    classes[4] = unknown  # the centre voxel, with few points
+    points = np.full(len(grid), 10.)
+    points[4] = 1
+    features = dict(points=points, passes=np.zeros(len(grid)))
+    filled_classes, filled = fill_sparse(grid, classes, features, cell)
+    assert filled_classes[4] == tall and filled.tolist() == [i == 4 for i in range(len(grid))]
+    # A well-measured unknown voxel is left alone, and so is one with too few classified neighbours.
+    points[4] = 10
+    assert fill_sparse(grid, classes, dict(points=points, passes=np.full(len(grid), 10.)), cell)[0][4] == unknown
+    points[4] = 1
+    lonely = np.full(len(grid), unknown)
+    lonely[0] = tall
+    assert fill_sparse(grid, lonely, features, cell)[0][4] == unknown

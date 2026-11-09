@@ -16,7 +16,7 @@ import numpy as np
 import yaml
 
 from semantic_mapping.camera_projection import transform_points
-from semantic_mapping.lidar_features import LIDAR_CLASSES, VoxelStatistics, lidar_classes
+from semantic_mapping.lidar_features import LIDAR_CLASSES, VoxelStatistics, fill_sparse, lidar_classes
 from semantic_mapping.semantic_fusion import voxel_keys
 from semantic_mapping.terrain_analysis import analyze, settings_for_run
 
@@ -63,7 +63,7 @@ def stretch(folder, poses, first, scans, stride, cell, max_range, settings, deta
     for start, count in zip(starts, counts):
         if count > best[voxel[start]]:
             best[voxel[start]], majority[voxel[start]] = count, label[start]
-    return (majority, classes, features, height) if details else (majority, classes)
+    return (majority, classes, features, height, centres) if details else (majority, classes)
 
 
 def main():
@@ -78,47 +78,70 @@ def main():
     parser.add_argument('--stretches', type=int, default=3, help='evenly spaced stretches per sequence')
     parser.add_argument('--scans', type=int, default=30, help='scans per stretch')
     parser.add_argument('--stride', type=int, default=3, help='use every nth scan')
+    parser.add_argument('--sequences', nargs='+', help='only these sequences, e.g. 00002 00003 00004')
+    parser.add_argument('--fill-sparse', action='store_true',
+                        help='also score the rule that fills sparse voxels from classified neighbours')
     args = parser.parse_args()
     if args.output.exists():
         parser.error('Output already exists; choose a new folder to preserve previous results')
     expectations = {int(k): v for k, v in json.loads(args.expectations.read_text())['classes'].items()}
     settings = settings_for_run(yaml.safe_load(args.terrain_config.read_text()), args.resolution)
-    table = {label: np.zeros(len(LIDAR_CLASSES), np.int64) for label in expectations}
+    variants = ['as_measured', 'sparse_filled'] if args.fill_sparse else ['as_measured']
+    tables = {v: {label: np.zeros(len(LIDAR_CLASSES), np.int64) for label in expectations} for v in variants}
+    filled_tables = {label: np.zeros(len(LIDAR_CLASSES), np.int64) for label in expectations}
     stretches, started = [], time.time()
-    for folder in sorted(p for p in args.data.iterdir() if p.is_dir()):
+    for folder in sorted(p for p in args.data.iterdir() if p.is_dir() and (not args.sequences or p.name in args.sequences)):
         poses = read_poses(folder/'poses.txt')
         scans = len(list((folder/'os1_cloud_node_kitti_bin').glob('*.bin')))
         span = args.scans*args.stride
         for first in np.linspace(span, min(scans, len(poses))-2*span, args.stretches).astype(int):
-            majority, classes = stretch(folder, poses, int(first), args.scans, args.stride, args.resolution,
-                                        args.max_range, settings)
-            for label in table:
-                table[label] += np.bincount(classes[majority == label], minlength=len(LIDAR_CLASSES))
+            majority, classes, features, _, centres = stretch(folder, poses, int(first), args.scans, args.stride,
+                                                              args.resolution, args.max_range, settings, True)
+            versions = {'as_measured': classes}
+            if args.fill_sparse:
+                versions['sparse_filled'], filled = fill_sparse(centres, classes, features, args.resolution)
+                for label in filled_tables:
+                    filled_tables[label] += np.bincount(versions['sparse_filled'][filled & (majority == label)],
+                                                        minlength=len(LIDAR_CLASSES))
+            for name, values in versions.items():
+                for label in tables[name]:
+                    tables[name][label] += np.bincount(values[majority == label], minlength=len(LIDAR_CLASSES))
             stretches.append(dict(sequence=folder.name, first_scan=int(first), voxels=len(classes)))
             print(f'{folder.name} scan {first}: {len(classes)} voxels, {time.time()-started:.0f} s', flush=True)
-    per_class, voxels, consistent = {}, 0, 0
-    for label, counts in table.items():
-        total = int(counts.sum())
-        if not total:
-            continue
-        accept = [LIDAR_CLASSES.index(c) for c in expectations[label]['accept']]
-        ok = int(counts[accept].sum())
-        voxels += total
-        consistent += ok
-        per_class[expectations[label]['name']] = dict(
-            voxels=total, accepted=expectations[label]['accept'], consistent_fraction=ok/total,
-            lidar_class_fraction={c: float(counts[i]/total) for i, c in enumerate(LIDAR_CLASSES)})
+    def score(table):
+        per_class, voxels, consistent = {}, 0, 0
+        for label, counts in table.items():
+            total = int(counts.sum())
+            if not total:
+                continue
+            accept = [LIDAR_CLASSES.index(c) for c in expectations[label]['accept']]
+            ok = int(counts[accept].sum())
+            voxels += total
+            consistent += ok
+            per_class[expectations[label]['name']] = dict(
+                voxels=total, accepted=expectations[label]['accept'], consistent_fraction=ok/total,
+                lidar_class_fraction={c: float(counts[i]/total) for i, c in enumerate(LIDAR_CLASSES)})
+        return dict(scored_voxels=voxels, consistent_fraction=consistent/max(voxels, 1),
+                    mean_class_consistent_fraction=float(np.mean([v['consistent_fraction'] for v in per_class.values()])),
+                    per_rellis_class=per_class)
+    results = {name: score(table) for name, table in tables.items()}
     report = dict(resolution_m=args.resolution, max_range_m=args.max_range, ground_method=settings.ground_method,
-                  stretches=stretches, scored_voxels=voxels, consistent_fraction=consistent/max(voxels, 1),
-                  mean_class_consistent_fraction=float(np.mean([v['consistent_fraction'] for v in per_class.values()])),
-                  per_rellis_class=per_class,
+                  sequences=args.sequences or 'all', stretches=stretches, **results['as_measured'],
                   note='Agreement of rule-based LiDAR classes with majority human labels per voxel.')
+    if args.fill_sparse:
+        report['sparse_filled'] = results['sparse_filled']
+        report['filled_voxels_only'] = score(filled_tables)
     args.output.mkdir(parents=True)
     (args.output/'report.json').write_text(json.dumps(report, indent=2)+'\n')
-    print(f"\nScored voxels {voxels}, consistent {report['consistent_fraction']:.2f}, "
-          f"class mean {report['mean_class_consistent_fraction']:.2f}")
-    for name, value in sorted(per_class.items(), key=lambda kv: -kv[1]['voxels']):
-        print(f"{name:10s} {value['voxels']:8d} voxels  consistent {value['consistent_fraction']:.2f}")
+    for name, result in results.items():
+        print(f"\n{name}: scored voxels {result['scored_voxels']}, consistent {result['consistent_fraction']:.3f}, "
+              f"class mean {result['mean_class_consistent_fraction']:.3f}")
+        for label, value in sorted(result['per_rellis_class'].items(), key=lambda kv: -kv[1]['voxels'])[:6]:
+            print(f"  {label:10s} {value['voxels']:8d} voxels  consistent {value['consistent_fraction']:.3f}  "
+                  f"unknown {value['lidar_class_fraction']['unknown']:.3f}")
+    if args.fill_sparse:
+        only = report['filled_voxels_only']
+        print(f"\nfilled voxels only: {only['scored_voxels']}, consistent {only['consistent_fraction']:.3f}")
 
 
 if __name__ == '__main__':

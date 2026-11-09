@@ -57,7 +57,7 @@ def main():
         # Offset from the published evaluation's stretches, so these are different scans.
         for first in np.linspace(2*args.span, len(poses)-3*args.span, args.stretches+2).astype(int)[1:-1]:
             for stride in args.strides:
-                majority, classes, features, height = stretch(folder, poses, int(first), args.span//stride, stride, cell, 20., settings, True)
+                majority, classes, features, height, _ = stretch(folder, poses, int(first), args.span//stride, stride, cell, 20., settings, True)
                 for label, name in TARGETS.items():
                     mask = majority == label
                     unknown = mask & (classes == UNKNOWN)

@@ -1,0 +1,667 @@
+{
+  "resolution_m": 0.2,
+  "max_range_m": 20.0,
+  "ground_method": "cloth",
+  "sequences": [
+    "00000",
+    "00001"
+  ],
+  "stretches": [
+    {
+      "sequence": "00000",
+      "first_scan": 90,
+      "voxels": 86727
+    },
+    {
+      "sequence": "00000",
+      "first_scan": 1378,
+      "voxels": 185589
+    },
+    {
+      "sequence": "00000",
+      "first_scan": 2667,
+      "voxels": 78453
+    },
+    {
+      "sequence": "00001",
+      "first_scan": 90,
+      "voxels": 81996
+    },
+    {
+      "sequence": "00001",
+      "first_scan": 1114,
+      "voxels": 95334
+    },
+    {
+      "sequence": "00001",
+      "first_scan": 2139,
+      "voxels": 52950
+    }
+  ],
+  "scored_voxels": 577521,
+  "consistent_fraction": 0.4795912183279915,
+  "mean_class_consistent_fraction": 0.44775466153287813,
+  "per_rellis_class": {
+    "grass": {
+      "voxels": 96074,
+      "accepted": [
+        "ground",
+        "low_vegetation"
+      ],
+      "consistent_fraction": 0.86846597414493,
+      "lidar_class_fraction": {
+        "unknown": 0.1274122030934488,
+        "ground": 0.5515123758769283,
+        "low_vegetation": 0.31695359826800173,
+        "tall_vegetation": 0.0013010804171784249,
+        "trunk_like": 0.0004787975935216604,
+        "solid_obstacle": 0.002341944750921165
+      }
+    },
+    "tree": {
+      "voxels": 253474,
+      "accepted": [
+        "tall_vegetation",
+        "trunk_like"
+      ],
+      "consistent_fraction": 0.32417131540118516,
+      "lidar_class_fraction": {
+        "unknown": 0.4773270631307353,
+        "ground": 0.05518909237239322,
+        "low_vegetation": 0.08270670759131114,
+        "tall_vegetation": 0.31745662276998826,
+        "trunk_like": 0.006714692631196888,
+        "solid_obstacle": 0.060605821504375205
+      }
+    },
+    "vehicle": {
+      "voxels": 1251,
+      "accepted": [
+        "solid_obstacle"
+      ],
+      "consistent_fraction": 0.2917665867306155,
+      "lidar_class_fraction": {
+        "unknown": 0.45883293365307753,
+        "ground": 0.013589128697042365,
+        "low_vegetation": 0.16386890487609912,
+        "tall_vegetation": 0.05435651478816946,
+        "trunk_like": 0.017585931254996003,
+        "solid_obstacle": 0.2917665867306155
+      }
+    },
+    "object": {
+      "voxels": 101,
+      "accepted": [
+        "solid_obstacle"
+      ],
+      "consistent_fraction": 0.10891089108910891,
+      "lidar_class_fraction": {
+        "unknown": 0.38613861386138615,
+        "ground": 0.009900990099009901,
+        "low_vegetation": 0.48514851485148514,
+        "tall_vegetation": 0.0,
+        "trunk_like": 0.009900990099009901,
+        "solid_obstacle": 0.10891089108910891
+      }
+    },
+    "log": {
+      "voxels": 769,
+      "accepted": [
+        "solid_obstacle",
+        "ground"
+      ],
+      "consistent_fraction": 0.6293888166449935,
+      "lidar_class_fraction": {
+        "unknown": 0.20026007802340703,
+        "ground": 0.6293888166449935,
+        "low_vegetation": 0.16905071521456436,
+        "tall_vegetation": 0.0,
+        "trunk_like": 0.0013003901170351106,
+        "solid_obstacle": 0.0
+      }
+    },
+    "person": {
+      "voxels": 7630,
+      "accepted": [
+        "solid_obstacle",
+        "trunk_like"
+      ],
+      "consistent_fraction": 0.27208387942332896,
+      "lidar_class_fraction": {
+        "unknown": 0.3062909567496723,
+        "ground": 0.022149410222804717,
+        "low_vegetation": 0.1943643512450852,
+        "tall_vegetation": 0.20511140235910877,
+        "trunk_like": 0.04980340760157274,
+        "solid_obstacle": 0.22228047182175623
+      }
+    },
+    "fence": {
+      "voxels": 2001,
+      "accepted": [
+        "solid_obstacle",
+        "trunk_like"
+      ],
+      "consistent_fraction": 0.3058470764617691,
+      "lidar_class_fraction": {
+        "unknown": 0.37231384307846077,
+        "ground": 0.12543728135932034,
+        "low_vegetation": 0.15342328835582209,
+        "tall_vegetation": 0.04297851074462768,
+        "trunk_like": 0.04447776111944028,
+        "solid_obstacle": 0.2613693153423288
+      }
+    },
+    "bush": {
+      "voxels": 174505,
+      "accepted": [
+        "low_vegetation",
+        "tall_vegetation"
+      ],
+      "consistent_fraction": 0.44717916392080453,
+      "lidar_class_fraction": {
+        "unknown": 0.25792957221856105,
+        "ground": 0.2751038652187616,
+        "low_vegetation": 0.4153004211913699,
+        "tall_vegetation": 0.03187874272943469,
+        "trunk_like": 0.002676141084782671,
+        "solid_obstacle": 0.017111257557090056
+      }
+    },
+    "concrete": {
+      "voxels": 38443,
+      "accepted": [
+        "ground"
+      ],
+      "consistent_fraction": 0.7316286450068933,
+      "lidar_class_fraction": {
+        "unknown": 0.09083578284733242,
+        "ground": 0.7316286450068933,
+        "low_vegetation": 0.17644304554795412,
+        "tall_vegetation": 2.601253804333689e-05,
+        "trunk_like": 0.000234112842390032,
+        "solid_obstacle": 0.0008324012173867804
+      }
+    },
+    "barrier": {
+      "voxels": 98,
+      "accepted": [
+        "solid_obstacle"
+      ],
+      "consistent_fraction": 0.20408163265306123,
+      "lidar_class_fraction": {
+        "unknown": 0.3877551020408163,
+        "ground": 0.1836734693877551,
+        "low_vegetation": 0.19387755102040816,
+        "tall_vegetation": 0.0,
+        "trunk_like": 0.030612244897959183,
+        "solid_obstacle": 0.20408163265306123
+      }
+    },
+    "puddle": {
+      "voxels": 590,
+      "accepted": [
+        "ground"
+      ],
+      "consistent_fraction": 0.5423728813559322,
+      "lidar_class_fraction": {
+        "unknown": 0.023728813559322035,
+        "ground": 0.5423728813559322,
+        "low_vegetation": 0.43389830508474575,
+        "tall_vegetation": 0.0,
+        "trunk_like": 0.0,
+        "solid_obstacle": 0.0
+      }
+    },
+    "mud": {
+      "voxels": 943,
+      "accepted": [
+        "ground"
+      ],
+      "consistent_fraction": 0.6850477200424178,
+      "lidar_class_fraction": {
+        "unknown": 0.11983032873807,
+        "ground": 0.6850477200424178,
+        "low_vegetation": 0.19300106044538706,
+        "tall_vegetation": 0.0021208907741251328,
+        "trunk_like": 0.0,
+        "solid_obstacle": 0.0
+      }
+    },
+    "rubble": {
+      "voxels": 1642,
+      "accepted": [
+        "solid_obstacle",
+        "ground"
+      ],
+      "consistent_fraction": 0.40986601705237513,
+      "lidar_class_fraction": {
+        "unknown": 0.4110840438489647,
+        "ground": 0.33191230207064554,
+        "low_vegetation": 0.16747868453105969,
+        "tall_vegetation": 0.0048721071863581,
+        "trunk_like": 0.006699147381242387,
+        "solid_obstacle": 0.0779537149817296
+      }
+    }
+  },
+  "note": "Agreement of rule-based LiDAR classes with majority human labels per voxel.",
+  "sparse_filled": {
+    "scored_voxels": 577521,
+    "consistent_fraction": 0.6462604823028081,
+    "mean_class_consistent_fraction": 0.567842059944109,
+    "per_rellis_class": {
+      "grass": {
+        "voxels": 96074,
+        "accepted": [
+          "ground",
+          "low_vegetation"
+        ],
+        "consistent_fraction": 0.9808272789724587,
+        "lidar_class_fraction": {
+          "unknown": 0.013395923975269064,
+          "ground": 0.6191893748568812,
+          "low_vegetation": 0.36163790411557756,
+          "tall_vegetation": 0.001925599017424069,
+          "trunk_like": 0.0005100235235339426,
+          "solid_obstacle": 0.003341174511314195
+        }
+      },
+      "tree": {
+        "voxels": 253474,
+        "accepted": [
+          "tall_vegetation",
+          "trunk_like"
+        ],
+        "consistent_fraction": 0.5373016561856443,
+        "lidar_class_fraction": {
+          "unknown": 0.16202450744455052,
+          "ground": 0.07181012648240057,
+          "low_vegetation": 0.12429282687770737,
+          "tall_vegetation": 0.5286222650054838,
+          "trunk_like": 0.00867939118016049,
+          "solid_obstacle": 0.10457088300969725
+        }
+      },
+      "vehicle": {
+        "voxels": 1251,
+        "accepted": [
+          "solid_obstacle"
+        ],
+        "consistent_fraction": 0.4844124700239808,
+        "lidar_class_fraction": {
+          "unknown": 0.13029576338928858,
+          "ground": 0.06874500399680256,
+          "low_vegetation": 0.23501199040767387,
+          "tall_vegetation": 0.05995203836930456,
+          "trunk_like": 0.02158273381294964,
+          "solid_obstacle": 0.4844124700239808
+        }
+      },
+      "object": {
+        "voxels": 101,
+        "accepted": [
+          "solid_obstacle"
+        ],
+        "consistent_fraction": 0.15841584158415842,
+        "lidar_class_fraction": {
+          "unknown": 0.019801980198019802,
+          "ground": 0.10891089108910891,
+          "low_vegetation": 0.7029702970297029,
+          "tall_vegetation": 0.0,
+          "trunk_like": 0.009900990099009901,
+          "solid_obstacle": 0.15841584158415842
+        }
+      },
+      "log": {
+        "voxels": 769,
+        "accepted": [
+          "solid_obstacle",
+          "ground"
+        ],
+        "consistent_fraction": 0.7984395318595578,
+        "lidar_class_fraction": {
+          "unknown": 0.006501950585175552,
+          "ground": 0.7971391417425228,
+          "low_vegetation": 0.19375812743823148,
+          "tall_vegetation": 0.0,
+          "trunk_like": 0.0013003901170351106,
+          "solid_obstacle": 0.0013003901170351106
+        }
+      },
+      "person": {
+        "voxels": 7630,
+        "accepted": [
+          "solid_obstacle",
+          "trunk_like"
+        ],
+        "consistent_fraction": 0.37011795543905635,
+        "lidar_class_fraction": {
+          "unknown": 0.05517693315858453,
+          "ground": 0.031323722149410226,
+          "low_vegetation": 0.26461336828309306,
+          "tall_vegetation": 0.2787680209698558,
+          "trunk_like": 0.058846657929226734,
+          "solid_obstacle": 0.3112712975098296
+        }
+      },
+      "fence": {
+        "voxels": 2001,
+        "accepted": [
+          "solid_obstacle",
+          "trunk_like"
+        ],
+        "consistent_fraction": 0.45977011494252873,
+        "lidar_class_fraction": {
+          "unknown": 0.08345827086456771,
+          "ground": 0.16991504247876063,
+          "low_vegetation": 0.22338830584707647,
+          "tall_vegetation": 0.06346826586706647,
+          "trunk_like": 0.07196401799100449,
+          "solid_obstacle": 0.38780609695152424
+        }
+      },
+      "bush": {
+        "voxels": 174505,
+        "accepted": [
+          "low_vegetation",
+          "tall_vegetation"
+        ],
+        "consistent_fraction": 0.6004297871121171,
+        "lidar_class_fraction": {
+          "unknown": 0.03888713790435804,
+          "ground": 0.3353313658634423,
+          "low_vegetation": 0.5597948482851495,
+          "tall_vegetation": 0.04063493882696771,
+          "trunk_like": 0.0029569353313658635,
+          "solid_obstacle": 0.022394773788716654
+        }
+      },
+      "concrete": {
+        "voxels": 38443,
+        "accepted": [
+          "ground"
+        ],
+        "consistent_fraction": 0.8064407044195302,
+        "lidar_class_fraction": {
+          "unknown": 0.008167936945607784,
+          "ground": 0.8064407044195302,
+          "low_vegetation": 0.18383060635226178,
+          "tall_vegetation": 2.601253804333689e-05,
+          "trunk_like": 0.00033816299456337955,
+          "solid_obstacle": 0.001196576749993497
+        }
+      },
+      "barrier": {
+        "voxels": 98,
+        "accepted": [
+          "solid_obstacle"
+        ],
+        "consistent_fraction": 0.2755102040816326,
+        "lidar_class_fraction": {
+          "unknown": 0.07142857142857142,
+          "ground": 0.29591836734693877,
+          "low_vegetation": 0.32653061224489793,
+          "tall_vegetation": 0.0,
+          "trunk_like": 0.030612244897959183,
+          "solid_obstacle": 0.2755102040816326
+        }
+      },
+      "puddle": {
+        "voxels": 590,
+        "accepted": [
+          "ground"
+        ],
+        "consistent_fraction": 0.5525423728813559,
+        "lidar_class_fraction": {
+          "unknown": 0.003389830508474576,
+          "ground": 0.5525423728813559,
+          "low_vegetation": 0.4440677966101695,
+          "tall_vegetation": 0.0,
+          "trunk_like": 0.0,
+          "solid_obstacle": 0.0
+        }
+      },
+      "mud": {
+        "voxels": 943,
+        "accepted": [
+          "ground"
+        ],
+        "consistent_fraction": 0.7688229056203606,
+        "lidar_class_fraction": {
+          "unknown": 0.015906680805938492,
+          "ground": 0.7688229056203606,
+          "low_vegetation": 0.20890774125132555,
+          "tall_vegetation": 0.005302226935312832,
+          "trunk_like": 0.0,
+          "solid_obstacle": 0.0010604453870625664
+        }
+      },
+      "rubble": {
+        "voxels": 1642,
+        "accepted": [
+          "solid_obstacle",
+          "ground"
+        ],
+        "consistent_fraction": 0.5889159561510353,
+        "lidar_class_fraction": {
+          "unknown": 0.08038976857490865,
+          "ground": 0.4336175395858709,
+          "low_vegetation": 0.31303288672350793,
+          "tall_vegetation": 0.007308160779537149,
+          "trunk_like": 0.010353227771010963,
+          "solid_obstacle": 0.15529841656516444
+        }
+      }
+    }
+  },
+  "filled_voxels_only": {
+    "scored_voxels": 136052,
+    "consistent_fraction": 0.7074868432658101,
+    "mean_class_consistent_fraction": 0.6043598045969601,
+    "per_rellis_class": {
+      "grass": {
+        "voxels": 10954,
+        "accepted": [
+          "ground",
+          "low_vegetation"
+        ],
+        "consistent_fraction": 0.9854847544276063,
+        "lidar_class_fraction": {
+          "unknown": 0.0,
+          "ground": 0.5935731239729779,
+          "low_vegetation": 0.39191163045462846,
+          "tall_vegetation": 0.005477451159393828,
+          "trunk_like": 0.00027387255796969143,
+          "solid_obstacle": 0.008763921855030126
+        }
+      },
+      "tree": {
+        "voxels": 79921,
+        "accepted": [
+          "tall_vegetation",
+          "trunk_like"
+        ],
+        "consistent_fraction": 0.6759550055679984,
+        "lidar_class_fraction": {
+          "unknown": 0.0,
+          "ground": 0.05271455562367838,
+          "low_vegetation": 0.13189274408478371,
+          "tall_vegetation": 0.6697238523041503,
+          "trunk_like": 0.00623115326384805,
+          "solid_obstacle": 0.1394376947235395
+        }
+      },
+      "vehicle": {
+        "voxels": 411,
+        "accepted": [
+          "solid_obstacle"
+        ],
+        "consistent_fraction": 0.5863746958637469,
+        "lidar_class_fraction": {
+          "unknown": 0.0,
+          "ground": 0.1678832116788321,
+          "low_vegetation": 0.21654501216545013,
+          "tall_vegetation": 0.0170316301703163,
+          "trunk_like": 0.012165450121654502,
+          "solid_obstacle": 0.5863746958637469
+        }
+      },
+      "object": {
+        "voxels": 37,
+        "accepted": [
+          "solid_obstacle"
+        ],
+        "consistent_fraction": 0.13513513513513514,
+        "lidar_class_fraction": {
+          "unknown": 0.0,
+          "ground": 0.2702702702702703,
+          "low_vegetation": 0.5945945945945946,
+          "tall_vegetation": 0.0,
+          "trunk_like": 0.0,
+          "solid_obstacle": 0.13513513513513514
+        }
+      },
+      "log": {
+        "voxels": 149,
+        "accepted": [
+          "solid_obstacle",
+          "ground"
+        ],
+        "consistent_fraction": 0.87248322147651,
+        "lidar_class_fraction": {
+          "unknown": 0.0,
+          "ground": 0.8657718120805369,
+          "low_vegetation": 0.12751677852348994,
+          "tall_vegetation": 0.0,
+          "trunk_like": 0.0,
+          "solid_obstacle": 0.006711409395973154
+        }
+      },
+      "person": {
+        "voxels": 1916,
+        "accepted": [
+          "solid_obstacle",
+          "trunk_like"
+        ],
+        "consistent_fraction": 0.3903966597077244,
+        "lidar_class_fraction": {
+          "unknown": 0.0,
+          "ground": 0.03653444676409186,
+          "low_vegetation": 0.2797494780793319,
+          "tall_vegetation": 0.29331941544885176,
+          "trunk_like": 0.0360125260960334,
+          "solid_obstacle": 0.354384133611691
+        }
+      },
+      "fence": {
+        "voxels": 578,
+        "accepted": [
+          "solid_obstacle",
+          "trunk_like"
+        ],
+        "consistent_fraction": 0.532871972318339,
+        "lidar_class_fraction": {
+          "unknown": 0.0,
+          "ground": 0.15397923875432526,
+          "low_vegetation": 0.2422145328719723,
+          "tall_vegetation": 0.07093425605536333,
+          "trunk_like": 0.09515570934256055,
+          "solid_obstacle": 0.43771626297577854
+        }
+      },
+      "bush": {
+        "voxels": 38224,
+        "accepted": [
+          "low_vegetation",
+          "tall_vegetation"
+        ],
+        "consistent_fraction": 0.6996389702804521,
+        "lidar_class_fraction": {
+          "unknown": 0.0,
+          "ground": 0.27495814148179154,
+          "low_vegetation": 0.6596640853913771,
+          "tall_vegetation": 0.03997488488907493,
+          "trunk_like": 0.0012819171201339473,
+          "solid_obstacle": 0.024120971117622438
+        }
+      },
+      "concrete": {
+        "voxels": 3178,
+        "accepted": [
+          "ground"
+        ],
+        "consistent_fraction": 0.9049716803020768,
+        "lidar_class_fraction": {
+          "unknown": 0.0,
+          "ground": 0.9049716803020768,
+          "low_vegetation": 0.0893643801132788,
+          "tall_vegetation": 0.0,
+          "trunk_like": 0.0012586532410320957,
+          "solid_obstacle": 0.004405286343612335
+        }
+      },
+      "barrier": {
+        "voxels": 31,
+        "accepted": [
+          "solid_obstacle"
+        ],
+        "consistent_fraction": 0.22580645161290322,
+        "lidar_class_fraction": {
+          "unknown": 0.0,
+          "ground": 0.3548387096774194,
+          "low_vegetation": 0.41935483870967744,
+          "tall_vegetation": 0.0,
+          "trunk_like": 0.0,
+          "solid_obstacle": 0.22580645161290322
+        }
+      },
+      "puddle": {
+        "voxels": 12,
+        "accepted": [
+          "ground"
+        ],
+        "consistent_fraction": 0.5,
+        "lidar_class_fraction": {
+          "unknown": 0.0,
+          "ground": 0.5,
+          "low_vegetation": 0.5,
+          "tall_vegetation": 0.0,
+          "trunk_like": 0.0,
+          "solid_obstacle": 0.0
+        }
+      },
+      "mud": {
+        "voxels": 98,
+        "accepted": [
+          "ground"
+        ],
+        "consistent_fraction": 0.8061224489795918,
+        "lidar_class_fraction": {
+          "unknown": 0.0,
+          "ground": 0.8061224489795918,
+          "low_vegetation": 0.15306122448979592,
+          "tall_vegetation": 0.030612244897959183,
+          "trunk_like": 0.0,
+          "solid_obstacle": 0.01020408163265306
+        }
+      },
+      "rubble": {
+        "voxels": 543,
+        "accepted": [
+          "solid_obstacle",
+          "ground"
+        ],
+        "consistent_fraction": 0.5414364640883977,
+        "lidar_class_fraction": {
+          "unknown": 0.0,
+          "ground": 0.30755064456721914,
+          "low_vegetation": 0.44014732965009207,
+          "tall_vegetation": 0.007366482504604052,
+          "trunk_like": 0.011049723756906077,
+          "solid_obstacle": 0.23388581952117865
+        }
+      }
+    }
+  }
+}

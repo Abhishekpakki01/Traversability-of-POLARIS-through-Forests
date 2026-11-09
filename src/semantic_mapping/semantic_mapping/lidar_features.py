@@ -209,3 +209,33 @@ def lidar_classes(features, height, cell, settings=LidarClassSettings()):
     solid = above & enough & ~trunk & ~vegetation & (height > s.ground_clearance_m)
     labels[solid] = LIDAR_CLASSES.index('solid_obstacle')
     return labels
+
+
+def fill_sparse(centres, classes, features, cell, min_neighbours=3):
+    """Give unknown voxels with too few points the most common class of their classified neighbours.
+
+    Rule fixed before testing: a voxel qualifies if it is unknown and has fewer than 3 points or
+    fewer than 5 hits plus passes. It takes the most common known class among the 26 neighbours in
+    its 3x3x3 block, if at least min_neighbours of them have a known class. Filled voxels are
+    inferred from their surroundings, not measured, so return the mask as well.
+    """
+    classes = np.asarray(classes).copy()
+    unknown = LIDAR_CLASSES.index('unknown')
+    sparse = (classes == unknown) & ((features['points'] < 3) | (features['points']+features['passes'] < 5))
+    keys = voxel_keys(centres, cell)
+    codes = encode(keys)
+    order = np.argsort(codes)
+    sorted_codes = codes[order]
+    votes = np.zeros((len(classes), len(LIDAR_CLASSES)), np.int64)
+    for offset in encode(NEIGHBOURS)-encode(np.zeros((1, 3))):
+        if offset == 0:
+            continue
+        position = np.clip(np.searchsorted(sorted_codes, codes+offset), 0, len(codes)-1)
+        found = sorted_codes[position] == codes+offset
+        neighbour = order[position[found]]
+        known = classes[neighbour] != unknown
+        np.add.at(votes, (np.flatnonzero(found)[known], classes[neighbour[known]]), 1)
+    votes[:, unknown] = 0
+    filled = sparse & (votes.sum(1) >= min_neighbours)
+    classes[filled] = votes[filled].argmax(1)
+    return classes, filled
