@@ -25,6 +25,7 @@ terminal.
 | Follow the vehicle, with camera panels | `src/semantic_mapping/tools/view_demo.sh` |
 | GPU not working (CPU drawing) | `src/semantic_mapping/tools/view_demo.sh light` |
 | Slower playback | add a rate, e.g. `src/semantic_mapping/tools/view_demo.sh explore 0.25` |
+| **Run the pipeline now** from the raw recording (first 30 scans, about 3 minutes), then show it | `src/semantic_mapping/tools/quick_run.sh` (or `quick_run.sh 60` for more scans) |
 
 While it plays, type these **in the terminal**: SPACE pauses/resumes, RIGHT
 ARROW steps one message, UP/DOWN change speed.
@@ -162,6 +163,7 @@ backed up first and hash-verified in `backups/before_*_2026_11_0*/`.
 | `check_map_sharpness.py` | Ground thickness: single scan, all scans, deliberately perturbed poses |
 | `build_v2_demo.sh` | Rebuilds the whole v2 chain with one command |
 | `view_demo.sh` | Opens RViz so you control playback from your terminal |
+| `quick_run.sh` | Runs the whole v2 chain live on the first N raw scans into `~/thesis_runs/`, then opens RViz |
 | `capture_demo_media.py`, `capture_rviz_window.ps1` | Pictures and videos of RViz with the camera beside the map |
 | `prepare_calibration_check.py`, `click_calibration_check.py`, `click_calibration.sh` | Clicked camera–LiDAR alignment check |
 | `check_outline_alignment.py`, `nudge_calibration_check.py`, `nudge_calibration.sh` | Camera–LiDAR offset from outlines against the sky, and a check by eye |
