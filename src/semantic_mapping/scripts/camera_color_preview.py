@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Publish a color camera reference for RViz, preserving acquisition headers."""
 
 from cv_bridge import CvBridge, CvBridgeError

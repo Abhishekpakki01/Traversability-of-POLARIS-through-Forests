@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Fuse camera predictions into the existing occupied OHM grid, on a new topic."""
 
 from collections import OrderedDict, deque

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Separate adapter using recorded mounting transforms and stated intrinsics."""
 
 from pathlib import Path

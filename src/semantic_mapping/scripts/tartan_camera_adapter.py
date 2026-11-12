@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Publish documented virtual pinhole calibration for Tartan rectified images."""
 
 from pathlib import Path

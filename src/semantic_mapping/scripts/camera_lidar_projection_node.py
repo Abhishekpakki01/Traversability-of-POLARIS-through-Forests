@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Timestamp-paired camera/LiDAR projection reference, separate from OHM."""
 
 from collections import deque

@@ -1,0 +1,1 @@
+Backup before changing the ROS node scripts' first line from '#!/usr/bin/env python3' to '#!/usr/bin/python3' (so a virtual environment without torch on PATH cannot break the nodes), and before adding tools/ros_env.sh. Restore: unzip previous_files.zip from the repo root.

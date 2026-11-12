@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Offer a local display of saved maps without changing the full map or labels."""
 from collections import OrderedDict
 
