@@ -2,12 +2,13 @@
 # Show camera classes merged into the LiDAR point cloud (TartanDrive), with the camera beside the map.
 #   tools/view_camera_classes.sh            the saved full drive
 #   tools/view_camera_classes.sh RUN_FOLDER a run from build_offline_demo.py or quick_run.sh
-# Layers (tick them in the Displays list): camera classes on this scan's LiDAR points (default),
+# Default: the headlight map (camera classes lit inside the camera beam, the rest of the map dimmed)
+# and the beam itself. Optional layers (tick them in Displays): camera classes on this scan's LiDAR points,
 # camera colours on the points, both accumulated over the drive, and the fused camera-class voxel map.
 # Keys in this terminal while it plays: SPACE pause/resume, RIGHT ARROW one step. Ctrl+C closes RViz.
 set -eo pipefail
 repo="$(cd "$(dirname "$0")/../../.." && pwd)"
-run="${1:-$repo/artifacts/offline_camera_points_2026_11_16}"
+run="${1:-$repo/artifacts/offline_headlight_2026_11_16}"
 rate=${2:-0.5}
 [ -d "$run/replay" ] || { echo "No replay in $run (build it with build_offline_demo.py or quick_run.sh)"; exit 1; }
 source /opt/ros/humble/setup.bash

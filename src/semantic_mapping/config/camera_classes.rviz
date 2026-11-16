@@ -32,8 +32,7 @@ Visualization Manager:
     Max Intensity: 4096
     Min Color: 0; 0; 0
     Min Intensity: 0
-    Name: 'Camera-class voxel map: classes inside the camera view, grey = LiDAR only
-      (15 m)'
+    Name: 'Headlight map: camera classes lit inside the beam, dimmed outside (15 m)'
     Position Transformer: XYZ
     Selectable: true
     Size (Pixels): 3
@@ -41,17 +40,17 @@ Visualization Manager:
     Style: Boxes
     Topic:
       Depth: 1
-      Durability Policy: Transient Local
+      Durability Policy: Volatile
       Filter size: 10
       History Policy: Keep Last
       Reliability Policy: Reliable
-      Value: /offline_demo/local_semantic
+      Value: /camera_points/headlight_map
     Use Fixed Frame: true
     Use rainbow: true
-    Value: false
+    Value: true
   - Class: rviz_default_plugins/Marker
     Enabled: true
-    Name: Camera view cone (to 20 m)
+    Name: Headlight beam (camera view, 10 m)
     Namespaces: {}
     Topic:
       Depth: 5
@@ -59,7 +58,7 @@ Visualization Manager:
       Filter size: 10
       History Policy: Keep Last
       Reliability Policy: Reliable
-      Value: /camera_points/frustum
+      Value: /camera_points/headlight
     Value: true
   - Alpha: 1
     Autocompute Intensity Bounds: true

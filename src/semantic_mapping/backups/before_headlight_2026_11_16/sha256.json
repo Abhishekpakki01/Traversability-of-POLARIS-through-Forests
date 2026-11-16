@@ -1,0 +1,8 @@
+{
+  "src/semantic_mapping/semantic_mapping/offline_demo.py": "347f053554ca182484dee88fc39761a5c09fc93fc88ce46e729254517357482a",
+  "src/semantic_mapping/tools/build_offline_demo.py": "3e1c4b284560d3899d280ec531c3036aa95957f8361c33d89c9cb67b91c2a1dd",
+  "src/semantic_mapping/config/camera_classes.rviz": "2a42885229ddd6a0d4a6fb5d461e7b19fd87bf8eb8acf42779cc533aa736efd5",
+  "src/semantic_mapping/tools/view_camera_classes.sh": "326636c7b5cff68ac9628bedd9bb7dab312fd6cd2f1c01d4a77a76607b240e6b",
+  "src/semantic_mapping/tools/quick_run.sh": "e2a691e009cb89d78cd46242af0f769df0c19e047687bc4bc2e670848a57acf0",
+  "src/semantic_mapping/test/test_offline_demo.py": "273f01a1182648cd7c2105b4f08a2bb0de44e37b9a185254fda345863748865b"
+}

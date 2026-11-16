@@ -23,7 +23,7 @@ from rclpy.serialization import deserialize_message, serialize_message
 from rclpy.time import Time
 import rosbag2_py
 from sensor_msgs.msg import CameraInfo, Image, PointCloud2
-from std_msgs.msg import Header, String
+from std_msgs.msg import ColorRGBA, Header, String
 from tf2_msgs.msg import TFMessage
 from visualization_msgs.msg import Marker
 from geometry_msgs.msg import Point
@@ -35,7 +35,8 @@ from semantic_mapping.camera_projection import (
 from semantic_mapping.goose_inference import AspectPredictor, aspect_size, polygon_mask
 from semantic_mapping.goose_model import GoosePredictor
 from semantic_mapping.offline_demo import (
-    ELEVATION_RANGE, NearestImage, OfflineOhm, cloud_message, colored_points, stamp_ns)
+    ELEVATION_RANGE, NearestImage, OfflineOhm, cloud_message, colored_points, headlight_colors,
+    in_camera_view, stamp_ns)
 from semantic_mapping.recorded_calibration import recorded_geometry
 from semantic_mapping.semantic_fusion import (
     CLASS_NAMES, PALETTE, SemanticEvidence, surface_observations, voxel_keys)
@@ -99,18 +100,22 @@ def status_image(status):
     return image
 
 
-def frustum_marker(header, world_camera, intrinsic, width, height, depth):
-    """Outline of the camera's view cone up to the mapping range, for RViz."""
+def beam_marker(header, world_camera, intrinsic, width, height, reach):
+    """A soft headlight-like beam: the camera's view, bright at the camera and fading out at `reach`."""
     corners = np.array([[0, 0, 1], [width, 0, 1], [width, height, 1], [0, height, 1]], dtype=float)
-    rays = np.linalg.solve(np.asarray(intrinsic, dtype=float), corners.T).T  # z = 1 in the camera frame
-    far = transform_points(rays*depth, world_camera)
+    rays = np.linalg.solve(np.asarray(intrinsic, dtype=float), corners.T).T
+    rays /= np.linalg.norm(rays, axis=1, keepdims=True)  # every edge of the beam is `reach` long
+    far = transform_points(rays*reach, world_camera)
     origin = world_camera[:3, 3]
-    ends = [(origin, c) for c in far] + [(far[i], far[(i+1) % 4]) for i in range(4)]
-    marker = Marker(header=header, ns='camera_view', id=0, type=Marker.LINE_LIST, action=Marker.ADD)
+    marker = Marker(header=header, ns='headlight', id=0, type=Marker.TRIANGLE_LIST, action=Marker.ADD)
     marker.pose.orientation.w = 1.
-    marker.scale.x = .08
-    marker.color.r, marker.color.g, marker.color.b, marker.color.a = 1., .85, .1, 1.
-    marker.points = [Point(x=float(a[0]), y=float(a[1]), z=float(a[2])) for pair in ends for a in pair]
+    marker.scale.x = marker.scale.y = marker.scale.z = 1.
+    marker.color.r, marker.color.g, marker.color.b, marker.color.a = 1., .92, .55, .35
+    near, end = ColorRGBA(r=1., g=.92, b=.55, a=.75), ColorRGBA(r=1., g=.92, b=.55, a=.08)
+    for i in range(4):  # the four sides of the beam
+        for point, colour in ((origin, near), (far[i], end), (far[(i+1) % 4], end)):
+            marker.points.append(Point(x=float(point[0]), y=float(point[1]), z=float(point[2])))
+            marker.colors.append(colour)
     return marker
 
 
@@ -131,6 +136,8 @@ def main():
                         help='0 keeps the original 512x512 squash; e.g. 512 keeps the aspect ratio')
     parser.add_argument('--mirror-average', action='store_true', help='average predictions with the mirrored image')
     parser.add_argument('--image-mask', type=Path, help='polygon JSON of image pixels to ignore (e.g. hood)')
+    parser.add_argument('--headlight-reach', type=float, default=10.,
+                        help='length of the headlight beam in RViz; voxels in it show their camera class')
     parser.add_argument('--threads', type=int, default=2, help='CPU threads for inference')
     args = parser.parse_args()
     if args.max_scans < 0:
@@ -164,6 +171,7 @@ def main():
     classes = json.loads(classes_file.read_text())['classes']
     groups = [CLASS_NAMES.index(c['group']) for c in classes]
     print('Loading the existing pretrained model; thresholds remain 2 observations / 0.6 confidence.', flush=True)
+    mask = None
     legacy = not (args.inference_short_side or args.mirror_average or args.image_mask)
     if legacy:
         predictor = GoosePredictor(args.model, groups, args.threads)
@@ -176,7 +184,7 @@ def main():
         inference = dict(input=f'{size[0]}x{size[1]}', mirror_average=args.mirror_average,
                          image_mask=None if mask is None else str(args.image_mask.resolve()),
                          masked_pixels=0 if mask is None else int(mask.sum()))
-    if args.resolution <= 0 or args.max_range <= 0:
+    if args.resolution <= 0 or args.max_range <= 0 or args.headlight_reach <= 0:
         parser.error('Resolution and range must be positive')
     executable = Path(get_package_prefix('semantic_mapping'))/'lib/semantic_mapping/ohm_offline_mapper'
     mapper = OfflineOhm(executable, args.resolution)
@@ -201,7 +209,8 @@ def main():
         '/offline_demo/status': 'std_msgs/msg/String',
         '/camera_points/rgb': 'sensor_msgs/msg/PointCloud2',
         '/camera_points/classes': 'sensor_msgs/msg/PointCloud2',
-        '/camera_points/frustum': 'visualization_msgs/msg/Marker'}
+        '/camera_points/headlight': 'visualization_msgs/msg/Marker',
+        '/camera_points/headlight_map': 'sensor_msgs/msg/PointCloud2'}
     for topic, kind in topics.items():
         writer.create_topic(rosbag2_py.TopicMetadata(name=topic, type=kind, serialization_format='cdr'))
     def write(topic, message, timestamp):
@@ -319,8 +328,6 @@ def main():
                 point_classes[point_probabilities.max(axis=1) < .6] = 0
                 write('/camera_points/rgb', colored_points(header, seen, projection.rgb[usable]), stamp)
                 write('/camera_points/classes', colored_points(header, seen, PALETTE[point_classes]), stamp)
-                write('/camera_points/frustum', frustum_marker(header, world_camera, intrinsic,
-                                                               image.width, image.height, args.max_range), stamp)
                 masked = ~np.isfinite(probabilities).all(axis=2)
                 labels_image = np.nan_to_num(probabilities, nan=0.).argmax(axis=2).astype(np.uint8)
                 labels_image[(np.nan_to_num(probabilities, nan=0.).max(axis=2) < .6) | masked] = 0
@@ -347,6 +354,16 @@ def main():
             semantic = cloud_message(header, centres, labels, confidence, counts, relative_z)
             elevation = cloud_message(header, centres, labels, confidence, counts, relative_z, True)
             write('/semantic_voxel_map', semantic, stamp)
+            # Headlight view: the camera's beam from this scan's pose; voxels in it are lit in their
+            # camera class, the rest of the map within 15 m stays visible but dimmed.
+            beam_camera = world_vehicle @ vehicle_camera
+            near = np.hypot(*(centres[:, :2]-world_vehicle[:2, 3]).T) <= 15.
+            lit = in_camera_view(centres[near], beam_camera, intrinsic, config['width'], config['height'],
+                                 args.headlight_reach, mask)
+            write('/camera_points/headlight_map', colored_points(header, centres[near],
+                  headlight_colors(labels[near], lit)), stamp)
+            write('/camera_points/headlight', beam_marker(header, beam_camera, intrinsic, config['width'],
+                  config['height'], args.headlight_reach), stamp)
             write('/offline_demo/elevation', elevation, stamp)
             seen = counts > 0
             status = dict(counters, source_scans=source_scans,
