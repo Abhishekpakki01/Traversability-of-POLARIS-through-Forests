@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-# Run the whole v2 pipeline LIVE from the raw TartanDrive recording, on its first N scans,
-# then show the result in RViz with the camera beside the map.
+# Run the pipeline LIVE from the raw TartanDrive recording, on its first N scans, then show the
+# result in RViz. By default only the camera part runs: LiDAR map + camera classes fused into it, and
+# every LiDAR point the camera sees coloured by its pixel and by its camera class (camera_classes.rviz).
+# With --all, terrain, LiDAR-only classes and water follow, shown in the full demo layout.
 # Same settings as build_v2_demo.sh (0.2 m voxels, 20 m range, vehicle box, cloth ground).
 # The terminal shows each command as it runs and a short summary of what each step produced;
 # the full output of every step is kept in <output>/logs/.
@@ -8,12 +10,16 @@
 #   src/semantic_mapping/tools/quick_run.sh            30 scans, about 3 minutes on the thesis laptop
 #   src/semantic_mapping/tools/quick_run.sh 10         about 2 minutes
 #   src/semantic_mapping/tools/quick_run.sh 10 --no-view   build only, no RViz
+#   src/semantic_mapping/tools/quick_run.sh 10 --all       also terrain, LiDAR-only classes and water
 #
 # Output goes to ~/thesis_runs/quick_run_<date_time> (outside the Git repo; about 1 GB per 30 scans).
 # Keys while it plays: SPACE pause/resume, RIGHT ARROW one step. Ctrl+C closes RViz.
 set -eo pipefail
 scans=${1:-30}
-view=${2:-}
+view=yes; all=no
+for flag in "${@:2}"; do
+  case "$flag" in --no-view) view=no ;; --all) all=yes ;; *) echo "unknown option $flag"; exit 1 ;; esac
+done
 repo="$(cd "$(dirname "$0")/../../.." && pwd)"
 source /opt/ros/humble/setup.bash
 source "$HOME/semantic_map_ws/install/setup.bash"
@@ -37,7 +43,7 @@ text = open(log).read()
 d = json.loads(text[text.index('\n{') + 1:])
 pct = lambda x: f'{100 * x:.1f}%'
 def show(label, value):
-    print(f'    {label:<38} {value}')
+    print(f'    {label:<42} {value}')
 if step == 'map':
     f = d['last_frame']
     show('scans mapped', f"{d['mapped_scans']} of {d['requested_scan_limit']} requested ({d['source_scans']} in the recording)")
@@ -45,6 +51,7 @@ if step == 'map':
     show('scans skipped for a missing pose', d['missing_lidar_pose'])
     show('vehicle-body points removed', f"{d['vehicle_box_points_removed']:,}")
     show('occupied 0.2 m voxels', f"{f['occupied_voxels']:,}")
+    show('LiDAR points the camera sees (last scan)', f"{f['projection_points']:,}")
     show('voxels with a confirmed camera class', f"{f['classified_voxels']:,}")
     show('camera classes', ', '.join(f'{k} {v:,}' for k, v in f['class_counts'].items() if v and k != 'unknown'))
     show('median time per scan', f"{d['processing_seconds_median']:.1f} s")
@@ -78,10 +85,12 @@ step() {
 echo "Running the pipeline on the first $scans scans of the raw TartanDrive recording"
 echo "Output: $out" | sed "s|$HOME|~|g"
 
-step map "1/4  LiDAR map + camera classes (a few seconds per scan)" \
+total=$([ "$all" = yes ] && echo 4 || echo 1)
+step map "1/$total  LiDAR map + camera classes on the LiDAR points (a few seconds per scan)" \
   $py $tools/build_offline_demo.py --max-scans "$scans" --exclude-vehicle-box -1.8 -1.6 -1.0 0.4 1.4 0.4 \
   --resolution 0.2 --max-range 20 --inference-short-side 512 \
   --image-mask $config/tartan_image_mask.json --threads 6 --output "$out/run"
+if [ "$all" = yes ]; then
 step terrain "2/4  Terrain and traversability" \
   $py $tools/build_terrain_replay.py --input "$out/run" --config $config/traversability_v2.yaml --output "$out/terrain"
 step lidar "3/4  LiDAR-only classes" \
@@ -90,16 +99,18 @@ step lidar "3/4  LiDAR-only classes" \
 step water "4/4  Water layer" \
   $py $tools/build_water_replay.py --run "$out/run" --replay "$out/lidar/replay" \
   --terrain-config $config/traversability_v2.yaml --fill-iterations 14 --output "$out/water"
+fi
 
 echo
 echo "All steps done in $((SECONDS - start)) s. Full output of each step: $out/logs/" | sed "s|$HOME|~|g"
 
-[ "$view" = "--no-view" ] && exit 0
-ros2 launch semantic_mapping demo_v2.launch.py play:=false layout:=demo_v2.rviz > "$out/logs/view.log" 2>&1 &
+[ "$view" = no ] && exit 0
+if [ "$all" = yes ]; then layout=demo_v2.rviz; bag="$out/water/replay"; else layout=camera_classes.rviz; bag="$out/run/replay"; fi
+ros2 launch semantic_mapping demo_v2.launch.py play:=false layout:=$layout > "$out/logs/view.log" 2>&1 &
 viewer=$!
 trap 'kill -INT $viewer 2>/dev/null; wait $viewer 2>/dev/null; echo "Closed."' EXIT
 echo "RViz is starting. Playback begins in 5 s at a quarter of real speed."
 sleep 5
-ros2 bag play "$out/water/replay" --clock --rate 0.25 --read-ahead-queue-size 100 || true
+ros2 bag play "$bag" --clock --rate 0.25 --read-ahead-queue-size 100 || true
 echo "Playback finished; RViz stays open. Press Ctrl+C here to close it."
 wait $viewer

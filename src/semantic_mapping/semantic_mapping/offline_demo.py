@@ -110,6 +110,26 @@ class OfflineOhm:
         self.process.stdout.close()
 
 
+def colored_points(header, xyz, rgb):
+    """PointCloud2 of points with an RGB8 colour each (uint8 rows of r, g, b)."""
+    from sensor_msgs.msg import PointCloud2, PointField
+    xyz = np.asarray(xyz, dtype=np.float32).reshape(-1, 3)
+    rgb = np.asarray(rgb, dtype=np.uint8).reshape(-1, 3)
+    if len(xyz) != len(rgb):
+        raise ValueError('Need one colour per point')
+    dtype = np.dtype(dict(names=['x', 'y', 'z', 'rgb'], formats=['<f4']*3+['<u4'],
+                          offsets=[0, 4, 8, 12], itemsize=16))
+    data = np.zeros(len(xyz), dtype=dtype)
+    for i, name in enumerate(('x', 'y', 'z')):
+        data[name] = xyz[:, i]
+    colors = rgb.astype(np.uint32)
+    data['rgb'] = (colors[:, 0] << 16) | (colors[:, 1] << 8) | colors[:, 2]
+    return PointCloud2(header=header, height=1, width=len(xyz), is_dense=True,
+        point_step=16, row_step=len(xyz)*16, data=data.tobytes(),
+        fields=[PointField(name=n, offset=o, datatype=k, count=1) for n, o, k in
+                zip(('x', 'y', 'z', 'rgb'), (0, 4, 8, 12), [PointField.FLOAT32]*3+[PointField.UINT32])])
+
+
 def cloud_message(header, centres, labels, confidence, observations, relative_z,
                   elevation_colors=False):
     """Preserve semantic attributes even in the optional elevation view."""

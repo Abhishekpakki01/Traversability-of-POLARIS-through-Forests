@@ -25,6 +25,8 @@ import rosbag2_py
 from sensor_msgs.msg import CameraInfo, Image, PointCloud2
 from std_msgs.msg import Header, String
 from tf2_msgs.msg import TFMessage
+from visualization_msgs.msg import Marker
+from geometry_msgs.msg import Point
 from tf2_ros import Buffer, TransformException
 import yaml
 
@@ -32,7 +34,8 @@ from semantic_mapping.camera_projection import (
     draw_projection, project_visible_points, transform_matrix, transform_points, xyz_from_cloud)
 from semantic_mapping.goose_inference import AspectPredictor, aspect_size, polygon_mask
 from semantic_mapping.goose_model import GoosePredictor
-from semantic_mapping.offline_demo import ELEVATION_RANGE, NearestImage, OfflineOhm, cloud_message, stamp_ns
+from semantic_mapping.offline_demo import (
+    ELEVATION_RANGE, NearestImage, OfflineOhm, cloud_message, colored_points, stamp_ns)
 from semantic_mapping.recorded_calibration import recorded_geometry
 from semantic_mapping.semantic_fusion import (
     CLASS_NAMES, PALETTE, SemanticEvidence, surface_observations, voxel_keys)
@@ -94,6 +97,21 @@ def status_image(status):
         cv2.putText(image, name, (x+20, 201), cv2.FONT_HERSHEY_SIMPLEX, .46,
                     (235, 235, 235), 1, cv2.LINE_AA)
     return image
+
+
+def frustum_marker(header, world_camera, intrinsic, width, height, depth):
+    """Outline of the camera's view cone up to the mapping range, for RViz."""
+    corners = np.array([[0, 0, 1], [width, 0, 1], [width, height, 1], [0, height, 1]], dtype=float)
+    rays = np.linalg.solve(np.asarray(intrinsic, dtype=float), corners.T).T  # z = 1 in the camera frame
+    far = transform_points(rays*depth, world_camera)
+    origin = world_camera[:3, 3]
+    ends = [(origin, c) for c in far] + [(far[i], far[(i+1) % 4]) for i in range(4)]
+    marker = Marker(header=header, ns='camera_view', id=0, type=Marker.LINE_LIST, action=Marker.ADD)
+    marker.pose.orientation.w = 1.
+    marker.scale.x = .08
+    marker.color.r, marker.color.g, marker.color.b, marker.color.a = 1., .85, .1, 1.
+    marker.points = [Point(x=float(a[0]), y=float(a[1]), z=float(a[2])) for pair in ends for a in pair]
+    return marker
 
 
 def main():
@@ -180,7 +198,10 @@ def main():
         '/offline_demo/segmentation': 'sensor_msgs/msg/Image',
         '/offline_demo/projection': 'sensor_msgs/msg/Image',
         '/offline_demo/status_image': 'sensor_msgs/msg/Image',
-        '/offline_demo/status': 'std_msgs/msg/String'}
+        '/offline_demo/status': 'std_msgs/msg/String',
+        '/camera_points/rgb': 'sensor_msgs/msg/PointCloud2',
+        '/camera_points/classes': 'sensor_msgs/msg/PointCloud2',
+        '/camera_points/frustum': 'visualization_msgs/msg/Marker'}
     for topic, kind in topics.items():
         writer.create_topic(rosbag2_py.TopicMetadata(name=topic, type=kind, serialization_format='cdr'))
     def write(topic, message, timestamp):
@@ -290,6 +311,16 @@ def main():
                 updated = evidence.update(observations, stamp_ns(image), occupied)
                 counters['inferred_images'] += 1
                 counters['fused_frames'] += int(updated > 0)
+                # Camera information on this scan's LiDAR points: the pixel colour, and the camera
+                # class where the network is at least 60% sure (grey 'unknown' otherwise).
+                seen = transform_points(points[projection.source_indices[usable]], world_lidar)
+                point_probabilities = sampled[usable]
+                point_classes = point_probabilities.argmax(axis=1)
+                point_classes[point_probabilities.max(axis=1) < .6] = 0
+                write('/camera_points/rgb', colored_points(header, seen, projection.rgb[usable]), stamp)
+                write('/camera_points/classes', colored_points(header, seen, PALETTE[point_classes]), stamp)
+                write('/camera_points/frustum', frustum_marker(header, world_camera, intrinsic,
+                                                               image.width, image.height, args.max_range), stamp)
                 masked = ~np.isfinite(probabilities).all(axis=2)
                 labels_image = np.nan_to_num(probabilities, nan=0.).argmax(axis=2).astype(np.uint8)
                 labels_image[(np.nan_to_num(probabilities, nan=0.).max(axis=2) < .6) | masked] = 0

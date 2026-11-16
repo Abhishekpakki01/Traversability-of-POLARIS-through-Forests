@@ -1,0 +1,1 @@
+Backup before adding the per-scan LiDAR point clouds coloured by camera pixel colour and by camera class (16 Nov meeting: camera classes merged into the LiDAR point cloud), a camera-classes RViz layout and viewer. Restore: unzip previous_files.zip from the repo root.

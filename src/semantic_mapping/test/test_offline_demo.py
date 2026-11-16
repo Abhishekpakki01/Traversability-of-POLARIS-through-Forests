@@ -5,7 +5,7 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-from semantic_mapping.offline_demo import NearestImage, OfflineOhm, cloud_message, local_cloud
+from semantic_mapping.offline_demo import NearestImage, OfflineOhm, cloud_message, colored_points, local_cloud
 from semantic_mapping.semantic_fusion import voxel_keys
 
 
@@ -89,3 +89,19 @@ def test_local_view_preserves_unknown_and_semantic_fields_and_requires_exact_pos
     different_pose.header.stamp.sec = 4
     with pytest.raises(ValueError):
         local_cloud(cloud, different_pose, 15.)
+
+
+def test_colored_points_pack_xyz_and_rgb_per_point():
+    from std_msgs.msg import Header
+    xyz = np.array([[1., 2., 3.], [-4., 5.5, 0.25]])
+    rgb = np.array([[255, 0, 0], [10, 20, 30]], dtype=np.uint8)
+    message = colored_points(Header(frame_id='sensor_init'), xyz, rgb)
+    assert (message.width, message.point_step) == (2, 16)
+    assert [f.name for f in message.fields] == ['x', 'y', 'z', 'rgb']
+    data = np.frombuffer(bytes(message.data), dtype=np.dtype(dict(
+        names=['x', 'y', 'z', 'rgb'], formats=['<f4']*3+['<u4'], offsets=[0, 4, 8, 12], itemsize=16)))
+    assert np.allclose(np.column_stack([data['x'], data['y'], data['z']]), xyz)
+    assert list(data['rgb']) == [0xFF0000, (10 << 16) | (20 << 8) | 30]
+    with pytest.raises(ValueError):
+        colored_points(Header(), xyz, rgb[:1])
+
