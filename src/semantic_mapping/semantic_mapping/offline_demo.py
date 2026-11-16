@@ -157,38 +157,3 @@ def cloud_message(header, centres, labels, confidence, observations, relative_z,
         fields=[PointField(name=n, offset=o, datatype=k, count=1)
                 for n, o, k in zip(names, offsets, kinds)])
 
-
-def in_camera_view(world_points, world_camera, intrinsic, width, height, reach, mask=None):
-    """True for points in front of the camera, inside the image and within `reach` metres.
-
-    `mask` (height x width, True = ignored, e.g. the vehicle's hood) removes pixels the camera
-    classes never come from.
-    """
-    world_points = np.asarray(world_points, dtype=float).reshape(-1, 3)
-    camera_world = np.linalg.inv(np.asarray(world_camera, dtype=float))
-    camera = world_points @ camera_world[:3, :3].T + camera_world[:3, 3]
-    z = camera[:, 2]
-    with np.errstate(divide='ignore', invalid='ignore'):
-        pixels = camera @ np.asarray(intrinsic, dtype=float).T
-        u, v = pixels[:, 0]/z, pixels[:, 1]/z
-    inside = ((z > 0) & (np.linalg.norm(camera, axis=1) <= reach)
-              & (u >= 0) & (u < width) & (v >= 0) & (v < height))
-    if mask is not None:
-        rows, columns = v[inside].astype(int), u[inside].astype(int)
-        inside[np.flatnonzero(inside)[np.asarray(mask, dtype=bool)[rows, columns]]] = False
-    return inside
-
-
-def headlight_colors(labels, lit):
-    """Voxel colours like car headlights: camera classes lit inside the beam, dimmed outside.
-
-    Inside the beam a confirmed class shows its full colour and an unconfirmed voxel is light grey;
-    outside, every voxel stays visible (the surroundings still count) but darkened.
-    """
-    labels = np.asarray(labels)
-    lit = np.asarray(lit, dtype=bool)
-    bright = PALETTE[labels].astype(float)
-    bright[labels == 0] = 210.
-    dim = .4*PALETTE[labels]+15.
-    dim[labels == 0] = 70.
-    return np.rint(np.where(lit[:, None], bright, dim)).astype(np.uint8)

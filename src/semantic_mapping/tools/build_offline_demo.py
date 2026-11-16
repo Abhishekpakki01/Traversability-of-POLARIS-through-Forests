@@ -35,11 +35,10 @@ from semantic_mapping.camera_projection import (
 from semantic_mapping.goose_inference import AspectPredictor, aspect_size, polygon_mask
 from semantic_mapping.goose_model import GoosePredictor
 from semantic_mapping.offline_demo import (
-    ELEVATION_RANGE, NearestImage, OfflineOhm, cloud_message, colored_points, headlight_colors,
-    in_camera_view, stamp_ns)
+    ELEVATION_RANGE, NearestImage, OfflineOhm, cloud_message, colored_points, stamp_ns)
 from semantic_mapping.recorded_calibration import recorded_geometry
 from semantic_mapping.semantic_fusion import (
-    CLASS_NAMES, PALETTE, SemanticEvidence, surface_observations, voxel_keys)
+    CLASS_NAMES, PALETTE, SemanticEvidence, surface_observations, visible_in_cone, voxel_keys)
 from semantic_mapping.tartan_camera import quaternion_from_matrix
 
 
@@ -101,13 +100,13 @@ def status_image(status):
 
 
 def beam_marker(header, world_camera, intrinsic, width, height, reach):
-    """A soft headlight-like beam: the camera's view, bright at the camera and fading out at `reach`."""
+    """The camera cone: the camera's view up to `reach`, bright at the camera and fading out."""
     corners = np.array([[0, 0, 1], [width, 0, 1], [width, height, 1], [0, height, 1]], dtype=float)
     rays = np.linalg.solve(np.asarray(intrinsic, dtype=float), corners.T).T
     rays /= np.linalg.norm(rays, axis=1, keepdims=True)  # every edge of the beam is `reach` long
     far = transform_points(rays*reach, world_camera)
     origin = world_camera[:3, 3]
-    marker = Marker(header=header, ns='headlight', id=0, type=Marker.TRIANGLE_LIST, action=Marker.ADD)
+    marker = Marker(header=header, ns='camera_cone', id=0, type=Marker.TRIANGLE_LIST, action=Marker.ADD)
     marker.pose.orientation.w = 1.
     marker.scale.x = marker.scale.y = marker.scale.z = 1.
     marker.color.r, marker.color.g, marker.color.b, marker.color.a = 1., .92, .55, .35
@@ -136,8 +135,11 @@ def main():
                         help='0 keeps the original 512x512 squash; e.g. 512 keeps the aspect ratio')
     parser.add_argument('--mirror-average', action='store_true', help='average predictions with the mirrored image')
     parser.add_argument('--image-mask', type=Path, help='polygon JSON of image pixels to ignore (e.g. hood)')
-    parser.add_argument('--headlight-reach', type=float, default=10.,
-                        help='length of the headlight beam in RViz; voxels in it show their camera class')
+    parser.add_argument('--fusion', choices=('cone', 'lidar-points'), default='cone',
+                        help='cone: the camera classifies every visible map voxel in its view (default); '
+                             'lidar-points: only voxels hit by a LiDAR point of the same scan (earlier method)')
+    parser.add_argument('--cone-reach', type=float, default=0.,
+                        help='how far the camera cone classifies, in metres (0 = the mapping range --max-range)')
     parser.add_argument('--threads', type=int, default=2, help='CPU threads for inference')
     args = parser.parse_args()
     if args.max_scans < 0:
@@ -184,7 +186,8 @@ def main():
         inference = dict(input=f'{size[0]}x{size[1]}', mirror_average=args.mirror_average,
                          image_mask=None if mask is None else str(args.image_mask.resolve()),
                          masked_pixels=0 if mask is None else int(mask.sum()))
-    if args.resolution <= 0 or args.max_range <= 0 or args.headlight_reach <= 0:
+    args.cone_reach = args.cone_reach or args.max_range
+    if args.resolution <= 0 or args.max_range <= 0 or args.cone_reach <= 0:
         parser.error('Resolution and range must be positive')
     executable = Path(get_package_prefix('semantic_mapping'))/'lib/semantic_mapping/ohm_offline_mapper'
     mapper = OfflineOhm(executable, args.resolution)
@@ -209,8 +212,8 @@ def main():
         '/offline_demo/status': 'std_msgs/msg/String',
         '/camera_points/rgb': 'sensor_msgs/msg/PointCloud2',
         '/camera_points/classes': 'sensor_msgs/msg/PointCloud2',
-        '/camera_points/headlight': 'visualization_msgs/msg/Marker',
-        '/camera_points/headlight_map': 'sensor_msgs/msg/PointCloud2'}
+        '/camera_cone/beam': 'visualization_msgs/msg/Marker',
+        '/camera_cone/map': 'sensor_msgs/msg/PointCloud2'}
     for topic, kind in topics.items():
         writer.create_topic(rosbag2_py.TopicMetadata(name=topic, type=kind, serialization_format='cdr'))
     def write(topic, message, timestamp):
@@ -231,7 +234,9 @@ def main():
                   physical_calibration_validated=False, semantic_accuracy_measured=False,
                   traversability_implemented=False, elevation_reference='world_z_minus_first_mapped_vehicle_z',
                   elevation_range_m=list(ELEVATION_RANGE),
-                  visibility_mode='solid_voxel_rays' if args.strict_voxel_occlusion else 'measured_lidar_depth',
+                  fusion=args.fusion, cone_reach_m=args.cone_reach,
+                  visibility_mode=('camera_cone_voxel_depth' if args.fusion == 'cone' else
+                                   'solid_voxel_rays' if args.strict_voxel_occlusion else 'measured_lidar_depth'),
                   requested_scan_limit=args.max_scans, completed_requested_input=False,
                   vehicle_box_m=None if vehicle_box is None else vehicle_box.tolist())
     journal = open(args.output/'frames.jsonl', 'w')
@@ -312,11 +317,26 @@ def main():
                 pixels = np.clip(pixels, 0, [columns-1, rows-1])
                 sampled = probabilities[pixels[:, 1], pixels[:, 0]]
                 usable = np.isfinite(sampled).all(axis=1)  # masked pixels (e.g. hood) give no observation
-                observations, visibility = surface_observations(
-                    transform_points(points[projection.source_indices[usable]], world_lidar),
-                    sampled[usable], world_camera[:3, 3], occupied,
-                    args.resolution, args.strict_voxel_occlusion)
-                visibility['masked_samples'] = int((~usable).sum())
+                if args.fusion == 'cone':
+                    # The camera is the classifier: every map voxel it can see in its cone takes the
+                    # class probabilities of the pixel it projects to (hidden voxels are skipped).
+                    near = np.flatnonzero(np.linalg.norm(centres-world_camera[:3, 3], axis=1) <= args.cone_reach)
+                    shown, voxel_pixels = visible_in_cone(centres[near], world_camera, intrinsic, image.width,
+                        image.height, args.cone_reach, args.resolution, mask)
+                    at = np.floor((voxel_pixels+.5)*[columns/image.width, rows/image.height]).astype(int)
+                    at = np.clip(at, 0, [columns-1, rows-1])
+                    voxel_probabilities = probabilities[at[:, 1], at[:, 0]]
+                    good = np.isfinite(voxel_probabilities).all(axis=1)
+                    observations = {tuple(key): p for key, p in
+                                    zip(keys[near][shown][good].tolist(), voxel_probabilities[good])}
+                    visibility = dict(cone_voxels=len(near), visible_voxels=len(observations),
+                                      hidden_or_outside=int(len(near)-len(shown)), masked_samples=int((~good).sum()))
+                else:
+                    observations, visibility = surface_observations(
+                        transform_points(points[projection.source_indices[usable]], world_lidar),
+                        sampled[usable], world_camera[:3, 3], occupied,
+                        args.resolution, args.strict_voxel_occlusion)
+                    visibility['masked_samples'] = int((~usable).sum())
                 updated = evidence.update(observations, stamp_ns(image), occupied)
                 counters['inferred_images'] += 1
                 counters['fused_frames'] += int(updated > 0)
@@ -354,16 +374,12 @@ def main():
             semantic = cloud_message(header, centres, labels, confidence, counts, relative_z)
             elevation = cloud_message(header, centres, labels, confidence, counts, relative_z, True)
             write('/semantic_voxel_map', semantic, stamp)
-            # Headlight view: the camera's beam from this scan's pose; voxels in it are lit in their
-            # camera class, the rest of the map within 15 m stays visible but dimmed.
-            beam_camera = world_vehicle @ vehicle_camera
-            near = np.hypot(*(centres[:, :2]-world_vehicle[:2, 3]).T) <= 15.
-            lit = in_camera_view(centres[near], beam_camera, intrinsic, config['width'], config['height'],
-                                 args.headlight_reach, mask)
-            write('/camera_points/headlight_map', colored_points(header, centres[near],
-                  headlight_colors(labels[near], lit)), stamp)
-            write('/camera_points/headlight', beam_marker(header, beam_camera, intrinsic, config['width'],
-                  config['height'], args.headlight_reach), stamp)
+            # Camera-cone map: only voxels the camera has classified, kept as the vehicle drives on,
+            # and the cone the camera is classifying from at this scan's pose.
+            classified = labels > 0
+            write('/camera_cone/map', colored_points(header, centres[classified], PALETTE[labels[classified]]), stamp)
+            write('/camera_cone/beam', beam_marker(header, world_vehicle @ vehicle_camera, intrinsic, config['width'],
+                  config['height'], args.cone_reach), stamp)
             write('/offline_demo/elevation', elevation, stamp)
             seen = counts > 0
             status = dict(counters, source_scans=source_scans,

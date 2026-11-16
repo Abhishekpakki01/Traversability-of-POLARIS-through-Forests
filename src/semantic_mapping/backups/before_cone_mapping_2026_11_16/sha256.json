@@ -1,0 +1,10 @@
+{
+  "src/semantic_mapping/semantic_mapping/offline_demo.py": "8a5ae2cdda9115df79215b4b1ee7a2b622d540b4a164c0050af39fdbbd9f7d98",
+  "src/semantic_mapping/semantic_mapping/semantic_fusion.py": "08abac97d31ef6dc73b2427b43aadf16d98e0aa1599b53fbd1ed80b1fd287941",
+  "src/semantic_mapping/tools/build_offline_demo.py": "c9f96de562cdb15b5f830980d7b3848a790d763e1ac73e3fc8b19ed4122772f0",
+  "src/semantic_mapping/config/camera_classes.rviz": "19a32ae89b71754e5958ae0fbd251295871c2620e93e425e28de682136bf2621",
+  "src/semantic_mapping/tools/view_camera_classes.sh": "def17689c24e7fe44f26999aba8ba772ecc8fce0464ed029d1f1b177ab71acff",
+  "src/semantic_mapping/tools/quick_run.sh": "e2a691e009cb89d78cd46242af0f769df0c19e047687bc4bc2e670848a57acf0",
+  "src/semantic_mapping/test/test_offline_demo.py": "9f6eeec3c38d04e82a1d5d1f6464ac5bba07a2ec8ed0346360235bf6a9a9fef9",
+  "src/semantic_mapping/test/test_semantic_fusion.py": "d9530df9d0833878963923d664df93d05789d56af41ac9695f8605c20facee3d"
+}

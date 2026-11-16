@@ -32,7 +32,7 @@ Visualization Manager:
     Max Intensity: 4096
     Min Color: 0; 0; 0
     Min Intensity: 0
-    Name: 'Headlight map: camera classes lit inside the beam, dimmed outside (15 m)'
+    Name: 'Camera-cone map: voxels classified by the camera, kept as the vehicle drives'
     Position Transformer: XYZ
     Selectable: true
     Size (Pixels): 3
@@ -44,13 +44,13 @@ Visualization Manager:
       Filter size: 10
       History Policy: Keep Last
       Reliability Policy: Reliable
-      Value: /camera_points/headlight_map
+      Value: /camera_cone/map
     Use Fixed Frame: true
     Use rainbow: true
     Value: true
   - Class: rviz_default_plugins/Marker
     Enabled: true
-    Name: Headlight beam (camera view, 10 m)
+    Name: Camera cone (what the camera classifies now)
     Namespaces: {}
     Topic:
       Depth: 5
@@ -58,7 +58,7 @@ Visualization Manager:
       Filter size: 10
       History Policy: Keep Last
       Reliability Policy: Reliable
-      Value: /camera_points/headlight
+      Value: /camera_cone/beam
     Value: true
   - Alpha: 1
     Autocompute Intensity Bounds: true

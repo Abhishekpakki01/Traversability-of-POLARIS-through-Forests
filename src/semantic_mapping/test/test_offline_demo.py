@@ -5,8 +5,7 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-from semantic_mapping.offline_demo import (NearestImage, OfflineOhm, cloud_message, colored_points,
-                                          headlight_colors, in_camera_view, local_cloud)
+from semantic_mapping.offline_demo import NearestImage, OfflineOhm, cloud_message, colored_points, local_cloud
 from semantic_mapping.semantic_fusion import voxel_keys
 
 
@@ -107,20 +106,3 @@ def test_colored_points_pack_xyz_and_rgb_per_point():
         colored_points(Header(), xyz, rgb[:1])
 
 
-
-def test_in_camera_view_keeps_points_inside_the_image_and_reach():
-    intrinsic = np.array([[100., 0, 50], [0, 100., 25], [0, 0, 1]])
-    camera = np.eye(4); camera[:3, 3] = [1., 2., 3.]  # optical frame: z forward
-    points = np.array([[1, 2, 8], [1, 2, -2], [1, 2, 20], [9, 2, 8], [1.2, 2.1, 5]], dtype=float)
-    assert in_camera_view(points, camera, intrinsic, 100, 50, 10.).tolist() == [
-        True, False, False, False, True]  # ahead / behind / too far / outside the image / ahead
-    hood = np.zeros((50, 100), dtype=bool); hood[28:, 55:] = True  # hides only (1.2, 2.1, 5): u=60, v=30
-    assert in_camera_view(points, camera, intrinsic, 100, 50, 10., hood).tolist() == [
-        True, False, False, False, False]
-
-
-def test_headlight_colors_light_the_beam_and_dim_the_rest():
-    colours = headlight_colors(np.array([1, 0, 1, 0]), np.array([True, True, False, False]))
-    assert colours[0].tolist() == [139, 90, 43]                 # ground, inside the beam
-    assert colours[1].tolist() == [210, 210, 210]               # no class yet, inside the beam
-    assert colours[2].sum() < .8*colours[0].sum() and colours[3].tolist() == [70, 70, 70]  # outside: dimmed

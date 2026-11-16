@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 
 from semantic_mapping.semantic_fusion import (
-    SemanticEvidence, first_occupied, surface_observations, voxel_keys)
+    SemanticEvidence, first_occupied, surface_observations, visible_in_cone, voxel_keys)
 from semantic_mapping.camera_projection import project_visible_points
 
 
@@ -100,3 +100,20 @@ def test_measured_depth_rejects_far_surface_without_solid_cube_overblocking():
         [0, 0, 0], occupied, 1.0, strict_voxel_occlusion=False)
     assert list(values) == [(0, 0, 2)]
     assert (0, 0, 1) not in values and (0, 0, 4) not in values
+
+
+def test_visible_in_cone_projects_every_voxel_and_hides_the_ones_behind():
+    intrinsic = np.array([[100., 0, 50], [0, 100., 25], [0, 0, 1]])
+    camera = np.eye(4)  # optical frame: x right, y down, z forward
+    centres = np.array([[0, 0, 5],       # A: in view
+                        [0, 0, 7],       # B: straight behind A -> hidden
+                        [0, .04, 5.2],   # C: next to A, 0.2 m further (ground at a grazing angle) -> visible
+                        [2, 0, 5],       # D: in view, to the right
+                        [0, 0, -3],      # E: behind the camera
+                        [0, 0, 30]],     # F: beyond the cone
+                       dtype=float)
+    indices, pixels = visible_in_cone(centres, camera, intrinsic, 100, 50, 10., .2)
+    assert indices.tolist() == [0, 2, 3]
+    assert np.allclose(pixels[0], [50, 25]) and np.allclose(pixels[2], [90, 25])
+    hood = np.zeros((50, 100), dtype=bool); hood[:, 80:] = True
+    assert visible_in_cone(centres, camera, intrinsic, 100, 50, 10., .2, hood)[0].tolist() == [0, 2]

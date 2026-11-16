@@ -86,6 +86,45 @@ def surface_observations(world_points, probabilities, camera_origin, occupied, r
     return means, stats
 
 
+def visible_in_cone(centres, world_camera, intrinsic, width, height, reach, resolution,
+                    mask=None, cell=4, tolerance=None):
+    """Voxels of the map the camera can see: the camera is the classifier for every one of them.
+
+    Every occupied voxel centre in front of the camera, inside the image and within `reach`
+    metres is projected with the intrinsics (u = fx x/z + cx, v = fy y/z + cy) after the
+    extrinsics (world -> camera). Each voxel is drawn into a coarse depth image (cells of `cell`
+    pixels) as a square of its projected size; a voxel is visible when no other voxel lies more
+    than `tolerance` (default 1.5 voxels) in front of it there. Masked pixels (e.g. the hood)
+    classify nothing. Returns (indices into centres, pixel coordinates u, v).
+    """
+    centres = np.asarray(centres, dtype=float).reshape(-1, 3)
+    intrinsic = np.asarray(intrinsic, dtype=float)
+    tolerance = 1.5*resolution if tolerance is None else tolerance
+    camera_world = np.linalg.inv(np.asarray(world_camera, dtype=float))
+    camera = centres @ camera_world[:3, :3].T + camera_world[:3, 3]
+    z = camera[:, 2]
+    front = np.flatnonzero((z > .05) & (np.linalg.norm(camera, axis=1) <= reach))
+    z = z[front]
+    u = intrinsic[0, 0]*camera[front, 0]/z + intrinsic[0, 2]
+    v = intrinsic[1, 1]*camera[front, 1]/z + intrinsic[1, 2]
+    inside = (u >= 0) & (u < width) & (v >= 0) & (v < height)
+    front, z, u, v = front[inside], z[inside], u[inside], v[inside]
+    columns, rows = -(-width//cell), -(-height//cell)
+    cu, cv = (u//cell).astype(int), (v//cell).astype(int)
+    radius = np.minimum((intrinsic[0, 0]*resolution/(2*z)/cell).astype(int), 8)
+    depth = np.full(rows*columns, np.inf)
+    for du in range(-radius.max(initial=0), radius.max(initial=0)+1):
+        for dv in range(-radius.max(initial=0), radius.max(initial=0)+1):
+            reach_here = radius >= max(abs(du), abs(dv))
+            tu, tv = cu+du, cv+dv
+            ok = reach_here & (tu >= 0) & (tu < columns) & (tv >= 0) & (tv < rows)
+            np.minimum.at(depth, tv[ok]*columns+tu[ok], z[ok])
+    visible = z <= depth[cv*columns+cu]+tolerance
+    if mask is not None:
+        visible &= ~np.asarray(mask, dtype=bool)[v.astype(int), u.astype(int)]
+    return front[visible], np.column_stack([u[visible], v[visible]])
+
+
 @dataclass
 class Evidence:
     counts: np.ndarray
