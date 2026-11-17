@@ -1,0 +1,5 @@
+{
+  "src/semantic_mapping/tools/build_offline_demo.py": "e0a2dfcea48936e60939cf599f6d475f65b47a585e9b9de58d8b29d471d7331b",
+  "src/semantic_mapping/config/camera_classes.rviz": "1398485399d74bef3a8d78a45ca4f5576b9b91a8a7212382d0461ebc7a409579",
+  "src/semantic_mapping/tools/view_camera_classes.sh": "f36cb3c21088ca75ea33f80ebada4552527ba634d6d60ea12445bce83f9ba5c0"
+}

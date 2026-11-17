@@ -2,8 +2,8 @@
 # Show camera classes merged into the LiDAR point cloud (TartanDrive), with the camera beside the map.
 #   tools/view_camera_classes.sh            the saved full drive
 #   tools/view_camera_classes.sh RUN_FOLDER a run from build_offline_demo.py or quick_run.sh
-# Default: the camera-cone map (the camera classifies every voxel it sees in its cone; classified
-# voxels stay as the vehicle drives) and the cone itself. Optional layers (tick them in Displays): camera classes on this scan's LiDAR points,
+# Default: the map in the camera's cone shape (classified voxels the camera sees now, full colour)
+# and the trail of what it classified earlier (fainter). The camera classifies every voxel it sees. Optional layers (tick them in Displays): camera classes on this scan's LiDAR points,
 # camera colours on the points, both accumulated over the drive, and the fused camera-class voxel map.
 # Keys in this terminal while it plays: SPACE pause/resume, RIGHT ARROW one step. Ctrl+C closes RViz.
 set -eo pipefail

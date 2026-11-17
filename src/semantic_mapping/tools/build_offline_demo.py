@@ -23,10 +23,8 @@ from rclpy.serialization import deserialize_message, serialize_message
 from rclpy.time import Time
 import rosbag2_py
 from sensor_msgs.msg import CameraInfo, Image, PointCloud2
-from std_msgs.msg import ColorRGBA, Header, String
+from std_msgs.msg import Header, String
 from tf2_msgs.msg import TFMessage
-from visualization_msgs.msg import Marker
-from geometry_msgs.msg import Point
 from tf2_ros import Buffer, TransformException
 import yaml
 
@@ -97,25 +95,6 @@ def status_image(status):
         cv2.putText(image, name, (x+20, 201), cv2.FONT_HERSHEY_SIMPLEX, .46,
                     (235, 235, 235), 1, cv2.LINE_AA)
     return image
-
-
-def beam_marker(header, world_camera, intrinsic, width, height, reach):
-    """The camera cone: the camera's view up to `reach`, bright at the camera and fading out."""
-    corners = np.array([[0, 0, 1], [width, 0, 1], [width, height, 1], [0, height, 1]], dtype=float)
-    rays = np.linalg.solve(np.asarray(intrinsic, dtype=float), corners.T).T
-    rays /= np.linalg.norm(rays, axis=1, keepdims=True)  # every edge of the beam is `reach` long
-    far = transform_points(rays*reach, world_camera)
-    origin = world_camera[:3, 3]
-    marker = Marker(header=header, ns='camera_cone', id=0, type=Marker.TRIANGLE_LIST, action=Marker.ADD)
-    marker.pose.orientation.w = 1.
-    marker.scale.x = marker.scale.y = marker.scale.z = 1.
-    marker.color.r, marker.color.g, marker.color.b, marker.color.a = 1., .92, .55, .35
-    near, end = ColorRGBA(r=1., g=.92, b=.55, a=.75), ColorRGBA(r=1., g=.92, b=.55, a=.08)
-    for i in range(4):  # the four sides of the beam
-        for point, colour in ((origin, near), (far[i], end), (far[(i+1) % 4], end)):
-            marker.points.append(Point(x=float(point[0]), y=float(point[1]), z=float(point[2])))
-            marker.colors.append(colour)
-    return marker
 
 
 def main():
@@ -212,8 +191,8 @@ def main():
         '/offline_demo/status': 'std_msgs/msg/String',
         '/camera_points/rgb': 'sensor_msgs/msg/PointCloud2',
         '/camera_points/classes': 'sensor_msgs/msg/PointCloud2',
-        '/camera_cone/beam': 'visualization_msgs/msg/Marker',
-        '/camera_cone/map': 'sensor_msgs/msg/PointCloud2'}
+        '/camera_cone/now': 'sensor_msgs/msg/PointCloud2',
+        '/camera_cone/trail': 'sensor_msgs/msg/PointCloud2'}
     for topic, kind in topics.items():
         writer.create_topic(rosbag2_py.TopicMetadata(name=topic, type=kind, serialization_format='cdr'))
     def write(topic, message, timestamp):
@@ -374,12 +353,16 @@ def main():
             semantic = cloud_message(header, centres, labels, confidence, counts, relative_z)
             elevation = cloud_message(header, centres, labels, confidence, counts, relative_z, True)
             write('/semantic_voxel_map', semantic, stamp)
-            # Camera-cone map: only voxels the camera has classified, kept as the vehicle drives on,
-            # and the cone the camera is classifying from at this scan's pose.
-            classified = labels > 0
-            write('/camera_cone/map', colored_points(header, centres[classified], PALETTE[labels[classified]]), stamp)
-            write('/camera_cone/beam', beam_marker(header, world_vehicle @ vehicle_camera, intrinsic, config['width'],
-                  config['height'], args.cone_reach), stamp)
+            # The map in the shape of the camera's cone: classified voxels the camera sees from this
+            # scan's pose in full colour; everything it classified earlier stays as a fainter trail.
+            near = np.flatnonzero(np.linalg.norm(centres-(world_vehicle @ vehicle_camera)[:3, 3], axis=1) <= args.cone_reach)
+            in_view = np.zeros(len(centres), dtype=bool)
+            in_view[near[visible_in_cone(centres[near], world_vehicle @ vehicle_camera, intrinsic, config['width'],
+                                         config['height'], args.cone_reach, args.resolution, mask)[0]]] = True
+            now, trail = (labels > 0) & in_view, (labels > 0) & ~in_view
+            write('/camera_cone/now', colored_points(header, centres[now], PALETTE[labels[now]]), stamp)
+            write('/camera_cone/trail', colored_points(header, centres[trail],
+                  np.rint(.35*PALETTE[labels[trail]]+12)), stamp)
             write('/offline_demo/elevation', elevation, stamp)
             seen = counts > 0
             status = dict(counters, source_scans=source_scans,

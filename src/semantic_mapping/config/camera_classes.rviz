@@ -32,7 +32,7 @@ Visualization Manager:
     Max Intensity: 4096
     Min Color: 0; 0; 0
     Min Intensity: 0
-    Name: 'Camera-cone map: voxels classified by the camera, kept as the vehicle drives'
+    Name: 'Camera cone: voxels the camera classifies now'
     Position Transformer: XYZ
     Selectable: true
     Size (Pixels): 3
@@ -44,21 +44,43 @@ Visualization Manager:
       Filter size: 10
       History Policy: Keep Last
       Reliability Policy: Reliable
-      Value: /camera_cone/map
+      Value: /camera_cone/now
     Use Fixed Frame: true
     Use rainbow: true
     Value: true
-  - Class: rviz_default_plugins/Marker
+  - Alpha: 1
+    Autocompute Intensity Bounds: true
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
+      Value: true
+    Axis: Z
+    Channel Name: intensity
+    Class: rviz_default_plugins/PointCloud2
+    Color: 255; 255; 255
+    Color Transformer: RGB8
+    Decay Time: 0
     Enabled: true
-    Name: Camera cone (what the camera classifies now)
-    Namespaces: {}
+    Invert Rainbow: false
+    Max Color: 255; 255; 255
+    Max Intensity: 4096
+    Min Color: 0; 0; 0
+    Min Intensity: 0
+    Name: 'Trail: voxels the camera classified earlier (fainter)'
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.2
+    Style: Boxes
     Topic:
-      Depth: 5
+      Depth: 1
       Durability Policy: Volatile
       Filter size: 10
       History Policy: Keep Last
       Reliability Policy: Reliable
-      Value: /camera_cone/beam
+      Value: /camera_cone/trail
+    Use Fixed Frame: true
+    Use rainbow: true
     Value: true
   - Alpha: 1
     Autocompute Intensity Bounds: true
