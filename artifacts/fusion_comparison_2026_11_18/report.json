@@ -1,0 +1,101 @@
+{
+  "cone": {
+    "whole_map_at_end": {
+      "occupied_voxels": 182996,
+      "classified_voxels": 30244,
+      "classified_share": 0.16527137205184814,
+      "class_counts": {
+        "ground": 6786,
+        "vegetation": 23125,
+        "trunk": 7,
+        "water": 282,
+        "obstacle": 44
+      }
+    },
+    "in_view": {
+      "sampled_every_n_scans": 10,
+      "visible_voxel_samples": 98591,
+      "classified_share": 0.610055684595957,
+      "by_distance_m": {
+        "0-5": 0.64405495026054,
+        "5-10": 0.6110700804201543,
+        "10-15": 0.6316261987349521,
+        "15-20": 0.5867616639852907
+      }
+    },
+    "stability": {
+      "scans_apart": 10,
+      "voxel_pairs_compared": 394671,
+      "class_changed_share": 0.00032938827529765296,
+      "lost_confirmation_share": 0.03495569727697247
+    }
+  },
+  "lidar_points": {
+    "whole_map_at_end": {
+      "occupied_voxels": 182996,
+      "classified_voxels": 31056,
+      "classified_share": 0.16970862751098384,
+      "class_counts": {
+        "ground": 5298,
+        "vegetation": 25631,
+        "trunk": 12,
+        "water": 84,
+        "obstacle": 31
+      }
+    },
+    "in_view": {
+      "sampled_every_n_scans": 10,
+      "visible_voxel_samples": 98591,
+      "classified_share": 0.4548183911310363,
+      "by_distance_m": {
+        "0-5": 0.5003315963998105,
+        "5-10": 0.531470539963893,
+        "10-15": 0.5241787390328504,
+        "15-20": 0.35143900508184583
+      }
+    },
+    "stability": {
+      "scans_apart": 10,
+      "voxel_pairs_compared": 384166,
+      "class_changed_share": 0.00020043418730444652,
+      "lost_confirmation_share": 0.036551907248429064
+    }
+  },
+  "agreement_at_end": {
+    "same_class_share_where_both_classified": 0.9955136375223044,
+    "classified_by_both": {
+      "voxels": 19615,
+      "under_another_voxel_share": 0.37303084374203416,
+      "class_counts": {
+        "ground": 4066,
+        "vegetation": 15487,
+        "trunk": 3,
+        "water": 43,
+        "obstacle": 16
+      }
+    },
+    "classified_only_by_cone": {
+      "voxels": 10629,
+      "under_another_voxel_share": 0.3733182801768746,
+      "class_counts": {
+        "ground": 2720,
+        "vegetation": 7638,
+        "trunk": 4,
+        "water": 239,
+        "obstacle": 28
+      }
+    },
+    "classified_only_by_lidar_points": {
+      "voxels": 11441,
+      "under_another_voxel_share": 0.5113189406520409,
+      "class_counts": {
+        "ground": 1262,
+        "vegetation": 10099,
+        "trunk": 11,
+        "water": 43,
+        "obstacle": 26
+      }
+    }
+  },
+  "note": "Coverage and consistency on TartanDrive; no labelled 3D ground truth, so not accuracy."
+}

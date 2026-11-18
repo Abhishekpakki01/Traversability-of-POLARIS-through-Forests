@@ -1,0 +1,89 @@
+recording: 2023-11-02-16-00-43_down_meadows/down_meadows_0.bag
+image_topic: /multisense/left/image_rect_color
+image_frame: multisense/left_camera_optical_frame
+width: 1024
+height: 544
+intrinsics_verified: false
+intrinsics_status: Rectified P cross-checked against original stereo cloud and its
+  exact camera exposure. No factory CameraInfo is present; physical calibration accuracy
+  remains unmeasured.
+camera_P:
+- 477.6049499511719
+- 0.0
+- 499.5
+- 0.0
+- 0.0
+- 477.6049499511719
+- 252.0
+- 0.0
+- 0.0
+- 0.0
+- 1.0
+- 0.0
+camera_R:
+- 1.0
+- 0.0
+- 0.0
+- 0.0
+- 1.0
+- 0.0
+- 0.0
+- 0.0
+- 1.0
+intrinsics_source_url: https://raw.githubusercontent.com/castacks/tartan_drive_2.0/main/calibration/multisense_intrinsics.txt
+transform_chain:
+- parent: vehicle
+  child: multisense/head
+  translation:
+  - 0.0
+  - 0.0
+  - -0.1274
+  quaternion:
+  - 0.0005446647235482245
+  - 0.10893203693359271
+  - -0.0049702245428434365
+  - 0.9940366248473097
+  source: original bag /tf
+- parent: multisense/head
+  child: multisense/left_camera_frame
+  translation:
+  - 0.0
+  - 0.035
+  - -0.002
+  quaternion:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+  source: original bag /tf_static, corroborated by saved robot_description
+- parent: multisense/left_camera_frame
+  child: multisense/left_camera_optical_frame
+  translation:
+  - 0.0
+  - 0.0
+  - 0.0
+  quaternion:
+  - -0.5
+  - 0.49999999999755174
+  - -0.5
+  - 0.5000000000024483
+  source: original bag /tf_static, corroborated by saved robot_description
+vehicle_from_lidar:
+  parent: vehicle
+  child: velodyne_1
+  translation:
+  - 0.0
+  - 0.0
+  - 0.0
+  quaternion:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+  source: original bag /tf
+recording_parameters_sha256: f915175a5532d30cb4a0081e16e686e1f55e292df34c117bc061227cf390a401
+note: Mount chain follows original TF. Use already rectified P; do not import raw
+  distortion or later R. Stereo-color consistency is not ground-truth LiDAR reprojection
+  accuracy.
+rectification_convention: 'Recorded rectified optical frame: no additional rotation
+  from a later calibration example.'
