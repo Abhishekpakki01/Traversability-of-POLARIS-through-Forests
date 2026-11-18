@@ -5,6 +5,26 @@ The original workspace `~/semantic_map_ws` is kept separately as a working compa
 
 ---
 
+## 0. Current focus (from 16 November 2026): camera-cone mapping
+
+Scope after the 16 November meeting: camera classes only, on TartanDrive, fused into the LiDAR
+voxel map through the camera's view. Poses and calibration are taken from the dataset as given.
+See the README section "Current focus" for the method and the projection-method comparison.
+
+| What | Command |
+|---|---|
+| Set up a terminal | `source src/semantic_mapping/tools/ros_env.sh` |
+| Run from the raw recording (camera part only), then RViz | `src/semantic_mapping/tools/quick_run.sh 10` |
+| View the saved full drive | `src/semantic_mapping/tools/view_camera_classes.sh` |
+| Build a full drive (about 30–45 min) | `/usr/bin/python3 src/semantic_mapping/tools/build_offline_demo.py --exclude-vehicle-box -1.8 -1.6 -1.0 0.4 1.4 0.4 --resolution 0.2 --max-range 20 --inference-short-side 512 --image-mask src/semantic_mapping/config/tartan_image_mask.json --threads 6 --output artifacts/NEW_FOLDER` |
+| Same with the earlier LiDAR-point method | add `--fusion lidar-points` |
+| Compare the two methods | `/usr/bin/python3 src/semantic_mapping/tools/compare_fusion_methods.py --cone RUN_A --lidar-points RUN_B --image-mask src/semantic_mapping/config/tartan_image_mask.json --output artifacts/NEW_FOLDER` |
+
+Code: `visible_in_cone` in `semantic_mapping/semantic_fusion.py` (projection and depth test),
+the `--fusion cone` branch in `tools/build_offline_demo.py`, layout `config/camera_classes.rviz`.
+
+The sections below describe the earlier scope (3 November) and are kept for reference.
+
 ## 1. How to run things: one terminal
 
 ### A. Watch the demo in RViz (needs no setup)

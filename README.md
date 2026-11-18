@@ -4,6 +4,37 @@ This is my thesis project on using LiDAR and camera data to build a 3D voxel map
 of off-road terrain. The aim is to use the map to study traversability for the
 POLARIS vehicle in forest environments.
 
+## Current focus (from 16 November 2026)
+
+After the supervisor meeting on 16 November the scope is camera classes on TartanDrive, fused
+into the LiDAR voxel map through the camera's view. The camera is the classifier:
+
+1. LiDAR scans, placed with the dataset's poses, build the occupied voxels (OHM, 0.2 m).
+2. Every voxel inside the camera's view (to 20 m) is projected into the image: extrinsics
+   (world → camera) then intrinsics (u = fx·x/z + cx, v = fy·y/z + cy). A coarse depth image of
+   the voxels hides voxels behind others.
+3. Each visible voxel takes the class probabilities of its pixel (pretrained GOOSE PP-LiteSeg);
+   a class is confirmed after 2 views at 0.6 confidence.
+4. RViz shows the classified voxels the camera sees now in full colour, so the map takes the
+   shape of the camera's cone, and a fainter trail of earlier classes. No LiDAR-only voxels.
+
+```bash
+source src/semantic_mapping/tools/ros_env.sh
+src/semantic_mapping/tools/quick_run.sh 10            # first 10 scans from the raw recording, then RViz
+src/semantic_mapping/tools/view_camera_classes.sh     # the saved full drive
+```
+
+Projection methods compared on the full drive (`tools/compare_fusion_methods.py`,
+`artifacts/fusion_comparison_2026_11_18/report.json`): of the voxels the camera sees, 61% are
+classified with voxel projection and 45% when only voxels hit by a LiDAR point of the same scan
+are labelled (`--fusion lidar-points`); at 15–20 m, 59% and 35%. Where both classify, 99.6% get
+the same class. The voxels only the LiDAR-point method classifies are mostly inside vegetation,
+where the camera cannot see them. This measures coverage and consistency, not accuracy:
+TartanDrive has no labelled 3D ground truth.
+
+The terrain, LiDAR-only class and water layers below are from the earlier scope and are now
+secondary.
+
 ## What runs so far
 
 - ROS 2 reads recorded LiDAR scans and vehicle poses, and OHM accumulates them
