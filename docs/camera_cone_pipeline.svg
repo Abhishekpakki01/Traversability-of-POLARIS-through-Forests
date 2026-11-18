@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" font-family="DejaVu Sans, Arial, sans-serif">
+  <title>Camera-cone mapping: the camera classifies the LiDAR voxel map</title>
+  <rect width="1200" height="560" fill="#fcfcfb"/>
+  <text x="40" y="52" font-size="26" font-weight="bold" fill="#1d1d1b">Camera-cone mapping on TartanDrive</text>
+  <text x="40" y="82" font-size="16" fill="#5f5e58">The LiDAR gives the 3D shape (voxels); the camera decides what each voxel it sees is.</text>
+
+  <!-- step boxes -->
+  <g font-size="15" fill="#1d1d1b">
+    <rect x="40" y="120" width="200" height="150" rx="10" fill="#eef3fb" stroke="#2a78d6"/>
+    <text x="56" y="148" font-weight="bold">1  LiDAR scan</text>
+    <text x="56" y="176">points (x, y, z)</text>
+    <text x="56" y="198">placed with the</text>
+    <text x="56" y="220">dataset's pose</text>
+    <text x="56" y="250" fill="#5f5e58" font-size="13">vehicle body removed</text>
+
+    <rect x="270" y="120" width="200" height="150" rx="10" fill="#eef3fb" stroke="#2a78d6"/>
+    <text x="286" y="148" font-weight="bold">2  Voxel map</text>
+    <text x="286" y="176">OHM ray tracing</text>
+    <text x="286" y="198">0.2 m cubes:</text>
+    <text x="286" y="220">occupied or free</text>
+    <text x="286" y="250" fill="#5f5e58" font-size="13">shape only, no class</text>
+
+    <rect x="500" y="120" width="200" height="150" rx="10" fill="#fff6e5" stroke="#d68a00"/>
+    <text x="516" y="148" font-weight="bold">3  Camera cone</text>
+    <text x="516" y="176">voxels inside the</text>
+    <text x="516" y="198">camera's view, to 20 m</text>
+    <text x="516" y="220">hidden ones skipped</text>
+    <text x="516" y="250" fill="#5f5e58" font-size="13">voxel depth test</text>
+
+    <rect x="730" y="120" width="200" height="150" rx="10" fill="#fff6e5" stroke="#d68a00"/>
+    <text x="746" y="148" font-weight="bold">4  Project + classify</text>
+    <text x="746" y="176">voxel centre → pixel</text>
+    <text x="746" y="198">pixel class from</text>
+    <text x="746" y="220">PP-LiteSeg (GOOSE)</text>
+    <text x="746" y="250" fill="#5f5e58" font-size="13">6 class probabilities</text>
+
+    <rect x="960" y="120" width="200" height="150" rx="10" fill="#edf7ed" stroke="#2d9a2d"/>
+    <text x="976" y="148" font-weight="bold">5  Classified map</text>
+    <text x="976" y="176">confirmed after</text>
+    <text x="976" y="198">2 views at 60%</text>
+    <text x="976" y="220">kept as it drives</text>
+    <text x="976" y="250" fill="#5f5e58" font-size="13">cone now + trail</text>
+  </g>
+  <g fill="#5f5e58">
+    <polygon points="244,186 266,195 244,204"/>
+    <polygon points="474,186 496,195 474,204"/>
+    <polygon points="704,186 726,195 704,204"/>
+    <polygon points="934,186 956,195 934,204"/>
+  </g>
+
+  <!-- projection detail -->
+  <rect x="40" y="305" width="660" height="215" rx="10" fill="#ffffff" stroke="#c3c2b7"/>
+  <text x="60" y="336" font-size="18" font-weight="bold" fill="#1d1d1b">How a voxel is projected into the image</text>
+  <g font-size="15" fill="#1d1d1b">
+    <text x="60" y="370" font-weight="bold" fill="#d68a00">Extrinsics</text>
+    <text x="170" y="370">where the camera is: p_camera = R · p_world + t</text>
+    <text x="170" y="392" fill="#5f5e58" font-size="13">3.5 cm left of, 13 cm below the LiDAR, tilted 12.5° down (dataset TF)</text>
+    <text x="60" y="430" font-weight="bold" fill="#d68a00">Intrinsics</text>
+    <text x="170" y="430">the lens: u = fx · x / z + cx,   v = fy · y / z + cy</text>
+    <text x="170" y="452" fill="#5f5e58" font-size="13">fx = fy = 477.6 px, cx = 499.5, cy = 252, image 1024 × 544, rectified</text>
+    <text x="60" y="490" font-weight="bold" fill="#d68a00">Keep if</text>
+    <text x="170" y="490">in front (z &gt; 0), inside the image, not the hood, not hidden</text>
+  </g>
+
+  <!-- comparison -->
+  <rect x="730" y="305" width="430" height="215" rx="10" fill="#ffffff" stroke="#c3c2b7"/>
+  <text x="750" y="336" font-size="18" font-weight="bold" fill="#1d1d1b">Two projection methods, full drive</text>
+  <g font-size="14" fill="#1d1d1b">
+    <text x="750" y="366" fill="#5f5e58">share of the voxels the camera sees that get a class</text>
+    <text x="750" y="398">voxels → image (cone)</text>
+    <rect x="930" y="384" width="134" height="20" fill="#d68a00"/>
+    <text x="1072" y="399" font-weight="bold">61%</text>
+    <text x="750" y="430">LiDAR points → image</text>
+    <rect x="930" y="416" width="100" height="20" fill="#9a9890"/>
+    <text x="1038" y="431" font-weight="bold">45%</text>
+    <text x="750" y="466">at 15–20 m: 59% vs 35%</text>
+    <text x="750" y="488">same class where both classify: 99.6%</text>
+    <text x="750" y="510" fill="#5f5e58" font-size="12">coverage and consistency, not accuracy (no 3D labels)</text>
+  </g>
+</svg>
