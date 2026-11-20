@@ -35,6 +35,23 @@ def transform_matrix(transform):
     return matrix
 
 
+def camera_offset(rotation_deg=(0., 0., 0.), shift_m=(0., 0., 0.)):
+    """A small change of the camera mounting, in the camera's own optical frame.
+
+    rotation_deg turns the camera about its x (right: tilt), y (down: pan) and z (forward: roll)
+    axes, in that order; shift_m moves it along the same axes. Use as vehicle_from_camera @ offset.
+    """
+    offset = np.eye(4)
+    for axis, angle in enumerate(np.radians(rotation_deg)):
+        c, s = np.cos(angle), np.sin(angle)
+        turn = np.eye(3)
+        i, j = [k for k in range(3) if k != axis]
+        turn[i, i], turn[i, j], turn[j, i], turn[j, j] = c, -s, s, c
+        offset[:3, :3] = offset[:3, :3] @ turn
+    offset[:3, 3] = shift_m
+    return offset
+
+
 def transform_points(points, matrix):
     return np.asarray(points) @ matrix[:3, :3].T + matrix[:3, 3]
 

@@ -9,7 +9,7 @@ from sensor_msgs_py import point_cloud2
 from std_msgs.msg import Header
 
 from semantic_mapping.camera_projection import (
-    project_visible_points, transform_matrix, transform_points, xyz_from_cloud)
+    camera_offset, project_visible_points, transform_matrix, transform_points, xyz_from_cloud)
 
 
 def calibration():
@@ -67,3 +67,15 @@ def test_mixed_type_lidar_fields_and_nonstandard_field_order():
                for name, offset in [('z', 4), ('x', 8), ('y', 12)]]
     cloud = point_cloud2.create_cloud(Header(), fields, [(7, 3.0, 1.0, 2.0)])
     assert xyz_from_cloud(cloud).tolist() == [[1.0, 2.0, 3.0]]
+
+
+def test_camera_offset_tilts_pans_and_shifts_in_the_camera_frame():
+    ahead = np.array([[0., 0., 10.]])  # 10 m in front of the camera
+    tilted = transform_points(ahead, np.linalg.inv(camera_offset((1., 0., 0.))))
+    assert np.isclose(abs(np.degrees(np.arctan2(tilted[0, 1], tilted[0, 2]))), 1.) and np.isclose(tilted[0, 0], 0.)
+    panned = transform_points(ahead, np.linalg.inv(camera_offset((0., 2., 0.))))
+    assert np.isclose(abs(np.degrees(np.arctan2(panned[0, 0], panned[0, 2]))), 2.) and np.isclose(panned[0, 1], 0.)
+    rolled = transform_points(ahead, np.linalg.inv(camera_offset((0., 0., 5.))))
+    assert np.allclose(rolled, ahead)  # roll does not move a point on the optical axis
+    shifted = camera_offset(shift_m=(.1, 0., 0.))
+    assert np.allclose(shifted[:3, :3], np.eye(3)) and np.allclose(shifted[:3, 3], [.1, 0, 0])

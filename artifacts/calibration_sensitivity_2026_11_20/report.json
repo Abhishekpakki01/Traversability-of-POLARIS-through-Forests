@@ -1,0 +1,204 @@
+{
+  "run": "/home/abhishek/Traversability-of-POLARIS-through-Forests/artifacts/offline_camera_cone_2026_11_16",
+  "images_used": 318,
+  "frames": 318,
+  "resolution_m": 0.2,
+  "cone_reach_m": 20.0,
+  "dataset_replay_matches_saved_run": 0.9999890707993617,
+  "note": "Sensitivity to the camera parameters on TartanDrive, not accuracy (no labelled 3D data).",
+  "variants": [
+    {
+      "name": "dataset",
+      "changed": "none",
+      "classified_voxels": 30242,
+      "in_view_classified_share": 0.6277404876265524
+    },
+    {
+      "name": "tilt +0.5 deg",
+      "changed": "extrinsic rotation",
+      "classified_voxels": 30490,
+      "in_view_classified_share": 0.6271873925269568,
+      "pixel_shift_median": 4.2972804150058925,
+      "pixel_shift_p95": 4.97668079378673,
+      "different_class_where_both_classified": 0.00018056408219277022,
+      "dataset_classified_now_unclassified": 0.08435288671384168,
+      "newly_classified_voxels": 2799
+    },
+    {
+      "name": "tilt +1 deg",
+      "changed": "extrinsic rotation",
+      "classified_voxels": 30633,
+      "in_view_classified_share": 0.6275908628316355,
+      "pixel_shift_median": 8.585303763975054,
+      "pixel_shift_p95": 9.933776814700328,
+      "different_class_where_both_classified": 0.0019960831575775834,
+      "dataset_classified_now_unclassified": 0.12201573969975531,
+      "newly_classified_voxels": 4081
+    },
+    {
+      "name": "tilt +2 deg",
+      "changed": "extrinsic rotation",
+      "classified_voxels": 30957,
+      "in_view_classified_share": 0.6281743601072429,
+      "pixel_shift_median": 17.13283807291592,
+      "pixel_shift_p95": 19.80196244385454,
+      "different_class_where_both_classified": 0.010467932192797437,
+      "dataset_classified_now_unclassified": 0.15342900601812048,
+      "newly_classified_voxels": 5355
+    },
+    {
+      "name": "tilt -1 deg",
+      "changed": "extrinsic rotation",
+      "classified_voxels": 29704,
+      "in_view_classified_share": 0.6210820971762494,
+      "pixel_shift_median": 8.627811796287844,
+      "pixel_shift_p95": 10.015057002409417,
+      "different_class_where_both_classified": 0.001686276012723719,
+      "dataset_classified_now_unclassified": 0.13719330732094437,
+      "newly_classified_voxels": 3611
+    },
+    {
+      "name": "pan +1 deg",
+      "changed": "extrinsic rotation",
+      "classified_voxels": 30305,
+      "in_view_classified_share": 0.6265099575579497,
+      "pixel_shift_median": 9.886516600888912,
+      "pixel_shift_p95": 16.556498864615488,
+      "different_class_where_both_classified": 0.0011033748050070387,
+      "dataset_classified_now_unclassified": 0.13091065405727134,
+      "newly_classified_voxels": 4022
+    },
+    {
+      "name": "pan +2 deg",
+      "changed": "extrinsic rotation",
+      "classified_voxels": 30228,
+      "in_view_classified_share": 0.6257255654054495,
+      "pixel_shift_median": 19.79003092422112,
+      "pixel_shift_p95": 33.18731466636253,
+      "different_class_where_both_classified": 0.00466321243523316,
+      "dataset_classified_now_unclassified": 0.1703591032339131,
+      "newly_classified_voxels": 5138
+    },
+    {
+      "name": "roll +2 deg",
+      "changed": "extrinsic rotation",
+      "classified_voxels": 29993,
+      "in_view_classified_share": 0.6202812506332192,
+      "pixel_shift_median": 8.1691747557176,
+      "pixel_shift_p95": 16.818151776339715,
+      "different_class_where_both_classified": 0.005479874966233165,
+      "dataset_classified_now_unclassified": 0.14314529462337147,
+      "newly_classified_voxels": 4080
+    },
+    {
+      "name": "right 5 cm",
+      "changed": "extrinsic translation",
+      "classified_voxels": 30016,
+      "in_view_classified_share": 0.6274063845341564,
+      "pixel_shift_median": 2.093143832902456,
+      "pixel_shift_p95": 7.292233987327814,
+      "different_class_where_both_classified": 3.645244778186855e-05,
+      "dataset_classified_now_unclassified": 0.09288406851398717,
+      "newly_classified_voxels": 2583
+    },
+    {
+      "name": "right 10 cm",
+      "changed": "extrinsic translation",
+      "classified_voxels": 30102,
+      "in_view_classified_share": 0.6269695151102115,
+      "pixel_shift_median": 4.18628766580423,
+      "pixel_shift_p95": 14.584467974658969,
+      "different_class_where_both_classified": 0.0004409657149156653,
+      "dataset_classified_now_unclassified": 0.10015871966139805,
+      "newly_classified_voxels": 2889
+    },
+    {
+      "name": "down 10 cm",
+      "changed": "extrinsic translation",
+      "classified_voxels": 29097,
+      "in_view_classified_share": 0.6239459836429341,
+      "pixel_shift_median": 4.186287665803576,
+      "pixel_shift_p95": 14.584467974659765,
+      "different_class_where_both_classified": 0.00045301823398391787,
+      "dataset_classified_now_unclassified": 0.1240989352556048,
+      "newly_classified_voxels": 2608
+    },
+    {
+      "name": "forward 10 cm",
+      "changed": "extrinsic translation",
+      "classified_voxels": 29585,
+      "in_view_classified_share": 0.626379536827298,
+      "pixel_shift_median": 2.16098514259284,
+      "pixel_shift_p95": 10.654516216230597,
+      "different_class_where_both_classified": 0.00011352026336701102,
+      "dataset_classified_now_unclassified": 0.12614906421532968,
+      "newly_classified_voxels": 3158
+    },
+    {
+      "name": "focal x0.98",
+      "changed": "intrinsic",
+      "classified_voxels": 31229,
+      "in_view_classified_share": 0.6262998331078479,
+      "pixel_shift_median": 4.680829996180869,
+      "pixel_shift_p95": 9.636580397537939,
+      "different_class_where_both_classified": 0.0005933177587421663,
+      "dataset_classified_now_unclassified": 0.10829310230804841,
+      "newly_classified_voxels": 4262
+    },
+    {
+      "name": "focal x0.95",
+      "changed": "intrinsic",
+      "classified_voxels": 32809,
+      "in_view_classified_share": 0.6262448574265853,
+      "pixel_shift_median": 11.70207499045207,
+      "pixel_shift_p95": 24.091450993844976,
+      "different_class_where_both_classified": 0.0030918894460993177,
+      "dataset_classified_now_unclassified": 0.12304080417961775,
+      "newly_classified_voxels": 6288
+    },
+    {
+      "name": "focal x1.05",
+      "changed": "intrinsic",
+      "classified_voxels": 27668,
+      "in_view_classified_share": 0.6214577752713943,
+      "pixel_shift_median": 11.70207499045207,
+      "pixel_shift_p95": 24.09145099384486,
+      "different_class_where_both_classified": 0.002100494233937397,
+      "dataset_classified_now_unclassified": 0.197143046094835,
+      "newly_classified_voxels": 3388
+    },
+    {
+      "name": "cx +10 px",
+      "changed": "intrinsic",
+      "classified_voxels": 30278,
+      "in_view_classified_share": 0.6279838897850281,
+      "pixel_shift_median": 10.0,
+      "pixel_shift_p95": 10.0,
+      "different_class_where_both_classified": 0.0007497656982193065,
+      "dataset_classified_now_unclassified": 0.11794854837643012,
+      "newly_classified_voxels": 3603
+    },
+    {
+      "name": "raw K instead of rectified P",
+      "changed": "intrinsic",
+      "classified_voxels": 32580,
+      "in_view_classified_share": 0.6252689502846589,
+      "pixel_shift_median": 10.740359096761873,
+      "pixel_shift_p95": 23.324729779323487,
+      "different_class_where_both_classified": 0.001652892561983471,
+      "dataset_classified_now_unclassified": 0.11976721116328286,
+      "newly_classified_voxels": 5960
+    },
+    {
+      "name": "published mounting (extrinsics.yaml)",
+      "changed": "extrinsic, other source",
+      "classified_voxels": 30649,
+      "in_view_classified_share": 0.6285751957483062,
+      "pixel_shift_median": 13.542729185233739,
+      "pixel_shift_p95": 29.159746385998435,
+      "different_class_where_both_classified": 0.007668590402403352,
+      "dataset_classified_now_unclassified": 0.16348125123999735,
+      "newly_classified_voxels": 5351
+    }
+  ]
+}
